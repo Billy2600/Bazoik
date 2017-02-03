@@ -33,16 +33,13 @@ void EntityBullet::Think( const float dt )
 		realSpeed = BULLET_SPEED - DIAG_SPEED;
 	}
 
-	// Set speed based on whether player or robot shot it
-	if( owner != NULL && dynamic_cast<EntityRobot*>( owner ) == NULL )
-	{
-		if( direction.x == 1 ) direction.x = realSpeed;
-		else if( direction.x == -1 ) direction.x = -realSpeed;
-		if( direction.y == 1 ) direction.y = realSpeed;
-		else if( direction.y == -1 ) direction.y = -realSpeed;
-	}
+	// Calculate angle + speed
+	sf::Vector2f moveVec;
+	float angle = atan2f( direction.y, direction.x );
+	moveVec.x = cosf( angle ) * realSpeed;
+	moveVec.y = sinf( angle ) * realSpeed;
 
-	Move( direction, dt );
+	Move( moveVec, dt );
 }
 
 void EntityBullet::Draw() const

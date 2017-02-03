@@ -42,12 +42,15 @@ void EntityRobot::Think( const float dt )
 	if( hitbox.left > GAME_WIDTH || hitbox.top > GAME_HEIGHT )
 		return;
 
+	// Get vector compared to player and normalize it
 	sf::Vector2f playerVec = playerPos - sf::Vector2f( hitbox.left, hitbox.top );
+	float playerVecMagnitude = sqrtf( playerVec.x * playerVec.x ) + ( playerVec.y * playerVec.y );
+	sf::Vector2f normalizedPlayerVec = playerVec / playerVecMagnitude;
 
 	// Fire
 	if( clock.getElapsedTime().asMilliseconds() > ROBOT_FIRE_DELAY && seePlayer )
 	{
-		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + ( hitbox.width / 2 ), hitbox.top + ( hitbox.height / 2 ) ), playerVec, this ) );
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + ( hitbox.width / 2 ), hitbox.top + ( hitbox.height / 2 ) ), normalizedPlayerVec, this ) );
 		clock.restart();
 	}
 
