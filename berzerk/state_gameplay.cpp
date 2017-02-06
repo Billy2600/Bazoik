@@ -176,17 +176,17 @@ void StateGameplay::Update( const float dt )
 			lastMove = Directions::S;
 			transStart = now;
 		}
+
+		// Did we run out of lives?
+		if( game->GetLives() == 0 )
+		{
+			this->game->SwitchState( new StateHighscore( this->game ) );
+			return;
+		}
 	}
 	else
 	{
 		ScreenTransition(dt);
-	}
-
-	// Did we run out of lives?
-	if( game->GetLives() == 0 )
-	{
-		this->game->SwitchState( new StateHighscore( this->game ) );
-		return;
 	}
 }
 
