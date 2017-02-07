@@ -3,6 +3,7 @@
 #include <stack>
 #include "asset_manager.h"
 #include "input_manager.h"
+#include "anim_manager.h"
 
 #define GAME_NAME "Bazoik"
 #define GAME_WIDTH 848
@@ -32,6 +33,7 @@ public:
 	AssetManager assetManager;
 	unsigned int score;
 	InputManager inputManager;
+	AnimManager animManager;
 
 	Game();
 	void GameLoop(); // Runs every update

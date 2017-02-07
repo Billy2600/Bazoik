@@ -27,7 +27,7 @@ void EntityRobot::LoadSprite()
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		sprite.setTextureRect( sf::IntRect( 49, 0, 9, 10 ) );
+		//sprite.setTextureRect( sf::IntRect( 49, 0, 9, 10 ) );
 		sprite.setScale( sf::Vector2f( 4, 4 ) );
 	}
 }
@@ -38,6 +38,7 @@ void EntityRobot::Think( const float dt )
 	
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+	sprite.setTextureRect( game->animManager.Animate( "robot_idle" ) );
 
 	if( hitbox.left > GAME_WIDTH || hitbox.top > GAME_HEIGHT )
 		return;

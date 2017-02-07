@@ -37,6 +37,7 @@ private:
 	void Die(); // Perform death
 
 	sf::Sprite sprite;
+	std::string currentAnim;
 	void LoadSprite();
 
 public:

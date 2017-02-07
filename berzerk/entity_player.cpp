@@ -30,8 +30,9 @@ void EntityPlayer::LoadSprite()
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		sprite.setTextureRect( sf::IntRect( 95, 0, 6, 16 ) );
+		//sprite.setTextureRect( sf::IntRect( 95, 0, 6, 16 ) );
 		sprite.setScale( sf::Vector2f( 4, 4 ) );
+		currentAnim = "player_stand";
 	}
 }
 
@@ -131,7 +132,7 @@ void EntityPlayer::SetInput( const PlayerInput input )
 void EntityPlayer::Draw() const
 {
 	game->window.draw( sprite );
-	//game->window.draw( shape );
+	game->window.draw( shape );
 }
 
 void EntityPlayer::HandleCollision( Entity *other )
@@ -153,4 +154,22 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 	hitbox.top += move.y * dt;
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+
+	// Change animation
+	if( move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0 )
+		currentAnim = "player_walk";
+	else
+		currentAnim = "player_stand";
+	// Flip sprite
+	if( move.x < 0 )
+		sprite.setScale( -4.f, 4.f );
+	else
+		sprite.setScale( 4.f, 4.f );
+
+	sf::IntRect animRect = game->animManager.Animate( currentAnim );
+	sprite.setTextureRect( animRect );
+	sprite.setOrigin( animRect.width / 2, animRect.height / 2 );
+	sprite.move( animRect.width, animRect.height );
+	hitbox.width = animRect.width;
+	hitbox.height = animRect.height;
 }

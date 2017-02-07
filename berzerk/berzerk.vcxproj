@@ -120,6 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="anim_manager.cpp" />
     <ClCompile Include="asset_manager.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entity_bullet.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="state_titlescreen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="anim_manager.h" />
     <ClInclude Include="asset_manager.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="entity_bullet.h" />

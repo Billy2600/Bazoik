@@ -72,6 +72,9 @@
     <ClCompile Include="liang-barsky.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="anim_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_state.h">
@@ -132,6 +135,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="liang-barsky.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="anim_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

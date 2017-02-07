@@ -19,13 +19,13 @@ Game::Game()
 
 	// Load sprite texture
 	assetManager.LoadTexture( "sprites", "assets/sprites.png" );
+	// Load animations
+	animManager.LoadFromFile( "assets/animations.xml" );
 }
 
 void Game::GameLoop()
 {
 	sf::Clock clock;
-	//clock.restart();
-	//float simulationTime = 0;
 
 	while( window.isOpen() )
 	{
@@ -42,14 +42,6 @@ void Game::GameLoop()
 		states.top()->HandleInput();
 		if( popped )
 			continue;
-
-		// Fixed timestep, thanks to Fabien Sanglard
-		//float realTime = (float)clock.getElapsedTime().asMilliseconds();
-		//while( simulationTime < realTime )
-		//{
-		//	simulationTime += 16; // Timeslice is ALWAYS 16ms
-		//	states.top()->Update( 16 );
-		//}
 
 		states.top()->Update( clock.restart().asSeconds() );
 
