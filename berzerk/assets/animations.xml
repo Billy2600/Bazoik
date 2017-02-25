@@ -26,4 +26,8 @@
 	<anim name="player_fire">
 		<frame x="120" y="0" w="6" h="16"></frame>
 	</anim>
+	<anim name="player_death">
+		<frame x="95" y="0" w="6" h="16"></frame>
+		<frame x="89" y="16" w="6" h="16"></frame>
+	</anim>
 </animations>

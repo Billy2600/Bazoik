@@ -30,7 +30,6 @@ void EntityPlayer::LoadSprite()
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		//sprite.setTextureRect( sf::IntRect( 95, 0, 6, 16 ) );
 		sprite.setScale( sf::Vector2f( 4, 4 ) );
 		currentAnim = "player_stand";
 	}
@@ -45,6 +44,10 @@ void EntityPlayer::Think( const float dt )
 	// Early out here if dead
 	if( dead )
 	{
+		// Keep animation going during death
+		sf::IntRect animRect = game->animManager.Animate( currentAnim );
+		sprite.setTextureRect( animRect );
+
 		// Check if we should also reset the state
 		if( now - deathTime >= resetDelay )
 		{
@@ -131,8 +134,8 @@ void EntityPlayer::Think( const float dt )
 
 void EntityPlayer::Die()
 {
-	//shape.setFillColor( sf::Color::Red );
-	sprite.setColor( sf::Color::Red );
+	//sprite.setColor( sf::Color::Red );
+	currentAnim = "player_death";
 	dead = true;
 	deathTime = (float)now;
 }
