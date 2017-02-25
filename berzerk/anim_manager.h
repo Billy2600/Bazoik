@@ -13,6 +13,7 @@ private:
 	std::map< std::string, std::vector<sf::IntRect> > animations;
 	std::map<std::string, sf::Uint8> frameCounters;
 	sf::Clock clock;
+	std::map<std::string, sf::Int32> lastTime; // Last time we changed frame
 
 public:
 	AnimManager();

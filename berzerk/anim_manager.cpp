@@ -42,13 +42,13 @@ void AnimManager::LoadFromFile( const std::string &filename )
 
 sf::IntRect AnimManager::Animate( const std::string &name )
 {
-	if( clock.getElapsedTime().asMilliseconds() > ANIM_FRAME_DELAY )
+	if( clock.getElapsedTime().asMilliseconds() > lastTime[name] + ANIM_FRAME_DELAY )
 	{
 		frameCounters[name]++;
 		if( frameCounters[name] >= animations[name].size() )
 			frameCounters[name] = 0;
 
-		clock.restart();
+		lastTime[name] = clock.getElapsedTime().asMilliseconds();
 	}
 
 	if( !IsEmpty( name ) )

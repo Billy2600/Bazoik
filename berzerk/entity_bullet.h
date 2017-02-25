@@ -1,7 +1,7 @@
 #pragma once
 #include "entity.h"
 
-#define BULLET_SPEED 1000
+#define BULLET_SPEED 500
 
 class EntityBullet : public Entity
 {

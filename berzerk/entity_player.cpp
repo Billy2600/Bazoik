@@ -69,11 +69,13 @@ void EntityPlayer::Think( const float dt )
 	{
 		if( !input.fire ) move.x -= realSpeed;
 		direction.x = -1;
+		lastHoriz = Directions::W;
 	}
 	else if( input.right )
 	{
 		if( !input.fire ) move.x += realSpeed;
 		direction.x = 1;
+		lastHoriz = Directions::E;
 	}
 	else
 	{
@@ -96,10 +98,26 @@ void EntityPlayer::Think( const float dt )
 	}
 
 	// Choose diagonal directions
-	if( input.left && input.up ) direction = sf::Vector2f( -1, -1 );
-	else if( input.right && input.up ) direction = sf::Vector2f( 1, -1 );
-	else if( input.left && input.down ) direction = sf::Vector2f( -1, 1 );
-	else if( input.right && input.down ) direction = sf::Vector2f( 1, 1 );
+	if( input.left && input.up )
+	{
+		direction = sf::Vector2f( -1, -1 );
+		lastHoriz = Directions::W;
+	}
+	else if( input.right && input.up )
+	{
+		direction = sf::Vector2f( 1, -1 );
+		lastHoriz = Directions::E;
+	}
+	else if( input.left && input.down )
+	{
+		direction = sf::Vector2f( -1, 1 );
+		lastHoriz = Directions::W;
+	}
+	else if( input.right && input.down )
+	{
+		direction = sf::Vector2f( 1, 1 );
+		lastHoriz = Directions::E;
+	}
 
 	// Fire with delay
 	if( direction != sf::Vector2f(0,0) && input.fire && now - lastFire >= fireDelay )
@@ -160,8 +178,8 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 		currentAnim = "player_walk";
 	else
 		currentAnim = "player_stand";
-	// Flip sprite
-	if( move.x < 0 )
+	// Flip sprite based on last horizontal movement
+	if( lastHoriz == Directions::W )
 		sprite.setScale( -4.f, 4.f );
 	else
 		sprite.setScale( 4.f, 4.f );
