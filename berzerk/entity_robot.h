@@ -13,6 +13,7 @@ private:
 	sf::Vector2f playerPos;
 	bool moving;
 	sf::Sprite sprite;
+	std::string currentAnim;
 
 	void LoadSprite();
 

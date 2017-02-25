@@ -10,6 +10,10 @@
 		<frame x="69" y="0" w="9" h="10"></frame>
 		<frame x="79" y="0" w="9" h="10"></frame>
 	</anim>
+	<anim name="robot_walk">
+		<frame x="9" y="11" w="9" h="11"></frame>
+		<frame x="19" y="11" w="9" h="11"></frame>
+	</anim>
 	<anim name="player_stand">
 		<frame x="95" y="0" w="6" h="16"></frame>
 	</anim>

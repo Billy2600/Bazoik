@@ -38,7 +38,7 @@ void EntityRobot::Think( const float dt )
 	
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
-	sprite.setTextureRect( game->animManager.Animate( "robot_idle" ) );
+	sprite.setTextureRect( game->animManager.Animate( currentAnim ) );
 
 	if( hitbox.left > GAME_WIDTH || hitbox.top > GAME_HEIGHT )
 		return;
@@ -60,6 +60,11 @@ void EntityRobot::Think( const float dt )
 	{
 		moving = true;
 		this->Move( sf::Vector2f(playerVec.x / 7, playerVec.y / 7), dt );
+		currentAnim = "robot_walk";
+	}
+	else
+	{
+		currentAnim = "robot_idle";
 	}
 
 	//if(seePlayer) shape.setFillColor( sf::Color::Cyan );
