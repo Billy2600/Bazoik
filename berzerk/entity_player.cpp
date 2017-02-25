@@ -176,6 +176,8 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 	// Change animation
 	if( move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0 )
 		currentAnim = "player_walk";
+	else if( input.fire )
+		currentAnim = "player_fire";
 	else
 		currentAnim = "player_stand";
 	// Flip sprite based on last horizontal movement
