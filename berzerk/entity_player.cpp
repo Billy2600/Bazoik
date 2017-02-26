@@ -5,9 +5,6 @@ EntityPlayer::EntityPlayer()
 	shape.setFillColor( sf::Color::Transparent );
 	shape.setOutlineColor( sf::Color::Red );
 	shape.setOutlineThickness( 1.f );
-	shape.setSize( sf::Vector2f(30,48) );
-	hitbox.width = 30;
-	hitbox.height = 48;
 	clock.restart();
 	dead = false;
 	reset = false;
@@ -32,6 +29,11 @@ void EntityPlayer::LoadSprite()
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
 		sprite.setScale( sf::Vector2f( 4, 4 ) );
 		currentAnim = "player_stand";
+		// Load hitbox based on sprite info
+		sf::IntRect animRect = game->animManager.Animate( currentAnim );
+		hitbox.width = animRect.width * sprite.getScale().x;
+		hitbox.height = animRect.height * sprite.getScale().y;
+		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
 	}
 }
 
@@ -183,16 +185,19 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 		currentAnim = "player_fire";
 	else
 		currentAnim = "player_stand";
+
 	// Flip sprite based on last horizontal movement
 	if( lastHoriz == Directions::W )
+	{
 		sprite.setScale( -4.f, 4.f );
+		// Account for sprite mis-aligning with the hitbox when flipped via negative scale
+		sprite.move( sf::Vector2f( hitbox.width, 0 ) );
+	}
 	else
+	{
 		sprite.setScale( 4.f, 4.f );
+	}
 
 	sf::IntRect animRect = game->animManager.Animate( currentAnim );
 	sprite.setTextureRect( animRect );
-	sprite.setOrigin( animRect.width / 2, animRect.height / 2 );
-	sprite.move( animRect.width, animRect.height );
-	hitbox.width = animRect.width;
-	hitbox.height = animRect.height;
 }
