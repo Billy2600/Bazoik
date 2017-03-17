@@ -8,6 +8,8 @@ StateHighscore::StateHighscore( Game *game )
 	this->game = game;
 	AssetManager *assetManager = &this->game->assetManager;
 	entryMode = false;
+	entryIndex = 0;
+	entryChar = 'A';
 
 	title.setFont( assetManager->GetFontRef( "joystix" ) );
 	title.setFillColor( sf::Color::Green );
@@ -20,28 +22,19 @@ StateHighscore::StateHighscore( Game *game )
 	table.setPosition( sf::Vector2f( 3, 90 ) );
 	table.setString( "" );
 
-	// TEMPORARY: init scores
-	/*scores[0] = { 150, {'T', 'S', '1', '\0' } };
-	scores[1] = { 75,{ 'T', 'S', '2', '\0' } };
-	scores[2] = { 86,{ 'T', 'S', '3', '\0' } };
-	scores[3] = { 100,{ 'T', 'S', '4', '\0' } };
-	scores[4] = { 50,{ 'T', 'S', '5', '\0' } };
-	scores[5] = { 23,{ 'T', 'S', '6', '\0' } };
-	scores[6] = { 37,{ 'T', 'S', '7', '\0' } };
-	scores[7] = { 30,{ 'T', 'S', '8', '\0' } };
-	scores[8] = { 23,{ 'T', 'S', '9', '\0' } };
-	scores[9] = { 115,{ 'T', 'S', 'T', '\0' } };*/
-
 	LoadFromFile( "scores.xml" );
 	QuickSort(0, NUM_SCORES-1);
 	CheckNewScore();
+
+	clock.restart();
 }
 
 void StateHighscore::CheckNewScore()
 {
 	if( game->score > scores[NUM_SCORES-1].num )
 	{
-		scores[NUM_SCORES - 1] = { game->score, { 'B', 'L', 'Y', '\0' } };
+		scores[NUM_SCORES - 1] = { game->score, { ' ', ' ', ' ', '\0', ' ' } };
+		entryMode = true;
 	}
 
 	QuickSort( 0, NUM_SCORES - 1 );
@@ -123,28 +116,52 @@ void StateHighscore::Draw() const
 
 void StateHighscore::Update( const float dt )
 {
-	if( entryMode )
+	std::stringstream ss;
+	unsigned int i = 1; // Not being used for array offset, so we can set it to 1
+	for( auto score : scores )
 	{
+		// Keep spacing consistent with double digit numbers
+		std::string space;
+		if( i > 9 ) space = "";
+		else space = " ";
 
-	}
-
-	if( table.getString() == "" )
-	{
-		std::stringstream ss;
-		unsigned int i = 1; // Not being used for array offset, so we can set it to 1
-		for( auto score : scores )
+		// Display entry mode
+		if( entryMode && score.initials[4] == ' ' )
 		{
-			// Keep spacing consistent with double digit numbers
-			std::string space;
-			if( i > 9 ) space = "";
-			else space = " ";
+			entryLoc = i - 1; // Take down location
 
-			ss << i << ". " << space << score.num << " " << score.initials << "\n";
-			i++;
+			if( entryChar < 0 ) entryChar = 0;
+			if( entryChar > 255 ) entryChar = 255;
+
+			// Blink cursor
+			if( entryIndex < 3 )
+			{
+				if( clock.getElapsedTime().asMilliseconds() > blinkDelay )
+				{
+					if( scores[entryLoc].initials[entryIndex + 1] == ' ' )
+						scores[entryLoc].initials[entryIndex + 1] = '_';
+					else
+						scores[entryLoc].initials[entryIndex + 1] = ' ';
+
+					clock.restart();
+				}
+			}
+
+			scores[entryLoc].initials[entryIndex] = entryChar;
+
+			// Finish up
+			if( entryIndex > 2 )
+			{
+				scores[entryLoc].initials[3] = '\0';
+				entryMode = false;
+			}
 		}
-
-		table.setString( ss.str() );
+			
+		ss << i << ". " << space << score.num << " " << score.initials  << "\n";
+		i++;
 	}
+
+	table.setString( ss.str() );
 }
 
 void StateHighscore::HandleInput()
@@ -167,6 +184,25 @@ void StateHighscore::HandleInput()
 				Close();
 				game->PopState();
 				break; // If you don't break here, it will crash
+			}
+		}
+
+		// Initials input
+		if( entryMode )
+		{
+			if( game->inputManager.TestKeyDown( "right", event ) )
+			{
+				entryChar++;
+			}
+
+			if( game->inputManager.TestKeyDown( "left", event ) )
+			{
+				entryChar--;
+			}
+
+			if( game->inputManager.TestKeyDown( "fire", event ) )
+			{
+				entryIndex++;
 			}
 		}
 	}

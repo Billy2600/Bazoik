@@ -270,4 +270,5 @@ void StateGameplay::ScreenTransition( const float dt )
 StateGameplay::~StateGameplay()
 {
 	//maze.ClearMap();
+	sfx.stop();
 }
