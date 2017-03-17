@@ -10,6 +10,7 @@ private:
 	sf::Text title;
 	std::map<std::string, GuiButton> buttons;
 	void StartGame(); // Start the game
+	void LoadSounds(); // Load all sounds
 
 public:
 

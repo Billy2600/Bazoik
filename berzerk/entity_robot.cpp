@@ -18,6 +18,7 @@ EntityRobot::EntityRobot( const sf::Vector2f pos )
 
 EntityRobot::~EntityRobot()
 {
+
 }
 
 void EntityRobot::LoadSprite()

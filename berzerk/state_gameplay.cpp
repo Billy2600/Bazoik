@@ -4,6 +4,8 @@
 
 Directions StateGameplay::lastMove = Directions::W;
 
+bool StateGameplay::chicken = false;
+
 StateGameplay::StateGameplay( Game *game )
 {
 	this->game = game;
@@ -200,7 +202,7 @@ void StateGameplay::Draw() const
 
 	entityManager.Draw();
 	game->window.draw( txScore );
-	for( int i = 0; i < MAX_LIVES; i++ )
+	for( unsigned int i = 0; i < MAX_LIVES; i++ )
 	{
 		if( i >= game->GetLives() )
 			break;
@@ -218,6 +220,21 @@ void StateGameplay::ScreenTransition( const float dt )
 		txTrans.update( game->window );
 		sprTrans.setTexture( txTrans );
 		captured = true;
+
+		// Play sound
+		if( entityManager.GetRobotCount() > 0 ) chicken = true;
+		else chicken = false;
+
+		if( chicken )
+		{
+			sfx.setBuffer( game->assetManager.GetSoundRef( "chicken", true ) );
+			sfx.play();
+		}
+		else
+		{
+			sfx.setBuffer( game->assetManager.GetSoundRef( "intruder", true ) );
+			sfx.play();
+		}
 	}
 	else
 	{

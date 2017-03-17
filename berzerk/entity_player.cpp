@@ -5,6 +5,9 @@ EntityPlayer::EntityPlayer()
 	shape.setFillColor( sf::Color::Transparent );
 	shape.setOutlineColor( sf::Color::Red );
 	shape.setOutlineThickness( 1.f );
+	// Hitbox will remain consistent size, regardless of animation
+	hitbox.width = 24.f;
+	hitbox.height = 64.f;
 	clock.restart();
 	dead = false;
 	reset = false;
@@ -31,8 +34,6 @@ void EntityPlayer::LoadSprite()
 		currentAnim = "player_stand";
 		// Load hitbox based on sprite info
 		sf::IntRect animRect = game->animManager.Animate( currentAnim );
-		hitbox.width = animRect.width * sprite.getScale().x;
-		hitbox.height = animRect.height * sprite.getScale().y;
 		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
 	}
 }

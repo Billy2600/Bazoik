@@ -20,6 +20,7 @@ private:
 	Maze maze;
 	bool wallsCreated;
 	bool enemiesSpawned;
+	static bool chicken; // Did you kill all the robots? Static so it will carry over
 	sf::Text txScore;
 	sf::Sprite lives[MAX_LIVES];
 
@@ -33,6 +34,9 @@ private:
 	sf::Texture txTrans;
 
 	void ScreenTransition( const float dt ); // Transition screen
+
+	// Sound stuff
+	sf::Sound sfx;
 
 public:
 

@@ -173,6 +173,19 @@ void EntityManager::MoveAllEntities(sf::Vector2f move, const float dt)
 	}
 }
 
+int EntityManager::GetRobotCount() const
+{
+	int count = 0;
+
+	for( auto entity : entities )
+	{
+		if( dynamic_cast<EntityRobot*>( entity ) != NULL )
+			count++;
+	}
+
+	return count;
+}
+
 EntityManager::~EntityManager()
 {
 	for( auto entity : entities )
