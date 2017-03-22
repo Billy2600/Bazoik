@@ -2,19 +2,19 @@
 
 //unsigned int GuiButton::number = 0;
 
-GuiButton::GuiButton()
+GuiButton::GuiButton(const int order)
 {
-	//number++;
+	this->order = order;
 }
 
-GuiButton::GuiButton( const sf::Vector2f pos, const sf::Vector2f size, const sf::Vector2f padding, const std::string string, const sf::Font &font )
+GuiButton::GuiButton( const sf::Vector2f pos, const sf::Vector2f size, const sf::Vector2f padding, const std::string string, const sf::Font &font, const int order )
 {
-	//number++;
 	this->padding = padding;
 	SetPos( pos );
 	SetSize( size );
 	text.setString( string );
 	text.setFont( font );
+	this->order = order;
 }
 
 void GuiButton::SetHighlight( const bool highlight )

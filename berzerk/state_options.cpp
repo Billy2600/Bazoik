@@ -18,22 +18,29 @@ StateOptions::StateOptions( Game *game )
 	rebind.setCharacterSize( 30 );
 	rebind.setString( "Rebind Keys:" );
 
-	buttons["up"] = GuiButton( sf::Vector2f( 30, 150 ), sf::Vector2f( 500, 50 ), sf::Vector2f( 10, 3 ), "", assetManager->GetFontRef( "joystix" ) );
+	buttons["up"] = GuiButton( sf::Vector2f( 30, 150 ), sf::Vector2f( 500, 50 ), sf::Vector2f( 10, 3 ), "", assetManager->GetFontRef( "joystix" ), 0 );
 	buttons["up"].SetColors( sf::Color::Black, sf::Color::Green, sf::Color::Transparent );
 	buttons["up"].SetHighlightColors( sf::Color::Black, sf::Color::Red, sf::Color::Transparent );
 	buttons["up"].SetHighlight( false );
 
 	buttons["down"] = buttons["up"];
 	buttons["down"].SetPos( sf::Vector2f( 30, 200 ) );
+	buttons["down"].order = 1;
 
 	buttons["left"] = buttons["up"];
 	buttons["left"].SetPos( sf::Vector2f( 30, 250 ) );
+	buttons["left"].order = 2;
 
 	buttons["right"] = buttons["up"];
 	buttons["right"].SetPos( sf::Vector2f( 30, 300 ) );
+	buttons["right"].order = 3;
 
 	buttons["fire"] = buttons["up"];
 	buttons["fire"].SetPos( sf::Vector2f( 30, 350 ) );
+	buttons["fire"].order = 4;
+
+	selectedButton = 0;
+	joystickInput = false;
 }
 
 void StateOptions::HandleInput()
@@ -62,6 +69,7 @@ void StateOptions::HandleInput()
 				newKey.inputType = InputManager::InputType::Keyboard;
 				newKey.keyCode = event.key.code;
 				SetBind( newKey );
+				return;
 			}
 		}
 
@@ -73,6 +81,7 @@ void StateOptions::HandleInput()
 				newKey.inputType = InputManager::InputType::Joystick;
 				newKey.joystickButton = event.joystickButton.button;
 				SetBind( newKey );
+				return;
 			}
 		}
 
@@ -85,15 +94,16 @@ void StateOptions::HandleInput()
 				newKey.axis = event.joystickMove.axis;
 				newKey.axisPos = event.joystickMove.position;
 				SetBind( newKey );
+				return;
 			}
 		}
 
-		if( event.type == sf::Event::MouseButtonPressed )
+		if( event.type == sf::Event::MouseButtonPressed || game->inputManager.TestKeyDown( "fire", event ) )
 		{
 			// Check if mouse was inside any of the gui buttons
 			for( auto button : buttons )
 			{
-				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) )
+				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) || ( joystickInput && button.second.order == selectedButton ) )
 				{
 					awaitingRebind = true;
 					bind = button.first;
@@ -103,13 +113,62 @@ void StateOptions::HandleInput()
 
 		if( event.type == sf::Event::MouseMoved )
 		{
+			joystickInput = false;
 			// Check GUI highlights
 			for( auto& button : buttons )
 			{
 				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) )
 					button.second.SetHighlight( true );
 				else
-					button.second.SetHighlight( false );
+				{
+					if( !joystickInput || button.second.order != selectedButton )
+						button.second.SetHighlight( false );
+				}
+			}
+		}
+
+		// Interact with buttons with joystick
+		if( !awaitingRebind )
+		{
+			if( game->inputManager.TestKeyDown( "up", event ) )
+			{
+				if( joystickInput )
+				{
+					selectedButton--;
+					if( selectedButton < 0 )
+						selectedButton = 0;
+				}
+				else
+					joystickInput = true;
+			}
+
+			if( game->inputManager.TestKeyDown( "down", event ) )
+			{
+				if( joystickInput )
+				{
+					joystickInput = true;
+					selectedButton++;
+					if( selectedButton >= buttons.size() )
+						selectedButton = buttons.size() - 1;
+				}
+				else
+					joystickInput = true;
+			}
+
+			// Highlight buttons
+			if( joystickInput )
+			{
+				for( auto& button : buttons )
+				{
+					if( button.second.order == selectedButton )
+					{
+						button.second.SetHighlight( true );
+					}
+					else
+					{
+						button.second.SetHighlight( false );
+					}
+				}
 			}
 		}
 	}

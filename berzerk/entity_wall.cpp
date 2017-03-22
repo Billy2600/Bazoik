@@ -30,7 +30,7 @@ void EntityWall::SetColor( const sf::Color color )
 
 void EntityWall::Think( const float dt )
 {
-
+	
 }
 
 void EntityWall::Draw() const

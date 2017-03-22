@@ -3,6 +3,7 @@
 #include "game.h"
 #include "entity_wall.h"
 #include "entity_bullet.h"
+#include "entity_otto.h"
 #include "quadree.h"
 extern "C"
 {

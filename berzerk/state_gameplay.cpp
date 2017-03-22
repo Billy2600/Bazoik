@@ -17,6 +17,7 @@ StateGameplay::StateGameplay( Game *game )
 	// Init entities 
 	entityManager.game = game;
 	entityManager.Add( &player );
+	//entityManager.Add( new EntityOtto( sf::Vector2f( 0, 0 ) ) );
 	AssetManager *assetManager = &this->game->assetManager;
 
 	wallsCreated = false;

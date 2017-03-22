@@ -6,7 +6,6 @@
 class GuiButton : public sf::Drawable
 {
 private:
-	//static unsigned int number; // Number added
 	sf::Text text; // Text displayed
 	sf::Color hoverColor; // Color when hovered
 	sf::RectangleShape shape; // Shape around text
@@ -16,9 +15,10 @@ private:
 
 public:
 	sf::FloatRect hitbox; // Check if we were clicked
+	int order; // Order compared to other buttons (used for joystick input)
 
-	GuiButton();
-	GuiButton( const sf::Vector2f pos, const sf::Vector2f size, const sf::Vector2f padding, const std::string string, const sf::Font &font );
+	GuiButton(const int order = 0);
+	GuiButton( const sf::Vector2f pos, const sf::Vector2f size, const sf::Vector2f padding, const std::string string, const sf::Font &font, const int order = 0 );
 	void SetHighlight( const bool highlight ); // Tell this button it's highlighted or not
 	void SetColors( const sf::Color background, sf::Color text, sf::Color outline );
 	void SetHighlightColors( const sf::Color background, sf::Color text, sf::Color outline );

@@ -11,6 +11,8 @@ private:
 	bool error; // Are we displaying an error message?
 	std::string bind; // Which bind are we setting?
 	std::map<std::string, GuiButton> buttons;
+	bool joystickInput = false; // Will flip once user starts using joystick
+	int selectedButton; // Which button is currently selected? (Joystick only)
 
 public:
 	Game *game;

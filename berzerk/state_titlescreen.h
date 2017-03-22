@@ -9,6 +9,8 @@ class StateTitleScreen : public GameState
 private:
 	sf::Text title;
 	std::map<std::string, GuiButton> buttons;
+	bool joystickInput = false; // Will flip once user starts using joystick
+	int selectedButton; // Which button is currently selected? (Joystick only)
 	void StartGame(); // Start the game
 	void LoadSounds(); // Load all sounds
 

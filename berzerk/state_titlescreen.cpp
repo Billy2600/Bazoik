@@ -15,14 +15,17 @@ StateTitleScreen::StateTitleScreen(Game *game)
 	title.setPosition( sf::Vector2f(150,30) );
 	title.setString( GAME_NAME );
 
-	buttons["start"] = GuiButton( sf::Vector2f( 150, 200 ), sf::Vector2f( 270, 50 ), sf::Vector2f(10,3), "Start Game", assetManager->GetFontRef("joystix") );
+	buttons["start"] = GuiButton( sf::Vector2f( 150, 200 ), sf::Vector2f( 270, 50 ), sf::Vector2f(10,3), "Start Game", assetManager->GetFontRef("joystix"), 0 );
 	buttons["start"].SetColors( sf::Color::Black, sf::Color::Green, sf::Color::Green );
 	buttons["start"].SetHighlightColors( sf::Color::Black, sf::Color::Red, sf::Color::Red );
 	buttons["start"].SetHighlight( false );
 
 	buttons["options"] = buttons["start"];
+	buttons["options"].order = 1;
 	buttons["options"].SetText( "Options" );
 	buttons["options"].SetPos( sf::Vector2f( 150, 275 ) );
+
+	selectedButton = 0;
 }
 
 void StateTitleScreen::LoadSounds()
@@ -76,12 +79,13 @@ void StateTitleScreen::HandleInput()
 			}
 		}
 
-		if( event.type == sf::Event::MouseButtonPressed )
+		// Click on/select button
+		if( event.type == sf::Event::MouseButtonPressed || game->inputManager.TestKeyDown( "fire", event ) )
 		{
 			// Check if mouse was inside any of the gui buttons
 			for( auto button : buttons )
 			{
-				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) )
+				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) || ( joystickInput && button.second.order == selectedButton ) )
 				{
 					// Perform action based on which button this is
 					if( button.first == "start" )
@@ -98,13 +102,56 @@ void StateTitleScreen::HandleInput()
 
 		if( event.type == sf::Event::MouseMoved )
 		{
+			joystickInput = false;
 			// Check GUI highlights
 			for( auto& button : buttons )
 			{
 				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) )
 					button.second.SetHighlight( true );
 				else
+				{
+					if( !joystickInput || button.second.order != selectedButton )
+						button.second.SetHighlight( false );
+				}
+			}
+		}
+
+		// Interact with buttons with joystick
+		if( game->inputManager.TestKeyDown( "up", event ) )
+		{
+			if( joystickInput )
+			{
+				joystickInput = true;
+				selectedButton = 0;
+			}
+			else
+				joystickInput = true; // On first press, just turn on joystick functionality
+		}
+
+		if( game->inputManager.TestKeyDown( "down", event ) )
+		{
+			if( joystickInput )
+			{
+				joystickInput = true;
+				selectedButton = 1;
+			}
+			else
+				joystickInput = true;
+		}
+
+		// Highlight buttons
+		if( joystickInput )
+		{
+			for( auto& button : buttons )
+			{
+				if( button.second.order == selectedButton )
+				{
+					button.second.SetHighlight( true );
+				}
+				else
+				{
 					button.second.SetHighlight( false );
+				}
 			}
 		}
 	}
