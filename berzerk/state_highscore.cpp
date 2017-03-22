@@ -154,6 +154,7 @@ void StateHighscore::Update( const float dt )
 			{
 				scores[entryLoc].initials[3] = '\0';
 				entryMode = false;
+				clock.restart();
 			}
 		}
 			
@@ -162,6 +163,13 @@ void StateHighscore::Update( const float dt )
 	}
 
 	table.setString( ss.str() );
+
+	if( clock.getElapsedTime().asMilliseconds() > resetDelay )
+	{
+		Close();
+		game->PopState();
+		return;
+	}
 }
 
 void StateHighscore::HandleInput()

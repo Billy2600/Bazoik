@@ -23,6 +23,7 @@ private:
 	char entryChar; // Current char
 	sf::Clock clock;
 	const sf::Int32 blinkDelay = 500; // Input cursor blink delay (in milliseconds)
+	const sf::Int32 resetDelay = 5000; // Delay before moving back to title screen
 
 	void CheckNewScore(); // Did we get a new score?
 	// Quicksort scores
