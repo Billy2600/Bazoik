@@ -14,6 +14,8 @@ EntityRobot::EntityRobot( const sf::Vector2f pos )
 	moving = false;
 	drawHitbox = false;
 	currentAnim = "robot_idle";
+	hitbox.width = 36;
+	hitbox.height = 44;
 }
 
 EntityRobot::~EntityRobot()
@@ -30,8 +32,8 @@ void EntityRobot::LoadSprite()
 		sprite.setScale( sf::Vector2f( 4, 4 ) );
 		// Load hitbox based on sprite info
 		sf::IntRect animRect = game->animManager.Animate( currentAnim );
-		hitbox.width = animRect.width * sprite.getScale().x;
-		hitbox.height = animRect.height * sprite.getScale().y;
+		/*hitbox.width = animRect.width * sprite.getScale().x;
+		hitbox.height = animRect.height * sprite.getScale().y;*/
 		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
 	}
 }
@@ -60,7 +62,7 @@ void EntityRobot::Think( const float dt )
 	}
 
 	// Move towards player
-	if( seePlayer || moving )
+	if( seePlayer || (moving && game->level < 5) )
 	{
 		moving = true;
 		this->Move( sf::Vector2f(playerVec.x / 7, playerVec.y / 7), dt );

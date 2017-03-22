@@ -9,6 +9,7 @@ bool StateGameplay::chicken = false;
 StateGameplay::StateGameplay( Game *game )
 {
 	this->game = game;
+
 	player.SetPos( maze.GetPlayerStart(lastMove, player) );
 	transition = false;
 	captured = false;
@@ -157,24 +158,28 @@ void StateGameplay::Update( const float dt )
 		if( plPos.x > GAME_WIDTH )
 		{
 			transition = true;
+			game->level++;
 			lastMove = Directions::W;
 			transStart = now;
 		}
 		else if( (plPos.x + player.hitbox.width) < 0 )
 		{
 			transition = true;
+			game->level++;
 			lastMove = Directions::E;
 			transStart = now;
 		}
 		else if( plPos.y > GAME_HEIGHT)
 		{
 			transition = true;
+			game->level++;
 			lastMove = Directions::N;
 			transStart = now;
 		}
 		else if( (plPos.y + player.hitbox.height) < 0 )
 		{
 			transition = true;
+			game->level++;
 			lastMove = Directions::S;
 			transStart = now;
 		}

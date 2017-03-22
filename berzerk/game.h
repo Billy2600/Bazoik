@@ -34,6 +34,7 @@ public:
 	unsigned int score;
 	InputManager inputManager;
 	AnimManager animManager;
+	int unsigned level; // Current level, certain behaviors will change based on this
 
 	Game();
 	void GameLoop(); // Runs every update
