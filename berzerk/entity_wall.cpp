@@ -5,9 +5,10 @@ EntityWall::EntityWall()
 
 }
 
-EntityWall::EntityWall( sf::Vector2f pos, sf::Vector2f size )
+EntityWall::EntityWall( sf::Vector2f pos, sf::Vector2f size, sf::Color color )
 {
 	SetBox( pos, size );
+	SetColor( color );
 }
 
 void EntityWall::SetBox( sf::Vector2f pos, sf::Vector2f size )
@@ -20,6 +21,11 @@ void EntityWall::SetBox( sf::Vector2f pos, sf::Vector2f size )
 	shape.setFillColor( sf::Color::Blue );
 	shape.setPosition( pos );
 	shape.setSize( size );
+}
+
+void EntityWall::SetColor( const sf::Color color )
+{
+	shape.setFillColor( color );
 }
 
 void EntityWall::Think( const float dt )

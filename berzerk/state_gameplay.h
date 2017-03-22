@@ -33,10 +33,10 @@ private:
 	sf::Sprite sprTrans; // Screenshot of screen for transition
 	sf::Texture txTrans;
 
-	void ScreenTransition( const float dt ); // Transition screen
-
 	// Sound stuff
 	sf::Sound sfx;
+
+	void ScreenTransition( const float dt ); // Transition screen
 
 public:
 

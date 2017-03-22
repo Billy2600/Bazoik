@@ -8,8 +8,9 @@ private:
 
 public:
 	EntityWall();
-	EntityWall( const sf::Vector2f pos, const sf::Vector2f size );
+	EntityWall( const sf::Vector2f pos, const sf::Vector2f size, sf::Color color = sf::Color::Blue );
 	void SetBox( const sf::Vector2f pos, const sf::Vector2f size );
+	void SetColor( const sf::Color color );
 	virtual void Think( const float dt );
 	virtual void Draw() const;
 	virtual void Move(sf::Vector2f move, const float dt);

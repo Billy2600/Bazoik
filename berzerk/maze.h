@@ -63,6 +63,8 @@ public:
 	void CreateGaps();
 	// Create level walls
 	void CreateWalls(EntityManager &entityManager) const;
+	// Block last exit
+	void BlockExit( EntityManager &entityManager, Directions lastMove ) const;
 	// Spawn enemies
 	void SpawnEnemies( EntityManager &entityManager, const Directions lastMove ); // Uses lastmove to avoid spawning enemies near player
 	// Get position player should start in

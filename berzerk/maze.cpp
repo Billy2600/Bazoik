@@ -248,6 +248,30 @@ void Maze::CreateWalls( EntityManager &entityManager ) const
 	}
 }
 
+void Maze::BlockExit( EntityManager &entityManager, Directions lastMove ) const
+{
+	if( lastMove == Directions::N )
+	{
+		entityManager.Add( new EntityWall( sf::Vector2f( (float)( tileWidth * int( MAZE_WIDTH / 2 ) ), 0 ),
+			sf::Vector2f( (float)tileWidth, WALL_THICKNESS / 2 ), sf::Color::Red ) );
+	}
+	else if( lastMove == Directions::S )
+	{
+		entityManager.Add( new EntityWall( sf::Vector2f( (float)( tileWidth * int( MAZE_WIDTH / 2 ) ), (float)( tileWidth * MAZE_HEIGHT ) - ( WALL_THICKNESS *3 ) ),
+			sf::Vector2f( (float)tileWidth, WALL_THICKNESS / 2 ), sf::Color::Red ) );
+	}
+	else if( lastMove == Directions::W )
+	{
+		entityManager.Add( new EntityWall( sf::Vector2f( 0, (float)tileHeight ),
+			sf::Vector2f( WALL_THICKNESS / 2, (float)tileHeight ), sf::Color::Red ) );
+	}
+	else if( lastMove == Directions::E )
+	{
+		entityManager.Add( new EntityWall( sf::Vector2f( (float)( tileWidth * MAZE_WIDTH ), (float)tileHeight ),
+			sf::Vector2f( WALL_THICKNESS, (float)tileHeight ), sf::Color::Red ) );
+	}
+}
+
 void Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove )
 {
 	std::vector<sf::Vector2u> used;
@@ -311,13 +335,13 @@ sf::Vector2f Maze::GetPlayerStart( const Directions lastMove, EntityPlayer &play
 	{
 	// Keep in mind you'll end up on the other side that you exited
 	case Directions::S:
-		return sf::Vector2f( GAME_WIDTH / 2, GAME_HEIGHT - player.hitbox.height );
+		return sf::Vector2f( GAME_WIDTH / 2, GAME_HEIGHT - player.hitbox.height - WALL_THICKNESS );
 		break;
 	case Directions::N:
 		return sf::Vector2f( GAME_WIDTH /2, WALL_THICKNESS);
 		break;
 	case Directions::E:
-		return sf::Vector2f( GAME_WIDTH - player.hitbox.width, GAME_HEIGHT / 2 );
+		return sf::Vector2f( GAME_WIDTH - player.hitbox.width - WALL_THICKNESS, GAME_HEIGHT / 2 );
 		break;
 	case Directions::W:
 	default:

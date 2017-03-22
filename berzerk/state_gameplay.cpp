@@ -137,6 +137,10 @@ void StateGameplay::Update( const float dt )
 	if( maze.IsDone() && !wallsCreated )
 	{
 		maze.CreateWalls( entityManager );
+		if( game->level >= 5 )
+		{
+			maze.BlockExit( entityManager, lastMove );
+		}
 		wallsCreated = true;
 	}
 	if( maze.IsDone() && !enemiesSpawned )
