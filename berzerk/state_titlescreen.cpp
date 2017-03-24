@@ -5,7 +5,6 @@
 StateTitleScreen::StateTitleScreen(Game *game)
 {
 	this->game = game;
-	game->level = 1;
 
 	AssetManager *assetManager = &this->game->assetManager;
 	assetManager->LoadFont( "joystix", "assets/joystix monospace.ttf" );
@@ -161,6 +160,7 @@ void StateTitleScreen::Update(const float dt)
 {
 	LoadSounds();
 	game->ResetLives();
+	game->level = 1;
 }
 
 void StateTitleScreen::Draw() const

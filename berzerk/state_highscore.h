@@ -20,7 +20,7 @@ private:
 	bool entryMode; // Are we entering a score?
 	sf::Int8 entryIndex; // Which of the initials are we entering?
 	unsigned int entryLoc; // Location of new high score in the scores array
-	char entryChar; // Current char
+	unsigned char entryChar; // Current char
 	sf::Clock clock;
 	const sf::Int32 blinkDelay = 500; // Input cursor blink delay (in milliseconds)
 	const sf::Int32 resetDelay = 5000; // Delay before moving back to title screen
