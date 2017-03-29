@@ -6,7 +6,7 @@
 #include "entity_robot.h"
 #include "entity_bullet.h"
 
-#define PLAYER_SPEED 300
+#define PLAYER_SPEED 200
 
 struct PlayerInput
 {

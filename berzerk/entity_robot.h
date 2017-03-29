@@ -2,7 +2,7 @@
 #include "entity.h"
 #include "entity_player.h"
 
-#define ROBOT_FIRE_DELAY 1000 // Firing delay, in milliseconds
+#define ROBOT_FIRE_DELAY 3000 // Firing delay, in milliseconds
 
 class EntityRobot : public Entity
 {

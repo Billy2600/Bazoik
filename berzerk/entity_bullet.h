@@ -2,6 +2,10 @@
 #include "entity.h"
 
 #define BULLET_SPEED 500
+#define BULLET_WIDTH 2
+// Different dimensions baesd on who fired (accurate to original)
+#define PLAYER_BULLET_HEIGHT 30
+#define ROBOT_BULLET_HEIGHT 20
 
 class EntityBullet : public Entity
 {

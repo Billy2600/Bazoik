@@ -9,7 +9,12 @@ EntityBullet::EntityBullet( sf::Vector2f pos, sf::Vector2f direction, Entity* ow
 	hitbox.width = 1;
 	shape.setPosition( pos );
 	shape.setFillColor( sf::Color::Red );
-	shape.setSize( sf::Vector2f( 5, 30 ) );
+
+	if( dynamic_cast<EntityPlayer*>(owner) != NULL )
+		shape.setSize( sf::Vector2f( BULLET_WIDTH, PLAYER_BULLET_HEIGHT ) );
+	else
+		shape.setSize( sf::Vector2f( BULLET_WIDTH, ROBOT_BULLET_HEIGHT ) );
+
 	this->direction = direction;
 	this->owner = owner;
 	SetAngle();
