@@ -33,6 +33,10 @@ private:
 	sf::Sprite sprTrans; // Screenshot of screen for transition
 	sf::Texture txTrans;
 
+	const sf::Int32 ottoDelay = 10000;
+	EntityOtto *otto;
+	bool ottoSpawned; // Has Otto already been spawned?
+
 	// Sound stuff
 	sf::Sound sfx;
 

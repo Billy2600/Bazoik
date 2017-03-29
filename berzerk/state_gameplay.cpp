@@ -17,11 +17,10 @@ StateGameplay::StateGameplay( Game *game )
 	// Init entities 
 	entityManager.game = game;
 	entityManager.Add( &player );
-	//entityManager.Add( new EntityOtto( sf::Vector2f( 0, 0 ) ) );
 	AssetManager *assetManager = &this->game->assetManager;
 
 	wallsCreated = false;
-	enemiesSpawned = false;
+	enemiesSpawned = true;
 
 	txScore.setFont( assetManager->GetFontRef( "joystix" ) );
 	txScore.setFillColor( sf::Color::Green );
@@ -36,6 +35,8 @@ StateGameplay::StateGameplay( Game *game )
 		lives[i].setScale( 4, 4 );
 		lives[i].setPosition( (5 + lives[i].getGlobalBounds().width) * i, GAME_HEIGHT - lives[i].getGlobalBounds().height - 5 );
 	}
+
+	ottoSpawned = false;
 
 	clock.restart();
 }
@@ -194,6 +195,19 @@ void StateGameplay::Update( const float dt )
 		{
 			this->game->SwitchState( new StateHighscore( this->game ) );
 			return;
+		}
+
+		// Spawn Otto if delay has been reached
+		if( now >= ottoDelay && !ottoSpawned )
+		{
+			otto = new EntityOtto( sf::Vector2f( 0, player.hitbox.top ), player.hitbox.top, player.hitbox.top + player.hitbox.height );
+			entityManager.Add( otto );
+			ottoSpawned = true;
+		}
+		// Tell Otto where to move
+		if( ottoSpawned )
+		{
+			otto->SetMinMaxHeight( player.hitbox.top, player.hitbox.top + player.hitbox.height );
 		}
 	}
 	else

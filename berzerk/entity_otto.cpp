@@ -1,18 +1,31 @@
 #include "entity_otto.h"
-#include <cmath>
 
-EntityOtto::EntityOtto( sf::Vector2f pos )
+EntityOtto::EntityOtto( sf::Vector2f pos, const float minHeight, const float maxHeight )
 {
 	shape.setRadius( 20.f );
 	shape.setFillColor( sf::Color( 255, 165, 0 ) );
+	hitbox.left = pos.x;
+	hitbox.top = pos.y;
+	SetMinMaxHeight( minHeight, maxHeight );
 	hitbox.width = 20;
 	hitbox.height = 20;
+
+	float direction = ySpeed;
 }
 
 void EntityOtto::Think( const float dt )
 {
-	hitbox.left = abs( std::fmod( hitbox.top++, GAME_HEIGHT ) - ( GAME_HEIGHT / 2 ) );
-	shape.setPosition( sf::Vector2f( hitbox.top, hitbox.left ) );
+	if( direction == 0 ) direction = ySpeed; // Make sure this is initialized
+
+	hitbox.left += xSpeed * dt;
+	if( ( hitbox.top + hitbox.height ) > maxHeight )
+		direction = -ySpeed;
+	else if( ( hitbox.top + hitbox.height ) < minHeight )
+		direction = ySpeed;
+
+	hitbox.top += direction * dt;
+
+	shape.setPosition( sf::Vector2f(hitbox.left, hitbox.top) );
 }
 
 void EntityOtto::Draw() const
@@ -22,5 +35,11 @@ void EntityOtto::Draw() const
 
 void EntityOtto::HandleCollision( Entity *other )
 {
+	// Fool, nothing can stop Evil Otto!
+}
 
+void EntityOtto::SetMinMaxHeight( const float minHeight, const float maxHeight )
+{
+	this->maxHeight = maxHeight;
+	this->minHeight = minHeight;
 }

@@ -166,7 +166,7 @@ void EntityPlayer::HandleCollision( Entity *other )
 		return;
 
 	// In most cases, die
-	if( dynamic_cast<EntityWall*>( other ) != NULL || dynamic_cast<EntityRobot*>( other ) != NULL || dynamic_cast<EntityBullet*>( other ) != NULL )
+	if( dynamic_cast<EntityWall*>( other ) != NULL || dynamic_cast<EntityRobot*>( other ) != NULL || dynamic_cast<EntityBullet*>( other ) != NULL || dynamic_cast<EntityOtto*>( other ) != NULL )
 	{
 		Die();
 	}
