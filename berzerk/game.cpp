@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <cstdlib>
-#include <experimental/filesystem>
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 #include "game.h"
 #include "game_state.h"
 #include "state_gameplay.h"
@@ -47,6 +49,12 @@ void Game::GameLoop()
 
 		// Draw
 		Draw();
+	}
+
+	// Clear out states
+	while( !states.empty() )
+	{
+		PopState();
 	}
 }
 
@@ -113,15 +121,20 @@ std::string Game::GetConfigDir()
 		free( buf );
 	}
 
-	std::experimental::filesystem::create_directory( path + P_SEPERATOR + GAME_NAME );
+#ifdef _WIN32
+	std::string createPath = path + P_SEPERATOR + GAME_NAME;
+	// Check if directory exists, and if it doens't, create it
+	DWORD attrib = GetFileAttributes( createPath.c_str() );
+	if( attrib == INVALID_FILE_ATTRIBUTES && attrib & FILE_ATTRIBUTE_DIRECTORY )
+	{
+		CreateDirectory( createPath.c_str(), NULL );
+	}
+#endif
 	path = path + P_SEPERATOR + GAME_NAME + P_SEPERATOR;
 	return path;
 }
 
 Game::~Game()
 {
-	while( !states.empty() )
-	{
-		PopState();
-	}
+	
 }

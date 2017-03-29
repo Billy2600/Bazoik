@@ -20,7 +20,7 @@ StateGameplay::StateGameplay( Game *game )
 	AssetManager *assetManager = &this->game->assetManager;
 
 	wallsCreated = false;
-	enemiesSpawned = true;
+	enemiesSpawned = false;
 
 	txScore.setFont( assetManager->GetFontRef( "joystix" ) );
 	txScore.setFillColor( sf::Color::Green );
