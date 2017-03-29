@@ -1,0 +1,4 @@
+all:
+	g++ -c main.cpp anim_manager.cpp asset_manager.cpp entity_bullet.cpp entity.cpp entity_manager.cpp entity_otto.cpp entity_player.cpp entity_robot.cpp entity_wall.cpp game.cpp gui_button.cpp input_manager.cpp maze.cpp pugixml.cpp quadtree.cpp state_gameplay.cpp state_highscore.cpp state_options.cpp state_titlescreen.cpp -std=c++11 -D OLD_SFML -ggdb
+	g++ -c liang-barsky.c -ggdb
+	g++ main.o liang-barsky.o anim_manager.o asset_manager.o entity_bullet.o entity_manager.o entity.o entity_otto.o entity_player.o entity_robot.o entity_wall.o game.o gui_button.o input_manager.o maze.o pugixml.o quadtree.o state_gameplay.o state_highscore.o state_options.o state_titlescreen.o -o bazoik -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system

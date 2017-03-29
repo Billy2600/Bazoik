@@ -23,7 +23,11 @@ StateGameplay::StateGameplay( Game *game )
 	enemiesSpawned = false;
 
 	txScore.setFont( assetManager->GetFontRef( "joystix" ) );
+#ifdef OLD_SFML
+	txScore.setColor( sf::Color::Green );
+#else
 	txScore.setFillColor( sf::Color::Green );
+#endif
 	txScore.setCharacterSize( 30 );
 	txScore.setPosition( sf::Vector2f( 3, 3 ) );
 	txScore.setString( game->score );

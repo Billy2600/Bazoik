@@ -2,6 +2,10 @@
 #include <array>
 #include "state_highscore.h"
 #include "pugixml.hpp"
+#ifndef _WIN32
+#include <cstring>
+#define strcpy_s strcpy
+#endif
 
 StateHighscore::StateHighscore( Game *game )
 {
@@ -12,7 +16,11 @@ StateHighscore::StateHighscore( Game *game )
 	entryChar = 'A';
 
 	title.setFont( assetManager->GetFontRef( "joystix" ) );
+#ifdef OLD_SFML
+	title.setColor( sf::Color::Green );
+#else
 	title.setFillColor( sf::Color::Green );
+#endif
 	title.setCharacterSize( 90 );
 	title.setPosition( sf::Vector2f( 3, 3 ) );
 	title.setString( "HIGH SCORE" );

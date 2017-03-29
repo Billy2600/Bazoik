@@ -33,6 +33,15 @@ void EntityRobot::LoadSprite()
 		// Load hitbox based on sprite info
 		sf::IntRect animRect = game->animManager.Animate( currentAnim );
 		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
+		// Change sprite color based on level
+		if( game->level < 5 )
+		{
+			sprite.setColor( sf::Color( 222, 184, 135 ) );
+		}
+		else
+		{
+			sprite.setColor( sf::Color::Red );
+		}
 	}
 }
 

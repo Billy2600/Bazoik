@@ -33,7 +33,11 @@ void GuiButton::SetHighlight( const bool highlight )
 	shape.setFillColor( map->at( "background" ) );
 	shape.setOutlineColor( map->at( "outline" ) );
 	shape.setOutlineThickness( 2.f );
+#ifdef OLD_SFML
+	text.setColor( map->at( "text" ) );
+#else
 	text.setFillColor( map->at( "text" ) );
+#endif
 }
 
 void GuiButton::SetColors( const sf::Color background, sf::Color text, sf::Color outline )

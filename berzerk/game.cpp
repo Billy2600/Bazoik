@@ -2,6 +2,10 @@
 #include <cstdlib>
 #ifdef _WIN32
 #include <Windows.h>
+#else
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #endif
 #include "game.h"
 #include "game_state.h"
@@ -115,19 +119,33 @@ std::string Game::GetConfigDir()
 	char *buf = nullptr;
 	size_t sz = 0;
 
+#ifdef _WIN32
 	if( _dupenv_s( &buf, &sz, P_ENV_VAR ) == 0 && buf != nullptr )
 	{
 		path = std::string( buf );
 		free( buf );
 	}
+#else
+	if( secure_getenv( P_ENV_VAR ) != NULL )
+	{
+		path = std::string( secure_getenv( P_ENV_VAR) );
+	}
+#endif	
 
-#ifdef _WIN32
-	std::string createPath = path + P_SEPERATOR + GAME_NAME;
 	// Check if directory exists, and if it doens't, create it
+	std::string createPath = path + P_SEPERATOR + GAME_NAME;
+#ifdef _WIN32
 	DWORD attrib = GetFileAttributes( createPath.c_str() );
 	if( attrib == INVALID_FILE_ATTRIBUTES && attrib & FILE_ATTRIBUTE_DIRECTORY )
 	{
 		CreateDirectory( createPath.c_str(), NULL );
+	}
+#else
+	struct stat st = { 0 };
+
+	if( stat( createPath.c_str(), &st ) == -1 )
+	{
+		mkdir( createPath.c_str(), 0700 );
 	}
 #endif
 	path = path + P_SEPERATOR + GAME_NAME + P_SEPERATOR;

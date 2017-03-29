@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <array>
 #include <SFML/Graphics.hpp>
 #include "entity.h"
 
@@ -12,7 +13,7 @@ private:
 	int level;
 	std::vector<Entity*> objects;
 	sf::IntRect bounds;
-	Quadtree *nodes[4];
+	std::array<Quadtree*, 4> nodes;
 
 public:
 	Quadtree(int level, sf::IntRect bounds);

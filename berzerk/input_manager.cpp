@@ -1,3 +1,4 @@
+#include <iterator>
 #include "input_manager.h"
 #include "game.h"
 
@@ -9,7 +10,7 @@ int InputManager::FindIndexFromName( const std::string name, const InputType typ
 {
 	if( type == InputType::Keyboard )
 	{
-		for( unsigned int i = 0; i < std::size( keyNames ); i++ )
+		for( unsigned int i = 0; i < keyNames.size(); i++ )
 		{
 			if( keyNames[i] == name )
 			{
@@ -19,7 +20,7 @@ int InputManager::FindIndexFromName( const std::string name, const InputType typ
 	}
 	else if( type == InputType::Axis )
 	{
-		for( unsigned int i = 0; i < std::size( axisNames ); i++ )
+		for( unsigned int i = 0; i < axisNames.size(); i++ )
 		{
 			if( axisNames[i] == name )
 			{
@@ -241,7 +242,7 @@ std::string InputManager::GetKeyName( const std::string name ) const
 	{
 		if( keys.at( name ).inputType == InputType::Keyboard )
 		{
-			if( keys.at( name ).keyCode > (signed int)std::size( keyNames ) || keys.at( name ).keyCode < 0 ) // Bounds checking
+			if( keys.at( name ).keyCode > (signed int)keyNames.size() || keys.at( name ).keyCode < 0 ) // Bounds checking
 				return "UNBOUND";
 
 			return keyNames[keys.at( name ).keyCode];
@@ -252,7 +253,7 @@ std::string InputManager::GetKeyName( const std::string name ) const
 		}
 		if( keys.at( name ).inputType == InputType::Axis )
 		{
-			if( keys.at( name ).axis > (signed int)std::size( axisNames ) || keys.at( name ).axis < 0 ) // Bounds checking
+			if( keys.at( name ).axis > (signed int)axisNames.size() || keys.at( name ).axis < 0 ) // Bounds checking
 				return "UNBOUND";
 
 			std::string pos = "+"; // Indicate left/right, up/down, etc.

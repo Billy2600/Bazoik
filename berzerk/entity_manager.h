@@ -5,10 +5,7 @@
 #include "entity_bullet.h"
 #include "entity_otto.h"
 #include "quadree.h"
-extern "C"
-{
 #include "liang-barsky.h"
-}
 
 class EntityManager
 {

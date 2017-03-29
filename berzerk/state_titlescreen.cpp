@@ -9,7 +9,11 @@ StateTitleScreen::StateTitleScreen(Game *game)
 	AssetManager *assetManager = &this->game->assetManager;
 	assetManager->LoadFont( "joystix", "assets/joystix monospace.ttf" );
 	title.setFont( assetManager->GetFontRef( "joystix" ) );
+#ifdef OLD_SFML
+	title.setColor( sf::Color::Green );
+#else
 	title.setFillColor( sf::Color::Green );
+#endif
 	title.setCharacterSize( 90 );
 	title.setPosition( sf::Vector2f(150,30) );
 	title.setString( GAME_NAME );

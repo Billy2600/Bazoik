@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <map>
+#include <array>
 #include <SFML/Graphics.hpp>
 #include "pugixml.hpp"
 
@@ -46,13 +47,13 @@ public:
 	~InputManager();
 
 	// Names matching keycode numbers
-	const std::string keyNames[98] = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+	const std::array<std::string, 98> keyNames = { { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
 		"NUM0", "NUM1", "NUM2", "NUM3", "NUM4", "NUM5", "NUM6", "NUM7", "NUM8", "NUM9", "ESC", "L CTRL", "L SHIFT", "L ALT", "L SYS", "R CTRL", "R SHIFT", "R ALT", "L SYS",
 		"MENU", "[", "]", ";", ",", ".", "'", "/", "\\", "~", "=", "-", "SPACE", "ENTER", "BACKSPACE", "TAB", "PAGE UP", "PAGE DOWN", "END", "HOME", "INS", "DEL",
 		"+", "-", "*", "/", "LEFT", "RIGHT", "UP", "DOWN", "NUMPAD 0", "NUMPAD 1", "NUMPAD 2", "NUMPAD 3", "NUMPAD 4", "NUMPAD 5", "NUMPAD 6", "NUMPAD 7", "NUMPAD 8", "NUMPAD 9",
 		"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "PAUSE"
-	};
+	} };
 
-	const std::string axisNames[8] = { "X", "Y", "Z", "R", "U", "V", "PovX", "PovY" };
+	const std::array<std::string, 8> axisNames = { { "X", "Y", "Z", "R", "U", "V", "PovX", "PovY" } };
 };
 

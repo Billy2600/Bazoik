@@ -69,6 +69,7 @@ void Quadtree::Insert( Entity* entity )
 	if( nodes[0] != NULL )
 	{
 		int index = GetIndex( entity );
+
 		if( index != -1 )
 		{
 			nodes[index]->Insert( entity );

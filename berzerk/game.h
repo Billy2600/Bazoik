@@ -14,7 +14,7 @@
 #ifdef _WIN32
 #define P_ENV_VAR "USERPROFILE"
 #define P_SEPERATOR "\\"
-#elif
+#else
 #define P_ENV_VAR "HOME"
 #define P_SEPERATOR "/"
 #endif

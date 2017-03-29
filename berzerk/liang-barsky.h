@@ -25,6 +25,10 @@
  * http://hinjang.com/articles/04.html#eight
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifdef DEFINE_LIANG_BARSKY_GLOBALS
 #define GLOBAL
 #else
@@ -52,5 +56,9 @@ GLOBAL int clip_line(struct liang_barsky_clip_window *c,
 GLOBAL int clip_line_copy(struct liang_barsky_clip_window *c,
 			int x1, int y1, int x2, int y2,
 			int *ox1, int *oy1, int *ox2, int *oy2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
