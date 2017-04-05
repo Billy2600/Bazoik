@@ -42,6 +42,8 @@ StateGameplay::StateGameplay( Game *game )
 
 	ottoSpawned = false;
 
+	deathSoundPlayed = false;
+
 	clock.restart();
 }
 
@@ -50,7 +52,7 @@ void StateGameplay::HandleInput()
 	sf::Event event;
 
 	// Reset state if player is dead
-	if( player.CheckDead() )
+	if( player.CheckReset() )
 	{
 		game->ResetState();
 		return;
@@ -172,21 +174,21 @@ void StateGameplay::Update( const float dt )
 			lastMove = Directions::W;
 			transStart = now;
 		}
-		else if( (plPos.x + player.hitbox.width) < 0 )
+		else if( ( plPos.x + player.hitbox.width ) < 0 )
 		{
 			transition = true;
 			game->level++;
 			lastMove = Directions::E;
 			transStart = now;
 		}
-		else if( plPos.y > GAME_HEIGHT)
+		else if( plPos.y > GAME_HEIGHT )
 		{
 			transition = true;
 			game->level++;
 			lastMove = Directions::N;
 			transStart = now;
 		}
-		else if( (plPos.y + player.hitbox.height) < 0 )
+		else if( ( plPos.y + player.hitbox.height ) < 0 )
 		{
 			transition = true;
 			game->level++;
@@ -207,11 +209,30 @@ void StateGameplay::Update( const float dt )
 			otto = new EntityOtto( sf::Vector2f( 0, player.hitbox.top ), player.hitbox.top, player.hitbox.top + player.hitbox.height );
 			entityManager.Add( otto );
 			ottoSpawned = true;
+
+			sfx.setBuffer( game->assetManager.GetSoundRef( "intruder_alert", true ) );
+			sfx.play();
 		}
 		// Tell Otto where to move
 		if( ottoSpawned )
 		{
 			otto->SetMinMaxHeight( player.hitbox.top, player.hitbox.top + player.hitbox.height );
+		}
+
+		if( player.IsDead() && !deathSoundPlayed )
+		{
+			if( chicken )
+			{
+				sfx.setBuffer( game->assetManager.GetSoundRef( "got_chicken", true ) );
+				sfx.play();
+			}
+			else
+			{
+				sfx.setBuffer( game->assetManager.GetSoundRef( "got_humanoid", true ) );
+				sfx.play();
+			}
+
+			deathSoundPlayed = true;
 		}
 	}
 	else

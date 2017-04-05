@@ -47,7 +47,8 @@ public:
 	bool drawHitbox;
 
 	EntityPlayer();
-	bool CheckDead() const; // Signal to state that it's time to reset
+	bool IsDead() const;
+	bool CheckReset() const; // Signal to state that it's time to reset
 	void SetInput( const PlayerInput input );
 	void SetPos( const sf::Vector2f pos );
 	virtual void Think( const float dt );

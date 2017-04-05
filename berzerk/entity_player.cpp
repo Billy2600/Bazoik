@@ -149,7 +149,12 @@ void EntityPlayer::Die()
 	deathTime = (float)now;
 }
 
-bool EntityPlayer::CheckDead() const
+bool EntityPlayer::IsDead() const
+{
+	return dead;
+}
+
+bool EntityPlayer::CheckReset() const
 {
 	return reset;
 }
