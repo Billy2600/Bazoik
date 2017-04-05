@@ -30,4 +30,7 @@
 		<frame x="95" y="0" w="6" h="16"></frame>
 		<frame x="89" y="16" w="6" h="16"></frame>
 	</anim>
+	<anim name="evil_otto">
+		<frame x="0" y="0" w="8" h="8"></frame>
+	</anim>
 </animations>

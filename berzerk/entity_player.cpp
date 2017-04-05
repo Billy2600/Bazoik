@@ -2,9 +2,11 @@
 
 EntityPlayer::EntityPlayer()
 {
+#ifdef _DEBUG
 	shape.setFillColor( sf::Color::Transparent );
 	shape.setOutlineColor( sf::Color::Red );
 	shape.setOutlineThickness( 1.f );
+#endif
 	// Hitbox will remain consistent size, regardless of animation
 	hitbox.width = 18.f;
 	hitbox.height = 48.f;
@@ -21,7 +23,9 @@ void EntityPlayer::SetPos( const sf::Vector2f pos )
 {
 	hitbox.left = pos.x;
 	hitbox.top = pos.y;
+#ifdef _DEBUG
 	shape.setPosition( pos );
+#endif
 }
 
 void EntityPlayer::LoadSprite()
@@ -34,7 +38,9 @@ void EntityPlayer::LoadSprite()
 		currentAnim = "player_stand";
 		// Load hitbox based on sprite info
 		sf::IntRect animRect = game->animManager.Animate( currentAnim );
+#ifdef _DEBUG
 		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
+#endif
 	}
 }
 
@@ -156,7 +162,9 @@ void EntityPlayer::SetInput( const PlayerInput input )
 void EntityPlayer::Draw() const
 {
 	game->window.draw( sprite );
+#ifdef _DEBUG
 	game->window.draw( shape );
+#endif
 }
 
 void EntityPlayer::HandleCollision( Entity *other )
@@ -176,7 +184,9 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 {
 	hitbox.left += move.x * dt;
 	hitbox.top += move.y * dt;
+#ifdef _DEBUG
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+#endif
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 
 	// Change animation

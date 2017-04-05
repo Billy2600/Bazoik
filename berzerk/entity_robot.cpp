@@ -5,11 +5,12 @@ EntityRobot::EntityRobot( const sf::Vector2f pos )
 {
 	hitbox.top = pos.y;
 	hitbox.left = pos.x;
-
+#ifdef _DEBUG
 	shape.setFillColor( sf::Color::Transparent );
 	shape.setOutlineColor( sf::Color::Red );
 	shape.setOutlineThickness( 1.f );
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+#endif
 	seePlayer = false;
 	moving = false;
 	drawHitbox = false;
@@ -32,7 +33,9 @@ void EntityRobot::LoadSprite()
 		sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
 		// Load hitbox based on sprite info
 		sf::IntRect animRect = game->animManager.Animate( currentAnim );
+#ifdef _DEBUG
 		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
+#endif
 		// Change sprite color based on level
 		if( game->level < 5 )
 		{
@@ -49,7 +52,9 @@ void EntityRobot::Think( const float dt )
 {
 	LoadSprite();
 	
+#ifdef _DEBUG
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+#endif
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 	sprite.setTextureRect( game->animManager.Animate( currentAnim ) );
 
@@ -87,7 +92,9 @@ void EntityRobot::Think( const float dt )
 void EntityRobot::Draw() const
 {
 	game->window.draw( sprite );
+#ifdef _DEBUG
 	game->window.draw( shape );
+#endif
 }
 
 void EntityRobot::HandleCollision( Entity *other )

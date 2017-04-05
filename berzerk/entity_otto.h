@@ -8,7 +8,10 @@
 class EntityOtto : public Entity
 {
 private:
-	sf::CircleShape shape;
+	sf::Sprite sprite;
+#ifdef _DEBUG
+	sf::RectangleShape shape;
+#endif
 	const float xSpeed = 50;
 	const float ySpeed = 200;
 	float maxHeight;

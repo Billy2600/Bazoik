@@ -20,7 +20,9 @@ struct PlayerInput
 class EntityPlayer : public Entity
 {
 private:
+#ifdef _DEBUG
 	sf::RectangleShape shape;
+#endif
 	PlayerInput input;
 
 	sf::Clock clock; // Used for measuring delays

@@ -7,13 +7,15 @@
 class EntityRobot : public Entity
 {
 private:
-	sf::RectangleShape shape;
+	sf::Sprite sprite;
 	// Fire delay stuff
 	sf::Clock clock;
 	sf::Vector2f playerPos;
 	bool moving;
-	sf::Sprite sprite;
 	std::string currentAnim;
+#ifdef _DEBUG
+	sf::RectangleShape shape;
+#endif
 
 	void LoadSprite();
 
