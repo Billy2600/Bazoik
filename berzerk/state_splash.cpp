@@ -9,6 +9,7 @@ StateSplash::StateSplash( Game *game )
 
 void StateSplash::HandleInput()
 {
+	// Wish I could let you skip this splash screen, but we gotta load shit
 }
 
 void StateSplash::Update( const float dt )

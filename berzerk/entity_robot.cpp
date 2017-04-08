@@ -17,6 +17,10 @@ EntityRobot::EntityRobot( const sf::Vector2f pos )
 	currentAnim = "robot_idle";
 	hitbox.width = 27;
 	hitbox.height = 33;
+
+	stopIfSeePlayer = false;
+	movementSpeed = 50;
+	fireDelay = 3000;
 }
 
 EntityRobot::~EntityRobot()
@@ -48,9 +52,42 @@ void EntityRobot::LoadSprite()
 	}
 }
 
+void EntityRobot::LoadStatsFromFile()
+{
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_file( "assets/robotstats.xml" );
+	if( !result ) // Error check
+	{
+		return;
+	}
+
+	pugi::xml_node levelNodes = doc.child( "levels" );
+
+	for( pugi::xml_node level : levelNodes.children( "level" ) )
+	{
+		if( game->level >= std::stoi( level.attribute( "min" ).value() ) )
+		{
+			if( std::stoi( level.attribute( "stop_if_see_player" ).value() ) == 0 )
+				stopIfSeePlayer = false;
+			else
+				stopIfSeePlayer = true;
+
+			movementSpeed = std::stof( level.attribute( "speed" ).value() );
+			fireDelay = std::stoi( level.attribute( "firedelay" ).value() );
+
+			pugi::xml_node color = level.child( "color" );
+			int r = std::stoi( color.attribute( "r" ).value() );
+			int g = std::stoi( color.attribute( "g" ).value() );
+			int b = std::stoi( color.attribute( "b" ).value() );
+			sprite.setColor( sf::Color( r, g, b ) );
+		}
+	}
+}
+
 void EntityRobot::Think( const float dt )
 {
 	LoadSprite();
+	LoadStatsFromFile();
 	
 #ifdef _DEBUG
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
@@ -67,26 +104,31 @@ void EntityRobot::Think( const float dt )
 	sf::Vector2f normalizedPlayerVec = playerVec / playerVecMagnitude;
 
 	// Fire
-	if( clock.getElapsedTime().asMilliseconds() > ROBOT_FIRE_DELAY && seePlayer )
+	if( clock.getElapsedTime().asMilliseconds() > fireDelay && seePlayer )
 	{
 		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + ( hitbox.width / 2 ), hitbox.top + ( hitbox.height / 2 ) ), normalizedPlayerVec, this ) );
 		clock.restart();
 	}
 
+	if( game->level > 3 ) stopIfSeePlayer = true;
+
 	// Move towards player
-	if( seePlayer || (moving && game->level < 5) )
+	if( seePlayer || (moving && !stopIfSeePlayer) )
 	{
 		moving = true;
-		this->Move( sf::Vector2f(playerVec.x / 7, playerVec.y / 7), dt );
+
+		sf::Vector2f moveVec;
+		float angle = atan2f( normalizedPlayerVec.y, normalizedPlayerVec.x );
+		moveVec.x = cosf( angle ) * movementSpeed;
+		moveVec.y = sinf( angle ) * movementSpeed;
+
+		this->Move( moveVec, dt );
 		currentAnim = "robot_walk";
 	}
 	else
 	{
 		currentAnim = "robot_idle";
 	}
-
-	//if(seePlayer) shape.setFillColor( sf::Color::Cyan );
-	//else shape.setFillColor( sf::Color::Blue );
 }
 
 void EntityRobot::Draw() const
