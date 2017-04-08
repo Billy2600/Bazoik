@@ -155,6 +155,9 @@ void StateGameplay::Update( const float dt )
 	{
 		maze.SpawnEnemies( entityManager, lastMove );
 		enemiesSpawned = true;
+
+		sfx.setBuffer( game->assetManager.GetSoundRef( "humanoid", true ) );
+		sfx.play();
 	}
 
 	entityManager.Think( dt );
@@ -224,13 +227,12 @@ void StateGameplay::Update( const float dt )
 			if( chicken )
 			{
 				sfx.setBuffer( game->assetManager.GetSoundRef( "got_chicken", true ) );
-				sfx.play();
 			}
 			else
 			{
 				sfx.setBuffer( game->assetManager.GetSoundRef( "got_humanoid", true ) );
-				sfx.play();
 			}
+			sfx.play();
 
 			deathSoundPlayed = true;
 		}
@@ -277,13 +279,12 @@ void StateGameplay::ScreenTransition( const float dt )
 		if( chicken )
 		{
 			sfx.setBuffer( game->assetManager.GetSoundRef( "chicken", true ) );
-			sfx.play();
 		}
 		else
 		{
 			sfx.setBuffer( game->assetManager.GetSoundRef( "intruder", true ) );
-			sfx.play();
 		}
+		sfx.play();
 	}
 	else
 	{
