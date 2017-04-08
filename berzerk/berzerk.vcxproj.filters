@@ -78,6 +78,9 @@
     <ClCompile Include="entity_otto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="state_splash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_state.h">
@@ -144,6 +147,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entity_otto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="state_splash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

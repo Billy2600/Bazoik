@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include "game.h"
-#include "state_titlescreen.h"
+#include "state_splash.h"
 
 int main()
 {
 	// Init game with title screen
 	Game game;
-	game.states.push( new StateTitleScreen( &game ) );
+	game.states.push( new StateSplash( &game ) );
 	game.GameLoop();
 
 	return 0;

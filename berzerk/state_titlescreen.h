@@ -12,7 +12,6 @@ private:
 	bool joystickInput = false; // Will flip once user starts using joystick
 	int selectedButton; // Which button is currently selected? (Joystick only)
 	void StartGame(); // Start the game
-	void LoadSounds(); // Load all sounds
 
 public:
 
