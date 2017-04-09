@@ -24,6 +24,7 @@ private:
 	bool stopIfSeePlayer;
 	float movementSpeed;
 	int fireDelay;
+	bool statsLoaded;
 
 public:
 	bool seePlayer;

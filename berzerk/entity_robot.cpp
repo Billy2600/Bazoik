@@ -21,6 +21,8 @@ EntityRobot::EntityRobot( const sf::Vector2f pos )
 	stopIfSeePlayer = false;
 	movementSpeed = 50;
 	fireDelay = 3000;
+	statsLoaded = false;
+	sprite.setColor( sf::Color::Red );
 }
 
 EntityRobot::~EntityRobot()
@@ -40,20 +42,14 @@ void EntityRobot::LoadSprite()
 #ifdef _DEBUG
 		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
 #endif
-		// Change sprite color based on level
-		if( game->level < 5 )
-		{
-			sprite.setColor( sf::Color( 222, 184, 135 ) );
-		}
-		else
-		{
-			sprite.setColor( sf::Color::Red );
-		}
 	}
 }
 
 void EntityRobot::LoadStatsFromFile()
 {
+	if( statsLoaded )
+		return;
+
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file( "assets/robotstats.xml" );
 	if( !result ) // Error check
