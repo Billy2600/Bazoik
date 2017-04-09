@@ -106,8 +106,6 @@ void EntityRobot::Think( const float dt )
 		clock.restart();
 	}
 
-	if( game->level > 3 ) stopIfSeePlayer = true;
-
 	// Move towards player
 	if( seePlayer || (moving && !stopIfSeePlayer) )
 	{
