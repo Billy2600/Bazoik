@@ -1,7 +1,7 @@
 #include <cmath>
 #include "entity_robot.h"
 
-EntityRobot::EntityRobot( const sf::Vector2f pos )
+EntityRobot::EntityRobot( const sf::Vector2f pos, const bool stopIfSeePlayer, const float movementSpeed, const int fireDelay, const sf::Color color )
 {
 	hitbox.top = pos.y;
 	hitbox.left = pos.x;
@@ -18,11 +18,10 @@ EntityRobot::EntityRobot( const sf::Vector2f pos )
 	hitbox.width = 27;
 	hitbox.height = 33;
 
-	stopIfSeePlayer = false;
-	movementSpeed = 50;
-	fireDelay = 3000;
-	statsLoaded = false;
-	sprite.setColor( sf::Color::Red );
+	this->stopIfSeePlayer = stopIfSeePlayer;
+	this->movementSpeed = movementSpeed;
+	this->fireDelay = fireDelay;
+	sprite.setColor( color );
 }
 
 EntityRobot::~EntityRobot()
@@ -45,45 +44,9 @@ void EntityRobot::LoadSprite()
 	}
 }
 
-void EntityRobot::LoadStatsFromFile()
-{
-	if( statsLoaded )
-		return;
-
-	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file( "assets/robotstats.xml" );
-	if( !result ) // Error check
-	{
-		return;
-	}
-
-	pugi::xml_node levelNodes = doc.child( "levels" );
-
-	for( pugi::xml_node level : levelNodes.children( "level" ) )
-	{
-		if( game->level >= std::stoi( level.attribute( "min" ).value() ) )
-		{
-			if( std::stoi( level.attribute( "stop_if_see_player" ).value() ) == 0 )
-				stopIfSeePlayer = false;
-			else
-				stopIfSeePlayer = true;
-
-			movementSpeed = std::stof( level.attribute( "speed" ).value() );
-			fireDelay = std::stoi( level.attribute( "firedelay" ).value() );
-
-			pugi::xml_node color = level.child( "color" );
-			int r = std::stoi( color.attribute( "r" ).value() );
-			int g = std::stoi( color.attribute( "g" ).value() );
-			int b = std::stoi( color.attribute( "b" ).value() );
-			sprite.setColor( sf::Color( r, g, b ) );
-		}
-	}
-}
-
 void EntityRobot::Think( const float dt )
 {
 	LoadSprite();
-	LoadStatsFromFile();
 	
 #ifdef _DEBUG
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );

@@ -43,6 +43,8 @@ private:
 
 	void ScreenTransition( const float dt ); // Transition screen
 
+	RobotStats LoadRobotStats(); // Load robot stats from xml file
+
 public:
 
 	StateGameplay( Game *game );

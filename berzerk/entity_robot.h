@@ -5,6 +5,16 @@
 
 //#define ROBOT_FIRE_DELAY 3000 // Firing delay, in milliseconds
 
+// Stats for robots for each level
+struct RobotStats
+{
+	bool stopIfSeePlayer;
+	float movementSpeed;
+	int fireDelay;
+	int numRobots;
+	sf::Color color;
+};
+
 class EntityRobot : public Entity
 {
 private:
@@ -20,17 +30,15 @@ private:
 
 	void LoadSprite();
 	// Stats for difficulty
-	void LoadStatsFromFile(); // Load difficulty stats from file
 	bool stopIfSeePlayer;
 	float movementSpeed;
 	int fireDelay;
-	bool statsLoaded;
 
 public:
 	bool seePlayer;
 	bool drawHitbox;
 
-	EntityRobot(const sf::Vector2f pos);
+	EntityRobot(const sf::Vector2f pos, const bool stopIfSeePlayer = false, const float movementSpeed = 50, const int fireDelay = 3000, const sf::Color color = ERROR_COLOR );
 	~EntityRobot();
 	virtual void Think( const float dt );
 	virtual void Draw() const;

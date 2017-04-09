@@ -1,6 +1,7 @@
 #include "state_gameplay.h"
 #include "state_highscore.h"
 #include "state_titlescreen.h"
+#include "pugixml.hpp"
 
 Directions StateGameplay::lastMove = Directions::W;
 
@@ -147,13 +148,13 @@ void StateGameplay::Update( const float dt )
 		maze.CreateWalls( entityManager );
 		if( game->level >= 5 )
 		{
-			maze.BlockExit( entityManager, lastMove );
+			maze.BlockExit( entityManager, lastMove);
 		}
 		wallsCreated = true;
 	}
 	if( maze.IsDone() && !enemiesSpawned )
 	{
-		maze.SpawnEnemies( entityManager, lastMove );
+		maze.SpawnEnemies( entityManager, lastMove, LoadRobotStats() );
 		enemiesSpawned = true;
 
 		sfx.setBuffer( game->assetManager.GetSoundRef( "humanoid", true ) );
@@ -315,6 +316,43 @@ void StateGameplay::ScreenTransition( const float dt )
 			this->game->SwitchState( new StateGameplay( this->game ) );
 		}
 	}
+}
+
+RobotStats StateGameplay::LoadRobotStats()
+{
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_file( "assets/robotstats.xml" );
+	if( !result ) // Error check
+	{
+		RobotStats stats { false, 50, 3000, 5, ERROR_COLOR }; // Default values in case of error
+		return stats;
+	}
+
+	RobotStats stats;
+	pugi::xml_node levelNodes = doc.child( "levels" );
+
+	for( pugi::xml_node level : levelNodes.children( "level" ) )
+	{
+		if( game->level >= std::stoi( level.attribute( "min" ).value() ) )
+		{
+			if( std::stoi( level.attribute( "stop_if_see_player" ).value() ) == 0 )
+				stats.stopIfSeePlayer = false;
+			else
+				stats.stopIfSeePlayer = true;
+
+			stats.movementSpeed = std::stof( level.attribute( "speed" ).value() );
+			stats.fireDelay = std::stoi( level.attribute( "firedelay" ).value() );
+			stats.numRobots = std::stoi( level.attribute( "num_bots" ).value() );
+
+			pugi::xml_node color = level.child( "color" );
+			int r = std::stoi( color.attribute( "r" ).value() );
+			int g = std::stoi( color.attribute( "g" ).value() );
+			int b = std::stoi( color.attribute( "b" ).value() );
+			stats.color = sf::Color( r, g, b );
+		}
+	}
+
+	return stats;
 }
 
 StateGameplay::~StateGameplay()

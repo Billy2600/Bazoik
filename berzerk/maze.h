@@ -6,6 +6,7 @@
 #include "game.h"
 #include "entity_manager.h"
 #include "entity_player.h"
+#include "entity_robot.h"
 
 #define MAZE_WIDTH 5 // Total maze width
 #define MAZE_HEIGHT 3 // Total maze height
@@ -66,7 +67,7 @@ public:
 	// Block last exit
 	void BlockExit( EntityManager &entityManager, Directions lastMove ) const;
 	// Spawn enemies
-	void SpawnEnemies( EntityManager &entityManager, const Directions lastMove ); // Uses lastmove to avoid spawning enemies near player
+	void SpawnEnemies( EntityManager &entityManager, const Directions lastMove, const RobotStats stats ); // Uses lastmove to avoid spawning enemies near player
 	// Get position player should start in
 	sf::Vector2f GetPlayerStart( const Directions lastMove, EntityPlayer &player ) const;
 };

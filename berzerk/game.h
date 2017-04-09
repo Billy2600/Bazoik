@@ -18,6 +18,7 @@
 #define P_ENV_VAR "HOME"
 #define P_SEPERATOR "/"
 #endif
+#define ERROR_COLOR sf::Color( 255, 20, 147 ) // Look for this color to know something went wrong
 
 class GameState;
 

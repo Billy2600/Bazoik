@@ -1,5 +1,4 @@
 #include "maze.h"
-#include "entity_robot.h"
 
 bool Maze::CheckBounds(sf::Vector2u pos) const
 {
@@ -272,12 +271,12 @@ void Maze::BlockExit( EntityManager &entityManager, Directions lastMove ) const
 	}
 }
 
-void Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove )
+void Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove, RobotStats stats )
 {
 	std::vector<sf::Vector2u> used;
 
 	// Pick random tile
-	for( int i = 0; i < 5; i++ )
+	for( int i = 0; i < stats.numRobots; i++ )
 	{
 		std::uniform_int_distribution<unsigned int> randX( 0, MAZE_WIDTH - 1 );
 		std::uniform_int_distribution<unsigned int> randY( 0, MAZE_HEIGHT - 1 );
@@ -293,20 +292,23 @@ void Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove
 			i--;
 			continue;
 		}
-		// Don't spawn enemies inside same tile
-		bool repeatLoop = false;
-		for( auto tile : used )
+		// Don't spawn enemies inside same tile, unless there's a lot of them
+		if( stats.numRobots <= (MAZE_WIDTH * MAZE_HEIGHT) )
 		{
-			if( sf::Vector2u( tileX, tileY ) == tile )
+			bool repeatLoop = false;
+			for( auto tile : used )
 			{
-				repeatLoop = true; // Repeat parent loop, not this one
-				break;
+				if( sf::Vector2u( tileX, tileY ) == tile )
+				{
+					repeatLoop = true; // Repeat parent loop, not this one
+					break;
+				}
 			}
-		}
-		if( repeatLoop )
-		{
-			i--;
-			continue;
+			if( repeatLoop )
+			{
+				i--;
+				continue;
+			}
 		}
 
 		used.push_back( sf::Vector2u( tileX, tileY ) );
@@ -324,7 +326,7 @@ void Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove
 		float x = randBoundX( rngEngine );
 		float y = randBoundY( rngEngine );
 
-		entityManager.Add( new EntityRobot( sf::Vector2f( x, y ) ) );
+		entityManager.Add( new EntityRobot( sf::Vector2f( x, y ), stats.stopIfSeePlayer, stats.movementSpeed, stats.fireDelay, stats.color ) );
 	}
 }
 
