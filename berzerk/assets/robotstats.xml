@@ -1,9 +1,41 @@
 <?xml version="1.0"?>
 <levels>
-	<level min="1" speed="50" firedelay="3000" stop_if_see_player="0" num_bots="5">
-		<color r="222" g="184" b="135"></color>
+<!--Blue  bots = Inactive
+    Yellow bot = Melee
+    Green bots = Standard
+    White bots = Turret
+    Red   bots = Elite-->
+    <level min="1" speed="1" firedelay="90000" stop_if_see_player="0" num_bots="2" can_shoot="0">
+		<color r="0" g="0" b="255"></color>
 	</level>
-	<level min="5" speed="55" firedelay="3000" stop_if_see_player="1" num_bots="10">
+	<level min="2" speed="50" firedelay="3000" stop_if_see_player="0" num_bots="5" can_shoot="1">
+		<color r="0" g="204" b="0"></color>
+	</level>
+    <level min="3" speed="50" firedelay="3000" stop_if_see_player="0" num_bots="7" can_shoot="1">
+		<color r="0" g="204" b="0"></color>
+	</level>
+    <level min="4" speed="1" firedelay="500" stop_if_see_player="1" num_bots="2" can_shoot="1">
+		<color r="255" g="255" b="255"></color>
+	</level>
+	<level min="5" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="9" can_shoot="0">
+		<color r="255" g="255" b="0"></color>
+	</level>
+    <level min="6" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="12">
+		<color r="255" g="255" b="0"></color>
+	</level>
+    <level min="7" speed="1" firedelay="500" stop_if_see_player="1" num_bots="3" can_shoot="1">
+		<color r="255" g="255" b="255"></color>
+	</level>
+    <level min="8" speed="60" firedelay="2000" stop_if_see_player="1" num_bots="3" can_shoot="1">
+		<color r="255" g="0" b="0"></color>
+	</level>
+    <level min="9" speed="60" firedelay="2000" stop_if_see_player="1" num_bots="5" can_shoot="1">
+		<color r="255" g="0" b="0"></color>
+	</level>
+    <level min="10" speed="1" firedelay="90000" stop_if_see_player="0" num_bots="30" can_shoot="0">
+		<color r="0" g="0" b="255"></color>
+	</level>
+    <level min="11" speed="60" firedelay="2000" stop_if_see_player="1" num_bots="8" can_shoot="1">
 		<color r="255" g="0" b="0"></color>
 	</level>
 </levels>

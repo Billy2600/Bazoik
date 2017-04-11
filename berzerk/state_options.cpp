@@ -152,7 +152,7 @@ void StateOptions::HandleInput()
 				{
 					joystickInput = true;
 					selectedButton++;
-					if( selectedButton >= buttons.size() )
+					if( (unsigned int) selectedButton >= buttons.size() )
 						selectedButton = buttons.size() - 1;
 				}
 				else

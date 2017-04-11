@@ -320,20 +320,20 @@ void StateGameplay::ScreenTransition( const float dt )
 
 RobotStats StateGameplay::LoadRobotStats()
 {
+	RobotStats stats{ false, true, 50, 3000, 5, ERROR_COLOR }; // Default values in case of error
+
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file( "assets/robotstats.xml" );
 	if( !result ) // Error check
 	{
-		RobotStats stats { false, 50, 3000, 5, ERROR_COLOR }; // Default values in case of error
 		return stats;
 	}
 
-	RobotStats stats;
 	pugi::xml_node levelNodes = doc.child( "levels" );
 
 	for( pugi::xml_node level : levelNodes.children( "level" ) )
 	{
-		if( game->level >= std::stoi( level.attribute( "min" ).value() ) )
+		if( game->level >= (unsigned int)std::stoi( level.attribute( "min" ).value() ) )
 		{
 			if( std::stoi( level.attribute( "stop_if_see_player" ).value() ) == 0 )
 				stats.stopIfSeePlayer = false;
@@ -343,6 +343,11 @@ RobotStats StateGameplay::LoadRobotStats()
 			stats.movementSpeed = std::stof( level.attribute( "speed" ).value() );
 			stats.fireDelay = std::stoi( level.attribute( "firedelay" ).value() );
 			stats.numRobots = std::stoi( level.attribute( "num_bots" ).value() );
+
+			if( std::stoi( level.attribute( "can_shoot" ).value() ) == 0 )
+				stats.canShoot = false;
+			else
+				stats.canShoot = true;
 
 			pugi::xml_node color = level.child( "color" );
 			int r = std::stoi( color.attribute( "r" ).value() );

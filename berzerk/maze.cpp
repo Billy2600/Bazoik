@@ -314,7 +314,7 @@ void Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove
 		used.push_back( sf::Vector2u( tileX, tileY ) );
 
 		// Get bounds of tile
-		EntityRobot tempRobot( sf::Vector2f( 0, 0 ) ); // Used for sizing
+		EntityRobot tempRobot( sf::Vector2f( 0, 0 ), stats ); // Used for sizing
 		float minX = (float)((tileX * tileWidth) + WALL_THICKNESS);
 		float maxX = (float)((tileX * tileWidth) + tileWidth - tempRobot.hitbox.width);
 		float minY = (float)((tileY * tileHeight) + WALL_THICKNESS);
@@ -326,7 +326,7 @@ void Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove
 		float x = randBoundX( rngEngine );
 		float y = randBoundY( rngEngine );
 
-		entityManager.Add( new EntityRobot( sf::Vector2f( x, y ), stats.stopIfSeePlayer, stats.movementSpeed, stats.fireDelay, stats.color ) );
+		entityManager.Add( new EntityRobot( sf::Vector2f( x, y ), stats ) );
 	}
 }
 

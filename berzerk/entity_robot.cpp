@@ -1,7 +1,7 @@
 #include <cmath>
 #include "entity_robot.h"
 
-EntityRobot::EntityRobot( const sf::Vector2f pos, const bool stopIfSeePlayer, const float movementSpeed, const int fireDelay, const sf::Color color )
+EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 {
 	hitbox.top = pos.y;
 	hitbox.left = pos.x;
@@ -18,10 +18,8 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const bool stopIfSeePlayer, co
 	hitbox.width = 27;
 	hitbox.height = 33;
 
-	this->stopIfSeePlayer = stopIfSeePlayer;
-	this->movementSpeed = movementSpeed;
-	this->fireDelay = fireDelay;
-	sprite.setColor( color );
+	this->stats = stats;
+	sprite.setColor( stats.color );
 }
 
 EntityRobot::~EntityRobot()
@@ -63,24 +61,25 @@ void EntityRobot::Think( const float dt )
 	sf::Vector2f normalizedPlayerVec = playerVec / playerVecMagnitude;
 
 	// Fire
-	if( clock.getElapsedTime().asMilliseconds() > fireDelay && seePlayer )
+	if( clock.getElapsedTime().asMilliseconds() > stats.fireDelay && seePlayer && stats.canShoot )
 	{
 		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + ( hitbox.width / 2 ), hitbox.top + ( hitbox.height / 2 ) ), normalizedPlayerVec, this ) );
 		clock.restart();
 	}
 
 	// Move towards player
-	if( seePlayer || (moving && !stopIfSeePlayer) )
+	if( seePlayer || (moving && !stats.stopIfSeePlayer) )
 	{
 		moving = true;
 
 		sf::Vector2f moveVec;
 		float angle = atan2f( normalizedPlayerVec.y, normalizedPlayerVec.x );
-		moveVec.x = cosf( angle ) * movementSpeed;
-		moveVec.y = sinf( angle ) * movementSpeed;
+		moveVec.x = cosf( angle ) * stats.movementSpeed;
+		moveVec.y = sinf( angle ) * stats.movementSpeed;
 
 		this->Move( moveVec, dt );
-		currentAnim = "robot_walk";
+		if( stats.movementSpeed > 1 ) // Remain in idle anim at slow speeds
+			currentAnim = "robot_walk";
 	}
 	else
 	{

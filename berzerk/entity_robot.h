@@ -9,6 +9,7 @@
 struct RobotStats
 {
 	bool stopIfSeePlayer;
+	bool canShoot;
 	float movementSpeed;
 	int fireDelay;
 	int numRobots;
@@ -30,15 +31,13 @@ private:
 
 	void LoadSprite();
 	// Stats for difficulty
-	bool stopIfSeePlayer;
-	float movementSpeed;
-	int fireDelay;
+	RobotStats stats;
 
 public:
 	bool seePlayer;
 	bool drawHitbox;
 
-	EntityRobot(const sf::Vector2f pos, const bool stopIfSeePlayer = false, const float movementSpeed = 50, const int fireDelay = 3000, const sf::Color color = ERROR_COLOR );
+	EntityRobot(const sf::Vector2f pos, const RobotStats stats );
 	~EntityRobot();
 	virtual void Think( const float dt );
 	virtual void Draw() const;
