@@ -340,11 +340,11 @@ RobotStats StateGameplay::LoadRobotStats()
 			else
 				stats.stopIfSeePlayer = true;
 
-			stats.movementSpeed = std::stof( level.attribute( "speed" ).value() );
+			stats.movementSpeed = (float)std::stoi( level.attribute( "speed" ).value() );
 			stats.fireDelay = std::stoi( level.attribute( "firedelay" ).value() );
 			stats.numRobots = std::stoi( level.attribute( "num_bots" ).value() );
 
-			if( std::stoi( level.attribute( "can_shoot" ).value() ) == 0 )
+			if( level.attribute( "can_shoot" ).value() == "0" )
 				stats.canShoot = false;
 			else
 				stats.canShoot = true;
