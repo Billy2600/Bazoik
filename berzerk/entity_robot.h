@@ -20,8 +20,11 @@ class EntityRobot : public Entity
 {
 private:
 	sf::Sprite sprite;
-	// Fire delay stuff
+	bool dead;
 	sf::Clock clock;
+	sf::Int32 lastFire;
+	const sf::Int32 deathDelay = 500; // Delay before deletion
+	sf::Int32 deathTime;
 	sf::Vector2f playerPos;
 	bool moving;
 	std::string currentAnim;
@@ -43,5 +46,6 @@ public:
 	virtual void Draw() const;
 	virtual void HandleCollision( Entity *other );
 	void SetPlayerPos( sf::Vector2f playerPos );
+	bool IsDead() const;
 };
 

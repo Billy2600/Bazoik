@@ -14,6 +14,9 @@
 		<frame x="9" y="11" w="9" h="11"></frame>
 		<frame x="19" y="11" w="9" h="11"></frame>
 	</anim>
+	<anim name="robot_death">
+		<frame x="29" y="11" w="9" h="9"></frame>
+	</anim>
 	<anim name="player_stand">
 		<frame x="95" y="0" w="6" h="16"></frame>
 	</anim>

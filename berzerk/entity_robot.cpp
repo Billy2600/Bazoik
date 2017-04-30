@@ -11,9 +11,12 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 	shape.setOutlineThickness( 1.f );
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 #endif
+	bool dead = false;
 	seePlayer = false;
 	moving = false;
 	drawHitbox = false;
+	lastFire = 0;
+	deathTime = 0;
 	currentAnim = "robot_idle";
 	hitbox.width = 27;
 	hitbox.height = 33;
@@ -44,6 +47,7 @@ void EntityRobot::LoadSprite()
 
 void EntityRobot::Think( const float dt )
 {
+	sf::Int32 now = clock.getElapsedTime().asMilliseconds();
 	LoadSprite();
 	
 #ifdef _DEBUG
@@ -51,6 +55,14 @@ void EntityRobot::Think( const float dt )
 #endif
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 	sprite.setTextureRect( game->animManager.Animate( currentAnim ) );
+
+	if( dead && now - deathTime < deathDelay )
+		return;
+	else if( dead && now - deathTime >= deathDelay )
+	{
+		deleteMe = true;
+		return;
+	}
 
 	if( hitbox.left > GAME_WIDTH || hitbox.top > GAME_HEIGHT )
 		return;
@@ -61,10 +73,10 @@ void EntityRobot::Think( const float dt )
 	sf::Vector2f normalizedPlayerVec = playerVec / playerVecMagnitude;
 
 	// Fire
-	if( clock.getElapsedTime().asMilliseconds() > stats.fireDelay && seePlayer && stats.canShoot )
+	if( now - lastFire >= stats.fireDelay && seePlayer && stats.canShoot )
 	{
 		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + ( hitbox.width / 2 ), hitbox.top + ( hitbox.height / 2 ) ), normalizedPlayerVec, this ) );
-		clock.restart();
+		lastFire = now;
 	}
 
 	// Move towards player
@@ -99,20 +111,27 @@ void EntityRobot::HandleCollision( Entity *other )
 {
 	if( dynamic_cast<EntityBullet*>( other ) != NULL || dynamic_cast<EntityWall*>( other ) != NULL )
 	{
-		if( !deleteMe ) // Only do this stuff once
+		if( !dead ) // Only do this stuff once
 		{
 			unsigned int prevScore = game->score;
-			game->score += 50; 
+			game->score += 50;
+			currentAnim = "robot_death";
+			deathTime = clock.getElapsedTime().asMilliseconds();
 			// Do we award an extra life?
 			if( prevScore % EXTRA_LIFE_SCORE != 0 && game->score % EXTRA_LIFE_SCORE == 0 )
 				game->AddLife();
 		}
 
-		deleteMe = true;
+		dead = true;
 	}
 }
 
 void EntityRobot::SetPlayerPos( sf::Vector2f playerPos )
 {
 	this->playerPos = playerPos;
+}
+
+bool EntityRobot::IsDead() const
+{
+	return dead;
 }

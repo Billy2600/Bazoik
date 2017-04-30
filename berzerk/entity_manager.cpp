@@ -60,6 +60,16 @@ void EntityManager::CheckCollisions()
 				continue;
 			}
 
+			// Don't bother if one is a dead robot
+			auto robotCheckA = dynamic_cast<EntityRobot*>( entityA );
+			auto robotCheckB = dynamic_cast<EntityRobot*>( entityB );
+
+			if( robotCheckA != NULL && robotCheckA->IsDead()
+				|| robotCheckB != NULL && robotCheckB->IsDead() )
+			{
+				continue;
+			}
+
 			// Detect collision
 			if( entityA != entityB && entityA->hitbox.intersects(entityB->hitbox) )
 			{
