@@ -44,6 +44,26 @@ void EntityPlayer::LoadSprite()
 	}
 }
 
+void EntityPlayer::ChooseFireAnim( sf::Vector2f direction )
+{
+	if( direction == sf::Vector2f( -1, -1 ) )
+		currentAnim = "player_fire_nw";
+	else if( direction == sf::Vector2f( 0, -1 ) )
+		currentAnim = "player_fire_n";
+	else if( direction == sf::Vector2f( 1, -1 ) )
+		currentAnim = "player_fire_ne";
+	else if( direction == sf::Vector2f( -1, 0 ) )
+		currentAnim = "player_fire_w";
+	else if( direction == sf::Vector2f( 1, 0 ) )
+		currentAnim = "player_fire_e";
+	else if( direction == sf::Vector2f( -1, 1 ) )
+		currentAnim = "player_fire_sw";
+	else if( direction == sf::Vector2f( 0, 1 ) )
+		currentAnim = "player_fire_s";
+	else if( direction == sf::Vector2f( 1, 1) )
+		currentAnim = "player_fire_se";
+}
+
 void EntityPlayer::Think( const float dt )
 {
 	LoadSprite();
@@ -139,6 +159,13 @@ void EntityPlayer::Think( const float dt )
 	}
 
 	Move( move, dt );
+	// Change animation
+	if( move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0 )
+		currentAnim = "player_walk";
+	else if( input.fire )
+		ChooseFireAnim( direction );
+	else
+		currentAnim = "player_stand";
 }
 
 void EntityPlayer::Die()
@@ -194,16 +221,8 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 #endif
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 
-	// Change animation
-	if( move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0 )
-		currentAnim = "player_walk";
-	else if( input.fire )
-		currentAnim = "player_fire";
-	else
-		currentAnim = "player_stand";
-
-	// Flip sprite based on last horizontal movement
-	if( lastHoriz == Directions::W )
+	// Flip sprite based on last horizontal movement if walking
+	if( lastHoriz == Directions::W && (currentAnim == "player_stand" || currentAnim == "player_walk") )
 	{
 		sprite.setScale( -SPRITE_SCALE, SPRITE_SCALE );
 		// Account for sprite mis-aligning with the hitbox when flipped via negative scale

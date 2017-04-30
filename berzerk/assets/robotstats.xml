@@ -20,7 +20,7 @@
 	<level min="5" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="9" can_shoot="0">
 		<color r="255" g="255" b="0"></color>
 	</level>
-    <level min="6" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="12">
+    <level min="6" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="12" can_shoot="1">
 		<color r="255" g="255" b="0"></color>
 	</level>
     <level min="7" speed="1" firedelay="500" stop_if_see_player="1" num_bots="3" can_shoot="1">

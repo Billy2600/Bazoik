@@ -42,6 +42,7 @@ private:
 	sf::Sprite sprite;
 	std::string currentAnim;
 	void LoadSprite();
+	void ChooseFireAnim(sf::Vector2f direction); // Choose firing direction; will set animation (does not return)
 
 public:
 	bool drawHitbox;

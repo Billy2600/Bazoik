@@ -26,6 +26,30 @@
 	<anim name="player_fire">
 		<frame x="120" y="0" w="6" h="16"></frame>
 	</anim>
+	<anim name="player_fire_nw">
+		<frame x="127" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_n">
+		<frame x="134" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_ne">
+		<frame x="141" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_w">
+		<frame x="146" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_e">
+		<frame x="152" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_sw">
+		<frame x="158" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_s">
+		<frame x="165" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_se">
+		<frame x="171" y="0" w="6" h="16"></frame>
+	</anim>
 	<anim name="player_death">
 		<frame x="95" y="0" w="6" h="16"></frame>
 		<frame x="89" y="16" w="6" h="16"></frame>
