@@ -34,7 +34,7 @@ void EntityPlayer::LoadSprite()
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
+		//sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
 		currentAnim = "player_stand";
 		// Load hitbox based on sprite info
 		sf::IntRect animRect = game->animManager.Animate( currentAnim );
@@ -224,13 +224,15 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 	// Flip sprite based on last horizontal movement if walking
 	if( lastHoriz == Directions::W && (currentAnim == "player_stand" || currentAnim == "player_walk") )
 	{
-		sprite.setScale( -SPRITE_SCALE, SPRITE_SCALE );
+		//sprite.setScale( -SPRITE_SCALE, SPRITE_SCALE );
+		sprite.setScale( -1, 1 );
 		// Account for sprite mis-aligning with the hitbox when flipped via negative scale
 		sprite.move( sf::Vector2f( hitbox.width, 0 ) );
 	}
 	else
 	{
-		sprite.setScale( SPRITE_SCALE, SPRITE_SCALE );
+		//sprite.setScale( SPRITE_SCALE, SPRITE_SCALE );
+		sprite.setScale( 1, 1 );
 	}
 
 	sf::IntRect animRect = game->animManager.Animate( currentAnim );

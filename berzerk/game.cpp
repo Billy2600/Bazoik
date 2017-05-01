@@ -24,7 +24,7 @@ Game::Game()
 	lives = START_LIVES;
 
 	// Load sprite texture
-	assetManager.LoadTexture( "sprites", "assets/sprites.png" );
+	assetManager.LoadTexture( "sprites", "assets/Bazoik_Character_Sprite_Sheet.png" );
 	// Load animations
 	animManager.LoadFromFile( "assets/animations.xml" );
 }

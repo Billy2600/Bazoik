@@ -36,7 +36,7 @@ void EntityRobot::LoadSprite()
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
+		//sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
 		// Load hitbox based on sprite info
 		sf::IntRect animRect = game->animManager.Animate( currentAnim );
 #ifdef _DEBUG

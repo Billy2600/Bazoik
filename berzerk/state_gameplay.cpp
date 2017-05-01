@@ -46,6 +46,8 @@ StateGameplay::StateGameplay( Game *game )
 	deathSoundPlayed = false;
 
 	clock.restart();
+
+	demo.LoadFromFile( game->GetConfigDir() + "demo1.xml" );
 }
 
 void StateGameplay::HandleInput()
@@ -86,6 +88,10 @@ void StateGameplay::HandleInput()
 			{
 				this->game->SwitchState( new StateGameplay( this->game ) );
 				break;
+			}
+			if( event.key.code == sf::Keyboard::Key::F9 )
+			{
+				demo.SaveToFile( game->GetConfigDir() + "demo1.xml" );
 			}
 		}
 
@@ -134,7 +140,9 @@ void StateGameplay::HandleInput()
 		if( game->inputManager.TestKeyUp( "fire", event ) ) input.fire = false;
 	}
 
+	//player.SetInput( demo.Play() );
 	player.SetInput( input );
+	demo.Record( input );
 }
 
 void StateGameplay::Update( const float dt )

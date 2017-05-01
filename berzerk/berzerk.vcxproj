@@ -132,6 +132,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gui_button.cpp" />
     <ClCompile Include="input_manager.cpp" />
+    <ClCompile Include="demo.cpp" />
     <ClCompile Include="liang-barsky.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="maze.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="game_state.h" />
     <ClInclude Include="gui_button.h" />
     <ClInclude Include="input_manager.h" />
+    <ClInclude Include="demo.h" />
     <ClInclude Include="liang-barsky.h" />
     <ClInclude Include="maze.h" />
     <ClInclude Include="pugiconfig.hpp" />

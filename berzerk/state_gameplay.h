@@ -6,6 +6,7 @@
 #include "entity_robot.h"
 #include "entity_manager.h"
 #include "maze.h"
+#include "demo.h"
 
 #define TRANS_SPEED 500 // Speed of screen transition
 #define MAX_LIVES 9 // Maximum number of lives to show on screen
@@ -28,7 +29,6 @@ private:
 	bool transition; // Is the screen moving?
 	bool captured; // Did we capture an image of the screen yet?
 	sf::Clock clock;
-	//const sf::Int32 transDelay = 1500;
 	sf::Int32 transStart;
 	sf::Sprite sprTrans; // Screenshot of screen for transition
 	sf::Texture txTrans;
@@ -44,6 +44,8 @@ private:
 	void ScreenTransition( const float dt ); // Transition screen
 
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
+
+	Demo demo;
 
 public:
 

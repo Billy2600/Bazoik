@@ -15,6 +15,12 @@ struct PlayerInput
 	bool left = false;
 	bool right = false;
 	bool fire = false;
+	bool pause = false;
+
+	bool operator== ( const PlayerInput& other ) const
+	{
+		return ( up == other.up && down == other.down && left == other.left && right == other.right && fire == other.fire ); // We don't care about pause
+	}
 };
 
 class EntityPlayer : public Entity

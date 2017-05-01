@@ -24,7 +24,7 @@ void EntityOtto::Think( const float dt )
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
+		//sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
 		sprite.setTextureRect( game->animManager.Animate( "evil_otto" ) );
 	}
 

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<animations>
+	<anim name="robot_idle">
+		<frame x="9" y="0" w="9" h="10"></frame>
+		<frame x="19" y="0" w="9" h="10"></frame>
+		<frame x="29" y="0" w="9" h="10"></frame>
+		<frame x="39" y="0" w="9" h="10"></frame>
+		<frame x="49" y="0" w="9" h="10"></frame>
+		<frame x="59" y="0" w="9" h="10"></frame>
+		<frame x="69" y="0" w="9" h="10"></frame>
+		<frame x="79" y="0" w="9" h="10"></frame>
+	</anim>
+	<anim name="robot_walk">
+		<frame x="9" y="11" w="9" h="11"></frame>
+		<frame x="19" y="11" w="9" h="11"></frame>
+	</anim>
+	<anim name="robot_death">
+		<frame x="29" y="11" w="9" h="9"></frame>
+	</anim>
+	<anim name="player_stand">
+		<frame x="95" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_walk">
+		<frame x="95" y="0" w="6" h="16"></frame>
+		<frame x="102" y="0" w="8" h="16"></frame>
+		<frame x="111" y="0" w="8" h="16"></frame>
+		<frame x="120" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire">
+		<frame x="120" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_nw">
+		<frame x="127" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_n">
+		<frame x="134" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_ne">
+		<frame x="141" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_w">
+		<frame x="146" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_e">
+		<frame x="152" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_sw">
+		<frame x="158" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_s">
+		<frame x="165" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_fire_se">
+		<frame x="171" y="0" w="6" h="16"></frame>
+	</anim>
+	<anim name="player_death">
+		<frame x="95" y="0" w="6" h="16"></frame>
+		<frame x="89" y="16" w="6" h="16"></frame>
+	</anim>
+	<anim name="evil_otto">
+		<frame x="0" y="0" w="8" h="8"></frame>
+	</anim>
+</animations>
