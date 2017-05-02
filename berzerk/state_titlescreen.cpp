@@ -29,6 +29,8 @@ StateTitleScreen::StateTitleScreen(Game *game)
 	buttons["options"].SetPos( sf::Vector2f( 150, 275 ) );
 
 	selectedButton = 0;
+	playDemo = false;
+	recordDemo = false;
 }
 
 void StateTitleScreen::HandleInput()
@@ -129,13 +131,26 @@ void StateTitleScreen::HandleInput()
 				}
 			}
 		}
+
+		// Record/play demos
+		if( event.key.code == sf::Keyboard::Key::F10 )
+		{
+			playDemo = true;
+			recordDemo = false;
+			title.setString( "Play Demo" );
+		}
+		if( event.key.code == sf::Keyboard::Key::F11 )
+		{
+			recordDemo = true;
+			playDemo = false;
+			title.setString( "Record Demo" );
+		}
 	}
 }
 
 void StateTitleScreen::Update(const float dt)
 {
-	game->ResetLives();
-	game->level = 1;
+	
 }
 
 void StateTitleScreen::Draw() const
@@ -150,5 +165,7 @@ void StateTitleScreen::Draw() const
 
 void StateTitleScreen::StartGame()
 {
-	this->game->states.push( new StateGameplay( this->game ) );
+	game->ResetLives();
+	game->level = 1;
+	this->game->states.push( new StateGameplay( this->game, recordDemo, playDemo ) );
 }

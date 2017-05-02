@@ -46,10 +46,12 @@ private:
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
 
 	Demo demo;
+	bool recordDemo;
+	bool playDemo;
 
 public:
 
-	StateGameplay( Game *game );
+	StateGameplay( Game *game, bool recordDemo = false, bool playDemo = false );
 	virtual void Draw() const;
 	virtual void Update( const float dt );
 	virtual void HandleInput();

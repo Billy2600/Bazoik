@@ -2,31 +2,33 @@
 
 Demo::Demo()
 {
-	clock.restart();
 	iterator = 0;
+	frame = 0;
 }
 
 void Demo::Record( const PlayerInput input )
 {
 	// Early out if it's the same as the last one
 	if( inputs.size() > 0 && input == inputs.back().input )
+	{
+		frame++;
 		return;
+	}
 
 	// Add it
-	FrameInput newInput { input, clock.getElapsedTime().asMilliseconds() };
+	FrameInput newInput { input, frame++ };
 	inputs.push_back( newInput );
 }
 
 PlayerInput Demo::Play()
 {
-	sf::Int32 now = clock.getElapsedTime().asMilliseconds();
-	// Return no input if we're on the first one and it hasn't happened yet
-	if( iterator == 0 && now < inputs.at( iterator ).time )
+	if( iterator + 1 >= inputs.size() )
 		return PlayerInput();
 
-	if( iterator + 1 != inputs.size() && now >= inputs.at( iterator ).time )
+	if( frame == inputs.at( iterator + 1 ).frame )
 		iterator++;
 
+	frame++;
 	return inputs.at( iterator ).input;
 }
 
@@ -44,15 +46,15 @@ void Demo::LoadFromFile( const std::string path )
 	for( pugi::xml_node input : inputNodes.children( "input" ) )
 	{
 		FrameInput newInput;
-		newInput.input.up = (bool)std::stoi( input.attribute( "up" ).value() );
-		newInput.input.down = (bool)std::stoi( input.attribute( "down" ).value() );
-		newInput.input.left = (bool)std::stoi( input.attribute( "left" ).value() );
-		newInput.input.right = (bool)std::stoi( input.attribute( "right" ).value() );
-		newInput.input.fire = (bool)std::stoi( input.attribute( "fire" ).value() );
-		newInput.time = std::stoi( input.attribute( "time" ).value() );
+		newInput.input.up = std::stoi( input.attribute( "up" ).value() );
+		newInput.input.down = std::stoi( input.attribute( "down" ).value() );
+		newInput.input.left = std::stoi( input.attribute( "left" ).value() );
+		newInput.input.right = std::stoi( input.attribute( "right" ).value() );
+		newInput.input.fire = std::stoi( input.attribute( "fire" ).value() );
+		newInput.frame = std::stoi( input.attribute( "frame" ).value() );
 		inputs.push_back( newInput );
 	}
-	clock.restart();
+	frame = 0;
 }
 
 void Demo::SaveToFile( const std::string path )
@@ -69,7 +71,7 @@ void Demo::SaveToFile( const std::string path )
 		inputNode.append_attribute( "right" ).set_value( (int)fInput.input.right );
 		inputNode.append_attribute( "up" ).set_value( (int)fInput.input.up );
 		inputNode.append_attribute( "fire" ).set_value( (int)fInput.input.fire );
-		inputNode.append_attribute( "time" ).set_value( (int)fInput.time );
+		inputNode.append_attribute( "frame" ).set_value( (int)fInput.frame );
 	}
 
 	doc.save_file( path.c_str() );

@@ -7,7 +7,7 @@ Directions StateGameplay::lastMove = Directions::W;
 
 bool StateGameplay::chicken = false;
 
-StateGameplay::StateGameplay( Game *game )
+StateGameplay::StateGameplay( Game *game, bool recordDemo , bool playDemo )
 {
 	this->game = game;
 
@@ -47,7 +47,10 @@ StateGameplay::StateGameplay( Game *game )
 
 	clock.restart();
 
-	demo.LoadFromFile( game->GetConfigDir() + "demo1.xml" );
+	this->recordDemo = recordDemo;
+	this->playDemo = playDemo;
+	if( playDemo )
+		demo.LoadFromFile( game->GetConfigDir() + "demo1.xml" );
 }
 
 void StateGameplay::HandleInput()
@@ -140,9 +143,16 @@ void StateGameplay::HandleInput()
 		if( game->inputManager.TestKeyUp( "fire", event ) ) input.fire = false;
 	}
 
-	//player.SetInput( demo.Play() );
-	player.SetInput( input );
-	demo.Record( input );
+	if( playDemo && !recordDemo )
+	{
+		player.SetInput( demo.Play() );
+	}
+	else if( !playDemo )
+	{
+		player.SetInput( input );
+		if( recordDemo ) // This is here so you can't record while playing a demo
+			demo.Record( input );
+	}
 }
 
 void StateGameplay::Update( const float dt )

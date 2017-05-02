@@ -7,15 +7,15 @@
 struct FrameInput
 {
 	PlayerInput input;
-	sf::Int32 time;
+	unsigned int frame;
 };
 
 class Demo
 {
 private:
-	sf::Clock clock;
 	std::vector<FrameInput> inputs;
-	int iterator;
+	int iterator; // Iterator for input vector
+	unsigned int frame; // Current frame
 
 public:
 	Demo();
