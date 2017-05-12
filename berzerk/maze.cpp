@@ -255,6 +255,14 @@ std::vector<sf::IntRect>  Maze::CreateWalls( EntityManager &entityManager ) cons
 	return vWalls;
 }
 
+void Maze::LoadWalls( const std::vector<sf::IntRect> walls, EntityManager &entityManager )
+{
+	for ( auto wall : walls )
+	{
+		entityManager.Add( new EntityWall( sf::Vector2f( (float)wall.left, (float)wall.top ), sf::Vector2f( (float)wall.width, (float)wall.height ) ) );
+	}
+}
+
 void Maze::BlockExit( EntityManager &entityManager, Directions lastMove ) const
 {
 	if( lastMove == Directions::N )

@@ -63,6 +63,8 @@ public:
 	// Create level walls
 	// Will automatically add wall entities, but positions and boundries will also be returend
 	std::vector<sf::IntRect> CreateWalls(EntityManager &entityManager) const;
+	// Load walls from external source (usually a demo)
+	void LoadWalls( const std::vector<sf::IntRect> walls, EntityManager &entityManager );
 	// Block last exit
 	void BlockExit( EntityManager &entityManager, Directions lastMove ) const;
 	// Spawn enemies

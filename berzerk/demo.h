@@ -27,5 +27,6 @@ public:
 	void LoadFromFile( const std::string path );
 	void SaveToFile( const std::string path );
 	void SetWalls( const std::vector<sf::IntRect> walls );
+	std::vector<sf::IntRect> GetWalls() const;
 };
 

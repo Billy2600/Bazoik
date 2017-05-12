@@ -54,6 +54,17 @@ void Demo::LoadFromFile( const std::string path )
 		newInput.frame = std::stoi( input.attribute( "frame" ).value() );
 		inputs.push_back( newInput );
 	}
+
+	pugi::xml_node wallNodes = doc.child( "walls" );
+	for ( pugi::xml_node wall : wallNodes.children( "wall" ) )
+	{
+		walls.push_back( sf::IntRect(
+			std::stoi( wall.attribute( "x" ).value() ),
+			std::stoi( wall.attribute( "y" ).value() ),
+			std::stoi( wall.attribute( "w" ).value() ),
+			std::stoi( wall.attribute( "h" ).value() ) ) );
+	}
+
 	frame = 0;
 }
 
@@ -91,4 +102,9 @@ void Demo::SaveToFile( const std::string path )
 void Demo::SetWalls( const std::vector<sf::IntRect> walls )
 {
 	this->walls = walls;
+}
+
+std::vector<sf::IntRect> Demo::GetWalls() const
+{
+	return walls;
 }

@@ -158,20 +158,23 @@ void StateGameplay::HandleInput()
 
 void StateGameplay::Update( const float dt )
 {
-	while( !maze.IsDone() )
+
+	while ( !maze.IsDone() )
 	{
 		maze.Generate();
 	}
-	if( maze.IsDone() && !wallsCreated )
+	if ( maze.IsDone() && !wallsCreated )
 	{
 		if ( recordDemo )
 			demo.SetWalls( maze.CreateWalls( entityManager ) );
+		else if(playDemo )
+			maze.LoadWalls( demo.GetWalls(), entityManager );
 		else
 			maze.CreateWalls( entityManager );
 
-		if( game->level >= 5 )
+		if ( game->level >= 5 )
 		{
-			maze.BlockExit( entityManager, lastMove);
+			maze.BlockExit( entityManager, lastMove );
 		}
 		wallsCreated = true;
 	}
