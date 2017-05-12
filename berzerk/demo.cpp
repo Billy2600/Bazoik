@@ -1,9 +1,11 @@
 #include "demo.h"
 
-Demo::Demo()
+Demo::Demo(const int level)
 {
 	iterator = 0;
 	frame = 0;
+	this->level = level;
+	done = false;
 }
 
 void Demo::Record( const PlayerInput input )
@@ -22,8 +24,11 @@ void Demo::Record( const PlayerInput input )
 
 PlayerInput Demo::Play()
 {
-	if( iterator + 1 >= inputs.size() )
-		return PlayerInput();
+	if ( iterator + 1 >= inputs.size() )
+	{
+		done = true;
+		return PlayerInput(); // No movement
+	}
 
 	if( frame == inputs.at( iterator + 1 ).frame )
 		iterator++;
@@ -41,6 +46,9 @@ void Demo::LoadFromFile( const std::string path )
 	{
 		return;
 	}
+
+	pugi::xml_node levelNode = doc.child( "level" );
+	level = std::stoi( levelNode.attribute("num").value() );
 
 	pugi::xml_node inputNodes = doc.child( "inputs" );
 	for( pugi::xml_node input : inputNodes.children( "input" ) )
@@ -80,8 +88,11 @@ void Demo::SaveToFile( const std::string path )
 {
 	// Build xml and save it to file
 	pugi::xml_document doc;
-	pugi::xml_node inputNodes = doc.append_child( "inputs" );
 
+	pugi::xml_node levelNode = doc.append_child( "level" );
+	levelNode.append_attribute( "num" ).set_value( level );
+
+	pugi::xml_node inputNodes = doc.append_child( "inputs" );
 	for( auto fInput : inputs )
 	{
 		pugi::xml_node inputNode = inputNodes.append_child( "input" );
@@ -132,4 +143,19 @@ void Demo::SetRobotPositions( const std::vector<sf::Vector2f> positions )
 std::vector<sf::Vector2f> Demo::GetRobotPositions() const
 {
 	return robotPositions;
+}
+
+void Demo::SetLevel( const int level )
+{
+	this->level = level;
+}
+
+int Demo::GetLevel() const
+{
+	return level;
+}
+
+bool Demo::IsDone() const
+{
+	return done;
 }

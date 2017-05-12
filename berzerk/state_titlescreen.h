@@ -14,6 +14,7 @@ private:
 	void StartGame(); // Start the game
 	bool playDemo;
 	bool recordDemo;
+	int startLevel;
 
 public:
 

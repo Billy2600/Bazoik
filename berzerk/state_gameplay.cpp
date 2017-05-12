@@ -49,8 +49,15 @@ StateGameplay::StateGameplay( Game *game, bool recordDemo , bool playDemo )
 
 	this->recordDemo = recordDemo;
 	this->playDemo = playDemo;
-	if( playDemo )
+	if ( playDemo )
+	{
 		demo.LoadFromFile( game->GetConfigDir() + "demo1.xml" );
+		game->level = demo.GetLevel();
+	}
+	if ( recordDemo )
+	{
+		demo.SetLevel( game->level );
+	}
 }
 
 void StateGameplay::HandleInput()
@@ -95,7 +102,6 @@ void StateGameplay::HandleInput()
 			if( event.key.code == sf::Keyboard::Key::F9 )
 			{
 				demo.SaveToFile( game->GetConfigDir() + "demo1.xml" );
-				txScore.setString( "Demo Saved" );
 			}
 		}
 
@@ -147,6 +153,12 @@ void StateGameplay::HandleInput()
 	if( playDemo && !recordDemo )
 	{
 		player.SetInput( demo.Play() );
+		// Return to title screen if demo is done
+		if ( demo.IsDone() )
+		{
+			game->PopState();
+			return;
+		}
 	}
 	else if( !playDemo )
 	{

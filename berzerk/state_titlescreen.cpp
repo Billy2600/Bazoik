@@ -31,6 +31,7 @@ StateTitleScreen::StateTitleScreen(Game *game)
 	selectedButton = 0;
 	playDemo = false;
 	recordDemo = false;
+	startLevel = 1;
 }
 
 void StateTitleScreen::HandleInput()
@@ -132,6 +133,19 @@ void StateTitleScreen::HandleInput()
 			}
 		}
 
+		// Change start level
+		if ( event.key.code == sf::Keyboard::Key::F1 )
+		{
+			if ( startLevel > 1 )
+				startLevel--;
+			title.setString( "Start: " + std::to_string(startLevel) );
+		}
+		else if ( event.key.code == sf::Keyboard::Key::F2 )
+		{
+			startLevel++;
+			title.setString( "Start: " + std::to_string( startLevel ) );
+		}
+
 		// Record/play demos
 		if( event.key.code == sf::Keyboard::Key::F10 )
 		{
@@ -166,6 +180,6 @@ void StateTitleScreen::Draw() const
 void StateTitleScreen::StartGame()
 {
 	game->ResetLives();
-	game->level = 1;
+	game->level = startLevel;
 	this->game->states.push( new StateGameplay( this->game, recordDemo, playDemo ) );
 }
