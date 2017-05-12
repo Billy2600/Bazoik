@@ -17,6 +17,7 @@ private:
 	int iterator; // Iterator for input vector
 	unsigned int frame; // Current frame
 	std::vector<sf::IntRect> walls;
+	std::vector<sf::Vector2f> robotPositions;
 
 public:
 	Demo();
@@ -28,5 +29,7 @@ public:
 	void SaveToFile( const std::string path );
 	void SetWalls( const std::vector<sf::IntRect> walls );
 	std::vector<sf::IntRect> GetWalls() const;
+	void SetRobotPositions( const std::vector<sf::Vector2f> positions );
+	std::vector<sf::Vector2f> GetRobotPositions() const;
 };
 

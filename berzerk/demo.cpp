@@ -65,6 +65,14 @@ void Demo::LoadFromFile( const std::string path )
 			std::stoi( wall.attribute( "h" ).value() ) ) );
 	}
 
+	pugi::xml_node robotNodes = doc.child( "robots" );
+	for ( pugi::xml_node robot : robotNodes.children( "robot" ) )
+	{
+		robotPositions.push_back( sf::Vector2f(
+			std::stof( robot.attribute( "x" ).value() ),
+			std::stof( robot.attribute( "y" ).value() ) ) );
+	}
+
 	frame = 0;
 }
 
@@ -86,7 +94,6 @@ void Demo::SaveToFile( const std::string path )
 	}
 
 	pugi::xml_node wallNodes = doc.append_child( "walls" );
-
 	for ( auto wall : walls )
 	{
 		pugi::xml_node wallNode = wallNodes.append_child( "wall" );
@@ -94,6 +101,14 @@ void Demo::SaveToFile( const std::string path )
 		wallNode.append_attribute( "y" ).set_value( wall.top );
 		wallNode.append_attribute( "w" ).set_value( wall.width );
 		wallNode.append_attribute( "h" ).set_value( wall.height );
+	}
+
+	pugi::xml_node robotNodes = doc.append_child( "robots" );
+	for ( auto robot : robotPositions )
+	{
+		pugi::xml_node robotNode = robotNodes.append_child( "robot" );
+		robotNode.append_attribute( "x" ).set_value( robot.x );
+		robotNode.append_attribute( "y" ).set_value( robot.y );
 	}
 
 	doc.save_file( path.c_str() );
@@ -107,4 +122,14 @@ void Demo::SetWalls( const std::vector<sf::IntRect> walls )
 std::vector<sf::IntRect> Demo::GetWalls() const
 {
 	return walls;
+}
+
+void Demo::SetRobotPositions( const std::vector<sf::Vector2f> positions )
+{
+	robotPositions = positions;
+}
+
+std::vector<sf::Vector2f> Demo::GetRobotPositions() const
+{
+	return robotPositions;
 }

@@ -167,7 +167,7 @@ void StateGameplay::Update( const float dt )
 	{
 		if ( recordDemo )
 			demo.SetWalls( maze.CreateWalls( entityManager ) );
-		else if(playDemo )
+		else if( playDemo )
 			maze.LoadWalls( demo.GetWalls(), entityManager );
 		else
 			maze.CreateWalls( entityManager );
@@ -180,7 +180,12 @@ void StateGameplay::Update( const float dt )
 	}
 	if( maze.IsDone() && !enemiesSpawned )
 	{
-		maze.SpawnEnemies( entityManager, lastMove, LoadRobotStats() );
+		if ( recordDemo )
+			demo.SetRobotPositions( maze.SpawnEnemies( entityManager, lastMove, LoadRobotStats() ) );
+		else if ( playDemo )
+			maze.LoadEnemies( demo.GetRobotPositions(), entityManager, LoadRobotStats() );
+		else
+			maze.SpawnEnemies( entityManager, lastMove, LoadRobotStats() );
 		enemiesSpawned = true;
 
 		sfx.setBuffer( game->assetManager.GetSoundRef( "humanoid", true ) );

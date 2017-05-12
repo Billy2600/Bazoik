@@ -287,9 +287,10 @@ void Maze::BlockExit( EntityManager &entityManager, Directions lastMove ) const
 	}
 }
 
-void Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove, RobotStats stats )
+std::vector<sf::Vector2f> Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove, RobotStats stats )
 {
 	std::vector<sf::Vector2u> used;
+	std::vector<sf::Vector2f> positions;
 
 	// Pick random tile
 	for( int i = 0; i < stats.numRobots; i++ )
@@ -343,6 +344,17 @@ void Maze::SpawnEnemies( EntityManager& entityManager, const Directions lastMove
 		float y = randBoundY( rngEngine );
 
 		entityManager.Add( new EntityRobot( sf::Vector2f( x, y ), stats ) );
+		positions.push_back( sf::Vector2f( x, y ) );
+	}
+
+	return positions;
+}
+
+void Maze::LoadEnemies( const std::vector<sf::Vector2f> positions, EntityManager &entityManager, const RobotStats stats )
+{
+	for ( auto pos : positions )
+	{
+		entityManager.Add( new EntityRobot( pos, stats ) );
 	}
 }
 

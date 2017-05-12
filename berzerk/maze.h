@@ -68,7 +68,10 @@ public:
 	// Block last exit
 	void BlockExit( EntityManager &entityManager, Directions lastMove ) const;
 	// Spawn enemies
-	void SpawnEnemies( EntityManager &entityManager, const Directions lastMove, const RobotStats stats ); // Uses lastmove to avoid spawning enemies near player
+	// Will automatically add robot entities, but positions will also be returend
+	std::vector<sf::Vector2f> SpawnEnemies( EntityManager &entityManager, const Directions lastMove, const RobotStats stats ); // Uses lastmove to avoid spawning enemies near player
+	// Load enemies from external source (usually a demo)
+	void LoadEnemies( const std::vector<sf::Vector2f> positions, EntityManager &entityManager, const RobotStats stats );
 	// Get position player should start in
 	sf::Vector2f GetPlayerStart( const Directions lastMove, EntityPlayer &player ) const;
 };
