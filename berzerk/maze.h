@@ -37,7 +37,6 @@ private:
 
 	// Random number generator engine
 	std::mt19937 rngEngine = std::mt19937((unsigned int)time(0)); 
-	//std::mt19937 rngEngine = std::mt19937( 0 );
 
 	unsigned int x, y; // X and Y iterators
 	bool done; // Level generation complete flag
@@ -50,7 +49,6 @@ private:
 
 public:
 	// Constructor
-	// Will call GenerateMaze on construction
 	Maze();
 	// Is level done generating?
 	bool IsDone() const;
@@ -63,7 +61,8 @@ public:
 	// Create gaps in outside walls so player can walk out of screen
 	void CreateGaps();
 	// Create level walls
-	void CreateWalls(EntityManager &entityManager) const;
+	// Will automatically add wall entities, but positions and boundries will also be returend
+	std::vector<sf::IntRect> CreateWalls(EntityManager &entityManager) const;
 	// Block last exit
 	void BlockExit( EntityManager &entityManager, Directions lastMove ) const;
 	// Spawn enemies

@@ -95,6 +95,7 @@ void StateGameplay::HandleInput()
 			if( event.key.code == sf::Keyboard::Key::F9 )
 			{
 				demo.SaveToFile( game->GetConfigDir() + "demo1.xml" );
+				txScore.setString( "Demo Saved" );
 			}
 		}
 
@@ -163,7 +164,11 @@ void StateGameplay::Update( const float dt )
 	}
 	if( maze.IsDone() && !wallsCreated )
 	{
-		maze.CreateWalls( entityManager );
+		if ( recordDemo )
+			demo.SetWalls( maze.CreateWalls( entityManager ) );
+		else
+			maze.CreateWalls( entityManager );
+
 		if( game->level >= 5 )
 		{
 			maze.BlockExit( entityManager, lastMove);

@@ -196,8 +196,9 @@ void Maze::ClearMap()
 	MarkVisited(sf::Vector2u(this->x, this->y));
 }
 
-void Maze::CreateWalls( EntityManager &entityManager ) const
+std::vector<sf::IntRect>  Maze::CreateWalls( EntityManager &entityManager ) const
 {
+	std::vector<sf::IntRect> vWalls;
 	// x/y iterators
 	unsigned int x;
 	unsigned int y;
@@ -215,6 +216,8 @@ void Maze::CreateWalls( EntityManager &entityManager ) const
 			{
 				entityManager.Add( new EntityWall( sf::Vector2f( (float)(x * tileWidth), (float)(y * tileHeight) ),
 					sf::Vector2f( (float)tileWidth, WALL_THICKNESS ) ) );
+
+				vWalls.push_back( sf::IntRect( x * tileWidth, y * tileHeight, tileWidth, WALL_THICKNESS ) );
 			}
 			if( map[x][y].bottom )
 			{
@@ -228,11 +231,13 @@ void Maze::CreateWalls( EntityManager &entityManager ) const
 				}
 
 				entityManager.Add( new EntityWall( pos, sf::Vector2f( width, WALL_THICKNESS ) ) );
+				vWalls.push_back( sf::IntRect( pos.x, pos.y, width, WALL_THICKNESS ) );
 			}
 			if( map[x][y].left )
 			{
 				entityManager.Add( new EntityWall( sf::Vector2f( (float)(x * tileWidth), (float)(y * tileHeight) ),
 					sf::Vector2f( WALL_THICKNESS, (float)tileHeight ) ) );
+				vWalls.push_back( sf::IntRect( x * tileWidth, y * tileHeight, WALL_THICKNESS, tileHeight ) );
 			}
 			if( map[x][y].right )
 			{
@@ -242,9 +247,12 @@ void Maze::CreateWalls( EntityManager &entityManager ) const
 					pos.x -= WALL_THICKNESS / 2; // Not sure why this is half offset...
 				}
 				entityManager.Add( new EntityWall( pos, sf::Vector2f( WALL_THICKNESS, (float)tileHeight ) ) );
+				vWalls.push_back( sf::IntRect( pos.x, pos.y, WALL_THICKNESS, tileHeight ) );
 			}
 		}
 	}
+
+	return vWalls;
 }
 
 void Maze::BlockExit( EntityManager &entityManager, Directions lastMove ) const

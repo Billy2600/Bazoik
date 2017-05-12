@@ -74,5 +74,21 @@ void Demo::SaveToFile( const std::string path )
 		inputNode.append_attribute( "frame" ).set_value( (int)fInput.frame );
 	}
 
+	pugi::xml_node wallNodes = doc.append_child( "walls" );
+
+	for ( auto wall : walls )
+	{
+		pugi::xml_node wallNode = wallNodes.append_child( "wall" );
+		wallNode.append_attribute( "x" ).set_value( wall.left );
+		wallNode.append_attribute( "y" ).set_value( wall.top );
+		wallNode.append_attribute( "w" ).set_value( wall.width );
+		wallNode.append_attribute( "h" ).set_value( wall.height );
+	}
+
 	doc.save_file( path.c_str() );
+}
+
+void Demo::SetWalls( const std::vector<sf::IntRect> walls )
+{
+	this->walls = walls;
 }

@@ -16,6 +16,7 @@ private:
 	std::vector<FrameInput> inputs;
 	int iterator; // Iterator for input vector
 	unsigned int frame; // Current frame
+	std::vector<sf::IntRect> walls;
 
 public:
 	Demo();
@@ -25,5 +26,6 @@ public:
 	// You must provide path and filename
 	void LoadFromFile( const std::string path );
 	void SaveToFile( const std::string path );
+	void SetWalls( const std::vector<sf::IntRect> walls );
 };
 
