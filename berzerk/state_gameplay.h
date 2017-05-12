@@ -42,6 +42,7 @@ private:
 	bool deathSoundPlayed; // Did we play the death sound yet?
 
 	void ScreenTransition( const float dt ); // Transition screen
+	bool ResetIfDead(); // Reset if player died
 
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
 

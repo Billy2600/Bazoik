@@ -64,12 +64,8 @@ void StateGameplay::HandleInput()
 {
 	sf::Event event;
 
-	// Reset state if player is dead
-	if( player.CheckReset() )
-	{
-		game->ResetState();
-		return;
-	}
+	if ( ResetIfDead() )
+		return; // Do not continue if we're resetting the state
 
 	while( game->window.pollEvent( event ) )
 	{
@@ -359,6 +355,28 @@ void StateGameplay::ScreenTransition( const float dt )
 			this->game->SwitchState( new StateGameplay( this->game ) );
 		}
 	}
+}
+
+bool StateGameplay::ResetIfDead()
+{
+	if ( player.CheckReset() )
+	{
+		if ( playDemo )
+			game->PopState(); // Return to title screen
+		else
+		{
+			if ( recordDemo )
+			{
+				PlayerInput last;
+				last.down = true;
+				demo.Record( last ); // Add input on current frame, so it doesn't end too early 
+				demo.SaveToFile( game->GetConfigDir() + "demo1.xml" );
+			}
+			game->ResetState();
+		}
+		return true;
+	}
+	return false;
 }
 
 RobotStats StateGameplay::LoadRobotStats()
