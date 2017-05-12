@@ -28,7 +28,7 @@ public:
 	PlayerInput Play();
 	// You must provide path and filename
 	void LoadFromFile( const std::string path );
-	void SaveToFile( const std::string path );
+	void SaveToFile( const std::string path ) const;
 	void SetWalls( const std::vector<sf::IntRect> walls );
 	std::vector<sf::IntRect> GetWalls() const;
 	void SetRobotPositions( const std::vector<sf::Vector2f> positions );

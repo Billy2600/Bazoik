@@ -84,7 +84,7 @@ void Demo::LoadFromFile( const std::string path )
 	frame = 0;
 }
 
-void Demo::SaveToFile( const std::string path )
+void Demo::SaveToFile( const std::string path ) const
 {
 	// Build xml and save it to file
 	pugi::xml_document doc;
