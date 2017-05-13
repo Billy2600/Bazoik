@@ -47,6 +47,11 @@ StateOptions::StateOptions( Game *game )
 	joystickInput = false;
 }
 
+void StateOptions::Start()
+{
+
+}
+
 void StateOptions::HandleInput()
 {
 	sf::Event event;

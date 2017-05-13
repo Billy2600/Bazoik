@@ -2,6 +2,7 @@
 #include "state_gameplay.h"
 #include "state_options.h"
 
+
 StateTitleScreen::StateTitleScreen(Game *game)
 {
 	this->game = game;
@@ -32,6 +33,17 @@ StateTitleScreen::StateTitleScreen(Game *game)
 	playDemo = false;
 	recordDemo = false;
 	startLevel = 1;
+	currentDemo = 0;
+	clkAttractMode.restart();
+}
+
+void StateTitleScreen::Start()
+{
+	clkAttractMode.restart();
+	playDemo = false;
+	recordDemo = false;
+	game->ResetLives();
+	game->score = 0;
 }
 
 void StateTitleScreen::HandleInput()
@@ -41,6 +53,10 @@ void StateTitleScreen::HandleInput()
 
 	while( game->window.pollEvent( event ) )
 	{
+		// Reset timer on all input
+		if ( event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::KeyPressed || event.type == sf::Event::MouseMoved || joystickInput )
+			clkAttractMode.restart();
+
 		// Close window
 		if( event.type == sf::Event::Closed )
 			game->window.close();
@@ -58,7 +74,7 @@ void StateTitleScreen::HandleInput()
 		}
 
 		// Click on/select button
-		if( event.type == sf::Event::MouseButtonPressed || game->inputManager.TestKeyDown( "fire", event ) )
+		if( event.type == sf::Event::MouseButtonPressed)
 		{
 			// Check if mouse was inside any of the gui buttons
 			for( auto button : buttons )
@@ -164,7 +180,24 @@ void StateTitleScreen::HandleInput()
 
 void StateTitleScreen::Update(const float dt)
 {
-	
+	if ( clkAttractMode.getElapsedTime().asMilliseconds() > ATTRACT_MODE_DELAY )
+	{
+		bool demoCheck = false;
+		for ( int i = 0; i < NUM_DEMOS; i++ )
+		{
+			demoCheck = game->FileExists( "demo" + std::to_string( i ) + ".xml" );
+		}
+
+		if ( demoCheck )
+		{
+			playDemo = true;
+			recordDemo = false;
+			StartGame();
+			currentDemo++;
+			if ( currentDemo >= NUM_DEMOS )
+				currentDemo = 0;
+		}
+	}
 }
 
 void StateTitleScreen::Draw() const
@@ -181,5 +214,5 @@ void StateTitleScreen::StartGame()
 {
 	game->ResetLives();
 	game->level = startLevel;
-	this->game->states.push( new StateGameplay( this->game, recordDemo, playDemo ) );
+	this->game->states.push( new StateGameplay( this->game, recordDemo, playDemo, "demo" + std::to_string(currentDemo) + ".xml" ) );
 }

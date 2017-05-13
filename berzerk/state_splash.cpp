@@ -7,6 +7,11 @@ StateSplash::StateSplash( Game *game )
 	graphicShown = false;
 }
 
+void StateSplash::Start()
+{
+
+}
+
 void StateSplash::HandleInput()
 {
 	// Wish I could let you skip this splash screen, but we gotta load shit

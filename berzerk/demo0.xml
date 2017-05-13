@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<level num="3" />
+<inputs>
+	<input down="0" left="0" right="0" up="0" fire="0" frame="0" />
+	<input down="0" left="0" right="1" up="0" fire="0" frame="44" />
+	<input down="0" left="0" right="1" up="1" fire="0" frame="76" />
+	<input down="0" left="0" right="0" up="1" fire="0" frame="77" />
+	<input down="0" left="0" right="0" up="0" fire="0" frame="83" />
+	<input down="0" left="1" right="0" up="0" fire="0" frame="93" />
+	<input down="0" left="0" right="0" up="0" fire="0" frame="98" />
+	<input down="0" left="0" right="0" up="1" fire="0" frame="109" />
+	<input down="0" left="0" right="0" up="1" fire="1" frame="110" />
+	<input down="0" left="0" right="0" up="1" fire="0" frame="116" />
+	<input down="0" left="0" right="0" up="0" fire="0" frame="117" />
+	<input down="0" left="1" right="0" up="0" fire="0" frame="128" />
+	<input down="1" left="1" right="0" up="0" fire="0" frame="131" />
+	<input down="1" left="0" right="0" up="0" fire="0" frame="135" />
+	<input down="1" left="0" right="1" up="0" fire="0" frame="168" />
+	<input down="0" left="0" right="1" up="0" fire="0" frame="180" />
+	<input down="0" left="0" right="1" up="0" fire="1" frame="195" />
+	<input down="0" left="0" right="1" up="0" fire="0" frame="203" />
+	<input down="0" left="0" right="0" up="0" fire="0" frame="205" />
+	<input down="0" left="0" right="1" up="0" fire="0" frame="212" />
+	<input down="0" left="0" right="0" up="0" fire="0" frame="219" />
+	<input down="1" left="0" right="0" up="0" fire="0" frame="246" />
+</inputs>
+<walls>
+	<wall x="0" y="0" w="169" h="10" />
+	<wall x="0" y="0" w="10" h="160" />
+	<wall x="169" y="0" w="169" h="10" />
+	<wall x="338" y="0" w="10" h="160" />
+	<wall x="338" y="0" w="10" h="160" />
+	<wall x="507" y="0" w="169" h="10" />
+	<wall x="507" y="160" w="179" h="10" />
+	<wall x="676" y="0" w="169" h="10" />
+	<wall x="840" y="0" w="10" h="160" />
+	<wall x="169" y="160" w="10" h="160" />
+	<wall x="169" y="320" w="179" h="10" />
+	<wall x="169" y="160" w="10" h="160" />
+	<wall x="338" y="160" w="10" h="160" />
+	<wall x="338" y="320" w="179" h="10" />
+	<wall x="338" y="160" w="10" h="160" />
+	<wall x="507" y="160" w="169" h="10" />
+	<wall x="507" y="320" w="179" h="10" />
+	<wall x="676" y="160" w="10" h="160" />
+	<wall x="676" y="160" w="10" h="160" />
+	<wall x="0" y="470" w="169" h="10" />
+	<wall x="0" y="320" w="10" h="160" />
+	<wall x="169" y="320" w="169" h="10" />
+	<wall x="169" y="470" w="169" h="10" />
+	<wall x="338" y="320" w="169" h="10" />
+	<wall x="507" y="320" w="169" h="10" />
+	<wall x="507" y="470" w="169" h="10" />
+	<wall x="676" y="470" w="169" h="10" />
+	<wall x="840" y="320" w="10" h="160" />
+</walls>
+<robots>
+	<robot x="781.066711" y="209.048386" />
+	<robot x="114.491379" y="40.0573997" />
+	<robot x="711.031555" y="412.681702" />
+	<robot x="206.399765" y="398.785156" />
+	<robot x="443.369995" y="406.20993" />
+	<robot x="610.486572" y="366.635437" />
+	<robot x="308.264221" y="233.45871" />
+</robots>

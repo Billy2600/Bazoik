@@ -7,6 +7,7 @@ int main()
 	// Init game with splash screen
 	Game game;
 	game.states.push( new StateSplash( &game ) );
+	game.states.top()->Start();
 	game.GameLoop();
 
 	return 0;

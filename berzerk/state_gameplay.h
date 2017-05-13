@@ -52,7 +52,8 @@ private:
 
 public:
 
-	StateGameplay( Game *game, bool recordDemo = false, bool playDemo = false );
+	StateGameplay( Game *game, const bool recordDemo = false, const bool playDemo = false, const std::string demoName = "");
+	virtual void Start();
 	virtual void Draw() const;
 	virtual void Update( const float dt );
 	virtual void HandleInput();

@@ -18,6 +18,7 @@ public:
 	Game *game;
 
 	StateOptions( Game *game );
+	virtual void Start();
 	virtual void Draw() const;
 	virtual void Update( const float dt );
 	virtual void HandleInput();

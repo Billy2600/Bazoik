@@ -7,7 +7,7 @@ Directions StateGameplay::lastMove = Directions::W;
 
 bool StateGameplay::chicken = false;
 
-StateGameplay::StateGameplay( Game *game, bool recordDemo , bool playDemo )
+StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool playDemo, const std::string demoName )
 {
 	this->game = game;
 
@@ -51,13 +51,18 @@ StateGameplay::StateGameplay( Game *game, bool recordDemo , bool playDemo )
 	this->playDemo = playDemo;
 	if ( playDemo )
 	{
-		demo.LoadFromFile( game->GetConfigDir() + "demo1.xml" );
+		demo.LoadFromFile( demoName );
 		game->level = demo.GetLevel();
 	}
 	if ( recordDemo )
 	{
 		demo.SetLevel( game->level );
 	}
+}
+
+void StateGameplay::Start()
+{
+
 }
 
 void StateGameplay::HandleInput()

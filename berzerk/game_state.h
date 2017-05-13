@@ -10,6 +10,7 @@ protected:
 public:
 	Game *game;
 
+	virtual void Start() = 0;
 	virtual void Draw() const = 0;
 	virtual void Update( const float dt ) = 0;
 	virtual void HandleInput() = 0;

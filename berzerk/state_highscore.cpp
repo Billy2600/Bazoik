@@ -37,6 +37,11 @@ StateHighscore::StateHighscore( Game *game )
 	clock.restart();
 }
 
+void StateHighscore::Start()
+{
+
+}
+
 void StateHighscore::CheckNewScore()
 {
 	if( game->score > scores[NUM_SCORES-1].num )

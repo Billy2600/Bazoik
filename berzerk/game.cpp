@@ -16,6 +16,11 @@
 Game::Game()
 {
 	window.create( sf::VideoMode( GAME_WIDTH, GAME_HEIGHT ), GAME_NAME );
+	/*window.create( sf::VideoMode::getDesktopMode(), GAME_NAME );
+	sf::View view = window.getDefaultView();
+	view.setSize( sf::Vector2f( GAME_WIDTH, GAME_HEIGHT ) );
+	view.setCenter( sf::Vector2f( GAME_WIDTH / 2, GAME_HEIGHT / 2) );
+	window.setView( view );*/
 	window.setFramerateLimit( 60 );
 	popped = false;
 
@@ -35,8 +40,11 @@ void Game::GameLoop()
 
 	while( window.isOpen() )
 	{
-		if( popped )
+		if ( popped )
+		{
+			states.top()->Start();
 			popped = false;
+		}
 
 		// Skip if stack is empty
 		if( states.empty() )
@@ -68,12 +76,14 @@ void Game::ResetState()
 	{
 		SwitchState( new StateGameplay( this ) );
 	}
+	states.top()->Start();
 }
 
 void Game::SwitchState( GameState* newState )
 {
 	PopState();
 	states.push( newState );
+	states.top()->Start();
 }
 
 unsigned int Game::GetLives() const
@@ -150,6 +160,17 @@ std::string Game::GetConfigDir()
 #endif
 	path = path + P_SEPERATOR + GAME_NAME + P_SEPERATOR;
 	return path;
+}
+
+bool Game::FileExists( std::string path ) const
+{
+#ifdef _WIN32
+	DWORD attrib = GetFileAttributes( path.c_str() );
+	return ( attrib != INVALID_FILE_ATTRIBUTES && !( attrib & FILE_ATTRIBUTE_DIRECTORY ) );
+#else
+	struct stat st = { 0 };
+	return ( stat( path.c_str(), &st ) == 0 );
+#endif
 }
 
 Game::~Game()
