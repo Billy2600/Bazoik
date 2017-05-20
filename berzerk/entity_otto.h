@@ -1,9 +1,7 @@
 #pragma once
 #include "entity.h"
 
-// Movement stuff for Otto
-#define OTTO_PERIOD 6
-#define OTTO_AMPLITUDE 3
+#define OTTO_BUFFER 50 // Buffer above/below player so it's possible to avoid Otto
 
 class EntityOtto : public Entity
 {
@@ -17,7 +15,6 @@ private:
 	float maxHeight;
 	float minHeight;
 	float direction; // Current direction (up/down)
-	sf::Vector2f playerPos;
 
 public:
 	EntityOtto( const sf::Vector2f pos, const float minHeight = 0, const float maxHeight = GAME_HEIGHT );

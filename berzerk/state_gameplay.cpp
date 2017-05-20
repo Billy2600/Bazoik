@@ -264,7 +264,7 @@ void StateGameplay::Update( const float dt )
 		// Tell Otto where to move
 		if( ottoSpawned )
 		{
-			otto->SetMinMaxHeight( player.hitbox.top, player.hitbox.top + player.hitbox.height );
+			otto->SetMinMaxHeight( player.hitbox.top - OTTO_BUFFER, player.hitbox.top + player.hitbox.height + OTTO_BUFFER );
 		}
 
 		if( player.IsDead() && !deathSoundPlayed )
