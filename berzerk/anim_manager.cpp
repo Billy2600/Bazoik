@@ -62,6 +62,11 @@ sf::IntRect AnimManager::Animate( const std::string &name, const bool stopOnLast
 		return sf::IntRect( 0, 0, 0, 0 );
 }
 
+void AnimManager::ResetAnim( const std::string &name )
+{
+	frameCounters[name] = 0;
+}
+
 bool AnimManager::IsEmpty() const
 {
 	return animations.empty();

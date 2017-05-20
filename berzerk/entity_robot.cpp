@@ -36,9 +36,7 @@ void EntityRobot::LoadSprite()
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		//sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
-		// Load hitbox based on sprite info
-		sf::IntRect animRect = game->animManager.Animate( currentAnim, ( currentAnim == "robot_death" ) );
+		sf::IntRect animRect = game->animManager.Animate( currentAnim );
 #ifdef _DEBUG
 		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
 #endif
@@ -54,13 +52,14 @@ void EntityRobot::Think( const float dt )
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 #endif
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
-	sprite.setTextureRect( game->animManager.Animate( currentAnim ) );
+	sprite.setTextureRect( game->animManager.Animate( currentAnim, ( currentAnim == "robot_death" ) ) );
 
 	if( dead && now - deathTime < deathDelay )
 		return;
 	else if( dead && now - deathTime >= deathDelay )
 	{
 		deleteMe = true;
+		game->animManager.ResetAnim( "robot_death" );
 		return;
 	}
 
