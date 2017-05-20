@@ -18,7 +18,7 @@ private:
 public:
 	AnimManager();
 	void LoadFromFile( const std::string &filename ); // Load animation data from file
-	sf::IntRect Animate( const std::string &name ); // Move to next frame of specified anim; will return coordinates
+	sf::IntRect Animate( const std::string &name, const bool stopOnLastFrame = false ); // Move to next frame of specified anim; will return coordinates
 	bool IsEmpty() const; // Will return true if animation map is empty
 	bool IsEmpty( const std::string &name ); // Will return true if specified animation is empty
 	~AnimManager();

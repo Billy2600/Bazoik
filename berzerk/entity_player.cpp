@@ -74,7 +74,7 @@ void EntityPlayer::Think( const float dt )
 	if( dead )
 	{
 		// Keep animation going during death
-		sf::IntRect animRect = game->animManager.Animate( currentAnim );
+		sf::IntRect animRect = game->animManager.Animate( currentAnim, true );
 		sprite.setTextureRect( animRect );
 
 		// Check if we should also reset the state

@@ -40,13 +40,18 @@ void AnimManager::LoadFromFile( const std::string &filename )
 	}
 }
 
-sf::IntRect AnimManager::Animate( const std::string &name )
+sf::IntRect AnimManager::Animate( const std::string &name, const bool stopOnLastFrame )
 {
 	if( clock.getElapsedTime().asMilliseconds() > lastTime[name] + ANIM_FRAME_DELAY )
 	{
 		frameCounters[name]++;
-		if( frameCounters[name] >= animations[name].size() )
-			frameCounters[name] = 0;
+		if ( frameCounters[name] >= animations[name].size() )
+		{
+			if( stopOnLastFrame )
+				return animations[name].back();
+			else
+				frameCounters[name] = 0;
+		}
 
 		lastTime[name] = clock.getElapsedTime().asMilliseconds();
 	}
