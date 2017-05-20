@@ -4,6 +4,7 @@
 #include "pugixml.hpp"
 
 Directions StateGameplay::lastMove = Directions::W;
+std::vector<Directions> StateGameplay::lastFourMoves = std::vector<Directions>();
 
 bool StateGameplay::chicken = false;
 
@@ -62,7 +63,8 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 
 void StateGameplay::Start()
 {
-
+	/*lastMove = Directions::W;
+	lastFourMoves.clear();*/
 }
 
 void StateGameplay::HandleInput()
@@ -220,6 +222,7 @@ void StateGameplay::Update( const float dt )
 			transition = true;
 			game->level++;
 			lastMove = Directions::W;
+			AddLastMove( lastMove );
 			transStart = now;
 		}
 		else if( ( plPos.x + player.hitbox.width ) < 0 )
@@ -227,6 +230,7 @@ void StateGameplay::Update( const float dt )
 			transition = true;
 			game->level++;
 			lastMove = Directions::E;
+			AddLastMove( lastMove );
 			transStart = now;
 		}
 		else if( plPos.y > GAME_HEIGHT )
@@ -234,6 +238,7 @@ void StateGameplay::Update( const float dt )
 			transition = true;
 			game->level++;
 			lastMove = Directions::N;
+			AddLastMove( lastMove );
 			transStart = now;
 		}
 		else if( ( plPos.y + player.hitbox.height ) < 0 )
@@ -241,6 +246,7 @@ void StateGameplay::Update( const float dt )
 			transition = true;
 			game->level++;
 			lastMove = Directions::S;
+			AddLastMove( lastMove );
 			transStart = now;
 		}
 
@@ -254,7 +260,7 @@ void StateGameplay::Update( const float dt )
 		// Spawn Otto if delay has been reached
 		if( now >= ottoDelay && !ottoSpawned )
 		{
-			otto = new EntityOtto( sf::Vector2f( 0, player.hitbox.top ), player.hitbox.top, player.hitbox.top + player.hitbox.height );
+			otto = new EntityOtto( sf::Vector2f( 0, player.hitbox.top ), player.hitbox.top, player.hitbox.top + player.hitbox.height, CheckEasterEgg() );
 			entityManager.Add( otto );
 			ottoSpawned = true;
 
@@ -424,6 +430,28 @@ RobotStats StateGameplay::LoadRobotStats()
 	}
 
 	return stats;
+}
+
+void StateGameplay::AddLastMove( Directions move )
+{
+	lastFourMoves.push_back( move );
+	if ( lastFourMoves.size() > 4 ) // Limit to four
+		lastFourMoves.erase( lastFourMoves.begin() );
+}
+
+bool StateGameplay::CheckEasterEgg() const
+{
+	if ( lastFourMoves.size() == 4
+		&& lastFourMoves[0] == Directions::S
+		&& lastFourMoves[1] == Directions::E
+		&& lastFourMoves[2] == Directions::N
+		&& lastFourMoves[3] == Directions::E
+		)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 StateGameplay::~StateGameplay()

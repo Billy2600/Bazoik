@@ -260,6 +260,8 @@ std::string InputManager::GetKeyName( const std::string name ) const
 			if( keys.at( name ).axisPos < 0 ) pos = "-";
 			return "Joystick Axis " + axisNames[keys.at(name).axis] + pos;
 		}
+
+		return "UNBOUND";
 	}
 	else
 	{

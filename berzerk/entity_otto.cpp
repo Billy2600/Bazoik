@@ -1,6 +1,6 @@
 #include "entity_otto.h"
 
-EntityOtto::EntityOtto( sf::Vector2f pos, const float minHeight, const float maxHeight )
+EntityOtto::EntityOtto( sf::Vector2f pos, const float minHeight, const float maxHeight, const bool dopefish )
 {
 	hitbox.left = pos.x;
 	hitbox.top = pos.y;
@@ -9,6 +9,7 @@ EntityOtto::EntityOtto( sf::Vector2f pos, const float minHeight, const float max
 	hitbox.height = 24;
 
 	float direction = ySpeed;
+	this->dopefish = dopefish;
 
 #ifdef _DEBUG
 	shape.setFillColor( sf::Color::Transparent );
@@ -25,7 +26,10 @@ void EntityOtto::Think( const float dt )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
 		//sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
-		sprite.setTextureRect( game->animManager.Animate( "evil_otto" ) );
+		if( dopefish)
+			sprite.setTextureRect( game->animManager.Animate( "dopefish" ) );
+		else
+			sprite.setTextureRect( game->animManager.Animate( "evil_otto" ) );
 	}
 
 	if( direction == 0 ) direction = ySpeed; // Make sure this is initialized

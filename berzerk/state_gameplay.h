@@ -50,6 +50,10 @@ private:
 
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
 
+	static std::vector<Directions> lastFourMoves; // Used to keep track for easter egg
+	void AddLastMove( Directions move ); // Add last move to vector
+	bool CheckEasterEgg() const; // Check if we should fire easter egg
+
 public:
 
 	StateGameplay( Game *game, const bool recordDemo = false, const bool playDemo = false, const std::string demoName = "");
