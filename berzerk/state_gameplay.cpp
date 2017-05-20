@@ -63,8 +63,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 
 void StateGameplay::Start()
 {
-	/*lastMove = Directions::W;
-	lastFourMoves.clear();*/
+	lastMove = Directions::W;
 }
 
 void StateGameplay::HandleInput()
