@@ -8,8 +8,8 @@ EntityPlayer::EntityPlayer()
 	shape.setOutlineThickness( 1.f );
 #endif
 	// Hitbox will remain consistent size, regardless of animation
-	hitbox.width = 18.f;
-	hitbox.height = 48.f;
+	hitbox.width = 16.f;
+	hitbox.height = 32.f;
 	clock.restart();
 	dead = false;
 	reset = false;
@@ -154,7 +154,7 @@ void EntityPlayer::Think( const float dt )
 	// Fire with delay
 	if( direction != sf::Vector2f(0,0) && input.fire && now - lastFire >= fireDelay )
 	{
-		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/2) ), direction, this ) );
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), direction, this ) );
 		lastFire = now;
 	}
 
