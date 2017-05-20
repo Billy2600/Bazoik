@@ -37,6 +37,10 @@ private:
 	EntityOtto *otto;
 	bool ottoSpawned; // Has Otto already been spawned?
 
+	Demo demo;
+	bool recordDemo;
+	bool playDemo;
+
 	// Sound stuff
 	sf::Sound sfx;
 	bool deathSoundPlayed; // Did we play the death sound yet?
@@ -45,10 +49,6 @@ private:
 	bool ResetIfDead(); // Reset if player died
 
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
-
-	Demo demo;
-	bool recordDemo;
-	bool playDemo;
 
 public:
 

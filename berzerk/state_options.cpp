@@ -107,12 +107,13 @@ void StateOptions::HandleInput()
 			}
 		}
 
-		if( event.type == sf::Event::MouseButtonPressed || game->inputManager.TestKeyDown( "fire", event ) )
+		if( event.type == sf::Event::MouseButtonPressed || game->inputManager.TestKeyDown( "fire", event ) || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Return )
 		{
 			// Check if mouse was inside any of the gui buttons
 			for( auto button : buttons )
 			{
-				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) || ( joystickInput && button.second.order == selectedButton ) )
+				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) || ( joystickInput && button.second.order == selectedButton )
+					|| button.second.order == selectedButton  && event.key.code == sf::Keyboard::Key::Return )
 				{
 					awaitingRebind = true;
 					bind = button.first;
@@ -139,7 +140,8 @@ void StateOptions::HandleInput()
 		// Interact with buttons with joystick
 		if( !awaitingRebind )
 		{
-			if( game->inputManager.TestKeyDown( "up", event ) )
+			if( game->inputManager.TestKeyDown( "up", event ) 
+				|| ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Up ) )
 			{
 				if( joystickInput )
 				{
@@ -151,7 +153,8 @@ void StateOptions::HandleInput()
 					joystickInput = true;
 			}
 
-			if( game->inputManager.TestKeyDown( "down", event ) )
+			if( game->inputManager.TestKeyDown( "down", event ) 
+				|| ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Down ) )
 			{
 				if( joystickInput )
 				{

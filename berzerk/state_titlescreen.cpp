@@ -63,10 +63,6 @@ void StateTitleScreen::HandleInput()
 
 		if( event.type == sf::Event::KeyPressed )
 		{
-			if( event.key.code == sf::Keyboard::Key::Return )
-			{
-				StartGame();
-			}
 			if( event.key.code == sf::Keyboard::Key::Escape )
 			{
 				game->window.close();
@@ -74,22 +70,20 @@ void StateTitleScreen::HandleInput()
 		}
 
 		// Click on/select button
-		if( event.type == sf::Event::MouseButtonPressed)
+		for( auto button : buttons )
 		{
-			// Check if mouse was inside any of the gui buttons
-			for( auto button : buttons )
+			if( event.type == sf::Event::MouseButtonPressed && button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) 
+				|| joystickInput && button.second.order == selectedButton && game->inputManager.TestKeyDown( "fire", event )
+				|| button.second.order == selectedButton && ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Return ) )
 			{
-				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) || ( joystickInput && button.second.order == selectedButton ) )
+				// Perform action based on which button this is
+				if( button.first == "start" )
 				{
-					// Perform action based on which button this is
-					if( button.first == "start" )
-					{
-						StartGame();
-					}
-					else if( button.first == "options" )
-					{
-						this->game->states.push( new StateOptions( this->game ) );
-					}
+					StartGame();
+				}
+				else if( button.first == "options" )
+				{
+					this->game->states.push( new StateOptions( this->game ) );
 				}
 			}
 		}
@@ -111,7 +105,8 @@ void StateTitleScreen::HandleInput()
 		}
 
 		// Interact with buttons with joystick
-		if( game->inputManager.TestKeyDown( "up", event ) )
+		if( game->inputManager.TestKeyDown( "up", event )
+			|| ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Up ) )
 		{
 			if( joystickInput )
 			{
@@ -122,7 +117,8 @@ void StateTitleScreen::HandleInput()
 				joystickInput = true; // On first press, just turn on joystick functionality
 		}
 
-		if( game->inputManager.TestKeyDown( "down", event ) )
+		if( game->inputManager.TestKeyDown( "down", event )
+			|| ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Down ) )
 		{
 			if( joystickInput )
 			{
