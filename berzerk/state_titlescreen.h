@@ -14,12 +14,13 @@ private:
 	std::map<std::string, GuiButton> buttons;
 	bool joystickInput = false; // Will flip once user starts using joystick
 	int selectedButton; // Which button is currently selected? (Joystick only)
-	void StartGame(); // Start the game
 	bool playDemo;
 	bool recordDemo;
 	int currentDemo;
 	int startLevel;
 	sf::Clock clkAttractMode; // Timer for attract mode
+
+	void StartGame(); // Start the game
 
 public:
 

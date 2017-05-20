@@ -1,7 +1,7 @@
 #include "state_titlescreen.h"
 #include "state_gameplay.h"
 #include "state_options.h"
-
+#include "state_credits.h"
 
 StateTitleScreen::StateTitleScreen(Game *game)
 {
@@ -185,6 +185,7 @@ void StateTitleScreen::Update(const float dt)
 		bool demoCheck = false;
 		for ( int i = 0; i < NUM_DEMOS; i++ )
 		{
+			// No demos will play unless all are accounted for
 			demoCheck = game->FileExists( "demo" + std::to_string( i ) + ".xml" );
 		}
 
@@ -194,7 +195,7 @@ void StateTitleScreen::Update(const float dt)
 			recordDemo = false;
 			StartGame();
 			currentDemo++;
-			if ( currentDemo >= NUM_DEMOS )
+			if ( currentDemo >= NUM_DEMOS + 1 ) // One above the limit will show credits instead
 				currentDemo = 0;
 		}
 	}
@@ -214,5 +215,8 @@ void StateTitleScreen::StartGame()
 {
 	game->ResetLives();
 	game->level = startLevel;
-	this->game->states.push( new StateGameplay( this->game, recordDemo, playDemo, "demo" + std::to_string(currentDemo) + ".xml" ) );
+	if( currentDemo >= NUM_DEMOS )
+		this->game->states.push( new StateCredits( this->game) );
+	else
+		this->game->states.push( new StateGameplay( this->game, recordDemo, playDemo, "demo" + std::to_string(currentDemo) + ".xml" ) );
 }

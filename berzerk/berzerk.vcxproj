@@ -138,6 +138,7 @@
     <ClCompile Include="maze.cpp" />
     <ClCompile Include="pugixml.cpp" />
     <ClCompile Include="quadtree.cpp" />
+    <ClCompile Include="state_credits.cpp" />
     <ClCompile Include="state_gameplay.cpp" />
     <ClCompile Include="state_highscore.cpp" />
     <ClCompile Include="state_options.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="pugiconfig.hpp" />
     <ClInclude Include="pugixml.hpp" />
     <ClInclude Include="quadree.h" />
+    <ClInclude Include="state_credits.h" />
     <ClInclude Include="state_gameplay.h" />
     <ClInclude Include="state_highscore.h" />
     <ClInclude Include="state_options.h" />
