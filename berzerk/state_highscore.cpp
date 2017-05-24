@@ -211,17 +211,20 @@ void StateHighscore::HandleInput()
 		// Initials input
 		if( entryMode )
 		{
-			if( game->inputManager.TestKeyDown( "right", event ) )
+			if( game->inputManager.TestKeyDown( "right", event )
+				|| event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right )
 			{
 				entryChar++;
 			}
 
-			if( game->inputManager.TestKeyDown( "left", event ) )
+			if( game->inputManager.TestKeyDown( "left", event )
+				|| event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left )
 			{
 				entryChar--;
 			}
 
-			if( game->inputManager.TestKeyDown( "fire", event ) )
+			if( game->inputManager.TestKeyDown( "fire", event ) 
+				|| event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return )
 			{
 				entryIndex++;
 			}
