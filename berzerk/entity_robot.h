@@ -20,6 +20,7 @@ class EntityRobot : public Entity
 {
 private:
 	sf::Sprite sprite;
+	sf::Sound sfx;
 	bool dead;
 	sf::Clock clock;
 	sf::Int32 lastFire;

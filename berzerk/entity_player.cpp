@@ -82,6 +82,7 @@ void EntityPlayer::Think( const float dt )
 		{
 			reset = true;
 			game->RemoveLife();
+			sfx.stop();
 		}
 		return;
 	}
@@ -156,6 +157,9 @@ void EntityPlayer::Think( const float dt )
 	{
 		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), direction, this ) );
 		lastFire = now;
+		sfx.setVolume( 100 );
+		sfx.setBuffer( game->assetManager.GetSoundRef( "shoot" ) );
+		sfx.play();
 	}
 
 	Move( move, dt );
@@ -174,6 +178,9 @@ void EntityPlayer::Die()
 	currentAnim = "player_death";
 	dead = true;
 	deathTime = (float)now;
+	sfx.setBuffer( game->assetManager.GetSoundRef( "death" ) );
+	sfx.setVolume( 50 );
+	sfx.play();
 }
 
 bool EntityPlayer::IsDead() const

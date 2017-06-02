@@ -46,6 +46,7 @@ private:
 	void Die(); // Perform death
 
 	sf::Sprite sprite;
+	sf::Sound sfx;
 	std::string currentAnim;
 	void LoadSprite();
 	void ChooseFireAnim(sf::Vector2f direction); // Choose firing direction; will set animation (does not return)

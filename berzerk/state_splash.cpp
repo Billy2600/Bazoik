@@ -65,4 +65,7 @@ void StateSplash::LoadSounds()
 	game->assetManager.LoadSound( "must_not_escape_hi", "assets/voice/Bazoik_The_Humanoid_Must_Not_Escape_Hi.wav" );
 	game->assetManager.LoadSound( "must_not_escape_low", "assets/voice/Bazoik_The_Humanoid_Must_Not_Escape_Low.wav" );
 	game->assetManager.LoadSound( "must_not_escape_mid", "assets/voice/Bazoik_The_Humanoid_Must_Not_Escape_Mid.wav" );
+	game->assetManager.LoadSound( "robot_die", "assets/robot_die.wav" );
+	game->assetManager.LoadSound( "death", "assets/death.wav" );
+	game->assetManager.LoadSound( "shoot", "assets/shoot.wav" );
 }
