@@ -13,6 +13,7 @@ class InputManager
 {
 public:
 	Game *game; // Make sure to set this pointer before use; we need at least one function from it
+	bool fullscreen; // If more general options sneak in, we'll rename this class to Options
 
 	enum InputType
 	{

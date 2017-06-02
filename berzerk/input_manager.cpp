@@ -44,6 +44,7 @@ void InputManager::LoadDefaults()
 	keys["left"] = key;
 	key.keyCode = sf::Keyboard::Key::RControl;
 	keys["fire"] = key;
+	fullscreen = false;
 }
 
 void InputManager::LoadFromFile( const std::string filename )
@@ -87,6 +88,9 @@ void InputManager::LoadFromFile( const std::string filename )
 			this->keys[n].axis = static_cast<sf::Joystick::Axis>( FindIndexFromName( value, InputType::Axis ) );
 		}
 	}
+
+	pugi::xml_node nodeFullscreen = doc.child( "fullscreen" );
+	this->fullscreen = std::stoi( nodeFullscreen.first_child().value() );
 }
 
 void InputManager::SaveToFile( const std::string filename ) const
@@ -117,6 +121,11 @@ void InputManager::SaveToFile( const std::string filename ) const
 			keyNode.append_child( pugi::node_pcdata ).set_value( axisNames[key.second.axis].c_str() );
 		}
 	}
+
+	std::string fullscreenValue = "0";
+	if ( this->fullscreen ) fullscreenValue = "1";
+	pugi::xml_node nodeFullscreen = doc.append_child( "fullscreen" );
+	nodeFullscreen.append_child( pugi::node_pcdata ).set_value( fullscreenValue.c_str() );
 	
 	std::string path = game->GetConfigDir() + filename;
 	doc.save_file( path.c_str() );
@@ -268,7 +277,6 @@ std::string InputManager::GetKeyName( const std::string name ) const
 		return "UNBOUND";
 	}
 }
-
 
 InputManager::~InputManager()
 {

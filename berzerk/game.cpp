@@ -15,18 +15,26 @@
 
 Game::Game()
 {
-	window.create( sf::VideoMode( GAME_WIDTH, GAME_HEIGHT ), GAME_NAME );
-	/*window.create( sf::VideoMode::getDesktopMode(), GAME_NAME );
-	sf::View view = window.getDefaultView();
-	view.setSize( sf::Vector2f( GAME_WIDTH, GAME_HEIGHT ) );
-	view.setCenter( sf::Vector2f( GAME_WIDTH / 2, GAME_HEIGHT / 2) );
-	window.setView( view );*/
-	window.setFramerateLimit( 60 );
 	popped = false;
 
 	inputManager.LoadFromFile( "keys.xml" );
 	inputManager.game = this;
 	lives = START_LIVES;
+
+	if ( inputManager.fullscreen )
+	{
+		window.create( sf::VideoMode::getDesktopMode(), GAME_NAME, sf::Style::None );
+		sf::View view = window.getDefaultView();
+		view.setSize( sf::Vector2f( GAME_WIDTH, GAME_HEIGHT ) );
+		view.setCenter( sf::Vector2f( GAME_WIDTH / 2, GAME_HEIGHT / 2 ) );
+		window.setView( view );
+	}
+	else
+	{
+		window.create( sf::VideoMode( GAME_WIDTH, GAME_HEIGHT ), GAME_NAME, sf::Style::Default );
+	}
+
+	window.setFramerateLimit( 60 );
 
 	// Load sprite texture
 	assetManager.LoadTexture( "sprites", "assets/Bazoik_Character_Sprite_Sheet.png" );

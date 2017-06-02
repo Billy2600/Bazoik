@@ -22,26 +22,35 @@ StateOptions::StateOptions( Game *game )
 	rebind.setCharacterSize( 30 );
 	rebind.setString( "Rebind Keys:" );
 
-	buttons["up"] = GuiButton( sf::Vector2f( 30, 150 ), sf::Vector2f( 500, 50 ), sf::Vector2f( 10, 3 ), "", assetManager->GetFontRef( "joystix" ), 0 );
+	buttons["up"] = GuiButton( sf::Vector2f( 30, 150 ), sf::Vector2f( 500, 30 ), sf::Vector2f( 10, 3 ), "", assetManager->GetFontRef( "joystix" ), 0 );
 	buttons["up"].SetColors( sf::Color::Black, sf::Color::Green, sf::Color::Transparent );
 	buttons["up"].SetHighlightColors( sf::Color::Black, sf::Color::Red, sf::Color::Transparent );
 	buttons["up"].SetHighlight( false );
 
 	buttons["down"] = buttons["up"];
-	buttons["down"].SetPos( sf::Vector2f( 30, 200 ) );
+	buttons["down"].SetPos( sf::Vector2f( 30, 190 ) );
 	buttons["down"].order = 1;
 
 	buttons["left"] = buttons["up"];
-	buttons["left"].SetPos( sf::Vector2f( 30, 250 ) );
+	buttons["left"].SetPos( sf::Vector2f( 30, 230 ) );
 	buttons["left"].order = 2;
 
 	buttons["right"] = buttons["up"];
-	buttons["right"].SetPos( sf::Vector2f( 30, 300 ) );
+	buttons["right"].SetPos( sf::Vector2f( 30, 270 ) );
 	buttons["right"].order = 3;
 
 	buttons["fire"] = buttons["up"];
-	buttons["fire"].SetPos( sf::Vector2f( 30, 350 ) );
+	buttons["fire"].SetPos( sf::Vector2f( 30, 310 ) );
 	buttons["fire"].order = 4;
+
+	buttons["fullscreen"] = buttons["up"];
+	buttons["fullscreen"].SetPos( sf::Vector2f( 30, 350 ) );
+	buttons["fullscreen"].order = 5;
+
+	buttons["return"] = buttons["up"];
+	buttons["return"].SetPos( sf::Vector2f( 30, 390 ) );
+	buttons["return"].order = 6;
+	buttons["return"].SetText( "Save & Return" );
 
 	selectedButton = 0;
 	joystickInput = false;
@@ -190,12 +199,30 @@ void StateOptions::Update(const float dt)
 {
 	if( awaitingRebind )
 	{
+		// Just toggle fullscreen selector
+		if ( bind == "fullscreen" )
+		{
+			game->inputManager.fullscreen = !game->inputManager.fullscreen;
+			awaitingRebind = false;
+			error = true;
+			std::string type = "windowed";
+			if ( game->inputManager.fullscreen ) type = "fullscreen";
+			rebind.setString( "Relaunch game for " + type );
+			return;
+		}
+		// Return button
+		if ( bind == "return" )
+		{
+			Return();
+			return;
+		}
+
 		error = false;
 		rebind.setString( "Press key to bind " + bind );
 	}
 	else
 	{
-		if(!error)
+		if ( !error )
 			rebind.setString( "Rebind keys:" );
 
 		buttons["up"].SetText( "up:    " + game->inputManager.GetKeyName( "up" ) );
@@ -204,6 +231,11 @@ void StateOptions::Update(const float dt)
 		buttons["right"].SetText( "right: " + game->inputManager.GetKeyName( "right" ) );
 		buttons["fire"].SetText( "fire:  " + game->inputManager.GetKeyName( "fire" ) );
 	}
+
+	if ( game->inputManager.fullscreen )
+		buttons["fullscreen"].SetText( "Fullscreen: Yes" );
+	else
+		buttons["fullscreen"].SetText( "Fullscreen: No" );
 }
 
 void StateOptions::Draw() const
