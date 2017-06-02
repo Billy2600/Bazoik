@@ -76,8 +76,11 @@ void StateGameplay::HandleInput()
 	while( game->window.pollEvent( event ) )
 	{
 		// Close window
-		if( event.type == sf::Event::Closed )
+		if ( event.type == sf::Event::Closed )
+		{
+			sfx.resetBuffer(); // Prevents crash on close
 			game->window.close();
+		}
 
 		if( event.type == sf::Event::KeyPressed )
 		{
@@ -362,6 +365,7 @@ void StateGameplay::ScreenTransition( const float dt )
 		if( ( sprBounds.left + sprBounds.width ) < 0 || sprBounds.left > GAME_WIDTH ||
 			( sprBounds.top + sprBounds.height ) < 0 || sprBounds.top > GAME_HEIGHT )
 		{
+			sfx.stop();
 			this->game->SwitchState( new StateGameplay( this->game ) );
 		}
 	}
@@ -456,5 +460,4 @@ bool StateGameplay::CheckEasterEgg() const
 StateGameplay::~StateGameplay()
 {
 	//maze.ClearMap();
-	sfx.stop();
 }
