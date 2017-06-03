@@ -49,5 +49,6 @@ public:
 	void Draw(); // Runs every frame
 	std::string GetConfigDir(); // Get directory for saving/loading files; includes trailing slash
 	bool FileExists( std::string path ) const;
+	void Close(); // Close game
 	~Game();
 };

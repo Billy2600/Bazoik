@@ -181,6 +181,15 @@ bool Game::FileExists( std::string path ) const
 #endif
 }
 
+void Game::Close()
+{
+	while ( states.size() > 0 )
+	{
+		PopState();
+	}
+	window.close();
+}
+
 Game::~Game()
 {
 	

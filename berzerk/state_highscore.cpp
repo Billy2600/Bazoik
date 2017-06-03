@@ -195,7 +195,8 @@ void StateHighscore::HandleInput()
 		if( event.type == sf::Event::Closed )
 		{
 			Close();
-			game->window.close();
+			game->Close();
+			return;
 		}
 
 		if( event.type == sf::Event::KeyPressed )

@@ -15,6 +15,15 @@ void StateSplash::Start()
 void StateSplash::HandleInput()
 {
 	// Wish I could let you skip this splash screen, but we gotta load shit
+	sf::Event event;
+	while ( game->window.pollEvent( event ) )
+	{
+		if ( event.type == sf::Event::Closed )
+		{
+			game->Close();
+			return;
+		}
+	}
 }
 
 void StateSplash::Update( const float dt )

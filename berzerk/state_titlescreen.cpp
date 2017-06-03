@@ -59,7 +59,10 @@ void StateTitleScreen::HandleInput()
 
 		// Close window
 		if( event.type == sf::Event::Closed )
-			game->window.close();
+		{
+			game->Close();
+			return;
+		}
 
 		if( event.type == sf::Event::KeyPressed )
 		{

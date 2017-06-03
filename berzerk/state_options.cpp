@@ -69,8 +69,11 @@ void StateOptions::HandleInput()
 	while( game->window.pollEvent( event ) )
 	{
 		// Close window
-		if( event.type == sf::Event::Closed )
-			game->window.close();
+		if ( event.type == sf::Event::Closed )
+		{
+			game->Close();
+			return;
+		}
 
 		if( event.type == sf::Event::KeyPressed )
 		{

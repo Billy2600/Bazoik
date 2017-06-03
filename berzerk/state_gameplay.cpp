@@ -79,7 +79,8 @@ void StateGameplay::HandleInput()
 		if ( event.type == sf::Event::Closed )
 		{
 			sfx.resetBuffer(); // Prevents crash on close
-			game->window.close();
+			game->Close();
+			return;
 		}
 
 		if( event.type == sf::Event::KeyPressed )
@@ -320,7 +321,7 @@ void StateGameplay::ScreenTransition( const float dt )
 	if( !captured )
 	{
 		// Capture the screen
-		txTrans.create( GAME_WIDTH, GAME_HEIGHT );
+		txTrans.create( game->window.getSize().x, game->window.getSize().y );
 		txTrans.update( game->window );
 		sprTrans.setTexture( txTrans );
 		captured = true;
