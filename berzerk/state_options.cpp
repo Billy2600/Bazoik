@@ -64,7 +64,7 @@ void StateOptions::Start()
 void StateOptions::HandleInput()
 {
 	sf::Event event;
-	sf::Vector2i m = sf::Mouse::getPosition( this->game->window );
+	sf::Vector2f m = game->window.mapPixelToCoords( sf::Mouse::getPosition( this->game->window ) );
 
 	while( game->window.pollEvent( event ) )
 	{
@@ -124,7 +124,7 @@ void StateOptions::HandleInput()
 			// Check if mouse was inside any of the gui buttons
 			for( auto button : buttons )
 			{
-				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) || ( joystickInput && button.second.order == selectedButton )
+				if( button.second.hitbox.contains( m ) || ( joystickInput && button.second.order == selectedButton )
 					|| button.second.order == selectedButton  && event.key.code == sf::Keyboard::Key::Return )
 				{
 					awaitingRebind = true;
@@ -139,7 +139,7 @@ void StateOptions::HandleInput()
 			// Check GUI highlights
 			for( auto& button : buttons )
 			{
-				if( button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) )
+				if( button.second.hitbox.contains( m ) )
 					button.second.SetHighlight( true );
 				else
 				{

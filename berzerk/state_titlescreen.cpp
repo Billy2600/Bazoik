@@ -54,7 +54,7 @@ void StateTitleScreen::Start()
 void StateTitleScreen::HandleInput()
 {
 	sf::Event event;
-	sf::Vector2i m = sf::Mouse::getPosition( this->game->window );
+	sf::Vector2f m = game->window.mapPixelToCoords( sf::Mouse::getPosition( this->game->window ) );
 
 	while( game->window.pollEvent( event ) )
 	{
@@ -80,7 +80,7 @@ void StateTitleScreen::HandleInput()
 		// Click on/select button
 		for( auto button : buttons )
 		{
-			if( event.type == sf::Event::MouseButtonPressed && button.second.hitbox.contains( sf::Vector2f( (float)m.x, (float)m.y ) ) 
+			if( event.type == sf::Event::MouseButtonPressed && button.second.hitbox.contains( m ) 
 				|| joystickInput && button.second.order == selectedButton && game->inputManager.TestKeyDown( "fire", event )
 				|| button.second.order == selectedButton && ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Return ) )
 			{
