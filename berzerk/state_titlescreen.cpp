@@ -29,6 +29,11 @@ StateTitleScreen::StateTitleScreen(Game *game)
 	buttons["options"].SetText( "Options" );
 	buttons["options"].SetPos( sf::Vector2f( 150, 275 ) );
 
+	buttons["quit"] = buttons["start"];
+	buttons["quit"].order = 2;
+	buttons["quit"].SetText( "Quit" );
+	buttons["quit"].SetPos( sf::Vector2f( 150, 350 ) );
+
 	selectedButton = 0;
 	playDemo = false;
 	recordDemo = false;
@@ -88,6 +93,11 @@ void StateTitleScreen::HandleInput()
 				{
 					this->game->states.push( new StateOptions( this->game ) );
 				}
+				else if ( button.first == "quit" )
+				{
+					game->Close();
+					return;
+				}
 			}
 		}
 
@@ -114,7 +124,10 @@ void StateTitleScreen::HandleInput()
 			if( joystickInput )
 			{
 				joystickInput = true;
-				selectedButton = 0;
+				
+				selectedButton--;
+				if ( selectedButton < 0 )
+					selectedButton = buttons.size() - 1;
 			}
 			else
 				joystickInput = true; // On first press, just turn on joystick functionality
@@ -126,7 +139,10 @@ void StateTitleScreen::HandleInput()
 			if( joystickInput )
 			{
 				joystickInput = true;
-				selectedButton = 1;
+				
+				selectedButton++;
+				if ( selectedButton >= buttons.size() )
+					selectedButton = 0;
 			}
 			else
 				joystickInput = true;

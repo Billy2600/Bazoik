@@ -99,7 +99,7 @@ void EntityRobot::Think( const float dt )
 		if ( stats.movementSpeed > 1 ) // Remain in idle anim at slow speeds
 		{
 			currentAnim = "robot_walk";
-			subAnim = "blank";
+			subAnim = "robot_eye";
 		}
 	}
 	else
