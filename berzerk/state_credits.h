@@ -11,7 +11,7 @@ private:
 
 public:
 
-	StateCredits::StateCredits( Game *game );
+	StateCredits( Game *game );
 	virtual void Start();
 	virtual void Draw() const;
 	virtual void Update( const float dt );

@@ -29,6 +29,7 @@ void EntityManager::Add( Entity* entity )
 
 void EntityManager::CheckCollisions()
 {
+#ifdef _WIN32
 	Quadtree quadtree = Quadtree( 0, sf::IntRect( 0, 0, GAME_WIDTH, GAME_HEIGHT ) );
 
 	for( auto entity : entities )
@@ -37,12 +38,17 @@ void EntityManager::CheckCollisions()
 	}
 
 	std::vector<Entity*> returnObjects;
+#endif
 	for( auto entityA : entities )
 	{
+#ifdef _WIN32
 		returnObjects.clear();
 		quadtree.Retrieve( returnObjects, entityA );
 
 		for( auto entityB : returnObjects )
+#else
+		for(auto entityB: entities) // Temp fix	
+#endif
 		{
 			 // Don't bother if both are walls
 			if( ( dynamic_cast<EntityWall*>( entityA ) != NULL ) && ( dynamic_cast<EntityWall*>( entityB ) != NULL ) )
@@ -79,8 +85,9 @@ void EntityManager::CheckCollisions()
 			}
 		}
 	}
-
+#ifdef _WIN32
 	quadtree.Clear();
+#endif
 
 	CheckLineOfSight();
 }
