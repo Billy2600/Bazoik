@@ -74,5 +74,7 @@ public:
 	void LoadEnemies( const std::vector<sf::Vector2f> positions, EntityManager &entityManager, const RobotStats stats );
 	// Get position player should start in
 	sf::Vector2f GetPlayerStart( const Directions lastMove, EntityPlayer &player ) const;
+	// If we're playing a demo, we need a way to skip generate
+	void SkipGenerate();
 };
 

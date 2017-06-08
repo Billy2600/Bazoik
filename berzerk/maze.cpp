@@ -382,3 +382,8 @@ sf::Vector2f Maze::GetPlayerStart( const Directions lastMove, EntityPlayer &play
 	// Should never happen
 	return sf::Vector2f( 0, 0 );
 }
+
+void Maze::SkipGenerate()
+{
+	done = true;
+}

@@ -177,10 +177,16 @@ void StateGameplay::HandleInput()
 void StateGameplay::Update( const float dt )
 {
 
-	while ( !maze.IsDone() )
+	if ( !playDemo )
 	{
-		maze.Generate();
+		while ( !maze.IsDone() )
+		{
+			maze.Generate();
+		}
 	}
+	else
+		maze.SkipGenerate();
+
 	if ( maze.IsDone() && !wallsCreated )
 	{
 		if ( recordDemo )
