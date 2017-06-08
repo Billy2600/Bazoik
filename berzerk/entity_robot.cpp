@@ -37,6 +37,8 @@ void EntityRobot::LoadSprite()
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
 		sf::IntRect animRect = game->animManager.Animate( currentAnim );
+		subSprite = sprite;
+		subSprite.setColor( sf::Color::White );
 #ifdef _DEBUG
 		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
 #endif
@@ -53,6 +55,8 @@ void EntityRobot::Think( const float dt )
 #endif
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 	sprite.setTextureRect( game->animManager.Animate( currentAnim, ( currentAnim == "robot_death" ) ) );
+	subSprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+	subSprite.setTextureRect( game->animManager.Animate( subAnim, ( subAnim == "robot_explosion" ) ) );
 
 	if( dead && now - deathTime < deathDelay )
 		return;
@@ -60,6 +64,7 @@ void EntityRobot::Think( const float dt )
 	{
 		deleteMe = true;
 		game->animManager.ResetAnim( "robot_death" );
+		game->animManager.ResetAnim( "robot_explosion" );
 		return;
 	}
 
@@ -91,18 +96,23 @@ void EntityRobot::Think( const float dt )
 		moveVec.y = sinf( angle ) * stats.movementSpeed;
 
 		this->Move( moveVec, dt );
-		if( stats.movementSpeed > 1 ) // Remain in idle anim at slow speeds
+		if ( stats.movementSpeed > 1 ) // Remain in idle anim at slow speeds
+		{
 			currentAnim = "robot_walk";
+			subAnim = "blank";
+		}
 	}
 	else
 	{
 		currentAnim = "robot_idle";
+		subAnim = "robot_eye";
 	}
 }
 
 void EntityRobot::Draw() const
 {
 	game->window.draw( sprite );
+	game->window.draw( subSprite );
 #ifdef _DEBUG
 	game->window.draw( shape );
 #endif
@@ -117,6 +127,7 @@ void EntityRobot::HandleCollision( Entity *other )
 			unsigned int prevScore = game->score;
 			game->score += 50;
 			currentAnim = "robot_death";
+			subAnim = "robot_explosion";
 			deathTime = clock.getElapsedTime().asMilliseconds();
 			// Do we award an extra life?
 			if( prevScore % EXTRA_LIFE_SCORE != 0 && game->score % EXTRA_LIFE_SCORE == 0 )

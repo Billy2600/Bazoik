@@ -20,6 +20,7 @@ class EntityRobot : public Entity
 {
 private:
 	sf::Sprite sprite;
+	sf::Sprite subSprite; // displays on top so we can parts of the robot that don't change color
 	sf::Sound sfx;
 	bool dead;
 	sf::Clock clock;
@@ -29,6 +30,7 @@ private:
 	sf::Vector2f playerPos;
 	bool moving;
 	std::string currentAnim;
+	std::string subAnim;
 #ifdef _DEBUG
 	sf::RectangleShape shape;
 #endif
