@@ -63,7 +63,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 
 void StateGameplay::Start()
 {
-	lastMove = Directions::W;
+
 }
 
 void StateGameplay::HandleInput()
@@ -87,6 +87,7 @@ void StateGameplay::HandleInput()
 		{
 			if( event.key.code == sf::Keyboard::Escape )
 			{
+				lastMove = Directions::W; // Make sure next started game starts at W
 				game->PopState();
 				break; // If you don't break here, it will crash
 			}
@@ -162,6 +163,7 @@ void StateGameplay::HandleInput()
 		// Return to title screen if demo is done
 		if ( demo.IsDone() )
 		{
+			lastMove = Directions::W;  // Default lastmove on next started game
 			game->PopState();
 			return;
 		}
