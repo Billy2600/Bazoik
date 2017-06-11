@@ -78,6 +78,7 @@ void StateGameplay::HandleInput()
 		// Close window
 		if ( event.type == sf::Event::Closed )
 		{
+			sfx.stop();
 			sfx.resetBuffer(); // Prevents crash on close
 			game->Close();
 			return;
@@ -469,4 +470,6 @@ bool StateGameplay::CheckEasterEgg() const
 StateGameplay::~StateGameplay()
 {
 	//maze.ClearMap();
+	sfx.stop();
+	sfx.resetBuffer();
 }
