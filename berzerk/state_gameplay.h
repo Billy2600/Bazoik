@@ -7,6 +7,7 @@
 #include "entity_manager.h"
 #include "maze.h"
 #include "demo.h"
+#include "pause_menu.h"
 
 #define TRANS_SPEED 500 // Speed of screen transition
 #define MAX_LIVES 9 // Maximum number of lives to show on screen
@@ -53,6 +54,8 @@ private:
 	static std::vector<Directions> lastFourMoves; // Used to keep track for easter egg
 	void AddLastMove( Directions move ); // Add last move to vector
 	bool CheckEasterEgg() const; // Check if we should fire easter egg
+
+	PauseMenu pause;
 
 public:
 

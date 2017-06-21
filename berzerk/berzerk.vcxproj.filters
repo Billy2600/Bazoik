@@ -87,6 +87,9 @@
     <ClCompile Include="state_credits.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pause_menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_state.h">
@@ -131,9 +134,6 @@
     <ClInclude Include="state_options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="input_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pugixml.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -162,6 +162,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="state_credits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pause_menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

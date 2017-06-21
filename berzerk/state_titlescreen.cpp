@@ -169,7 +169,7 @@ void StateTitleScreen::HandleInput()
 		{
 			if ( startLevel > 1 )
 				startLevel--;
-			title.setString( "Start: " + std::to_string(startLevel) );
+			title.setString( "Start: " + std::to_string( startLevel ) );
 		}
 		else if ( event.key.code == sf::Keyboard::Key::F2 )
 		{

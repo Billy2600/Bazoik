@@ -136,6 +136,7 @@
     <ClCompile Include="liang-barsky.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="maze.cpp" />
+    <ClCompile Include="pause_menu.cpp" />
     <ClCompile Include="pugixml.cpp" />
     <ClCompile Include="quadtree.cpp" />
     <ClCompile Include="state_credits.cpp" />
@@ -158,10 +159,11 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="gui_button.h" />
-    <ClInclude Include="input_manager.h" />
     <ClInclude Include="demo.h" />
+    <ClInclude Include="input_manager.h" />
     <ClInclude Include="liang-barsky.h" />
     <ClInclude Include="maze.h" />
+    <ClInclude Include="pause_menu.h" />
     <ClInclude Include="pugiconfig.hpp" />
     <ClInclude Include="pugixml.hpp" />
     <ClInclude Include="quadree.h" />

@@ -59,6 +59,8 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	{
 		demo.SetLevel( game->level );
 	}
+
+	pause.SetGame( game );
 }
 
 void StateGameplay::Start()
@@ -68,10 +70,28 @@ void StateGameplay::Start()
 
 void StateGameplay::HandleInput()
 {
-	sf::Event event;
+	if ( pause.open )
+	{
+		pause.HandleInput();
+		if ( pause.quit )
+		{
+			lastMove = Directions::W; // Make sure next started game starts at W
+			sfx.stop();
+			sfx.resetBuffer();
+			game->PopState();
+			return;
+		}
 
-	if ( ResetIfDead() )
-		return; // Do not continue if we're resetting the state
+		// Prevent controls from getting stuck when pause menu is opened
+		input.right = false;
+		input.left = false;
+		input.up = false;
+		input.down = false;
+		input.fire = false;
+		return;
+	}
+
+	sf::Event event;
 
 	while( game->window.pollEvent( event ) )
 	{
@@ -84,13 +104,24 @@ void StateGameplay::HandleInput()
 			return;
 		}
 
+		if ( ResetIfDead() )
+			return; // Do not continue if we're resetting the state
+
 		if( event.type == sf::Event::KeyPressed )
 		{
 			if( event.key.code == sf::Keyboard::Escape )
 			{
-				lastMove = Directions::W; // Make sure next started game starts at W
-				game->PopState();
-				break; // If you don't break here, it will crash
+				if ( recordDemo || playDemo )
+				{
+					lastMove = Directions::W; // Make sure next started game starts at W
+					sfx.stop();
+					sfx.resetBuffer();
+					game->PopState();
+				}
+				else
+				{
+					pause.open = true; // Pause menu will close itself
+				}
 			}
 
 			if( event.key.code == sf::Keyboard::Key::F12 )
@@ -179,6 +210,11 @@ void StateGameplay::HandleInput()
 
 void StateGameplay::Update( const float dt )
 {
+	if ( pause.open )
+	{
+		clock.restart();
+		return;
+	}
 
 	if ( !playDemo )
 	{
@@ -323,6 +359,9 @@ void StateGameplay::Draw() const
 
 		game->window.draw( lives[i] );
 	}
+
+	if ( pause.open )
+		pause.Draw();
 }
 
 void StateGameplay::ScreenTransition( const float dt )
@@ -332,7 +371,7 @@ void StateGameplay::ScreenTransition( const float dt )
 		// Capture the screen
 		txTrans.create( game->window.getSize().x, game->window.getSize().y );
 		txTrans.update( game->window );
-		sprTrans.setTexture( txTrans );
+		sprTrans.setTexture( txTrans, true );
 		captured = true;
 
 		// Play sound
