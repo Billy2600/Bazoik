@@ -370,6 +370,11 @@ void StateGameplay::ScreenTransition( const float dt )
 	{
 		// Capture the screen
 		txTrans.create( game->window.getSize().x, game->window.getSize().y );
+		sf::View view;
+		view = game->window.getDefaultView();
+		view.setSize( game->window.getSize().x, game->window.getSize().y );
+		view.setCenter( game->window.getSize().x / 2, game->window.getSize().y / 2 );
+		game->window.setView( view );
 		txTrans.update( game->window );
 		sprTrans.setTexture( txTrans, true );
 		captured = true;
@@ -415,6 +420,7 @@ void StateGameplay::ScreenTransition( const float dt )
 			( sprBounds.top + sprBounds.height ) < 0 || sprBounds.top > GAME_HEIGHT )
 		{
 			sfx.stop();
+			game->window.setView( game->window.getDefaultView() );
 			this->game->SwitchState( new StateGameplay( this->game ) );
 		}
 	}
