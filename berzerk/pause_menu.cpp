@@ -23,17 +23,17 @@ void PauseMenu::SetGame( Game *game )
 	title.setPosition( sf::Vector2f( 250, 30 ) );
 	title.setString( "Pause" );
 
-	buttons["return"] = GuiButton( sf::Vector2f( 250, 150 ), sf::Vector2f( 270, 50 ), sf::Vector2f( 10, 3 ), "Return", assetManager->GetFontRef( "joystix" ), 0 );
-	buttons["return"].SetColors( sf::Color::Black, sf::Color::Green, sf::Color::Green );
-	buttons["return"].SetHighlightColors( sf::Color::Black, sf::Color::Red, sf::Color::Red );
-	buttons["return"].SetHighlight( false );
+	buttons["resume"] = GuiButton( sf::Vector2f( 250, 150 ), sf::Vector2f( 270, 50 ), sf::Vector2f( 10, 3 ), "Resume", assetManager->GetFontRef( "joystix" ), 0 );
+	buttons["resume"].SetColors( sf::Color::Black, sf::Color::Green, sf::Color::Green );
+	buttons["resume"].SetHighlightColors( sf::Color::Black, sf::Color::Red, sf::Color::Red );
+	buttons["resume"].SetHighlight( false );
 
-	buttons["options"] = buttons["return"];
+	buttons["options"] = buttons["resume"];
 	buttons["options"].order = 1;
 	buttons["options"].SetText( "Options" );
 	buttons["options"].SetPos( sf::Vector2f( 250, 215 ) );
 
-	buttons["quit"] = buttons["return"];
+	buttons["quit"] = buttons["resume"];
 	buttons["quit"].order = 1;
 	buttons["quit"].SetText( "Exit" );
 	buttons["quit"].SetPos( sf::Vector2f( 250, 280 ) );
@@ -77,7 +77,7 @@ void PauseMenu::HandleInput()
 				|| button.second.order == selectedButton && ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Return ) )
 			{
 				// Perform action based on which button this is
-				if ( button.first == "return" )
+				if ( button.first == "resume" )
 				{
 					open = false;
 				}
