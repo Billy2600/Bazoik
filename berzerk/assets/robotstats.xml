@@ -4,7 +4,9 @@
     Yellow bot = Melee
     Green bots = Standard
     White bots = Turret
-    Red   bots = Elite-->
+    Red   bots = Elite
+	Orange bot = Hulk
+-->
     <level min="1" speed="1" firedelay="90000" stop_if_see_player="0" num_bots="2" can_shoot="0">
 		<color r="0" g="0" b="255"></color>
 	</level>
@@ -20,22 +22,25 @@
 	<level min="5" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="9" can_shoot="0">
 		<color r="255" g="255" b="0"></color>
 	</level>
-    <level min="6" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="12" can_shoot="1">
+	<level min="6" speed="40" firedelay="500" stop_if_see_player="1" num_bots="1" can_shoot="0" scale="3">
+		<color r="1" g="150" b="43"></color>
+	</level>
+    <level min="7" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="12" can_shoot="1">
 		<color r="255" g="255" b="0"></color>
 	</level>
-    <level min="7" speed="1" firedelay="500" stop_if_see_player="1" num_bots="3" can_shoot="1">
+    <level min="8" speed="1" firedelay="500" stop_if_see_player="1" num_bots="3" can_shoot="1">
 		<color r="255" g="255" b="255"></color>
 	</level>
-    <level min="8" speed="60" firedelay="2000" stop_if_see_player="1" num_bots="3" can_shoot="1">
+    <level min="9" speed="60" firedelay="2000" stop_if_see_player="1" num_bots="3" can_shoot="1">
 		<color r="255" g="0" b="0"></color>
 	</level>
-    <level min="9" speed="60" firedelay="2000" stop_if_see_player="1" num_bots="5" can_shoot="1">
+    <level min="10" speed="60" firedelay="2000" stop_if_see_player="1" num_bots="5" can_shoot="1">
 		<color r="255" g="0" b="0"></color>
 	</level>
-    <level min="10" speed="1" firedelay="90000" stop_if_see_player="0" num_bots="30" can_shoot="0">
+    <level min="11" speed="1" firedelay="90000" stop_if_see_player="0" num_bots="30" can_shoot="0" scale="0.7">
 		<color r="0" g="0" b="255"></color>
 	</level>
-    <level min="11" speed="60" firedelay="2000" stop_if_see_player="1" num_bots="8" can_shoot="1">
+    <level min="12" speed="60" firedelay="2000" stop_if_see_player="1" num_bots="8" can_shoot="1">
 		<color r="255" g="0" b="0"></color>
 	</level>
 </levels>
