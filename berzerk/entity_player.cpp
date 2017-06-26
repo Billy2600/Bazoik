@@ -81,7 +81,6 @@ void EntityPlayer::Think( const float dt )
 		if( now - deathTime >= resetDelay )
 		{
 			reset = true;
-			game->RemoveLife();
 			sfx.stop();
 		}
 		return;
@@ -175,12 +174,14 @@ void EntityPlayer::Think( const float dt )
 void EntityPlayer::Die()
 {
 	//sprite.setColor( sf::Color::Red );
+	game->animManager.ResetAnim( "player_death" );
 	currentAnim = "player_death";
 	dead = true;
 	deathTime = (float)now;
 	sfx.setBuffer( game->assetManager.GetSoundRef( "death" ) );
 	sfx.setVolume( 50 );
 	sfx.play();
+	game->RemoveLife();
 }
 
 bool EntityPlayer::IsDead() const

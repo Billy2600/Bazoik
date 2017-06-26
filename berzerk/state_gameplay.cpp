@@ -301,7 +301,7 @@ void StateGameplay::Update( const float dt )
 		}
 
 		// Did we run out of lives?
-		if( game->GetLives() == 0 )
+		if( game->GetLives() <= 0 && player.CheckReset() )
 		{
 			this->game->SwitchState( new StateHighscore( this->game ) );
 			return;
