@@ -18,8 +18,8 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 	lastFire = 0;
 	deathTime = 0;
 	currentAnim = "robot_idle";
-	hitbox.width = 32;
-	hitbox.height = 32;
+	hitbox.width = 32 * stats.scale;
+	hitbox.height = 32 * stats.scale;
 
 	this->stats = stats;
 	sprite.setColor( stats.color );
@@ -37,6 +37,7 @@ void EntityRobot::LoadSprite()
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
 		sf::IntRect animRect = game->animManager.Animate( currentAnim );
+		sprite.setScale( stats.scale, stats.scale );
 		subSprite = sprite;
 		subSprite.setColor( sf::Color::White );
 #ifdef _DEBUG

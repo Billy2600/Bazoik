@@ -14,6 +14,7 @@ struct RobotStats
 	int fireDelay;
 	int numRobots;
 	sf::Color color;
+	float scale;
 };
 
 class EntityRobot : public Entity

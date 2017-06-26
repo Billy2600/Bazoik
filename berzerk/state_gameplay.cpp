@@ -465,35 +465,55 @@ RobotStats StateGameplay::LoadRobotStats()
 		return stats;
 	}
 
-	pugi::xml_node levelNodes = doc.child( "levels" );
-
-	for( pugi::xml_node level : levelNodes.children( "level" ) )
+	try
 	{
-		if( game->level >= (unsigned int)std::stoi( level.attribute( "min" ).value() ) )
+		pugi::xml_node levelNodes = doc.child( "levels" );
+
+		for ( pugi::xml_node level : levelNodes.children( "level" ) )
 		{
-			if( std::stoi( level.attribute( "stop_if_see_player" ).value() ) == 0 )
-				stats.stopIfSeePlayer = false;
-			else
-				stats.stopIfSeePlayer = true;
+			if ( game->level >= (unsigned int)std::stoi( level.attribute( "min" ).value() ) )
+			{
+				if ( level.attribute( "stop_if_see_player") != NULL && std::stoi( level.attribute( "stop_if_see_player" ).value() ) == 0 )
+					stats.stopIfSeePlayer = false;
+				else
+					stats.stopIfSeePlayer = true;
 
-			stats.movementSpeed = (float)std::stoi( level.attribute( "speed" ).value() );
-			stats.fireDelay = std::stoi( level.attribute( "firedelay" ).value() );
-			stats.numRobots = std::stoi( level.attribute( "num_bots" ).value() );
+				if ( level.attribute( "speed" ) != NULL ) stats.movementSpeed = (float)std::stoi( level.attribute( "speed" ).value() );
+				else stats.movementSpeed = 5;
 
-			if( level.attribute( "can_shoot" ).value() == "0" )
-				stats.canShoot = false;
-			else
-				stats.canShoot = true;
+				if ( level.attribute( "firedelay" ) != NULL ) stats.fireDelay = std::stoi( level.attribute( "firedelay" ).value() );
+				else stats.fireDelay = 100;
 
-			pugi::xml_node color = level.child( "color" );
-			int r = std::stoi( color.attribute( "r" ).value() );
-			int g = std::stoi( color.attribute( "g" ).value() );
-			int b = std::stoi( color.attribute( "b" ).value() );
-			stats.color = sf::Color( r, g, b );
+				if ( level.attribute( "num_bots" ) != NULL ) stats.numRobots = std::stoi( level.attribute( "num_bots" ).value() );
+				else stats.numRobots = 5;
+
+				if( level.attribute( "scale" ) != NULL ) stats.scale = std::stof( level.attribute( "scale" ).value() );
+				else stats.scale = 1;
+
+				if ( level.attribute( "can_shoot" ) != NULL && level.attribute( "can_shoot" ).value() == "0" )
+					stats.canShoot = false;
+				else
+					stats.canShoot = true;
+
+				if ( level.child( "color" ) != NULL )
+				{
+					pugi::xml_node color = level.child( "color" );
+					int r = std::stoi( color.attribute( "r" ).value() );
+					int g = std::stoi( color.attribute( "g" ).value() );
+					int b = std::stoi( color.attribute( "b" ).value() );
+					stats.color = sf::Color( r, g, b );
+				}
+				else
+					stats.color = ERROR_COLOR;
+			}
 		}
-	}
 
-	return stats;
+		return stats;
+	}
+	catch ( int e )
+	{
+		game->ThrowError( "Error while loading assets/robotstats.xml" );
+	}
 }
 
 void StateGameplay::AddLastMove( Directions move )
