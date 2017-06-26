@@ -61,6 +61,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	}
 
 	pause.SetGame( game );
+	pauseTime = 0;
 }
 
 void StateGameplay::Start()
@@ -120,6 +121,7 @@ void StateGameplay::HandleInput()
 				}
 				else
 				{
+					pauseTime = clock.getElapsedTime().asMilliseconds();
 					pause.open = true; // Pause menu will close itself
 				}
 			}
@@ -306,7 +308,7 @@ void StateGameplay::Update( const float dt )
 		}
 
 		// Spawn Otto if delay has been reached
-		if( now >= ottoDelay && !ottoSpawned )
+		if( pauseTime + now >= OTTO_DELAY && !ottoSpawned )
 		{
 			otto = new EntityOtto( sf::Vector2f( 0, player.hitbox.top ), player.hitbox.top, player.hitbox.top + player.hitbox.height, CheckEasterEgg() );
 			entityManager.Add( otto );

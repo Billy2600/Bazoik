@@ -34,7 +34,6 @@ private:
 	sf::Sprite sprTrans; // Screenshot of screen for transition
 	sf::Texture txTrans;
 
-	const sf::Int32 ottoDelay = 10000;
 	EntityOtto *otto;
 	bool ottoSpawned; // Has Otto already been spawned?
 
@@ -56,6 +55,7 @@ private:
 	bool CheckEasterEgg() const; // Check if we should fire easter egg
 
 	PauseMenu pause;
+	sf::Int32 pauseTime; // Record time we paused for use with the Otto delay
 
 public:
 
