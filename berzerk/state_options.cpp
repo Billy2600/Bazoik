@@ -43,13 +43,17 @@ StateOptions::StateOptions( Game *game )
 	buttons["fire"].SetPos( sf::Vector2f( 30, 310 ) );
 	buttons["fire"].order = 4;
 
+	buttons["pause"] = buttons["up"];
+	buttons["pause"].SetPos( sf::Vector2f( 30, 350 ) );
+	buttons["pause"].order = 5;
+
 	buttons["fullscreen"] = buttons["up"];
-	buttons["fullscreen"].SetPos( sf::Vector2f( 30, 350 ) );
-	buttons["fullscreen"].order = 5;
+	buttons["fullscreen"].SetPos( sf::Vector2f( 30, 390 ) );
+	buttons["fullscreen"].order = 6;
 
 	buttons["return"] = buttons["up"];
-	buttons["return"].SetPos( sf::Vector2f( 30, 390 ) );
-	buttons["return"].order = 6;
+	buttons["return"].SetPos( sf::Vector2f( 30, 430 ) );
+	buttons["return"].order = 7;
 	buttons["return"].SetText( "Save & Return" );
 
 	selectedButton = 0;
@@ -233,6 +237,7 @@ void StateOptions::Update(const float dt)
 		buttons["left"].SetText( "left:  " + game->inputManager.GetKeyName( "left" ) );
 		buttons["right"].SetText( "right: " + game->inputManager.GetKeyName( "right" ) );
 		buttons["fire"].SetText( "fire:  " + game->inputManager.GetKeyName( "fire" ) );
+		buttons["pause"].SetText( "pause: " + game->inputManager.GetKeyName( "pause" ) );
 	}
 
 	if ( game->inputManager.fullscreen )

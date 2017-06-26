@@ -15,7 +15,6 @@ struct PlayerInput
 	bool left = false;
 	bool right = false;
 	bool fire = false;
-	bool pause = false;
 
 	bool operator== ( const PlayerInput& other ) const
 	{

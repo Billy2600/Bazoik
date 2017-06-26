@@ -34,7 +34,7 @@ void PauseMenu::SetGame( Game *game )
 	buttons["options"].SetPos( sf::Vector2f( 250, 215 ) );
 
 	buttons["quit"] = buttons["resume"];
-	buttons["quit"].order = 1;
+	buttons["quit"].order = 2;
 	buttons["quit"].SetText( "Exit" );
 	buttons["quit"].SetPos( sf::Vector2f( 250, 280 ) );
 
@@ -63,7 +63,7 @@ void PauseMenu::HandleInput()
 
 		if ( event.type == sf::Event::KeyPressed )
 		{
-			if ( event.key.code == sf::Keyboard::Key::Escape )
+			if ( event.key.code == sf::Keyboard::Key::Escape || game->inputManager.TestKeyDown( "pause", event ) )
 			{
 				open = false;
 			}
