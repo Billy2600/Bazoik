@@ -84,19 +84,26 @@ int StateHighscore::Partition( const int low, const int hi )
 
 void StateHighscore::SaveToFile( const std::string filename ) const
 {
-	// Build xml and save it to file
-	pugi::xml_document doc;
-	pugi::xml_node scoreNodes = doc.append_child( "scores" );
-
-	for( auto score : scores )
+	try
 	{
-		pugi::xml_node scoreNode = scoreNodes.append_child( "score" );
-		scoreNode.append_attribute( "name" ).set_value( score.initials );
-		scoreNode.append_child( pugi::node_pcdata ).set_value( std::to_string(score.num).c_str() );
-	}
+		// Build xml and save it to file
+		pugi::xml_document doc;
+		pugi::xml_node scoreNodes = doc.append_child( "scores" );
 
-	std::string path = game->GetConfigDir() + filename;
-	doc.save_file( path.c_str() );
+		for ( auto score : scores )
+		{
+			pugi::xml_node scoreNode = scoreNodes.append_child( "score" );
+			scoreNode.append_attribute( "name" ).set_value( score.initials );
+			scoreNode.append_child( pugi::node_pcdata ).set_value( std::to_string( score.num ).c_str() );
+		}
+
+		std::string path = game->GetConfigDir() + filename;
+		doc.save_file( path.c_str() );
+	}
+	catch ( int e )
+	{
+		game->ThrowError( "Error while reading " + filename );
+	}
 }
 
 void StateHighscore::LoadFromFile( const std::string filename )
@@ -109,15 +116,22 @@ void StateHighscore::LoadFromFile( const std::string filename )
 		return;
 	}
 
-	pugi::xml_node scoreNodes = doc.child( "scores" );
-
-	int i = 0;
-	for( pugi::xml_node score : scoreNodes.children( "score" ) )
+	try
 	{
-		std::string name( score.first_child().value() );
-		scores[i].num = std::stoi( name );
-		strcpy_s( scores[i].initials, score.attribute( "name" ).value() );
-		i++;
+		pugi::xml_node scoreNodes = doc.child( "scores" );
+
+		int i = 0;
+		for ( pugi::xml_node score : scoreNodes.children( "score" ) )
+		{
+			std::string name( score.first_child().value() );
+			scores[i].num = std::stoi( name );
+			strcpy_s( scores[i].initials, score.attribute( "name" ).value() );
+			i++;
+		}
+	}
+	catch ( int e )
+	{
+		game->ThrowError( "Error while reading " + filename );
 	}
 }
 

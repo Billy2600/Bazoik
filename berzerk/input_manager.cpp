@@ -58,77 +58,91 @@ void InputManager::LoadFromFile( const std::string filename )
 		return;
 	}
 
-	pugi::xml_node keyNodes = doc.child( "keys" );
-
-	for( pugi::xml_node key : keyNodes.children("key") )
+	try
 	{
-		std::string n(key.attribute( "name" ).value() );
-		std::string type( key.attribute( "type" ).value() );
-		std::string value( key.first_child().value() );
+		pugi::xml_node keyNodes = doc.child( "keys" );
 
-		if( type == "keyboard")
+		for ( pugi::xml_node key : keyNodes.children( "key" ) )
 		{
-			this->keys[n].inputType = InputType::Keyboard;
-			this->keys[n].keyCode = static_cast<sf::Keyboard::Key>( FindIndexFromName( value ) );
+			std::string n( key.attribute( "name" ).value() );
+			std::string type( key.attribute( "type" ).value() );
+			std::string value( key.first_child().value() );
+
+			if ( type == "keyboard" )
+			{
+				this->keys[n].inputType = InputType::Keyboard;
+				this->keys[n].keyCode = static_cast<sf::Keyboard::Key>( FindIndexFromName( value ) );
+			}
+			else if ( type == "joystick" )
+			{
+				this->keys[n].inputType = InputType::Joystick;
+				this->keys[n].joystickButton = std::stoi( value );
+			}
+			else if ( type == "mouse" )
+			{
+				this->keys[n].inputType = InputType::Mouse;
+				this->keys[n].mouseButton = static_cast<sf::Mouse::Button>( FindIndexFromName( value ) );
+			}
+			else if ( type == "axis" )
+			{
+				this->keys[n].inputType = InputType::Axis;
+				this->keys[n].axisPos = std::strtof( key.attribute( "axis" ).value(), NULL );
+				this->keys[n].axis = static_cast<sf::Joystick::Axis>( FindIndexFromName( value, InputType::Axis ) );
+			}
 		}
-		else if( type == "joystick" )
-		{
-			this->keys[n].inputType = InputType::Joystick;
-			this->keys[n].joystickButton = std::stoi( value );
-		}
-		else if( type == "mouse" )
-		{
-			this->keys[n].inputType = InputType::Mouse;
-			this->keys[n].mouseButton = static_cast<sf::Mouse::Button>( FindIndexFromName( value ) );
-		}
-		else if( type == "axis" )
-		{
-			this->keys[n].inputType = InputType::Axis;
-			this->keys[n].axisPos = std::strtof( key.attribute( "axis" ).value(), NULL );
-			this->keys[n].axis = static_cast<sf::Joystick::Axis>( FindIndexFromName( value, InputType::Axis ) );
-		}
+
+		pugi::xml_node nodeFullscreen = doc.child( "fullscreen" );
+		this->fullscreen = std::stoi( nodeFullscreen.first_child().value() );
 	}
-
-	pugi::xml_node nodeFullscreen = doc.child( "fullscreen" );
-	this->fullscreen = std::stoi( nodeFullscreen.first_child().value() );
+	catch( int e )
+	{
+		game->ThrowError( "Error while reading " + filename );
+	}
 }
 
 void InputManager::SaveToFile( const std::string filename ) const
 {
-	// Build xml and save it to file
-	pugi::xml_document doc;
-	pugi::xml_node keyNodes = doc.append_child( "keys" );
-	for( auto key : this->keys)
+	try
 	{
-		pugi::xml_node keyNode = keyNodes.append_child( "key" );
-		if( key.second.inputType == InputType::Keyboard )
+		// Build xml and save it to file
+		pugi::xml_document doc;
+		pugi::xml_node keyNodes = doc.append_child( "keys" );
+		for ( auto key : this->keys )
 		{
-			keyNode.append_attribute( "name" ).set_value( key.first.c_str() );
-			keyNode.append_attribute( "type" ).set_value( "keyboard" );
-			keyNode.append_child( pugi::node_pcdata ).set_value( keyNames[key.second.keyCode].c_str() );
+			pugi::xml_node keyNode = keyNodes.append_child( "key" );
+			if ( key.second.inputType == InputType::Keyboard )
+			{
+				keyNode.append_attribute( "name" ).set_value( key.first.c_str() );
+				keyNode.append_attribute( "type" ).set_value( "keyboard" );
+				keyNode.append_child( pugi::node_pcdata ).set_value( keyNames[key.second.keyCode].c_str() );
+			}
+			if ( key.second.inputType == InputType::Joystick )
+			{
+				keyNode.append_attribute( "name" ).set_value( key.first.c_str() );
+				keyNode.append_attribute( "type" ).set_value( "joystick" );
+				keyNode.append_child( pugi::node_pcdata ).set_value( std::to_string( key.second.joystickButton ).c_str() );
+			}
+			if ( key.second.inputType == InputType::Axis )
+			{
+				keyNode.append_attribute( "name" ).set_value( key.first.c_str() );
+				keyNode.append_attribute( "type" ).set_value( "axis" );
+				keyNode.append_attribute( "axis" ).set_value( std::to_string( key.second.axisPos ).c_str() );
+				keyNode.append_child( pugi::node_pcdata ).set_value( axisNames[key.second.axis].c_str() );
+			}
 		}
-		if( key.second.inputType == InputType::Joystick )
-		{
-			keyNode.append_attribute( "name" ).set_value( key.first.c_str() );
-			keyNode.append_attribute( "type" ).set_value( "joystick" );
-			keyNode.append_child( pugi::node_pcdata ).set_value( std::to_string(key.second.joystickButton).c_str() );
-		}
-		if( key.second.inputType == InputType::Axis )
-		{
-			keyNode.append_attribute( "name" ).set_value( key.first.c_str() );
-			keyNode.append_attribute( "type" ).set_value( "axis" );
-			keyNode.append_attribute( "axis" ).set_value( std::to_string( key.second.axisPos ).c_str() );
-			keyNode.append_child( pugi::node_pcdata ).set_value( axisNames[key.second.axis].c_str() );
-		}
-	}
 
-	std::string fullscreenValue = "0";
-	if ( this->fullscreen ) fullscreenValue = "1";
-	pugi::xml_node nodeFullscreen = doc.append_child( "fullscreen" );
-	nodeFullscreen.append_child( pugi::node_pcdata ).set_value( fullscreenValue.c_str() );
-	
-	std::string path = game->GetConfigDir() + filename;
-	doc.save_file( path.c_str() );
+		std::string fullscreenValue = "0";
+		if ( this->fullscreen ) fullscreenValue = "1";
+		pugi::xml_node nodeFullscreen = doc.append_child( "fullscreen" );
+		nodeFullscreen.append_child( pugi::node_pcdata ).set_value( fullscreenValue.c_str() );
+
+		std::string path = game->GetConfigDir() + filename;
+		doc.save_file( path.c_str() );
+	}
+	catch ( int e )
+	{
+		game->ThrowError( "Error while reading " + filename );
+	}
 }
 
 void InputManager::SetBind( const std::string name, const Keys key )
