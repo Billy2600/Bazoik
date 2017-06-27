@@ -518,6 +518,7 @@ RobotStats StateGameplay::LoadRobotStats()
 	catch ( int e )
 	{
 		game->ThrowError( "Error while loading assets/robotstats.xml" );
+		return stats;
 	}
 }
 

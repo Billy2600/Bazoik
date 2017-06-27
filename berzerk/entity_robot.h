@@ -45,11 +45,11 @@ public:
 	bool drawHitbox;
 
 	EntityRobot(const sf::Vector2f pos, const RobotStats stats );
-	~EntityRobot();
 	virtual void Think( const float dt );
 	virtual void Draw() const;
 	virtual void HandleCollision( Entity *other );
 	void SetPlayerPos( sf::Vector2f playerPos );
 	bool IsDead() const;
+	~EntityRobot();
 };
 

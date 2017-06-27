@@ -25,11 +25,6 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 	sprite.setColor( stats.color );
 }
 
-EntityRobot::~EntityRobot()
-{
-
-}
-
 void EntityRobot::LoadSprite()
 {
 	// Load texture if we need to
@@ -149,4 +144,10 @@ void EntityRobot::SetPlayerPos( sf::Vector2f playerPos )
 bool EntityRobot::IsDead() const
 {
 	return dead;
+}
+
+EntityRobot::~EntityRobot()
+{
+	sfx.stop();
+	sfx.resetBuffer();
 }
