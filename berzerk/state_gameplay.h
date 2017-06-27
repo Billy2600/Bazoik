@@ -47,6 +47,7 @@ private:
 
 	void ScreenTransition( const float dt ); // Transition screen
 	bool ResetIfDead(); // Reset if player died
+	void ReturnToTitle(); // Return to title screen
 
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
 

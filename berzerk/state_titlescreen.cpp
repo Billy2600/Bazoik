@@ -59,7 +59,7 @@ void StateTitleScreen::HandleInput()
 	while( game->window.pollEvent( event ) )
 	{
 		// Reset timer on all input
-		if ( event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::KeyPressed || event.type == sf::Event::MouseMoved || joystickInput )
+		if ( event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::KeyPressed || /*event.type == sf::Event::MouseMoved || */ joystickInput )
 			clkAttractMode.restart();
 
 		// Close window
@@ -201,7 +201,7 @@ void StateTitleScreen::Update(const float dt)
 		for ( int i = 0; i < NUM_DEMOS; i++ )
 		{
 			// No demos will play unless all are accounted for
-			demoCheck = game->FileExists( "demo" + std::to_string( i ) + ".xml" );
+			demoCheck = game->FileExists( "assets/demo" + std::to_string( i ) + ".xml" );
 		}
 
 		if ( demoCheck )
@@ -233,5 +233,5 @@ void StateTitleScreen::StartGame()
 	if( currentDemo >= NUM_DEMOS )
 		this->game->states.push( new StateCredits( this->game) );
 	else
-		this->game->states.push( new StateGameplay( this->game, recordDemo, playDemo, "demo" + std::to_string(currentDemo) + ".xml" ) );
+		this->game->states.push( new StateGameplay( this->game, recordDemo, playDemo, "assets/demo" + std::to_string(currentDemo) + ".xml" ) );
 }

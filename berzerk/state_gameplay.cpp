@@ -77,9 +77,7 @@ void StateGameplay::HandleInput()
 		if ( pause.quit )
 		{
 			lastMove = Directions::W; // Make sure next started game starts at W
-			sfx.stop();
-			sfx.resetBuffer();
-			game->PopState();
+			ReturnToTitle();
 			return;
 		}
 
@@ -115,9 +113,7 @@ void StateGameplay::HandleInput()
 				if ( recordDemo || playDemo )
 				{
 					lastMove = Directions::W; // Make sure next started game starts at W
-					sfx.stop();
-					sfx.resetBuffer();
-					game->PopState();
+					ReturnToTitle();
 				}
 				else
 				{
@@ -198,7 +194,7 @@ void StateGameplay::HandleInput()
 		if ( demo.IsDone() )
 		{
 			lastMove = Directions::W;  // Default lastmove on next started game
-			game->PopState();
+			ReturnToTitle();
 			return;
 		}
 	}
@@ -437,7 +433,9 @@ bool StateGameplay::ResetIfDead()
 	if ( player.CheckReset() )
 	{
 		if ( playDemo )
-			game->PopState(); // Return to title screen
+		{
+			ReturnToTitle();
+		}
 		else
 		{
 			if ( recordDemo )
@@ -452,6 +450,13 @@ bool StateGameplay::ResetIfDead()
 		return true;
 	}
 	return false;
+}
+
+void StateGameplay::ReturnToTitle()
+{
+	sfx.stop();
+	sfx.resetBuffer();
+	game->PopState();
 }
 
 RobotStats StateGameplay::LoadRobotStats()

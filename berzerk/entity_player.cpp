@@ -246,3 +246,9 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 	sf::IntRect animRect = game->animManager.Animate( currentAnim );
 	sprite.setTextureRect( animRect );
 }
+
+EntityPlayer::~EntityPlayer()
+{
+	sfx.stop();
+	sfx.resetBuffer();
+}
