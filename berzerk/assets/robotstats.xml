@@ -22,8 +22,8 @@
 	<level min="5" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="9" can_shoot="0">
 		<color r="255" g="255" b="0"></color>
 	</level>
-	<level min="6" speed="40" firedelay="500" stop_if_see_player="1" num_bots="1" can_shoot="0" scale="3">
-		<color r="1" g="150" b="43"></color>
+	<level min="6" speed="40" firedelay="3000" stop_if_see_player="1" num_bots="1" can_shoot="0" scale="3">
+		<color r="255" g="165" b="0"></color>
 	</level>
     <level min="7" speed="60" firedelay="90000" stop_if_see_player="0" num_bots="12" can_shoot="1">
 		<color r="255" g="255" b="0"></color>

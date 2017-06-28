@@ -227,5 +227,5 @@ void Game::ThrowError( const std::string error )
 
 Game::~Game()
 {
-	
+
 }

@@ -11,6 +11,8 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 	shape.setOutlineThickness( 1.f );
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 #endif
+	int hits = 0;
+	moveBack = false;
 	bool dead = false;
 	seePlayer = false;
 	moving = false;
@@ -118,21 +120,30 @@ void EntityRobot::HandleCollision( Entity *other )
 {
 	if( dynamic_cast<EntityBullet*>( other ) != NULL || dynamic_cast<EntityWall*>( other ) != NULL )
 	{
+		hits++;
 		if( !dead ) // Only do this stuff once
 		{
-			unsigned int prevScore = game->score;
-			game->score += 50;
-			currentAnim = "robot_death";
-			subAnim = "robot_explosion";
-			deathTime = clock.getElapsedTime().asMilliseconds();
-			// Do we award an extra life?
-			if( prevScore % EXTRA_LIFE_SCORE != 0 && game->score % EXTRA_LIFE_SCORE == 0 )
-				game->AddLife();
-			sfx.setBuffer( game->assetManager.GetSoundRef( "robot_die" ) );
-			sfx.play();
+			if ( hits >= (int)stats.scale )
+			{
+				unsigned int prevScore = game->score;
+				game->score += 50;
+				currentAnim = "robot_death";
+				subAnim = "robot_explosion";
+				deathTime = clock.getElapsedTime().asMilliseconds();
+				// Do we award an extra life?
+				if ( prevScore % EXTRA_LIFE_SCORE != 0 && game->score % EXTRA_LIFE_SCORE == 0 )
+					game->AddLife();
+				sfx.setBuffer( game->assetManager.GetSoundRef( "robot_die" ) );
+				sfx.play();
+				dead = true;
+			}
+			else
+			{
+				sf::Color prevColor = sprite.getColor();
+				float factor = stats.scale / hits;
+				sprite.setColor( sf::Color( prevColor.r / factor, prevColor.g / factor, prevColor.b / factor) );
+			}
 		}
-
-		dead = true;
 	}
 }
 
