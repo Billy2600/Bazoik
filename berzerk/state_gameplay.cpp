@@ -97,8 +97,6 @@ void StateGameplay::HandleInput()
 		// Close window
 		if ( event.type == sf::Event::Closed )
 		{
-			sfx.stop();
-			sfx.resetBuffer(); // Prevents crash on close
 			game->Close();
 			return;
 		}
@@ -108,7 +106,7 @@ void StateGameplay::HandleInput()
 
 		if( event.type == sf::Event::KeyPressed )
 		{
-			if( event.key.code == sf::Keyboard::Escape || game->inputManager.TestKeyDown( "pause", event ) )
+			if ( event.key.code == sf::Keyboard::Escape || game->inputManager.TestKeyDown( "pause", event ) )
 			{
 				if ( recordDemo || playDemo )
 				{
@@ -249,8 +247,7 @@ void StateGameplay::Update( const float dt )
 			maze.SpawnEnemies( entityManager, lastMove, LoadRobotStats() );
 		enemiesSpawned = true;
 
-		sfx.setBuffer( game->assetManager.GetSoundRef( "humanoid", true ) );
-		sfx.play();
+		game->assetManager.PlaySound( "humanoid", true );
 	}
 
 	entityManager.Think( dt );
@@ -310,8 +307,7 @@ void StateGameplay::Update( const float dt )
 			entityManager.Add( otto );
 			ottoSpawned = true;
 
-			sfx.setBuffer( game->assetManager.GetSoundRef( "intruder_alert", true ) );
-			sfx.play();
+			game->assetManager.PlaySound( "intruder_alert", true );
 		}
 		// Tell Otto where to move
 		if( ottoSpawned )
@@ -323,13 +319,12 @@ void StateGameplay::Update( const float dt )
 		{
 			if( chicken )
 			{
-				sfx.setBuffer( game->assetManager.GetSoundRef( "got_chicken", true ) );
+				game->assetManager.PlaySound( "got_chicken", true );
 			}
 			else
 			{
-				sfx.setBuffer( game->assetManager.GetSoundRef( "got_humanoid", true ) );
+				game->assetManager.PlaySound( "got_humanoid", true );
 			}
-			sfx.play();
 
 			deathSoundPlayed = true;
 		}
@@ -387,13 +382,12 @@ void StateGameplay::ScreenTransition( const float dt )
 
 		if( chicken )
 		{
-			sfx.setBuffer( game->assetManager.GetSoundRef( "chicken", true ) );
+			game->assetManager.PlaySound( "chicken", true );
 		}
 		else
 		{
-			sfx.setBuffer( game->assetManager.GetSoundRef( "intruder", true ) );
+			game->assetManager.PlaySound( "intruder", true );
 		}
-		sfx.play();
 	}
 	else
 	{
@@ -421,7 +415,6 @@ void StateGameplay::ScreenTransition( const float dt )
 		if( ( sprBounds.left + sprBounds.width ) < 0 || sprBounds.left > GAME_WIDTH ||
 			( sprBounds.top + sprBounds.height ) < 0 || sprBounds.top > GAME_HEIGHT )
 		{
-			sfx.stop();
 			game->window.setView( game->window.getDefaultView() );
 			this->game->SwitchState( new StateGameplay( this->game ) );
 		}
@@ -454,8 +447,6 @@ bool StateGameplay::ResetIfDead()
 
 void StateGameplay::ReturnToTitle()
 {
-	sfx.stop();
-	sfx.resetBuffer();
 	game->PopState();
 }
 
@@ -547,6 +538,4 @@ bool StateGameplay::CheckEasterEgg() const
 StateGameplay::~StateGameplay()
 {
 	//maze.ClearMap();
-	sfx.stop();
-	sfx.resetBuffer();
 }

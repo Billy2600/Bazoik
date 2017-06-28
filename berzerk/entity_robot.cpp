@@ -12,7 +12,6 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 #endif
 	int hits = 0;
-	moveBack = false;
 	bool dead = false;
 	seePlayer = false;
 	moving = false;
@@ -79,8 +78,7 @@ void EntityRobot::Think( const float dt )
 	{
 		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + ( hitbox.width / 2 ), hitbox.top + ( hitbox.height / 2 ) ), normalizedPlayerVec, this ) );
 		lastFire = now;
-		sfx.setBuffer( game->assetManager.GetSoundRef( "shoot" ) );
-		sfx.play();
+		game->assetManager.PlaySound( "shoot" );
 	}
 
 	// Move towards player
@@ -133,8 +131,7 @@ void EntityRobot::HandleCollision( Entity *other )
 				// Do we award an extra life?
 				if ( prevScore % EXTRA_LIFE_SCORE != 0 && game->score % EXTRA_LIFE_SCORE == 0 )
 					game->AddLife();
-				sfx.setBuffer( game->assetManager.GetSoundRef( "robot_die" ) );
-				sfx.play();
+				game->assetManager.PlaySound( "robot_die" );
 				dead = true;
 			}
 			else
@@ -159,6 +156,5 @@ bool EntityRobot::IsDead() const
 
 EntityRobot::~EntityRobot()
 {
-	sfx.stop();
-	sfx.resetBuffer();
+	
 }

@@ -22,7 +22,6 @@ class EntityRobot : public Entity
 private:
 	sf::Sprite sprite;
 	sf::Sprite subSprite; // displays on top so we can parts of the robot that don't change color
-	sf::Sound sfx;
 	int hits;
 	bool dead;
 	sf::Clock clock;

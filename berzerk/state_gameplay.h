@@ -42,7 +42,6 @@ private:
 	bool playDemo;
 
 	// Sound stuff
-	sf::Sound sfx;
 	bool deathSoundPlayed; // Did we play the death sound yet?
 
 	void ScreenTransition( const float dt ); // Transition screen

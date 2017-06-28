@@ -81,7 +81,6 @@ void EntityPlayer::Think( const float dt )
 		if( now - deathTime >= resetDelay )
 		{
 			reset = true;
-			sfx.stop();
 		}
 		return;
 	}
@@ -156,9 +155,7 @@ void EntityPlayer::Think( const float dt )
 	{
 		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), direction, this ) );
 		lastFire = now;
-		sfx.setVolume( 100 );
-		sfx.setBuffer( game->assetManager.GetSoundRef( "shoot" ) );
-		sfx.play();
+		game->assetManager.PlaySound( "shoot" );
 	}
 
 	Move( move, dt );
@@ -178,9 +175,7 @@ void EntityPlayer::Die()
 	currentAnim = "player_death";
 	dead = true;
 	deathTime = (float)now;
-	sfx.setBuffer( game->assetManager.GetSoundRef( "death" ) );
-	sfx.setVolume( 50 );
-	sfx.play();
+	game->assetManager.PlaySound( "death", false, 50 );
 	game->RemoveLife();
 }
 
@@ -249,6 +244,5 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 
 EntityPlayer::~EntityPlayer()
 {
-	sfx.stop();
-	sfx.resetBuffer();
+
 }
