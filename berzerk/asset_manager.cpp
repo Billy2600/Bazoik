@@ -2,15 +2,7 @@
 
 AssetManager::AssetManager()
 {
-	if ( SDL_Init( SDL_INIT_AUDIO ) < 0 )
-	{
-		printf( "Could not init SDL audio\n" );
-	}
 
-	if ( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
-	{
-		printf( "Could not init SDL_mixer" );
-	}
 }
 
 void AssetManager::LoadTexture( const std::string& name, const std::string &filename )
@@ -45,41 +37,49 @@ sf::Font& AssetManager::GetFontRef( const std::string& name )
 
 void AssetManager::LoadSound( const std::string& name, const std::string &filename )
 {
-	if( sounds.count( name ) == 0 )
+	if( soundBuffers.count( name ) == 0 )
 	{
-		Mix_Chunk *chunk = Mix_LoadWAV( filename.c_str() );
-		if ( chunk == NULL )
-		{
-			printf( "Failed to load sound effect %s\n", filename );
-		}
-
-		this->sounds[name] = chunk;
+		this->soundBuffers[name].loadFromFile( filename );
 	}
 }
 
-void AssetManager::PlaySound( const std::string &name, bool random, Uint8 volume )
+void AssetManager::PlaySound( const std::string &name, bool random, float volume )
 {
-	if( random )
+	sf::Sound *sfx = NULL;
+	// Choose first sound that's not playing
+	for ( int i = 0; i < MAX_SOUNDS; i++ )
+	{
+		if ( this->sounds[i].getStatus() != sf::SoundSource::Status::Playing )
+		{
+			sfx = &this->sounds[i];
+			break;
+		}
+	}
+	if ( sfx == NULL )
+		return;
+	
+	if ( random )
 	{
 		std::string versions[3] = { "_hi", "_low", "_mid" };
 		std::uniform_int_distribution<unsigned int> rand( 0, 2 );
 		unsigned int randSound = rand( rngEngine );
 
-		this->sounds.at( name + versions[randSound] )->volume = volume;
-		Mix_PlayChannel( -1, this->sounds.at( name + versions[randSound] ) , 0 );
+		sfx->setBuffer( this->soundBuffers.at( name + versions[randSound] ) );
 	}
 	else
 	{
-		Mix_PlayChannel( -1, this->sounds.at( name ), 0 );
+		sfx->setBuffer( this->soundBuffers.at( name ) );
 	}
+
+	sfx->setVolume( volume );
+	sfx->play();
 }
 
 AssetManager::~AssetManager()
 {
-	for ( auto sound : sounds )
+	for ( int i = 0; i < MAX_SOUNDS; i++ )
 	{
-		Mix_FreeChunk( sound.second );
+		this->sounds[i].stop();
+		this->sounds[i].resetBuffer();
 	}
-	Mix_Quit();
-	SDL_Quit();
 }

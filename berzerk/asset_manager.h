@@ -3,16 +3,17 @@
 #include <random>
 #include <string>
 #include <SFML/Graphics.hpp>
-#include <SDL.h>
-#undef main // We don't care about SDL's main
-#include <SDL_mixer.h>
+#include <SFML/Audio.hpp>
+
+#define MAX_SOUNDS 10 // Maximum number of sounds that can play at the same time
 
 class AssetManager
 {
 private:
 	std::map<std::string, sf::Texture> textures;
 	std::map<std::string, sf::Font> fonts;
-	std::map < std::string, Mix_Chunk*> sounds;
+	std::map<std::string, sf::SoundBuffer> soundBuffers;
+	sf::Sound sounds[MAX_SOUNDS];
 	std::mt19937 rngEngine = std::mt19937( (unsigned int)time( 0 ) ); // To randomly pick sounds
 
 public:
@@ -28,7 +29,7 @@ public:
 
 	// Add/load sounds
 	void LoadSound( const std::string& name, const std::string &filename );
-	void PlaySound( const std::string &name, bool random = false, Uint8 volume = 128 ); // Choose whether it'll randomly give you low/med/hi version
+	void PlaySound( const std::string &name, bool random = false, float volume = 100 ); // Choose whether it'll randomly give you low/med/hi version
 
 	~AssetManager();
 };
