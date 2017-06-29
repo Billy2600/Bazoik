@@ -48,24 +48,6 @@ void Game::GameLoop()
 
 	while( window.isOpen() )
 	{
-		if ( errorThrown )
-		{
-			sf::Event event;
-			while ( window.pollEvent( event ) )
-			{
-				// Allow user to close window
-				if ( event.type == sf::Event::Closed
-					|| sf::Keyboard::isKeyPressed( sf::Keyboard::Key::Escape )
-					// Alt+F4
-					|| ( sf::Keyboard::isKeyPressed( sf::Keyboard::Key::LAlt ) || sf::Keyboard::isKeyPressed( sf::Keyboard::Key::RAlt ) )
-					&& sf::Keyboard::isKeyPressed( sf::Keyboard::Key::F4 ) )
-				{
-					Close();
-				}
-			}
-			continue;
-		}
-
 		if ( popped )
 		{
 			states.top()->Start();
@@ -145,10 +127,7 @@ void Game::PopState()
 void Game::Draw()
 {
 	window.clear();
-	if ( errorThrown )
-		window.draw( errorText );
-	else
-		states.top()->Draw();
+	states.top()->Draw();
 	window.display();
 }
 
@@ -209,20 +188,6 @@ void Game::Close()
 		PopState();
 	}
 	window.close();
-}
-
-void Game::ThrowError( const std::string error )
-{
-	errorText.setString( error );
-	errorText.setFont( assetManager.GetFontRef( "joystix" ) );
-#ifdef OLD_SFML
-	errorText.setColor( sf::Color::Green );
-#else
-	errorText.setFillColor( sf::Color::Green );
-#endif
-	errorText.setCharacterSize( 30 );
-	errorText.setPosition( sf::Vector2f( 30, 30 ) );
-	errorThrown = true;
 }
 
 Game::~Game()

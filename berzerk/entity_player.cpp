@@ -1,4 +1,5 @@
 #include "entity_player.h"
+#include "error_log.h"
 
 EntityPlayer::EntityPlayer()
 {

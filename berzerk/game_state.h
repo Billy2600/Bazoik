@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "game.h"
 #include "input_manager.h"
+#include "error_log.h"
 
 class GameState
 {

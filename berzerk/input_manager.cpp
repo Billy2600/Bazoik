@@ -1,6 +1,7 @@
 #include <iterator>
 #include "input_manager.h"
 #include "game.h"
+#include "error_log.h"
 
 InputManager::InputManager()
 {
@@ -96,7 +97,8 @@ void InputManager::LoadFromFile( const std::string filename )
 	}
 	catch( int e )
 	{
-		game->ThrowError( "Error while reading " + filename );
+		ErrorLog log;
+		log.Write( "Error while reading " + filename );
 	}
 }
 
@@ -141,7 +143,8 @@ void InputManager::SaveToFile( const std::string filename ) const
 	}
 	catch ( int e )
 	{
-		game->ThrowError( "Error while reading " + filename );
+		ErrorLog log;
+		log.Write( "Error while reading " + filename );
 	}
 }
 

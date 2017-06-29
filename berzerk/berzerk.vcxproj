@@ -129,6 +129,7 @@
     <ClCompile Include="entity_player.cpp" />
     <ClCompile Include="entity_robot.cpp" />
     <ClCompile Include="entity_wall.cpp" />
+    <ClCompile Include="error_log.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gui_button.cpp" />
     <ClCompile Include="input_manager.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="entity_player.h" />
     <ClInclude Include="entity_robot.h" />
     <ClInclude Include="entity_wall.h" />
+    <ClInclude Include="error_log.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="gui_button.h" />

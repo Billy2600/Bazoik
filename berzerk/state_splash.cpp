@@ -5,6 +5,9 @@ StateSplash::StateSplash( Game *game )
 {
 	this->game = game;
 	graphicShown = false;
+
+	ErrorLog log;
+	log.DeleteOld();
 }
 
 void StateSplash::Start()

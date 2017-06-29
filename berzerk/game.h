@@ -36,8 +36,6 @@ public:
 	InputManager inputManager;
 	AnimManager animManager;
 	int unsigned level; // Current level, certain behaviors will change based on this
-	bool errorThrown; // Flag for thrown error
-	sf::Text errorText;
 
 	Game();
 	void GameLoop(); // Runs every update
@@ -49,9 +47,8 @@ public:
 	void RemoveLife(); // Remove one life
 	void AddLife(); // Add one life
 	void Draw(); // Runs every frame
-	std::string GetConfigDir(); // Get directory for saving/loading files; includes trailing slash
+	static std::string GetConfigDir(); // Get directory for saving/loading files; includes trailing slash
 	bool FileExists( std::string path ) const;
 	void Close(); // Close game
-	void ThrowError( const std::string error );
 	~Game();
 };
