@@ -29,7 +29,7 @@ public:
 
 	// Add/load sounds
 	void LoadSound( const std::string& name, const std::string &filename );
-	void PlaySound( const std::string &name, bool random = false, float volume = 100 ); // Choose whether it'll randomly give you low/med/hi version
+	void PlaySound( const std::string &name, const bool random = false, const float volume = 100 ); // Choose whether it'll randomly give you low/med/hi version
 
 	~AssetManager();
 };
