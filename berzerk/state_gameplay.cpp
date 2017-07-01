@@ -76,7 +76,6 @@ void StateGameplay::HandleInput()
 		pause.HandleInput();
 		if ( pause.quit )
 		{
-			lastMove = Directions::W; // Make sure next started game starts at W
 			ReturnToTitle();
 			return;
 		}
@@ -110,7 +109,6 @@ void StateGameplay::HandleInput()
 			{
 				if ( recordDemo || playDemo )
 				{
-					lastMove = Directions::W; // Make sure next started game starts at W
 					ReturnToTitle();
 				}
 				else
@@ -191,7 +189,6 @@ void StateGameplay::HandleInput()
 		// Return to title screen if demo is done
 		if ( demo.IsDone() )
 		{
-			lastMove = Directions::W;  // Default lastmove on next started game
 			ReturnToTitle();
 			return;
 		}
@@ -415,7 +412,11 @@ void StateGameplay::ScreenTransition( const float dt )
 		if( ( sprBounds.left + sprBounds.width ) < 0 || sprBounds.left > GAME_WIDTH ||
 			( sprBounds.top + sprBounds.height ) < 0 || sprBounds.top > GAME_HEIGHT )
 		{
-			game->window.setView( game->window.getDefaultView() );
+			sf::View view;
+			view = game->window.getDefaultView();
+			view.setSize( GAME_WIDTH, GAME_HEIGHT );
+			view.setCenter( GAME_WIDTH / 2, GAME_HEIGHT / 2 );
+			game->window.setView( view );
 			this->game->SwitchState( new StateGameplay( this->game ) );
 		}
 	}
@@ -447,6 +448,7 @@ bool StateGameplay::ResetIfDead()
 
 void StateGameplay::ReturnToTitle()
 {
+	lastMove = Directions::W;
 	game->PopState();
 }
 

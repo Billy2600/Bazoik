@@ -43,7 +43,7 @@ void AssetManager::LoadSound( const std::string& name, const std::string &filena
 	}
 }
 
-void AssetManager::PlaySound( const std::string &name, bool random, float volume )
+void AssetManager::PlaySound( const std::string &name, const bool random, const float volume )
 {
 	sf::Sound *sfx = NULL;
 	// Choose first sound that's not playing
