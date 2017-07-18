@@ -50,6 +50,14 @@ void EntityManager::CheckCollisions()
 		for(auto entityB: entities) // Temp fix	
 #endif
 		{
+
+#ifndef _WIN32
+			if( entityA == entityB )
+            {
+                continue;
+            }
+#endif
+
 			 // Don't bother if both are walls
 			if( ( dynamic_cast<EntityWall*>( entityA ) != NULL ) && ( dynamic_cast<EntityWall*>( entityB ) != NULL ) )
 			{

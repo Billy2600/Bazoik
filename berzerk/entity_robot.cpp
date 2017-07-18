@@ -11,8 +11,8 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 	shape.setOutlineThickness( 1.f );
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 #endif
-	int hits = 0;
-	bool dead = false;
+	hits = 0;
+	dead = false;
 	seePlayer = false;
 	moving = false;
 	drawHitbox = false;
@@ -117,7 +117,7 @@ void EntityRobot::Draw() const
 void EntityRobot::HandleCollision( Entity *other )
 {
 	if( dynamic_cast<EntityBullet*>( other ) != NULL || dynamic_cast<EntityWall*>( other ) != NULL )
-	{
+	{   
 		hits++;
 		if( !dead ) // Only do this stuff once
 		{
