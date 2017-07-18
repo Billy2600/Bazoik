@@ -40,6 +40,16 @@ Game::Game()
 	assetManager.LoadTexture( "sprites", "assets/Bazoik_Character_Sprite_Sheet.png" );
 	// Load animations
 	animManager.LoadFromFile( "assets/animations.xml" );
+
+	if ( !music.openFromFile( "assets/music.wav" ) )
+	{
+		ErrorLog log;
+		log.Write( "Could not open music file music.wav" );
+	}
+	else
+	{
+		music.setLoop( true );
+	}
 }
 
 void Game::GameLoop()
@@ -192,5 +202,5 @@ void Game::Close()
 
 Game::~Game()
 {
-
+	music.stop();
 }

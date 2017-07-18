@@ -36,6 +36,7 @@ public:
 	InputManager inputManager;
 	AnimManager animManager;
 	int unsigned level; // Current level, certain behaviors will change based on this
+	sf::Music music;
 
 	Game();
 	void GameLoop(); // Runs every update

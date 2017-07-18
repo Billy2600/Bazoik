@@ -62,6 +62,11 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 
 	pause.SetGame( game );
 	pauseTime = 0;
+
+	if ( game->music.getStatus() != sf::Music::Status::Playing )
+	{
+		game->music.play();
+	}
 }
 
 void StateGameplay::Start()
@@ -135,6 +140,16 @@ void StateGameplay::HandleInput()
 			if( event.key.code == sf::Keyboard::Key::F9 )
 			{
 				demo.SaveToFile( game->GetConfigDir() + "demo1.xml" );
+			}
+
+			if ( event.key.code == sf::Keyboard::Key::Equal )
+			{
+				game->music.setVolume( game->music.getVolume() + 10 );
+			}
+
+			if ( event.key.code == sf::Keyboard::Key::Dash )
+			{
+				game->music.setVolume( game->music.getVolume() - 10 );
 			}
 		}
 
@@ -449,6 +464,7 @@ bool StateGameplay::ResetIfDead()
 void StateGameplay::ReturnToTitle()
 {
 	lastMove = Directions::W;
+	game->music.stop();
 	game->PopState();
 }
 
