@@ -141,7 +141,7 @@ void StateTitleScreen::HandleInput()
 				joystickInput = true;
 				
 				selectedButton++;
-				if ( selectedButton >= buttons.size() )
+				if ( selectedButton >= (signed)buttons.size() )
 					selectedButton = 0;
 			}
 			else

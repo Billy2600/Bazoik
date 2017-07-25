@@ -154,6 +154,23 @@ bool EntityRobot::IsDead() const
 	return dead;
 }
 
+void EntityRobot::Move( sf::Vector2f move, const float dt )
+{
+	hitbox.left += move.x * dt;
+	hitbox.top += move.y * dt;
+	const sf::Vector2f newPos( hitbox.left, hitbox.top );
+	sprite.setPosition( newPos );
+	subSprite.setPosition( newPos );
+#ifdef _DEBUG
+	shape.setPosition( newPos );
+#endif
+}
+
+void EntityRobot::Stop()
+{
+	moving = false;
+}
+
 EntityRobot::~EntityRobot()
 {
 	

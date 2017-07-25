@@ -14,7 +14,6 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 
 	player.SetPos( maze.GetPlayerStart(lastMove, player) );
 	transition = false;
-	captured = false;
 
 	// Init entities 
 	entityManager.game = game;
@@ -262,10 +261,9 @@ void StateGameplay::Update( const float dt )
 		game->assetManager.PlaySound( "humanoid", true );
 	}
 
-	entityManager.Think( dt );
-
 	if( !transition )
 	{
+		entityManager.Think( dt );
 		entityManager.CheckCollisions();
 		txScore.setString( std::to_string( game->score ) );
 
@@ -349,12 +347,6 @@ void StateGameplay::Update( const float dt )
 
 void StateGameplay::Draw() const
 {
-	if( transition && captured )
-	{
-		game->window.draw( sprTrans );
-		return; // Don't draw anything else
-	}
-
 	entityManager.Draw();
 
 	game->window.draw( txScore );
@@ -372,68 +364,37 @@ void StateGameplay::Draw() const
 
 void StateGameplay::ScreenTransition( const float dt )
 {
-	if( !captured )
+	sf::Vector2f move;
+	switch( lastMove )
 	{
-		// Capture the screen
-		txTrans.create( game->window.getSize().x, game->window.getSize().y );
-
-		// Update view so transition looks right with resized screen
-		sf::View view;
-		view = game->window.getDefaultView();
-		view.setSize( game->window.getSize().x, game->window.getSize().y );
-		view.setCenter( game->window.getSize().x / 2, game->window.getSize().y / 2 );
-		game->window.setView( view );
-
-		txTrans.update( game->window );
-		sprTrans.setTexture( txTrans, true );
-		captured = true;
-
-		// Play sound
-		if( entityManager.GetRobotCount() > 0 ) chicken = true;
-		else chicken = false;
-
-		if( chicken )
-		{
-			game->assetManager.PlaySound( "chicken", true );
-		}
-		else
-		{
-			game->assetManager.PlaySound( "intruder", true );
-		}
+	case Directions::N:
+		move = sf::Vector2f( 0, -TRANS_SPEED );
+		break;
+	case Directions::E:
+		move = sf::Vector2f( TRANS_SPEED, 0 );
+		break;
+	case Directions::S:
+		move = sf::Vector2f( 0, TRANS_SPEED );
+		break;
+	case Directions::W:
+		move = sf::Vector2f( -TRANS_SPEED, 0 );
+		break;
 	}
-	else
+
+	transBoundry.width = GAME_WIDTH;
+	transBoundry.height = GAME_HEIGHT;
+	transBoundry.left += move.x * dt;
+	transBoundry.top += move.y * dt;
+
+	player.SetPos( sf::Vector2f( -1000, -1000 ) ); // Move player off of screen
+
+	entityManager.MoveAllEntities( move, dt );
+
+	// Check for done
+	if ( ( transBoundry.left + transBoundry.width ) < 0 || transBoundry.left > GAME_WIDTH ||
+		( transBoundry.top + transBoundry.height ) < 0 || transBoundry.top > GAME_HEIGHT )
 	{
-		sf::Vector2f move;
-		switch( lastMove )
-		{
-		case Directions::N:
-			move = sf::Vector2f( 0, -TRANS_SPEED );
-			break;
-		case Directions::E:
-			move = sf::Vector2f( TRANS_SPEED, 0 );
-			break;
-		case Directions::S:
-			move = sf::Vector2f( 0, TRANS_SPEED );
-			break;
-		case Directions::W:
-			move = sf::Vector2f( -TRANS_SPEED, 0 );
-			break;
-		}
-
-		sprTrans.move( move * dt );
-
-		// Check for done
-		sf::FloatRect sprBounds = sprTrans.getGlobalBounds();
-		if( ( sprBounds.left + sprBounds.width ) < 0 || sprBounds.left > GAME_WIDTH ||
-			( sprBounds.top + sprBounds.height ) < 0 || sprBounds.top > GAME_HEIGHT )
-		{
-			sf::View view;
-			view = game->window.getDefaultView();
-			view.setSize( GAME_WIDTH, GAME_HEIGHT );
-			view.setCenter( GAME_WIDTH / 2, GAME_HEIGHT / 2 );
-			game->window.setView( view );
-			this->game->SwitchState( new StateGameplay( this->game ) );
-		}
+		this->game->SwitchState( new StateGameplay( this->game ) );
 	}
 }
 

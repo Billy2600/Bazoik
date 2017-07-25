@@ -193,7 +193,9 @@ void EntityManager::MoveAllEntities(sf::Vector2f move, const float dt)
 {
 	for( auto entity : entities )
 	{
-		if( dynamic_cast<EntityBullet*>(entity) == NULL )
+		//if ( dynamic_cast<EntityRobot*>( entity ) != NULL )
+		//	dynamic_cast<EntityRobot*>( entity )->Stop(); // Stop all robots
+
 			entity->Move( move, dt );
 	}
 }

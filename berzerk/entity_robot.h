@@ -50,6 +50,8 @@ public:
 	virtual void HandleCollision( Entity *other );
 	void SetPlayerPos( sf::Vector2f playerPos );
 	bool IsDead() const;
+	virtual void Move( sf::Vector2f move, const float dt );
+	void Stop();
 	~EntityRobot();
 };
 

@@ -28,11 +28,9 @@ private:
 
 	static Directions lastMove;
 	bool transition; // Is the screen moving?
-	bool captured; // Did we capture an image of the screen yet?
 	sf::Clock clock;
 	sf::Int32 transStart;
-	sf::Sprite sprTrans; // Screenshot of screen for transition
-	sf::Texture txTrans;
+	sf::FloatRect transBoundry;
 
 	EntityOtto *otto;
 	bool ottoSpawned; // Has Otto already been spawned?
