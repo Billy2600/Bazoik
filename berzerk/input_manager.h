@@ -6,6 +6,7 @@
 #include "pugixml.hpp"
 
 #define JOYSTICK_DEADZONE 50
+#define CONFIG_FILE_VERSION_NO 1.0
 
 class Game;
 

@@ -45,22 +45,30 @@ void InputManager::LoadDefaults()
 	keys["left"] = key;
 	key.keyCode = sf::Keyboard::Key::RControl;
 	keys["fire"] = key;
+	key.keyCode = sf::Keyboard::Key::Escape;
+	keys["pause"] = key;
 	fullscreen = false;
 }
 
 void InputManager::LoadFromFile( const std::string filename )
 {
+	LoadDefaults(); // Defaults will be loaded, no matter what happens below
+
 	pugi::xml_document doc;
 	std::string path = game->GetConfigDir() + filename;
 	pugi::xml_parse_result result = doc.load_file( path.c_str() );
 	if( !result ) // Error check
 	{
-		LoadDefaults();
 		return;
 	}
 
 	try
 	{
+		// Don't attempt to read config file if it has no version number
+		pugi::xml_node versionNode = doc.child( "version" );
+		if ( versionNode == NULL )
+			return;
+
 		pugi::xml_node keyNodes = doc.child( "keys" );
 
 		for ( pugi::xml_node key : keyNodes.children( "key" ) )
@@ -108,6 +116,11 @@ void InputManager::SaveToFile( const std::string filename ) const
 	{
 		// Build xml and save it to file
 		pugi::xml_document doc;
+
+		// Version number
+		pugi::xml_node versionNode = doc.append_child( "version" );
+		versionNode.append_child( pugi::node_pcdata ).set_value( std::to_string( CONFIG_FILE_VERSION_NO ).c_str() );
+
 		pugi::xml_node keyNodes = doc.append_child( "keys" );
 		for ( auto key : this->keys )
 		{
