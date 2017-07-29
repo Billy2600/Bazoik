@@ -117,23 +117,20 @@ void StateHighscore::LoadFromFile( const std::string filename )
 		return;
 	}
 
-	try
-	{
-		pugi::xml_node scoreNodes = doc.child( "scores" );
+	pugi::xml_node scoreNodes = doc.child( "scores" );
+	if ( scoreNodes == NULL )
+		return;
 
-		int i = 0;
-		for ( pugi::xml_node score : scoreNodes.children( "score" ) )
-		{
-			std::string name( score.first_child().value() );
-			scores[i].num = std::stoi( name );
-			strcpy_s( scores[i].initials, score.attribute( "name" ).value() );
-			i++;
-		}
-	}
-	catch ( int e )
+	int i = 0;
+	for ( pugi::xml_node score : scoreNodes.children( "score" ) )
 	{
-		ErrorLog log;
-		log.Write( "Error while reading " + filename );
+		if ( score == NULL )
+			return;
+
+		std::string name( score.first_child().value() );
+		scores[i].num = std::stoi( name );
+		strcpy_s( scores[i].initials, score.attribute( "name" ).value() );
+		i++;
 	}
 }
 

@@ -1,4 +1,5 @@
 #include "demo.h"
+#include "error_log.h"
 
 Demo::Demo(const int level)
 {
@@ -42,17 +43,24 @@ void Demo::LoadFromFile( const std::string path )
 	inputs.clear();
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file( path.c_str() );
-	if( !result ) // Error check
-	{
+	if ( !result ) // Error check
 		return;
-	}
 
 	pugi::xml_node levelNode = doc.child( "level" );
+	if ( levelNode == NULL )
+		return;
+
 	level = std::stoi( levelNode.attribute("num").value() );
 
 	pugi::xml_node inputNodes = doc.child( "inputs" );
+	if ( inputNodes == NULL )
+		return;
+
 	for( pugi::xml_node input : inputNodes.children( "input" ) )
 	{
+		if ( input == NULL )
+			return;
+
 		FrameInput newInput;
 		newInput.input.up = std::stoi( input.attribute( "up" ).value() );
 		newInput.input.down = std::stoi( input.attribute( "down" ).value() );
@@ -64,8 +72,14 @@ void Demo::LoadFromFile( const std::string path )
 	}
 
 	pugi::xml_node wallNodes = doc.child( "walls" );
+	if ( wallNodes == NULL )
+		return;
+
 	for ( pugi::xml_node wall : wallNodes.children( "wall" ) )
 	{
+		if ( wall == NULL )
+			return;
+
 		walls.push_back( sf::IntRect(
 			std::stoi( wall.attribute( "x" ).value() ),
 			std::stoi( wall.attribute( "y" ).value() ),
@@ -74,8 +88,14 @@ void Demo::LoadFromFile( const std::string path )
 	}
 
 	pugi::xml_node robotNodes = doc.child( "robots" );
+	if ( robotNodes == NULL )
+		return;
+
 	for ( pugi::xml_node robot : robotNodes.children( "robot" ) )
 	{
+		if ( robot == NULL )
+			return;
+
 		robotPositions.push_back( sf::Vector2f(
 			std::stof( robot.attribute( "x" ).value() ),
 			std::stof( robot.attribute( "y" ).value() ) ) );

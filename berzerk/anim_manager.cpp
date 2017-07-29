@@ -20,9 +20,14 @@ void AnimManager::LoadFromFile( const std::string &filename )
 	}
 
 	pugi::xml_node animNodes = doc.child( "animations" );
+	if ( animNodes == NULL )
+		return;
 
 	for( pugi::xml_node anim : animNodes.children( "anim" ) )
 	{
+		if ( anim == NULL )
+			return;
+
 		// AnimManagers
 		std::string n( anim.attribute( "name" ).value() );
 		//std::string value( key.first_child().value() );
@@ -31,6 +36,9 @@ void AnimManager::LoadFromFile( const std::string &filename )
 		// Frames
 		for( pugi::xml_node frame : anim.children( "frame" ) )
 		{
+			if ( frame == NULL )
+				return;
+
 			int x = std::stoi( frame.attribute( "x" ).value() );
 			int y = std::stoi( frame.attribute( "y" ).value() );
 			int w = std::stoi( frame.attribute( "w" ).value() );
