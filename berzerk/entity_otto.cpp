@@ -25,7 +25,6 @@ void EntityOtto::Think( const float dt )
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		//sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
 		if( dopefish)
 			sprite.setTextureRect( game->animManager.Animate( "dopefish" ) );
 		else
@@ -34,18 +33,17 @@ void EntityOtto::Think( const float dt )
 
 	if( direction == 0 ) direction = ySpeed; // Make sure this is initialized
 
-	hitbox.left += xSpeed * dt;
+	sf::Vector2f move = sf::Vector2f( 0, 0 );
+
+	move.x = xSpeed;
 	if( ( hitbox.top + hitbox.height ) > maxHeight )
 		direction = -ySpeed;
 	else if( ( hitbox.top + hitbox.height ) < minHeight )
 		direction = ySpeed;
 
-	hitbox.top += direction * dt;
+	move.y += direction;
 
-	sprite.setPosition( sf::Vector2f(hitbox.left, hitbox.top) );
-#ifdef _DEBUG
-	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
-#endif
+	Move( move, dt );
 }
 
 void EntityOtto::Draw() const
@@ -65,4 +63,14 @@ void EntityOtto::SetMinMaxHeight( const float minHeight, const float maxHeight )
 {
 	this->maxHeight = maxHeight;
 	this->minHeight = minHeight;
+}
+
+void EntityOtto::Move( sf::Vector2f move, const float dt ) // Add vector to produce movement
+{
+	hitbox.left += move.x * dt;
+	hitbox.top += move.y * dt;
+	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+#ifdef _DEBUG
+	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+#endif
 }

@@ -25,5 +25,5 @@ public:
 	virtual void Draw() const;
 	virtual void HandleCollision( Entity *other );
 	void SetMinMaxHeight( const float maxHeight, const float minHeight );
-
+	virtual void Move( sf::Vector2f move, const float dt );
 };
