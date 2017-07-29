@@ -75,6 +75,9 @@ void StateGameplay::Start()
 
 void StateGameplay::HandleInput()
 {
+	// Show or hide cursor based on whether the pause menu is open
+	game->window.setMouseCursorVisible( pause.open );
+
 	if ( pause.open )
 	{
 		pause.HandleInput();
@@ -424,6 +427,7 @@ bool StateGameplay::ResetIfDead()
 
 void StateGameplay::ReturnToTitle()
 {
+	game->window.setMouseCursorVisible( true );
 	lastMove = Directions::W;
 	game->music.stop();
 	game->PopState();
