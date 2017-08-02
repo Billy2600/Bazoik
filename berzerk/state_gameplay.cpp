@@ -273,42 +273,46 @@ void StateGameplay::Update( const float dt )
 		// Begin screen transition if player moves outside screen
 		sf::Vector2f plPos( player.hitbox.left, player.hitbox.top );
 		sf::Int32 now = clock.getElapsedTime().asMilliseconds();
+		bool startTrans = false;
+
+		// Decide if we should start transition
 		if( plPos.x > GAME_WIDTH )
 		{
-			transition = true;
-			game->level++;
 			lastMove = Directions::W;
-			AddLastMove( lastMove );
-			transStart = now;
+			startTrans = true;
 		}
 		else if( ( plPos.x + player.hitbox.width ) < 0 )
 		{
-			transition = true;
-			game->level++;
 			lastMove = Directions::E;
-			AddLastMove( lastMove );
-			transStart = now;
+			startTrans = true;
 		}
 		else if( plPos.y > GAME_HEIGHT )
 		{
-			transition = true;
-			game->level++;
 			lastMove = Directions::N;
-			AddLastMove( lastMove );
-			transStart = now;
+			startTrans = true;
 		}
 		else if( ( plPos.y + player.hitbox.height ) < 0 )
 		{
+			lastMove = Directions::S;
+			startTrans = true;
+		}
+
+		// Kick off transition
+		if ( startTrans )
+		{
 			transition = true;
 			game->level++;
-			lastMove = Directions::S;
 			AddLastMove( lastMove );
 			transStart = now;
+			PlayTransitionSound();
 		}
 
 		// Did we run out of lives?
 		if( game->GetLives() <= 0 && player.CheckReset() )
 		{
+			game->music.stop();
+			game->assetManager.StopSound( "death" );
+			lastMove == Directions::W;
 			this->game->SwitchState( new StateHighscore( this->game ) );
 			return;
 		}
@@ -371,16 +375,16 @@ void StateGameplay::ScreenTransition( const float dt )
 	switch( lastMove )
 	{
 	case Directions::N:
-		move = sf::Vector2f( 0, -TRANS_SPEED );
+		move = sf::Vector2f( 0, -VERT_TRANS_SPEED );
 		break;
 	case Directions::E:
-		move = sf::Vector2f( TRANS_SPEED, 0 );
+		move = sf::Vector2f( HORZ_TRANS_SPEED, 0 );
 		break;
 	case Directions::S:
-		move = sf::Vector2f( 0, TRANS_SPEED );
+		move = sf::Vector2f( 0, VERT_TRANS_SPEED );
 		break;
 	case Directions::W:
-		move = sf::Vector2f( -TRANS_SPEED, 0 );
+		move = sf::Vector2f( -HORZ_TRANS_SPEED, 0 );
 		break;
 	}
 
@@ -398,6 +402,21 @@ void StateGameplay::ScreenTransition( const float dt )
 		( transBoundry.top + transBoundry.height ) < 0 || transBoundry.top > GAME_HEIGHT )
 	{
 		this->game->SwitchState( new StateGameplay( this->game ) );
+	}
+}
+
+void StateGameplay::PlayTransitionSound()
+{
+	if ( entityManager.GetRobotCount() > 0 ) chicken = true;
+	else chicken = false;
+
+	if ( chicken )
+	{
+		game->assetManager.PlaySound( "chicken", true );
+	}
+	else
+	{
+		game->assetManager.PlaySound( "intruder", true );
 	}
 }
 

@@ -9,7 +9,9 @@
 #include "demo.h"
 #include "pause_menu.h"
 
-#define TRANS_SPEED 500 // Speed of screen transition
+// Different transition speeds so we have time for robot voices (take less time to move screen vertically)
+#define VERT_TRANS_SPEED 250
+#define HORZ_TRANS_SPEED 400
 #define MAX_LIVES 9 // Maximum number of lives to show on screen
 
 class StateGameplay : public GameState
@@ -43,6 +45,7 @@ private:
 	bool deathSoundPlayed; // Did we play the death sound yet?
 
 	void ScreenTransition( const float dt ); // Transition screen
+	void PlayTransitionSound();
 	bool ResetIfDead(); // Reset if player died
 	void ReturnToTitle(); // Return to title screen
 

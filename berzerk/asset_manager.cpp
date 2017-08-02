@@ -35,7 +35,7 @@ sf::Font& AssetManager::GetFontRef( const std::string& name )
 	return this->fonts.at( name );
 }
 
-void AssetManager::LoadSound( const std::string& name, const std::string &filename )
+void AssetManager::LoadSound( const std::string &name, const std::string &filename )
 {
 	if( soundBuffers.count( name ) == 0 )
 	{
@@ -73,6 +73,29 @@ void AssetManager::PlaySound( const std::string &name, const bool random, const 
 
 	sfx->setVolume( volume );
 	sfx->play();
+}
+
+void AssetManager::StopSound( const std::string &name )
+{
+	for ( int i = 0; i < MAX_SOUNDS; i++ )
+	{
+		if ( soundBuffers.find( name ) == soundBuffers.end() )
+			return; // Early out if we couldn't find one with that name
+
+		if ( sounds[i].getBuffer() != NULL && sounds[i].getBuffer() == &soundBuffers.at( name ) )
+		{
+			sounds[i].stop();
+			return;
+		}
+	}
+}
+
+void AssetManager::StopAllSounds()
+{
+	for ( int i = 0; i < MAX_SOUNDS; i++ )
+	{
+		this->sounds[i].stop();
+	}
 }
 
 AssetManager::~AssetManager()
