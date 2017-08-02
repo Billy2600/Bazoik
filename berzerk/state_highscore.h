@@ -3,6 +3,8 @@
 #include "game_state.h"
 
 #define NUM_SCORES 10 // How many scores will the table hold?
+#define HS_FIRST_CHAR 33 // First valid char
+#define HS_LAST_CHAR 90 // Last valid char
 
 class StateHighscore : public GameState
 {

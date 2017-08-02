@@ -156,8 +156,8 @@ void StateHighscore::Update( const float dt )
 		{
 			entryLoc = i - 1; // Take down location
 
-			if( entryChar < 0 ) entryChar = 0;
-			if( entryChar > 255 ) entryChar = 255;
+			if( entryChar < HS_FIRST_CHAR ) entryChar = HS_LAST_CHAR;
+			if( entryChar > HS_LAST_CHAR ) entryChar = HS_FIRST_CHAR;
 
 			// Blink cursor
 			if( entryIndex < 3 )
