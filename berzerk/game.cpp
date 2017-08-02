@@ -15,6 +15,16 @@
 
 Game::Game()
 {
+	if ( !DirectoryExists( "assets" ) )
+	{
+		ErrorLog log;
+		log.Write( "Assets not found!" );
+#ifdef _WIN32
+		MessageBox( 0, "Game assets not found!", "Error", MB_OK | MB_ICONERROR );
+#endif
+		return;
+	}
+
 	popped = false;
 
 	inputManager.LoadFromFile( "keys.xml" );
@@ -180,7 +190,7 @@ std::string Game::GetConfigDir()
 	return path;
 }
 
-bool Game::FileExists( std::string path ) const
+bool Game::FileExists( const std::string path ) const
 {
 #ifdef _WIN32
 	DWORD attrib = GetFileAttributes( path.c_str() );
@@ -188,6 +198,17 @@ bool Game::FileExists( std::string path ) const
 #else
 	struct stat st = { 0 };
 	return ( stat( path.c_str(), &st ) == 0 );
+#endif
+}
+
+bool Game::DirectoryExists( const std::string path ) const
+{
+#ifdef _WIN32
+	DWORD attrib = GetFileAttributes( path.c_str() );
+	return ( attrib != INVALID_FILE_ATTRIBUTES && ( attrib & FILE_ATTRIBUTE_DIRECTORY ) );
+#else
+	struct stat st = { 0 };
+	return ( stat( path.c_str(), &st ) == 0 && S_ISDIR( st.st_mode ) );
 #endif
 }
 

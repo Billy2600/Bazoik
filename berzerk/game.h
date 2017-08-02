@@ -49,7 +49,8 @@ public:
 	void AddLife(); // Add one life
 	void Draw(); // Runs every frame
 	static std::string GetConfigDir(); // Get directory for saving/loading files; includes trailing slash
-	bool FileExists( std::string path ) const;
+	bool FileExists( const std::string path ) const;
+	bool DirectoryExists( const std::string path ) const;
 	void Close(); // Close game
 	~Game();
 };
