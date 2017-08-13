@@ -33,6 +33,10 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	txScore.setPosition( sf::Vector2f( 3, 3 ) );
 	txScore.setString( game->score );
 
+	respawnPrompt = txScore;
+	respawnPrompt.setPosition( sf::Vector2f( 3, 50 ) );
+	respawnPrompt.setString( "Press any button to respawn" );
+
 	for( unsigned int i = 0; i < MAX_LIVES; i++ )
 	{
 		lives[i].setTexture( game->assetManager.GetTextureRef( "sprites" ) );
@@ -358,6 +362,12 @@ void StateGameplay::Draw() const
 	entityManager.Draw();
 
 	game->window.draw( txScore );
+
+	if ( player.IsDead() )
+	{
+		game->window.draw( respawnPrompt );
+	}
+
 	for( unsigned int i = 0; i < MAX_LIVES; i++ )
 	{
 		if( i >= game->GetLives() )

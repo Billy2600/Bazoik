@@ -26,6 +26,7 @@ private:
 	bool enemiesSpawned;
 	static bool chicken; // Did you kill all the robots? Static so it will carry over
 	sf::Text txScore;
+	sf::Text respawnPrompt;
 	sf::Sprite lives[MAX_LIVES];
 
 	static Directions lastMove;
