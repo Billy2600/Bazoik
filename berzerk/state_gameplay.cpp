@@ -363,7 +363,7 @@ void StateGameplay::Draw() const
 
 	game->window.draw( txScore );
 
-	if ( player.IsDead() )
+	if ( player.IsDead() && !playDemo && !recordDemo )
 	{
 		game->window.draw( respawnPrompt );
 	}
