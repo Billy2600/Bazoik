@@ -314,6 +314,7 @@ void StateGameplay::Update( const float dt )
 			game->assetManager.StopSound( "death" );
 			lastMove == Directions::W;
 			this->game->SwitchState( new StateHighscore( this->game ) );
+			game->window.setMouseCursorVisible( true );
 			return;
 		}
 
