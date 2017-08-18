@@ -13,6 +13,7 @@
 #define VERT_TRANS_SPEED 250
 #define HORZ_TRANS_SPEED 400
 #define MAX_LIVES 9 // Maximum number of lives to show on screen
+#define ALL_ROBOTS_SCORE 300 // Score added for killing all robots
 
 class StateGameplay : public GameState
 {
