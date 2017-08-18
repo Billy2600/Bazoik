@@ -317,8 +317,8 @@ void StateGameplay::Update( const float dt )
 			game->music.stop();
 			game->assetManager.StopSound( "death" );
 			lastMove == Directions::W;
-			this->game->SwitchState( new StateHighscore( this->game ) );
 			game->window.setMouseCursorVisible( true );
+			this->game->SwitchState( new StateHighscore( this->game ) );
 			return;
 		}
 
