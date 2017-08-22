@@ -38,7 +38,7 @@ void EntityPlayer::LoadSprite()
 		//sprite.setScale( sf::Vector2f( SPRITE_SCALE, SPRITE_SCALE ) );
 		currentAnim = "player_stand";
 		// Load hitbox based on sprite info
-		sf::IntRect animRect = game->animManager.Animate( currentAnim );
+		sf::IntRect animRect = animManager.Animate( currentAnim );
 #ifdef _DEBUG
 		shape.setSize( sf::Vector2f( hitbox.width, hitbox.height ) );
 #endif
@@ -75,7 +75,7 @@ void EntityPlayer::Think( const float dt )
 	if( dead )
 	{
 		// Keep animation going during death
-		sf::IntRect animRect = game->animManager.Animate( currentAnim, true );
+		sf::IntRect animRect = animManager.Animate( currentAnim, true );
 		sprite.setTextureRect( animRect );
 
 		// Check if we should also reset the state
@@ -172,7 +172,7 @@ void EntityPlayer::Think( const float dt )
 void EntityPlayer::Die()
 {
 	//sprite.setColor( sf::Color::Red );
-	game->animManager.ResetAnim( "player_death" );
+	animManager.ResetAnim( "player_death" );
 	currentAnim = "player_death";
 	dead = true;
 	deathTime = (float)now;
@@ -239,7 +239,7 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 		sprite.setScale( 1, 1 );
 	}
 
-	sf::IntRect animRect = game->animManager.Animate( currentAnim );
+	sf::IntRect animRect = animManager.Animate( currentAnim );
 	sprite.setTextureRect( animRect );
 }
 

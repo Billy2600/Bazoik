@@ -14,6 +14,7 @@ private:
 	bool added; // Entity added flag
 	Entity *player; // Keep track of player
 	std::vector<EntityWall*> walls; // Keep track of walls
+	AnimManager animManager;
 
 public:
 	Game *game;

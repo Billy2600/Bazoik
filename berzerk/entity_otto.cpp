@@ -26,9 +26,9 @@ void EntityOtto::Think( const float dt )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
 		if( dopefish)
-			sprite.setTextureRect( game->animManager.Animate( "dopefish" ) );
+			sprite.setTextureRect( animManager.Animate( "dopefish" ) );
 		else
-			sprite.setTextureRect( game->animManager.Animate( "evil_otto" ) );
+			sprite.setTextureRect( animManager.Animate( "evil_otto" ) );
 	}
 
 	if( direction == 0 ) direction = ySpeed; // Make sure this is initialized

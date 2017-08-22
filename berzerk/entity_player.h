@@ -44,6 +44,7 @@ private:
 
 	void Die(); // Perform death
 
+	AnimManager animManager;
 	sf::Sprite sprite;
 	std::string currentAnim;
 	void LoadSprite();

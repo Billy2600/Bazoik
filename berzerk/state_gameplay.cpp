@@ -40,7 +40,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	for( unsigned int i = 0; i < MAX_LIVES; i++ )
 	{
 		lives[i].setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		lives[i].setTextureRect( game->animManager.Animate( "life_icon" ) );
+		lives[i].setTextureRect( animManager.Animate( "life_icon" ) );
 		lives[i].setScale( 4, 4 );
 		lives[i].setPosition( (5 + lives[i].getGlobalBounds().width) * i, GAME_HEIGHT - lives[i].getGlobalBounds().height - 5 );
 	}

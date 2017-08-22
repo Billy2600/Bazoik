@@ -49,6 +49,7 @@ Game::Game()
 	// Load sprite texture
 	assetManager.LoadTexture( "sprites", "assets/Bazoik_Character_Sprite_Sheet.png" );
 	// Load animations
+	AnimManager animManager;
 	animManager.LoadFromFile( "assets/animations.xml" );
 
 	if ( !music.openFromFile( "assets/music.wav" ) )

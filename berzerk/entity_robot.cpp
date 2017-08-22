@@ -32,7 +32,7 @@ void EntityRobot::LoadSprite()
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		sf::IntRect animRect = game->animManager.Animate( currentAnim );
+		sf::IntRect animRect = animManager.Animate( currentAnim );
 		sprite.setScale( stats.scale, stats.scale );
 		subSprite = sprite;
 		subSprite.setColor( sf::Color::White );
@@ -51,17 +51,17 @@ void EntityRobot::Think( const float dt )
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 #endif
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
-	sprite.setTextureRect( game->animManager.Animate( currentAnim, ( currentAnim == "robot_death" ) ) );
+	sprite.setTextureRect( animManager.Animate( currentAnim, ( currentAnim == "robot_death" ) ) );
 	subSprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
-	subSprite.setTextureRect( game->animManager.Animate( subAnim, ( subAnim == "robot_explosion" ) ) );
+	subSprite.setTextureRect( animManager.Animate( subAnim, ( subAnim == "robot_explosion" ) ) );
 
 	if( dead && now - deathTime < deathDelay )
 		return;
 	else if( dead && now - deathTime >= deathDelay )
 	{
 		deleteMe = true;
-		game->animManager.ResetAnim( "robot_death" );
-		game->animManager.ResetAnim( "robot_explosion" );
+		animManager.ResetAnim( "robot_death" );
+		animManager.ResetAnim( "robot_explosion" );
 		return;
 	}
 

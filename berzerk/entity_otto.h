@@ -17,6 +17,7 @@ private:
 	float minHeight;
 	float direction; // Current direction (up/down)
 	bool dopefish;
+	AnimManager animManager;
 
 public:
 	EntityOtto( const sf::Vector2f pos, const float minHeight = 0, const float maxHeight = GAME_HEIGHT, const bool dopefish = false );

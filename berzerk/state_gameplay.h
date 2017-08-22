@@ -29,6 +29,7 @@ private:
 	sf::Text txScore;
 	sf::Text respawnPrompt;
 	sf::Sprite lives[MAX_LIVES];
+	AnimManager animManager;
 
 	static Directions lastMove;
 	bool transition; // Is the screen moving?

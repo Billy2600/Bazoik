@@ -1,5 +1,7 @@
 #include "anim_manager.h"
 
+std::map< std::string, std::vector<sf::IntRect> > AnimManager::animations;
+
 AnimManager::AnimManager()
 {
 	
@@ -31,7 +33,7 @@ void AnimManager::LoadFromFile( const std::string &filename )
 		// AnimManagers
 		std::string n( anim.attribute( "name" ).value() );
 		//std::string value( key.first_child().value() );
-		frameCounters[n] = 0;
+		//frameCounters[n] = 0;
 
 		// Frames
 		for( pugi::xml_node frame : anim.children( "frame" ) )
@@ -55,7 +57,7 @@ sf::IntRect AnimManager::Animate( const std::string &name, const bool stopOnLast
 		frameCounters[name]++;
 		if ( frameCounters[name] >= animations[name].size() )
 		{
-			if( stopOnLastFrame )
+			if ( stopOnLastFrame )
 				return animations[name].back();
 			else
 				frameCounters[name] = 0;
@@ -64,7 +66,7 @@ sf::IntRect AnimManager::Animate( const std::string &name, const bool stopOnLast
 		lastTime[name] = clock.getElapsedTime().asMilliseconds();
 	}
 
-	if( !IsEmpty( name ) )
+	if( !IsAnimEmpty( name ) )
 		return animations[name].at( frameCounters[name] );
 	else
 		return sf::IntRect( 0, 0, 0, 0 );
@@ -80,7 +82,7 @@ bool AnimManager::IsEmpty() const
 	return animations.empty();
 }
 
-bool AnimManager::IsEmpty( const std::string &name )
+bool AnimManager::IsAnimEmpty( const std::string &name )
 {
 	return animations[name].empty();
 }

@@ -30,6 +30,7 @@ private:
 	sf::Int32 deathTime;
 	sf::Vector2f playerPos;
 	bool moving;
+	AnimManager animManager;
 	std::string currentAnim;
 	std::string subAnim;
 #ifdef _DEBUG
