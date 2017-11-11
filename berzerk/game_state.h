@@ -7,6 +7,7 @@
 class GameState
 {
 protected:
+	ErrorLog log;
 
 public:
 	Game *game;

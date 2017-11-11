@@ -1,4 +1,5 @@
 #include "asset_manager.h"
+#include "error_log.h"
 
 AssetManager::AssetManager()
 {
@@ -7,6 +8,9 @@ AssetManager::AssetManager()
 
 void AssetManager::LoadTexture( const std::string& name, const std::string &filename )
 {
+	ErrorLog log;
+	log.Write( "Loading texture " + name + " from file" );
+
 	if( textures.count( name ) == 0 )
 	{
 		sf::Texture tex;
@@ -22,6 +26,9 @@ sf::Texture& AssetManager::GetTextureRef( const std::string& name )
 
 void AssetManager::LoadFont( const std::string& name, const std::string &filename )
 {
+	ErrorLog log;
+	log.Write( "Loading font " + name + " from file" );
+
 	if( fonts.count( name ) == 0 )
 	{
 		sf::Font font;
@@ -37,6 +44,9 @@ sf::Font& AssetManager::GetFontRef( const std::string& name )
 
 void AssetManager::LoadSound( const std::string &name, const std::string &filename )
 {
+	ErrorLog log;
+	log.Write( "Loading sound " + name + " from file" );
+
 	if( soundBuffers.count( name ) == 0 )
 	{
 		this->soundBuffers[name].loadFromFile( filename );

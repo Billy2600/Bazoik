@@ -14,6 +14,9 @@ AnimManager::~AnimManager()
 
 void AnimManager::LoadFromFile( const std::string &filename )
 {
+	ErrorLog log;
+	log.Write( "Loading animations from " + filename );
+
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file( filename.c_str() );
 	if( !result ) // Error check

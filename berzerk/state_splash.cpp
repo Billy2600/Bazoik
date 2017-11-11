@@ -12,7 +12,7 @@ StateSplash::StateSplash( Game *game )
 
 void StateSplash::Start()
 {
-
+	log.Write( "Splash state started" );
 }
 
 void StateSplash::HandleInput()
@@ -33,6 +33,7 @@ void StateSplash::Update( const float dt )
 {
 	if( graphic.getTexture() == NULL )
 	{
+		log.Write( "Loading splash image" );
 		tex.loadFromFile( "assets/mmdclogo.png" );
 		graphic.setTexture( tex );
 	}
@@ -53,6 +54,7 @@ void StateSplash::Draw() const
 
 void StateSplash::LoadSounds()
 {
+	log.Write( "Loading sounds" );
 	game->assetManager.LoadSound( "chicken_hi", "assets/voice/Bazoik_Chicken_Hi.wav" );
 	game->assetManager.LoadSound( "chicken_low", "assets/voice/Bazoik_Chicken_Low.wav" );
 	game->assetManager.LoadSound( "chicken_mid", "assets/voice/Bazoik_Chicken_Mid.wav" );

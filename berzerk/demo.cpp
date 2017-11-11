@@ -40,6 +40,9 @@ PlayerInput Demo::Play()
 
 void Demo::LoadFromFile( const std::string path )
 {
+	ErrorLog log;
+	log.Write( "Loading demo " + path + " from file" );
+
 	inputs.clear();
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file( path.c_str() );
@@ -106,6 +109,9 @@ void Demo::LoadFromFile( const std::string path )
 
 void Demo::SaveToFile( const std::string path ) const
 {
+	ErrorLog log;
+	log.Write( "Saving demo " + path + " from file" );
+
 	// Build xml and save it to file
 	pugi::xml_document doc;
 

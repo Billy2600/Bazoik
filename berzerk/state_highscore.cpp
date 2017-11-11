@@ -39,7 +39,7 @@ StateHighscore::StateHighscore( Game *game )
 
 void StateHighscore::Start()
 {
-
+	log.Write( "Highscore state started" );
 }
 
 void StateHighscore::CheckNewScore()
@@ -84,6 +84,8 @@ int StateHighscore::Partition( const int low, const int hi )
 
 void StateHighscore::SaveToFile( const std::string filename ) const
 {
+	log.Write( "Saving score to file" );
+
 	try
 	{
 		// Build xml and save it to file
@@ -109,6 +111,8 @@ void StateHighscore::SaveToFile( const std::string filename ) const
 
 void StateHighscore::LoadFromFile( const std::string filename )
 {
+	log.Write( "Loading score from file" );
+
 	pugi::xml_document doc;
 	std::string path = game->GetConfigDir() + filename;
 	pugi::xml_parse_result result = doc.load_file( path.c_str() );
@@ -248,6 +252,7 @@ void StateHighscore::HandleInput()
 
 void StateHighscore::Close()
 {
+	log.Write( "Quitting high score state" );
 	SaveToFile( "scores.xml" );
 	game->score = 0;
 }

@@ -62,7 +62,7 @@ StateOptions::StateOptions( Game *game )
 
 void StateOptions::Start()
 {
-
+	log.Write( "Options state started" );
 }
 
 void StateOptions::HandleInput()
@@ -259,6 +259,7 @@ void StateOptions::Draw() const
 
 void StateOptions::Return()
 {
+	log.Write( "Quitting options state" );
 	game->inputManager.SaveToFile( "keys.xml" );
 	game->PopState();
 }

@@ -526,7 +526,6 @@ RobotStats StateGameplay::LoadRobotStats()
 	}
 	catch ( int e )
 	{
-		ErrorLog log;
 		log.Write( "Error while loading assets/robotstats.xml" );
 		return stats;
 	}

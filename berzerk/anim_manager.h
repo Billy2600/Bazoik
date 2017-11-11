@@ -4,6 +4,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "pugixml.hpp"
+#include "error_log.h"
 
 #define ANIM_FRAME_DELAY 100 // Frame delay (as milliseconds)
 

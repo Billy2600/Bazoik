@@ -52,6 +52,9 @@ void InputManager::LoadDefaults()
 
 void InputManager::LoadFromFile( const std::string filename )
 {
+	ErrorLog log;
+	log.Write( "Loading inputs from file" );
+
 	LoadDefaults(); // Defaults will be loaded, no matter what happens below
 
 	pugi::xml_document doc;
@@ -112,6 +115,9 @@ void InputManager::LoadFromFile( const std::string filename )
 
 void InputManager::SaveToFile( const std::string filename ) const
 {
+	ErrorLog log;
+	log.Write( "Saving inputs to file" );
+
 	try
 	{
 		// Build xml and save it to file

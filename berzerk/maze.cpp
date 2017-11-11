@@ -31,6 +31,9 @@ bool Maze::IsDone() const
 
 void Maze::Generate()
 {
+	ErrorLog log;
+	log.Write( "Generating maze" );
+
 	if (done) return; // Don't do any of this if we're done
 
 	// Visit every tile
@@ -385,5 +388,7 @@ sf::Vector2f Maze::GetPlayerStart( const Directions lastMove, EntityPlayer &play
 
 void Maze::SkipGenerate()
 {
+	ErrorLog log;
+	log.Write( "Skipping maze generation" );
 	done = true;
 }

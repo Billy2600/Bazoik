@@ -44,6 +44,7 @@ StateTitleScreen::StateTitleScreen(Game *game)
 
 void StateTitleScreen::Start()
 {
+	log.Write( "Title state started" );
 	clkAttractMode.restart();
 	playDemo = false;
 	recordDemo = false;
@@ -228,6 +229,7 @@ void StateTitleScreen::Draw() const
 
 void StateTitleScreen::StartGame()
 {
+	log.Write( "Switching to gameplay state" );
 	game->ResetLives();
 	game->level = startLevel;
 	if( currentDemo >= NUM_DEMOS )
