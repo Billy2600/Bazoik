@@ -15,6 +15,7 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 	dead = false;
 	seePlayer = false;
 	moving = false;
+	retreat = false;
 	drawHitbox = false;
 	lastFire = 0;
 	deathTime = 0;
@@ -68,7 +69,7 @@ void EntityRobot::Think( const float dt )
 	if( hitbox.left > GAME_WIDTH || hitbox.top > GAME_HEIGHT )
 		return;
 
-	// Get vector compared to player and normalize it
+	// Get vector compared to player and normalize it for bullet direction
 	sf::Vector2f playerVec = playerPos - sf::Vector2f( hitbox.left, hitbox.top );
 	float playerVecMagnitude = sqrtf( playerVec.x * playerVec.x ) + ( playerVec.y * playerVec.y );
 	sf::Vector2f normalizedPlayerVec = playerVec / playerVecMagnitude;
@@ -87,11 +88,20 @@ void EntityRobot::Think( const float dt )
 		moving = true;
 
 		sf::Vector2f moveVec;
-		float angle = atan2f( normalizedPlayerVec.y, normalizedPlayerVec.x );
-		moveVec.x = cosf( angle ) * stats.movementSpeed;
-		moveVec.y = sinf( angle ) * stats.movementSpeed;
 
-		this->Move( moveVec, dt );
+		if ( retreat && now - lastRetreat < retreatDelay )
+		{
+			moveVec = GetMoveTowardsVec( playerPos, stats.movementSpeed * 2 );
+			this->Move( -moveVec, dt );
+			if ( now - lastRetreat >= retreatDelay )
+				retreat = false;
+		}
+		else
+		{
+			moveVec = GetMoveTowardsVec( playerPos, stats.movementSpeed);
+			this->Move( moveVec, dt );
+		}
+
 		if ( stats.movementSpeed > 1 ) // Remain in idle anim at slow speeds
 		{
 			currentAnim = "robot_walk";
@@ -139,6 +149,22 @@ void EntityRobot::HandleCollision( Entity *other )
 				sf::Color prevColor = sprite.getColor();
 				float factor = stats.scale / hits;
 				sprite.setColor( sf::Color( prevColor.r / factor, prevColor.g / factor, prevColor.b / factor) );
+				
+				// Initiate retreat
+				/*if( dynamic_cast<EntityWall*>( other ) != NULL )
+				{*/
+					/*retreat = true;
+					lastRetreat = clock.getElapsedTime().asMilliseconds();
+					retreatPos = sf::Vector2f( other->hitbox.left, other->hitbox.top );*/
+				/*}*/
+
+				// Push robot away from wall
+				if ( dynamic_cast<EntityWall*>( other ) != NULL )
+				{
+					sf::Vector2f moveVec = GetMoveTowardsVec( sf::Vector2f( other->hitbox.left, other->hitbox.top ), stats.movementSpeed );
+					hitbox.left -= moveVec.x;
+					hitbox.top -= moveVec.y;
+				}
 			}
 		}
 	}

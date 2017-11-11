@@ -28,6 +28,19 @@ public:
 		hitbox.top += move.y * dt;
 	}
 
+	sf::Vector2f GetMoveTowardsVec( const sf::Vector2f target, float speed ) // Get vector to move towards point, will not do actual movement
+	{
+		sf::Vector2f targetVec = target - sf::Vector2f( hitbox.left, hitbox.top );
+		float targetVecMagnitude = sqrtf( targetVec.x * targetVec.x ) + ( targetVec.y * targetVec.y );
+		sf::Vector2f normalizedTargetVec = targetVec / targetVecMagnitude;
+		sf::Vector2f moveVec;
+		float angle = atan2f( normalizedTargetVec.y, normalizedTargetVec.x );
+		moveVec.x = cosf( angle ) * speed;
+		moveVec.y = sinf( angle ) * speed;
+
+		return moveVec;
+	}
+
 	// Angle helper functions
 	float GetAngle( const sf::Vector2f posA, const sf::Vector2f posB ) const;
 	float RadToDeg( const float angle ) const;

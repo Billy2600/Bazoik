@@ -36,6 +36,11 @@ private:
 #ifdef _DEBUG
 	sf::RectangleShape shape;
 #endif
+	// Move away from wall
+	bool retreat;
+	sf::Vector2f retreatPos;
+	sf::Int32 lastRetreat;
+	const sf::Int32 retreatDelay = 500;
 
 	void LoadSprite();
 	// Stats for difficulty
