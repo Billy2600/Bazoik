@@ -504,7 +504,7 @@ RobotStats StateGameplay::LoadRobotStats()
 				if( level.attribute( "scale" ) != NULL ) stats.scale = std::stof( level.attribute( "scale" ).value() );
 				else stats.scale = 1;
 
-				if ( level.attribute( "can_shoot" ) != NULL && level.attribute( "can_shoot" ).value() == "0" )
+				if ( level.attribute( "can_shoot" ) != NULL && std::stoi( level.attribute( "can_shoot" ).value() ) == 0 )
 					stats.canShoot = false;
 				else
 					stats.canShoot = true;
