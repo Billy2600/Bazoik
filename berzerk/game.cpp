@@ -45,6 +45,9 @@ Game::Game()
 	}
 
 	window.setFramerateLimit( 60 );
+	sf::Image icon;
+	icon.loadFromFile("assets/ICON.png");
+	window.setIcon(64, 64, icon.getPixelsPtr());
 
 	// Load sprite texture
 	assetManager.LoadTexture( "sprites", "assets/Bazoik_Character_Sprite_Sheet.png" );

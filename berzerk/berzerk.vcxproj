@@ -169,6 +169,7 @@
     <ClInclude Include="pugiconfig.hpp" />
     <ClInclude Include="pugixml.hpp" />
     <ClInclude Include="quadree.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="state_credits.h" />
     <ClInclude Include="state_gameplay.h" />
     <ClInclude Include="state_highscore.h" />
@@ -178,6 +179,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="berzerk.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\ICON.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
