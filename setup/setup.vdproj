@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:setup"
+"ProjectName" = "8:Setup"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -15,259 +15,43 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_068937D37E3E4AC78A78A77BF5E1A129"
+        "MsmKey" = "8:_015D384A842345B181D62203DAED824E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0AC3DB48CB054C1D99601BDD8D030D4B"
+        "MsmKey" = "8:_173E339E892E441985BD0414BB101CAA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_10A465660E774A4A996D5209A881EFEE"
+        "MsmKey" = "8:_3109601B30AC46F8A860E0638BEE832F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1E50BC9E23E245ED87B3BAA39E42965C"
+        "MsmKey" = "8:_8F9FDFC129F042A7BD960C8AD0A25B2D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1E9DB848F26449C29374F3FE48435A7D"
+        "MsmKey" = "8:_95B345E662B840A8A90F9B7AC108B5B6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_26392C8BFDA44F99AA7BDA054AE5AB9E"
+        "MsmKey" = "8:_E90B080962D149A7BDE5563657F4C377"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_285D9536F21E48B4ABCC639E7BA5074C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2B101B5AA9AC4431AA2759D51E4F64E8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3F7BA27704FC4493A6E64F347CE5BC63"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_45E956D95A0B4FAF9F1E2CBC99ACA446"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_46B0AAF37C3A4778A4AB81CE766E2702"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4D6F3BEED79B4DABA6C9DB23A2D5917F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_50F7A4E48DC44C96828545F94AA8A65F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_55BA7476B0DE4D578B534198E32F1597"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_55ED598A9FE74FE8B5ECD3E51B3D76F1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_69A9500EA8304276988045B4F01C2961"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6A86ADECB9F84E07ADF31DB929FDF19D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6BFCA62AF04B43FB9517DD5073EF5069"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_704B8BECDD874339814079CB085793B7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7220271D9C1241E4A51CEADC3F71036F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_77B222EB40AE44A987A56CC38A825A9D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7A471F1084A5469EB41A15CB4D0D4D23"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8382778B77CE4465A1C6E4E05D9B2CD8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8B6B08EC7F7A48E5BF0D4E4824D7D5DB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8D1666CD716A4BEE9B8C6148F2A157A4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A03AD067F83A4A2F88449AB5D46C481C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A46F339B5B3249F58BAA2A9E3370119E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AC2036A26ABF4A24AE5E6713CD492435"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B31F60453336465099AE0F44E9E31841"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BD062B4D21A9417CB9F19935B773BC85"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BE5C2D0D4B3B4A06BF2F9804B4FC3215"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C1ECD2D8649445D69A2604DDBCFBFB4A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D237A882937F47CDB0EC99A3ACDAACDC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DC45831C4FFC46DE9042B6C093DDE658"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E29B8B44883740C697B23924ED2EBC2A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E41FCB6988AD43B98AA97658B3F0C33A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E56EF5D407124864BDB45111277AD6D3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E91CA73B1208493CB8102D2870021B54"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EA74AF89448C439FB9DD022E2BB6BA08"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ED4795F93F9A45D9B116C27842851710"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EE6C7802BB2F44318D14DAF37A23FABF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EEA934F0400F44D49CCC750204EFFB37"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F4FCA295FDFB4018BCE6AB603E7B17FD"
+        "MsmKey" = "8:_F69F8C0AA5DD4C9D84CC3150A2B7C037"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -279,7 +63,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\setup.msi"
+        "OutputFilename" = "8:Debug\\Bazoik.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -295,7 +79,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\setup.msi"
+        "OutputFilename" = "8:Release\\Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -326,512 +110,12 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_068937D37E3E4AC78A78A77BF5E1A129"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Got_the_Intruder_Low.wav"
-            "TargetName" = "8:Bazoik_Got_the_Intruder_Low.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0AC3DB48CB054C1D99601BDD8D030D4B"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Got_the_Intruder_Mid.wav"
-            "TargetName" = "8:Bazoik_Got_the_Intruder_Mid.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_10A465660E774A4A996D5209A881EFEE"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Chicken_Low.wav"
-            "TargetName" = "8:Bazoik_Chicken_Low.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E50BC9E23E245ED87B3BAA39E42965C"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Got_the_Humanoid_Mid.wav"
-            "TargetName" = "8:Bazoik_Got_the_Humanoid_Mid.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E9DB848F26449C29374F3FE48435A7D"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_get_the_Humanoid_Low.wav"
-            "TargetName" = "8:Bazoik_get_the_Humanoid_Low.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26392C8BFDA44F99AA7BDA054AE5AB9E"
-            {
-            "SourcePath" = "8:..\\Release\\sfml-audio-2.dll"
-            "TargetName" = "8:sfml-audio-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_025B6AB164094F75ACA1CA39EFD36EA9"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_285D9536F21E48B4ABCC639E7BA5074C"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Intruder_alert_Mid.wav"
-            "TargetName" = "8:Bazoik_Intruder_alert_Mid.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2B101B5AA9AC4431AA2759D51E4F64E8"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\Bazoik_Character_Sprite_Sheet.png"
-            "TargetName" = "8:Bazoik_Character_Sprite_Sheet.png"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3F7BA27704FC4493A6E64F347CE5BC63"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_get_the_Intruder_Low.wav"
-            "TargetName" = "8:Bazoik_get_the_Intruder_Low.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_45E956D95A0B4FAF9F1E2CBC99ACA446"
-            {
-            "SourcePath" = "8:..\\Release\\sfml-window-2.dll"
-            "TargetName" = "8:sfml-window-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_025B6AB164094F75ACA1CA39EFD36EA9"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_46B0AAF37C3A4778A4AB81CE766E2702"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\robot_die.wav"
-            "TargetName" = "8:robot_die.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4D6F3BEED79B4DABA6C9DB23A2D5917F"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_The_Humanoid_Must_Not_Escape_Low.wav"
-            "TargetName" = "8:Bazoik_The_Humanoid_Must_Not_Escape_Low.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_50F7A4E48DC44C96828545F94AA8A65F"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\music.wav"
-            "TargetName" = "8:music.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_55BA7476B0DE4D578B534198E32F1597"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\demo1.xml"
-            "TargetName" = "8:demo1.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_55ED598A9FE74FE8B5ECD3E51B3D76F1"
-            {
-            "SourcePath" = "8:..\\Release\\sfml-system-2.dll"
-            "TargetName" = "8:sfml-system-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_025B6AB164094F75ACA1CA39EFD36EA9"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69A9500EA8304276988045B4F01C2961"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Intruder_alert_Hi.wav"
-            "TargetName" = "8:Bazoik_Intruder_alert_Hi.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6A86ADECB9F84E07ADF31DB929FDF19D"
-            {
-            "SourcePath" = "8:..\\Release\\sfml-graphics-2.dll"
-            "TargetName" = "8:sfml-graphics-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_025B6AB164094F75ACA1CA39EFD36EA9"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6BFCA62AF04B43FB9517DD5073EF5069"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\death.wav"
-            "TargetName" = "8:death.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_704B8BECDD874339814079CB085793B7"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\joystix monospace.ttf"
-            "TargetName" = "8:joystix monospace.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7220271D9C1241E4A51CEADC3F71036F"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Got_the_Humanoid_Hi.wav"
-            "TargetName" = "8:Bazoik_Got_the_Humanoid_Hi.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_77B222EB40AE44A987A56CC38A825A9D"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Got_the_Chicken_Mid.wav"
-            "TargetName" = "8:Bazoik_Got_the_Chicken_Mid.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A471F1084A5469EB41A15CB4D0D4D23"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Chicken_Mid.wav"
-            "TargetName" = "8:Bazoik_Chicken_Mid.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8382778B77CE4465A1C6E4E05D9B2CD8"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_The_Humanoid_Must_Not_Escape_Hi.wav"
-            "TargetName" = "8:Bazoik_The_Humanoid_Must_Not_Escape_Hi.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8B6B08EC7F7A48E5BF0D4E4824D7D5DB"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Got_the_Humanoid_Low.wav"
-            "TargetName" = "8:Bazoik_Got_the_Humanoid_Low.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D1666CD716A4BEE9B8C6148F2A157A4"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Got_the_Chicken_Hi.wav"
-            "TargetName" = "8:Bazoik_Got_the_Chicken_Hi.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A03AD067F83A4A2F88449AB5D46C481C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_015D384A842345B181D62203DAED824E"
             {
             "SourcePath" = "8:..\\Release\\sfml-network-2.dll"
             "TargetName" = "8:sfml-network-2.dll"
             "Tag" = "8:"
-            "Folder" = "8:_025B6AB164094F75ACA1CA39EFD36EA9"
+            "Folder" = "8:_618E1E25EB86403EBE720F4803117252"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -846,212 +130,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A46F339B5B3249F58BAA2A9E3370119E"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_get_the_Intruder_Hi.wav"
-            "TargetName" = "8:Bazoik_get_the_Intruder_Hi.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AC2036A26ABF4A24AE5E6713CD492435"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\robotstats.xml"
-            "TargetName" = "8:robotstats.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B31F60453336465099AE0F44E9E31841"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Intruder_alert_low.wav"
-            "TargetName" = "8:Bazoik_Intruder_alert_low.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BD062B4D21A9417CB9F19935B773BC85"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\demo2.xml"
-            "TargetName" = "8:demo2.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BE5C2D0D4B3B4A06BF2F9804B4FC3215"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_The_Humanoid_Must_Not_Escape_Mid.wav"
-            "TargetName" = "8:Bazoik_The_Humanoid_Must_Not_Escape_Mid.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C1ECD2D8649445D69A2604DDBCFBFB4A"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_get_the_Intruder_Mid.wav"
-            "TargetName" = "8:Bazoik_get_the_Intruder_Mid.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D237A882937F47CDB0EC99A3ACDAACDC"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\demo0.xml"
-            "TargetName" = "8:demo0.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DC45831C4FFC46DE9042B6C093DDE658"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Got_the_Intruder_Hi.wav"
-            "TargetName" = "8:Bazoik_Got_the_Intruder_Hi.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E29B8B44883740C697B23924ED2EBC2A"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\shoot.wav"
-            "TargetName" = "8:shoot.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E41FCB6988AD43B98AA97658B3F0C33A"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Got_the_Chicken_Low.wav"
-            "TargetName" = "8:Bazoik_Got_the_Chicken_Low.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E56EF5D407124864BDB45111277AD6D3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_173E339E892E441985BD0414BB101CAA"
             {
             "SourcePath" = "8:..\\Release\\berzerk.exe"
             "TargetName" = "8:berzerk.exe"
             "Tag" = "8:"
-            "Folder" = "8:_025B6AB164094F75ACA1CA39EFD36EA9"
+            "Folder" = "8:_618E1E25EB86403EBE720F4803117252"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1066,12 +150,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E91CA73B1208493CB8102D2870021B54"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3109601B30AC46F8A860E0638BEE832F"
+            {
+            "SourcePath" = "8:..\\Release\\sfml-audio-2.dll"
+            "TargetName" = "8:sfml-audio-2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_618E1E25EB86403EBE720F4803117252"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F9FDFC129F042A7BD960C8AD0A25B2D"
+            {
+            "SourcePath" = "8:..\\Release\\sfml-system-2.dll"
+            "TargetName" = "8:sfml-system-2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_618E1E25EB86403EBE720F4803117252"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_95B345E662B840A8A90F9B7AC108B5B6"
             {
             "SourcePath" = "8:..\\Release\\openal32.dll"
             "TargetName" = "8:openal32.dll"
             "Tag" = "8:"
-            "Folder" = "8:_025B6AB164094F75ACA1CA39EFD36EA9"
+            "Folder" = "8:_618E1E25EB86403EBE720F4803117252"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1086,12 +210,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EA74AF89448C439FB9DD022E2BB6BA08"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E90B080962D149A7BDE5563657F4C377"
             {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_get_the_Humanoid_Mid.wav"
-            "TargetName" = "8:Bazoik_get_the_Humanoid_Mid.wav"
+            "SourcePath" = "8:..\\Release\\sfml-graphics-2.dll"
+            "TargetName" = "8:sfml-graphics-2.dll"
             "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
+            "Folder" = "8:_618E1E25EB86403EBE720F4803117252"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1106,72 +230,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED4795F93F9A45D9B116C27842851710"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F69F8C0AA5DD4C9D84CC3150A2B7C037"
             {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Chicken_Hi.wav"
-            "TargetName" = "8:Bazoik_Chicken_Hi.wav"
+            "SourcePath" = "8:..\\Release\\sfml-window-2.dll"
+            "TargetName" = "8:sfml-window-2.dll"
             "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE6C7802BB2F44318D14DAF37A23FABF"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\mmdclogo.png"
-            "TargetName" = "8:mmdclogo.png"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EEA934F0400F44D49CCC750204EFFB37"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\animations.xml"
-            "TargetName" = "8:animations.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F4FCA295FDFB4018BCE6AB603E7B17FD"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_get_the_Humanoid_Hi.wav"
-            "TargetName" = "8:Bazoik_get_the_Humanoid_Hi.wav"
-            "Tag" = "8:"
-            "Folder" = "8:_D8950A8E56D042F29093F6D8D1DA0D46"
+            "Folder" = "8:_618E1E25EB86403EBE720F4803117252"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1192,7 +256,7 @@
         }
         "Folder"
         {
-            "{3C67513D-01DD-4637-8A68-80971EB9504F}:_025B6AB164094F75ACA1CA39EFD36EA9"
+            "{3C67513D-01DD-4637-8A68-80971EB9504F}:_618E1E25EB86403EBE720F4803117252"
             {
             "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
@@ -1202,48 +266,26 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_FB512E2E73BD4E7DBD8EE27ED6F2A063"
-                    {
-                    "Name" = "8:assets"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_5A18B98FFBB6427586BFBB552AD67B2D"
-                        "Folders"
-                        {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_D8950A8E56D042F29093F6D8D1DA0D46"
-                            {
-                            "Name" = "8:voice"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_C2DCCEB68115459496D3057810F4613B"
-                                "Folders"
-                                {
-                                }
-                            }
-                        }
-                    }
                 }
             }
-            "{1525181F-901A-416C-8A58-119130FE478E}:_38B920DEDB214449B93D8FBC7834537B"
-            {
-            "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Property" = "8:DesktopFolder"
-                "Folders"
-                {
-                }
-            }
-            "{1525181F-901A-416C-8A58-119130FE478E}:_3D5AD360334B45E1BD63919EB0F4A992"
+            "{1525181F-901A-416C-8A58-119130FE478E}:_93AA8B285C474F9A9F5E6B61BB336B93"
             {
             "Name" = "8:#1919"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:ProgramMenuFolder"
+                "Folders"
+                {
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_EDD3F096CDBE479096084DBE40611915"
+            {
+            "Name" = "8:#1916"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:DesktopFolder"
                 "Folders"
                 {
                 }
@@ -1264,21 +306,21 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Bazoik"
-        "ProductCode" = "8:{DF22606A-86F3-4584-BE02-8468479D180F}"
-        "PackageCode" = "8:{A8D0F775-CB23-4417-963C-0FC83F9AECB3}"
-        "UpgradeCode" = "8:{F3473E1A-AEDA-4939-B40D-8649FC686790}"
-        "AspNetVersion" = "8:2.0.50727.0"
+        "ProductCode" = "8:{6272A47D-2098-492F-AC68-A42BCEF7BF03}"
+        "PackageCode" = "8:{7DFF2087-0DF5-4CA1-9691-C7891F24F8DC}"
+        "UpgradeCode" = "8:{BD867B44-ECD9-4DAA-B44D-60BE959E2968}"
+        "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.01"
+        "ProductVersion" = "8:1.0.0"
         "Manufacturer" = "8:MMDC Games"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:setup"
+        "Title" = "8:Bazoik"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:MMDC Games"
+        "ARPCONTACT" = "8:Default Company Name"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -1297,7 +339,7 @@
             {
                 "Keys"
                 {
-                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_F71DC17E2DEB4AEB9D08AA4D4B3A8064"
+                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_D8076E0040CF43FBAA313D4E1B424403"
                     {
                     "Name" = "8:Software"
                     "Condition" = "8:"
@@ -1306,7 +348,7 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_4DCDAA54472B4946A7DE13525DB98571"
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_911D9F6DDEB5494EBD8CD298BF6407E3"
                             {
                             "Name" = "8:[Manufacturer]"
                             "Condition" = "8:"
@@ -1331,7 +373,7 @@
             {
                 "Keys"
                 {
-                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_85F8FF1D60274E86986E57E11200B4F4"
+                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_7F9C531748C540CBADB1EE897CBB8C19"
                     {
                     "Name" = "8:Software"
                     "Condition" = "8:"
@@ -1340,7 +382,7 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_E37301A2A5D342D0913B2C01E50FEE76"
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_173BAAF86ABB42C98A9532CFD2EBEF3E"
                             {
                             "Name" = "8:[Manufacturer]"
                             "Condition" = "8:"
@@ -1385,195 +427,53 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6F21066E21AD4F2D9C873914E37A505F"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8E2021A2E51143E09A6E81EF40FA76F0"
             {
-            "Name" = "8:Bazoik"
+            "Name" = "8:berzerk.exe"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_E56EF5D407124864BDB45111277AD6D3"
-            "Folder" = "8:_3D5AD360334B45E1BD63919EB0F4A992"
-            "WorkingFolder" = "8:_025B6AB164094F75ACA1CA39EFD36EA9"
+            "Target" = "8:_173E339E892E441985BD0414BB101CAA"
+            "Folder" = "8:_93AA8B285C474F9A9F5E6B61BB336B93"
+            "WorkingFolder" = "8:_618E1E25EB86403EBE720F4803117252"
             "Icon" = "8:"
             "Feature" = "8:"
             }
         }
         "UserInterface"
         {
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_1D4B9CAA2F104DA69F3E9D3BD28CE236"
-            {
-            "Name" = "8:#1902"
-            "Sequence" = "3:1"
-            "Attributes" = "3:3"
-                "Dialogs"
-                {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_267728418D4E47AD91AFEBCADD434D04"
-                    {
-                    "Sequence" = "3:100"
-                    "DisplayName" = "8:Finished"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdFinishedDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "UpdateText"
-                            {
-                            "Name" = "8:UpdateText"
-                            "DisplayName" = "8:#1058"
-                            "Description" = "8:#1158"
-                            "Type" = "3:15"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1258"
-                            "DefaultValue" = "8:#1258"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
-                }
-            }
-            "{2479F3F5-0309-486D-8047-8187E2CE5BA0}:_5BBF7ECC7BFD4EDAA83A28F2F90D2550"
-            {
-            "UseDynamicProperties" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "SourcePath" = "8:<VsdDialogDir>\\VsdUserInterface.wim"
-            }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_6364E32F3D2B4A90BAE44914456409FD"
-            {
-            "Name" = "8:#1900"
-            "Sequence" = "3:1"
-            "Attributes" = "3:1"
-                "Dialogs"
-                {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_430BCB6FEA72465788D4115DB7C57502"
-                    {
-                    "Sequence" = "3:300"
-                    "DisplayName" = "8:Confirm Installation"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_961FEFFA0947405CAE96C92703F56693"
-                    {
-                    "Sequence" = "3:200"
-                    "DisplayName" = "8:Installation Folder"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdFolderDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "InstallAllUsersVisible"
-                            {
-                            "Name" = "8:InstallAllUsersVisible"
-                            "DisplayName" = "8:#1059"
-                            "Description" = "8:#1159"
-                            "Type" = "3:5"
-                            "ContextData" = "8:1;True=1;False=0"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:0"
-                            "Value" = "3:1"
-                            "DefaultValue" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_A3848CD59A754098AC9903FF4EED82FD"
-                    {
-                    "Sequence" = "3:100"
-                    "DisplayName" = "8:Welcome"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdWelcomeDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "CopyrightWarning"
-                            {
-                            "Name" = "8:CopyrightWarning"
-                            "DisplayName" = "8:#1002"
-                            "Description" = "8:#1102"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1202"
-                            "DefaultValue" = "8:#1202"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Welcome"
-                            {
-                            "Name" = "8:Welcome"
-                            "DisplayName" = "8:#1003"
-                            "Description" = "8:#1103"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1203"
-                            "DefaultValue" = "8:#1203"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
-                }
-            }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_A4783D116A7E4A47892663C566619208"
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_094541BFD6B94296BC453413A4CFB9E6"
             {
             "Name" = "8:#1900"
             "Sequence" = "3:2"
             "Attributes" = "3:1"
                 "Dialogs"
                 {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_3B70BBC381E64B6D81D5C6A560694085"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_11205CE5BC7042D78DDB52EA3322173E"
+                    {
+                    "Sequence" = "3:300"
+                    "DisplayName" = "8:Confirm Installation"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminConfirmDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_E45A1C4766C54813BCA83CB04EFF5E41"
                     {
                     "Sequence" = "3:200"
                     "DisplayName" = "8:Installation Folder"
@@ -1595,7 +495,7 @@
                             }
                         }
                     }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_AF03BDF66AA3450186864D376FBBA5E9"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_F35E2104A7464195AF9FF02C65577660"
                     {
                     "Sequence" = "3:100"
                     "DisplayName" = "8:Welcome"
@@ -1643,38 +543,22 @@
                             }
                         }
                     }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_E0BC67BDD43D4221A8D14962EEA70A0E"
-                    {
-                    "Sequence" = "3:300"
-                    "DisplayName" = "8:Confirm Installation"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminConfirmDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
                 }
             }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_AEC566EFEB104E33BF8E1FDDE963C4C1"
+            "{2479F3F5-0309-486D-8047-8187E2CE5BA0}:_20A6DAC84F9047278CE827EBCEA46CDE"
+            {
+            "UseDynamicProperties" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "SourcePath" = "8:<VsdDialogDir>\\VsdBasicDialogs.wim"
+            }
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_4BAA0AC483C44A42A13F453DE9DE380E"
             {
             "Name" = "8:#1901"
             "Sequence" = "3:2"
             "Attributes" = "3:2"
                 "Dialogs"
                 {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_A82E38BE25A648D1BBC13FC8856018DD"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_417DCDD972E2437389F84B27A6001294"
                     {
                     "Sequence" = "3:100"
                     "DisplayName" = "8:Progress"
@@ -1711,20 +595,64 @@
                     }
                 }
             }
-            "{2479F3F5-0309-486D-8047-8187E2CE5BA0}:_B682D325843040AE869E619637045796"
+            "{2479F3F5-0309-486D-8047-8187E2CE5BA0}:_6A36100A730E465FB2A292BB4AFD5A61"
             {
             "UseDynamicProperties" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "SourcePath" = "8:<VsdDialogDir>\\VsdBasicDialogs.wim"
+            "SourcePath" = "8:<VsdDialogDir>\\VsdUserInterface.wim"
             }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_D7B47267B05D462EAC4143E0787BE7C5"
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_A77425649CCD41B286C39765D504D8A6"
+            {
+            "Name" = "8:#1902"
+            "Sequence" = "3:1"
+            "Attributes" = "3:3"
+                "Dialogs"
+                {
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_7EC23D6D6B2E45AB803AC7E3F5C32643"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Finished"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdFinishedDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "UpdateText"
+                            {
+                            "Name" = "8:UpdateText"
+                            "DisplayName" = "8:#1058"
+                            "Description" = "8:#1158"
+                            "Type" = "3:15"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:#1258"
+                            "DefaultValue" = "8:#1258"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_C71BB5AFE2874CAB82B5B7B72ED219F5"
             {
             "Name" = "8:#1901"
             "Sequence" = "3:1"
             "Attributes" = "3:2"
                 "Dialogs"
                 {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_CFA1F0C7EDA94861B01A3DF765A80BAC"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_FE34CB85D7334BAB9416054CB3615146"
                     {
                     "Sequence" = "3:100"
                     "DisplayName" = "8:Progress"
@@ -1761,20 +689,134 @@
                     }
                 }
             }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_EB3D044AC58B4259A6BAB264E30D36A7"
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_F5D9659B722A48678903CBDD11BB2F6E"
             {
             "Name" = "8:#1902"
             "Sequence" = "3:2"
             "Attributes" = "3:3"
                 "Dialogs"
                 {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_5D36645FF0F14265AE0B60FC2AFE5645"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_4581945724C2443C8956C41000DE976B"
                     {
                     "Sequence" = "3:100"
                     "DisplayName" = "8:Finished"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFinishedDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_F97467BECBE94A0193676C85A2ECB1CB"
+            {
+            "Name" = "8:#1900"
+            "Sequence" = "3:1"
+            "Attributes" = "3:1"
+                "Dialogs"
+                {
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_74297C02B5B84DE58811758D83244253"
+                    {
+                    "Sequence" = "3:200"
+                    "DisplayName" = "8:Installation Folder"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdFolderDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "InstallAllUsersVisible"
+                            {
+                            "Name" = "8:InstallAllUsersVisible"
+                            "DisplayName" = "8:#1059"
+                            "Description" = "8:#1159"
+                            "Type" = "3:5"
+                            "ContextData" = "8:1;True=1;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:1"
+                            "DefaultValue" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_925B1937C6BD4553B0CF6225C6B0B75C"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Welcome"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdWelcomeDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "CopyrightWarning"
+                            {
+                            "Name" = "8:CopyrightWarning"
+                            "DisplayName" = "8:#1002"
+                            "Description" = "8:#1102"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:#1202"
+                            "DefaultValue" = "8:#1202"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Welcome"
+                            {
+                            "Name" = "8:Welcome"
+                            "DisplayName" = "8:#1003"
+                            "Description" = "8:#1103"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:#1203"
+                            "DefaultValue" = "8:#1203"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_D365D0A7D2D1401AB924C1397D4DC18F"
+                    {
+                    "Sequence" = "3:300"
+                    "DisplayName" = "8:Confirm Installation"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
                         "Properties"
                         {
                             "BannerBitmap"

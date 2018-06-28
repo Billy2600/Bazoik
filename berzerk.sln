@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "berzerk", "berzerk\berzerk.vcxproj", "{FAC22467-F150-476C-A78D-E9176AE8791A}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "setup", "setup\setup.vdproj", "{12E52A41-F94B-4AA0-9F0E-1EF9F7098D5F}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{50593D5B-BDA0-41F8-80EE-0318A0168478}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{FAC22467-F150-476C-A78D-E9176AE8791A}.Release|x64.Build.0 = Release|x64
 		{FAC22467-F150-476C-A78D-E9176AE8791A}.Release|x86.ActiveCfg = Release|Win32
 		{FAC22467-F150-476C-A78D-E9176AE8791A}.Release|x86.Build.0 = Release|Win32
-		{12E52A41-F94B-4AA0-9F0E-1EF9F7098D5F}.Debug|x64.ActiveCfg = Debug
-		{12E52A41-F94B-4AA0-9F0E-1EF9F7098D5F}.Debug|x86.ActiveCfg = Debug
-		{12E52A41-F94B-4AA0-9F0E-1EF9F7098D5F}.Release|x64.ActiveCfg = Release
-		{12E52A41-F94B-4AA0-9F0E-1EF9F7098D5F}.Release|x86.ActiveCfg = Release
+		{50593D5B-BDA0-41F8-80EE-0318A0168478}.Debug|x64.ActiveCfg = Debug
+		{50593D5B-BDA0-41F8-80EE-0318A0168478}.Debug|x86.ActiveCfg = Debug
+		{50593D5B-BDA0-41F8-80EE-0318A0168478}.Release|x64.ActiveCfg = Release
+		{50593D5B-BDA0-41F8-80EE-0318A0168478}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
