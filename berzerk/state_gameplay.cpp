@@ -330,7 +330,18 @@ void StateGameplay::Update( const float dt )
 		// Spawn Otto if delay has been reached
 		if( pauseTime + now >= OTTO_DELAY && !ottoSpawned )
 		{
-			otto = new EntityOtto( sf::Vector2f( 0, player.hitbox.top ), player.hitbox.top, player.hitbox.top + player.hitbox.height, CheckEasterEgg() );
+			// Spawn on opposite side of screen from player
+			sf::Vector2f ottoSpawnPos = sf::Vector2f( 0, player.hitbox.top ); // Default to left side of screen
+			float ottoDir = 1;
+
+			const unsigned int halfGameWidth = game->window.getSize().x / 2;
+			if( player.hitbox.left < halfGameWidth )
+			{
+				ottoSpawnPos.x = game->window.getSize().x + OTTO_WIDTH; // Spawn Otto on right side instead
+				ottoDir = -1;
+			}
+
+			otto = new EntityOtto( ottoSpawnPos, player.hitbox.top, player.hitbox.top + player.hitbox.height, CheckEasterEgg(), ottoDir );
 			entityManager.Add( otto );
 			ottoSpawned = true;
 

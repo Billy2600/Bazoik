@@ -1,14 +1,15 @@
 #include "entity_otto.h"
 
-EntityOtto::EntityOtto( sf::Vector2f pos, const float minHeight, const float maxHeight, const bool dopefish )
+EntityOtto::EntityOtto( sf::Vector2f pos, const float minHeight, const float maxHeight, const bool dopefish, const int vDirection )
 {
 	hitbox.left = pos.x;
 	hitbox.top = pos.y;
 	SetMinMaxHeight( minHeight, maxHeight );
-	hitbox.width = 24;
-	hitbox.height = 24;
+	hitbox.width = OTTO_WIDTH;
+	hitbox.height = OTTO_HEIGHT;
 
-	float direction = ySpeed;
+	this->hDirection = ySpeed;
+	this->vDirection = vDirection;
 	this->dopefish = dopefish;
 
 #ifdef _DEBUG
@@ -31,17 +32,18 @@ void EntityOtto::Think( const float dt )
 			sprite.setTextureRect( animManager.Animate( "evil_otto" ) );
 	}
 
-	if( direction == 0 ) direction = ySpeed; // Make sure this is initialized
+	if( hDirection == 0 ) hDirection = ySpeed; // Make sure this is initialized
 
 	sf::Vector2f move = sf::Vector2f( 0, 0 );
 
-	move.x = xSpeed;
-	if( ( hitbox.top + hitbox.height ) > maxHeight )
-		direction = -ySpeed;
-	else if( ( hitbox.top + hitbox.height ) < minHeight )
-		direction = ySpeed;
+	move.x = xSpeed * vDirection;
 
-	move.y += direction;
+	if( ( hitbox.top + hitbox.height ) > maxHeight )
+		hDirection = -ySpeed;
+	else if( ( hitbox.top + hitbox.height ) < minHeight )
+		hDirection = ySpeed;
+
+	move.y += hDirection;
 
 	Move( move, dt );
 }

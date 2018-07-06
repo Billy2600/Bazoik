@@ -2,6 +2,8 @@
 #include "entity.h"
 
 #define OTTO_BUFFER 50 // Buffer above/below player so it's possible to avoid Otto
+#define OTTO_WIDTH 24
+#define OTTO_HEIGHT 24
 #define OTTO_DELAY 10000 // Delay before Otto will spawn
 
 class EntityOtto : public Entity
@@ -15,12 +17,14 @@ private:
 	const float ySpeed = 200;
 	float maxHeight;
 	float minHeight;
-	float direction; // Current direction (up/down)
+	// Horizonal/vertical directions; numerical as to be used directly in movement
+	float hDirection;
+	int vDirection; // Should be 1 or -1
 	bool dopefish;
 	AnimManager animManager;
 
 public:
-	EntityOtto( const sf::Vector2f pos, const float minHeight = 0, const float maxHeight = GAME_HEIGHT, const bool dopefish = false );
+	EntityOtto( const sf::Vector2f pos, const float minHeight = 0, const float maxHeight = GAME_HEIGHT, const bool dopefish = false, const int vDirection = 1 );
 
 	virtual void Think( const float dt );
 	virtual void Draw() const;
