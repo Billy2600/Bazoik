@@ -40,6 +40,14 @@ StateTitleScreen::StateTitleScreen(Game *game)
 	startLevel = 1;
 	currentDemo = 0;
 	clkAttractMode.restart();
+
+	if (!txImage.loadFromFile( "assets/TitleScreen001.png" ))
+		log.Write( "Could not load title screen image" );
+	else
+	{
+		spImage.setTexture( txImage );
+		spImage.setPosition( 0, 0 );
+	}
 }
 
 void StateTitleScreen::Start()
@@ -220,6 +228,8 @@ void StateTitleScreen::Update(const float dt)
 void StateTitleScreen::Draw() const
 {
 	game->window.draw( title );
+
+	game->window.draw( spImage );
 
 	for( auto button : buttons )
 	{

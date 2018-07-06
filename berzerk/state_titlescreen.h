@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include <string>
+#include <SFML/Graphics.hpp>
 #include "game_state.h"
 #include "gui_button.h"
 
@@ -19,6 +20,8 @@ private:
 	int currentDemo;
 	int startLevel;
 	sf::Clock clkAttractMode; // Timer for attract mode
+	sf::Texture txImage;
+	sf::Sprite spImage;
 
 	void StartGame(); // Start the game
 
