@@ -171,12 +171,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8F5B8B2A42584767AF28FF2B8E4D4B67"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_8F9FDFC129F042A7BD960C8AD0A25B2D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -226,6 +220,12 @@
         "Entry"
         {
         "MsmKey" = "8:_AF925B7785754AF0A2ABB6E6A6D3127B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C7BB1A91F70441DCB2B27EAE3A497358"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -313,6 +313,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -329,6 +337,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -870,26 +894,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F5B8B2A42584767AF28FF2B8E4D4B67"
-            {
-            "SourcePath" = "8:..\\berzerk\\assets\\animations.xml.old"
-            "TargetName" = "8:animations.xml.old"
-            "Tag" = "8:"
-            "Folder" = "8:_5FAB5A69108B4C658689D4C1BCD7D358"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F9FDFC129F042A7BD960C8AD0A25B2D"
             {
             "SourcePath" = "8:..\\Release\\sfml-system-2.dll"
@@ -1056,6 +1060,26 @@
             "TargetName" = "8:Bazoik_Intruder_alert_Mid.wav"
             "Tag" = "8:"
             "Folder" = "8:_F53D91A66BB1472A807A2C3027C1EF1D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C7BB1A91F70441DCB2B27EAE3A497358"
+            {
+            "SourcePath" = "8:..\\berzerk\\assets\\TitleScreen001.png"
+            "TargetName" = "8:TitleScreen001.png"
+            "Tag" = "8:"
+            "Folder" = "8:_5FAB5A69108B4C658689D4C1BCD7D358"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1379,15 +1403,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Bazoik"
-        "ProductCode" = "8:{6272A47D-2098-492F-AC68-A42BCEF7BF03}"
-        "PackageCode" = "8:{6850D8CB-0FD4-41D2-95C2-B50EEBF104ED}"
+        "ProductCode" = "8:{269AAC0D-AE48-4925-9D54-9999873DCBA8}"
+        "PackageCode" = "8:{2E4A3CBF-DC83-46EC-95CA-97A52C5090E2}"
         "UpgradeCode" = "8:{BD867B44-ECD9-4DAA-B44D-60BE959E2968}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:MMDC Games"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1510,6 +1534,20 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_173E339E892E441985BD0414BB101CAA"
             "Folder" = "8:_C7145D6F6BD24CA98AC1FEAA749C6A94"
+            "WorkingFolder" = "8:_618E1E25EB86403EBE720F4803117252"
+            "Icon" = "8:_48FD9E22708145729D1802940D5BB526"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D9B991BE965C414DA375948A9A0FADD2"
+            {
+            "Name" = "8:Bazoik"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_173E339E892E441985BD0414BB101CAA"
+            "Folder" = "8:_EDD3F096CDBE479096084DBE40611915"
             "WorkingFolder" = "8:_618E1E25EB86403EBE720F4803117252"
             "Icon" = "8:_48FD9E22708145729D1802940D5BB526"
             "Feature" = "8:"
