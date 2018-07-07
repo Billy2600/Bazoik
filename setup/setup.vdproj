@@ -320,6 +320,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -1403,15 +1411,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Bazoik"
-        "ProductCode" = "8:{269AAC0D-AE48-4925-9D54-9999873DCBA8}"
-        "PackageCode" = "8:{2E4A3CBF-DC83-46EC-95CA-97A52C5090E2}"
+        "ProductCode" = "8:{4065D898-D9D6-46FC-822B-9E7CC61FBE0C}"
+        "PackageCode" = "8:{CBC6BDF7-ED52-48B1-A97A-D52860C48629}"
         "UpgradeCode" = "8:{BD867B44-ECD9-4DAA-B44D-60BE959E2968}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:MMDC Games"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

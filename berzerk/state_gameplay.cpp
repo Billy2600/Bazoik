@@ -334,10 +334,10 @@ void StateGameplay::Update( const float dt )
 			sf::Vector2f ottoSpawnPos = sf::Vector2f( 0, player.hitbox.top ); // Default to left side of screen
 			float ottoDir = 1;
 
-			const unsigned int halfGameWidth = game->window.getSize().x / 2;
+			const unsigned int halfGameWidth = GAME_WIDTH / 2;
 			if( player.hitbox.left < halfGameWidth )
 			{
-				ottoSpawnPos.x = game->window.getSize().x + OTTO_WIDTH; // Spawn Otto on right side instead
+				ottoSpawnPos.x = GAME_WIDTH + OTTO_WIDTH; // Spawn Otto on right side instead
 				ottoDir = -1;
 			}
 
