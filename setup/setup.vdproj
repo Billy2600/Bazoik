@@ -165,6 +165,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_88ED034927F842C5A5450943C675B1CC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8C0A054F2A0D40F1BF1EDFF717A9FBBB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -882,6 +888,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_88ED034927F842C5A5450943C675B1CC"
+            {
+            "SourcePath" = "8:..\\berzerk\\assets\\Title_Music.wav"
+            "TargetName" = "8:Title_Music.wav"
+            "Tag" = "8:"
+            "Folder" = "8:_5FAB5A69108B4C658689D4C1BCD7D358"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8C0A054F2A0D40F1BF1EDFF717A9FBBB"
             {
             "SourcePath" = "8:..\\berzerk\\assets\\voice\\Bazoik_Intruder_alert_Hi.wav"
@@ -1411,15 +1437,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Bazoik"
-        "ProductCode" = "8:{4065D898-D9D6-46FC-822B-9E7CC61FBE0C}"
-        "PackageCode" = "8:{CBC6BDF7-ED52-48B1-A97A-D52860C48629}"
+        "ProductCode" = "8:{0B639BD2-91E5-466B-B020-A2513D7C39CB}"
+        "PackageCode" = "8:{8FEF4A0C-D3D4-4C97-AA65-B9840B9757F3}"
         "UpgradeCode" = "8:{BD867B44-ECD9-4DAA-B44D-60BE959E2968}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.3"
         "Manufacturer" = "8:MMDC Games"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
