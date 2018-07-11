@@ -55,15 +55,7 @@ Game::Game()
 	AnimManager animManager;
 	animManager.LoadFromFile( "assets/animations.xml" );
 
-	if ( !music.openFromFile( "assets/music.wav" ) )
-	{
-		ErrorLog log;
-		log.Write( "Could not open music file music.wav" );
-	}
-	else
-	{
-		music.setLoop( true );
-	}
+	music.setLoop(true); // Music will always loop
 }
 
 void Game::GameLoop()

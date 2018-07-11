@@ -68,7 +68,15 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 
 	if ( game->music.getStatus() != sf::Music::Status::Playing )
 	{
-		game->music.play();
+		if (!game->music.openFromFile("assets/music.wav"))
+		{
+			ErrorLog log;
+			log.Write("Could not open music file music.wav");
+		}
+		else
+		{
+			game->music.play();
+		}
 	}
 }
 
@@ -87,6 +95,7 @@ void StateGameplay::HandleInput()
 		pause.HandleInput();
 		if ( pause.quit )
 		{
+			game->music.stop();
 			ReturnToTitle();
 			return;
 		}
@@ -475,7 +484,7 @@ void StateGameplay::ReturnToTitle()
 {
 	game->window.setMouseCursorVisible( true );
 	lastMove = Directions::W;
-	game->music.stop();
+	//game->music.stop();
 	game->PopState();
 }
 

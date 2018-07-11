@@ -58,6 +58,19 @@ void StateTitleScreen::Start()
 	recordDemo = false;
 	game->ResetLives();
 	game->score = 0;
+
+	if (game->music.getStatus() != sf::Music::Status::Playing)
+	{
+		if (!game->music.openFromFile("assets/Title_Music.wav"))
+		{
+			ErrorLog log;
+			log.Write("Could not open music file Title_Music.wav");
+		}
+		else
+		{
+			game->music.play();
+		}
+	}
 }
 
 void StateTitleScreen::HandleInput()
@@ -96,6 +109,7 @@ void StateTitleScreen::HandleInput()
 				// Perform action based on which button this is
 				if( button.first == "start" )
 				{
+					game->music.stop(); // Stop attract mode music so that gameplay music will start
 					StartGame();
 				}
 				else if( button.first == "options" )
@@ -172,7 +186,8 @@ void StateTitleScreen::HandleInput()
 				}
 			}
 		}
-
+		
+#ifdef _DEBUG
 		// Change start level
 		if ( event.key.code == sf::Keyboard::Key::F1 )
 		{
@@ -193,12 +208,13 @@ void StateTitleScreen::HandleInput()
 			recordDemo = false;
 			title.setString( "Play Demo" );
 		}
-		if( event.key.code == sf::Keyboard::Key::F11 )
+		if (event.key.code == sf::Keyboard::Key::F11)
 		{
 			recordDemo = true;
 			playDemo = false;
-			title.setString( "Record Demo" );
+			title.setString("Record Demo");
 		}
+#endif
 	}
 }
 

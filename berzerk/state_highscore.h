@@ -17,6 +17,7 @@ private:
 
 	sf::Text title;
 	sf::Text table; // High score table
+	sf::Text countdown; // Show visible countdown on screen after entering highscore
 	Score scores[NUM_SCORES];
 
 	bool entryMode; // Are we entering a score?

@@ -30,6 +30,11 @@ StateHighscore::StateHighscore( Game *game )
 	table.setPosition( sf::Vector2f( 3, 90 ) );
 	table.setString( "" );
 
+	countdown = title;
+	countdown.setCharacterSize(40);
+	countdown.setPosition( sf::Vector2f( GAME_WIDTH - 40, GAME_HEIGHT - 80 ) );
+	countdown.setString( "" );
+
 	LoadFromFile( "scores.xml" );
 	QuickSort(0, NUM_SCORES-1);
 	CheckNewScore();
@@ -142,6 +147,7 @@ void StateHighscore::Draw() const
 {
 	game->window.draw( title );
 	game->window.draw( table );
+	game->window.draw( countdown );
 }
 
 void StateHighscore::Update( const float dt )
@@ -199,6 +205,11 @@ void StateHighscore::Update( const float dt )
 		Close();
 		game->PopState();
 		return;
+	}
+
+	if (!entryMode)
+	{
+		countdown.setString(std::to_string((resetDelay - clock.getElapsedTime().asMilliseconds()) / 1000));
 	}
 }
 
