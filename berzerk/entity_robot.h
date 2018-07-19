@@ -15,6 +15,7 @@ struct RobotStats
 	int numRobots;
 	sf::Color color;
 	float scale;
+    bool random; // If this is set, other values will be ignored and instead be randomized
 };
 
 class EntityRobot : public Entity

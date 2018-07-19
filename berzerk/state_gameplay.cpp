@@ -490,7 +490,7 @@ void StateGameplay::ReturnToTitle()
 
 RobotStats StateGameplay::LoadRobotStats()
 {
-	RobotStats stats{ false, true, 50, 3000, 5, ERROR_COLOR }; // Default values in case of error
+	RobotStats stats{ false, true, 50, 3000, 5, ERROR_COLOR, 1, false }; // Default values in case of error
 
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file( "assets/robotstats.xml" );
@@ -507,6 +507,10 @@ RobotStats StateGameplay::LoadRobotStats()
 		{
 			if ( game->level >= (unsigned int)std::stoi( level.attribute( "min" ).value() ) )
 			{
+                if (level.attribute( "random" ) != NULL && std::stoi( level.attribute( "random" ).value() ) == 1)
+                    stats.random = true;
+                else stats.random = false;
+                
 				if ( level.attribute( "stop_if_see_player") != NULL && std::stoi( level.attribute( "stop_if_see_player" ).value() ) == 0 )
 					stats.stopIfSeePlayer = false;
 				else
@@ -542,6 +546,9 @@ RobotStats StateGameplay::LoadRobotStats()
 			}
 		}
 
+        if (stats.random)
+            return RandomizeStats();
+
 		return stats;
 	}
 	catch ( int e )
@@ -549,6 +556,33 @@ RobotStats StateGameplay::LoadRobotStats()
 		log.Write( "Error while loading assets/robotstats.xml" );
 		return stats;
 	}
+}
+
+RobotStats StateGameplay::RandomizeStats()
+{
+    // Roll a bunch of dice
+    std::uniform_int_distribution<unsigned int> rndCanShoot( 0, 3 ); // All > 1 evaluate to true, so we're making it more likely they can shoot
+    std::uniform_int_distribution<unsigned int> rndStopIfSeePlayer( 0, 1 );
+    std::uniform_int_distribution<unsigned int> rndFireDelay( 500, 2000 );
+    std::uniform_int_distribution<unsigned int> rndMovementSpeed( 1, 60 );
+    std::uniform_int_distribution<unsigned int> rndNumRobots( 2, 15 );
+    std::uniform_real_distribution<double> rndScale( 0.5, 2.5 );
+    // Random colors
+    std::uniform_int_distribution<unsigned int> rndR( 0, 255 );
+    std::uniform_int_distribution<unsigned int> rndG( 0, 255 );
+    std::uniform_int_distribution<unsigned int> rndB( 0, 255 );
+
+    // Assign values
+    RobotStats rndStats;
+    rndStats.canShoot = rndCanShoot( rngEngine );
+    rndStats.stopIfSeePlayer = rndStopIfSeePlayer( rngEngine );
+    rndStats.fireDelay = rndFireDelay( rngEngine );
+    rndStats.movementSpeed = rndMovementSpeed( rngEngine );
+    rndStats.numRobots = rndNumRobots( rngEngine );
+    rndStats.scale = (float)rndScale( rngEngine );
+    rndStats.color = sf::Color( rndR( rngEngine ), rndB( rngEngine ), rndG( rngEngine ) );
+
+    return rndStats;
 }
 
 void StateGameplay::AddLastMove( Directions move )

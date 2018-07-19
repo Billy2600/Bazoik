@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <random>
 #include "game_state.h"
 #include "entity_player.h"
 #include "entity_wall.h"
@@ -53,6 +54,8 @@ private:
 	void ReturnToTitle(); // Return to title screen
 
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
+    std::mt19937 rngEngine = std::mt19937( (unsigned int)time( 0 ) );
+    RobotStats RandomizeStats(); // Randomize robot stats, if that option was selected
 
 	static std::vector<Directions> lastFourMoves; // Used to keep track for easter egg
 	void AddLastMove( Directions move ); // Add last move to vector

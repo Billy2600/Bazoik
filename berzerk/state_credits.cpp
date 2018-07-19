@@ -20,7 +20,7 @@ StateCredits::StateCredits( Game *game )
 	txCredits = title;
 	txCredits.setCharacterSize( 30 );
 	txCredits.setPosition( sf::Vector2f( 3, 90 ) );
-	txCredits.setString( "\nProgramming . . .Billy McPherson\nArt . . . . . . .Aaron Martinez\nVoice/Design . . Argus Swift" );
+	txCredits.setString( "\nProgramming . . .Billy McPherson\nArt/Music . . . .Aaron Martinez\nVoice/Design . . Argus Swift" );
 }
 
 void StateCredits::Start()

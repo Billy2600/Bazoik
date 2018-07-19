@@ -3,6 +3,8 @@
 
 EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 {
+    this->stats = stats;
+
 	hitbox.top = pos.y;
 	hitbox.left = pos.x;
 #ifdef _DEBUG
@@ -20,11 +22,10 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 	lastFire = 0;
 	deathTime = 0;
 	currentAnim = "robot_idle";
-	hitbox.width = 32 * stats.scale;
-	hitbox.height = 32 * stats.scale;
+	hitbox.width = 32 * this->stats.scale;
+	hitbox.height = 32 * this->stats.scale;
 
-	this->stats = stats;
-	sprite.setColor( stats.color );
+	sprite.setColor( this->stats.color );
 }
 
 void EntityRobot::LoadSprite()
