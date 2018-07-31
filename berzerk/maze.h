@@ -37,6 +37,8 @@ private:
 
 	// Random number generator engine
 	std::mt19937 rngEngine = std::mt19937((unsigned int)time(0)); 
+    std::uniform_int_distribution<unsigned int> randX = std::uniform_int_distribution<unsigned int>( 0, MAZE_WIDTH - 1 );
+    std::uniform_int_distribution<unsigned int> randY = std::uniform_int_distribution<unsigned int>( 0, MAZE_HEIGHT - 1 );
 
 	unsigned int x, y; // X and Y iterators
 	bool done; // Level generation complete flag

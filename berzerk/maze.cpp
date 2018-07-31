@@ -295,11 +295,13 @@ std::vector<sf::Vector2f> Maze::SpawnEnemies( EntityManager& entityManager, cons
 	std::vector<sf::Vector2u> used;
 	std::vector<sf::Vector2f> positions;
 
+    // Don't allow more than 14 robots
+    if ( stats.numRobots > 14 )
+        stats.numRobots = 14;
+
 	// Pick random tile
 	for( int i = 0; i < stats.numRobots; i++ )
 	{
-		std::uniform_int_distribution<unsigned int> randX( 0, MAZE_WIDTH - 1 );
-		std::uniform_int_distribution<unsigned int> randY( 0, MAZE_HEIGHT - 1 );
 		unsigned int tileX = randX( rngEngine );
 		unsigned int tileY = randY( rngEngine );
 		// Don't spawn in the same tile as player

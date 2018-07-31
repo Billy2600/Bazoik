@@ -565,7 +565,7 @@ RobotStats StateGameplay::RandomizeStats()
     std::uniform_int_distribution<unsigned int> rndStopIfSeePlayer( 0, 1 );
     std::uniform_int_distribution<unsigned int> rndFireDelay( 500, 2000 );
     std::uniform_int_distribution<unsigned int> rndMovementSpeed( 1, 60 );
-    std::uniform_int_distribution<unsigned int> rndNumRobots( 2, 15 );
+    std::uniform_int_distribution<unsigned int> rndNumRobots( 2, 14 );
     std::uniform_real_distribution<double> rndScale( 0.5, 2.5 );
     // Random colors
     std::uniform_int_distribution<unsigned int> rndR( 0, 255 );

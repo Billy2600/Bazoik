@@ -137,7 +137,18 @@ void StateHighscore::LoadFromFile( const std::string filename )
 			return;
 
 		std::string name( score.first_child().value() );
-		scores[i].num = std::stoi( name );
+        scores[i].num = 0;
+        try
+        {
+            scores[i].num = std::stoi( name );
+        }
+        catch(std::invalid_argument& e)
+        {
+            ErrorLog log;
+            log.Write( "Invalid argument while reading high score number" );
+            return;
+        }
+
 		strcpy_s( scores[i].initials, score.attribute( "name" ).value() );
 		i++;
 	}
