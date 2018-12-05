@@ -239,8 +239,7 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 		sprite.setScale( 1, 1 );
 	}
 
-	sf::IntRect animRect = animManager.Animate( currentAnim );
-	sprite.setTextureRect( animRect );
+	sprite.setTextureRect( animManager.Animate( currentAnim ) );
 }
 
 EntityPlayer::~EntityPlayer()

@@ -103,7 +103,9 @@
 		<frame x="380" y="88" w="5" h="8"></frame>
 	</anim>
 	<anim name="evil_otto">
-		<frame x="130" y="100" w="25" h="25"></frame>
+		<frame x="3" y="161" w="32" h="32"></frame>
+		<frame x="37" y="161" w="32" h="32"></frame>
+		<frame x="71" y="161" w="32" h="32"></frame>
 	</anim>
 	<anim name="dopefish">
 		<frame x="162" y="100" w="29" h="26"></frame>

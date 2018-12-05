@@ -2,8 +2,8 @@
 #include "entity.h"
 
 #define OTTO_BUFFER 50 // Buffer above/below player so it's possible to avoid Otto
-#define OTTO_WIDTH 24
-#define OTTO_HEIGHT 24
+#define OTTO_WIDTH 32
+#define OTTO_HEIGHT 32
 #define OTTO_DELAY 10000 // Delay before Otto will spawn
 
 class EntityOtto : public Entity
