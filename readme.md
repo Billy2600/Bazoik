@@ -27,7 +27,7 @@ To navigate the menus in the game, simply use the Up and Down buttons to select 
 
 ## Rebinding controls and changing fullscreen options
 <img src="https://i.imgur.com/LcsiVfL.png" alt="Bazoik Options" align="right" />
-From either the main menu or pause menu, select "Options". Once in the options menu, highlight the key you wish to rebind and press the fire button or left click the mouse. Then, the game will wait for input. The next valid input it recieves will be bound to the selected action. To change fullscreen mode, simply highlight the Fullscreen option and press the fire button or left click. This will toggle fullscreen on or off, depending on what mode is currently enabled. Make sure to save and quick after selecting your preferred options!
+From either the main menu or pause menu, select "Options". Once in the options menu, highlight the key you wish to rebind and press the fire button or left click the mouse. Then, the game will wait for input. The next valid input it recieves will be bound to the selected action. To change fullscreen mode, simply highlight the Fullscreen option and press the fire button or left click. This will toggle fullscreen on or off, depending on what mode is currently enabled. Make sure to select "save and return" after selecting your preferred options!
 
 ## Entering a high score
 If you manage to attain a high score when you get a game over, you wil be taken to the high score screen. To select a initial, simply press the Left and Right buttons, and then press Fire to confirm. Repeat the process for your middle and last initial. High scores are automatically saved to your computer.
