@@ -8,7 +8,7 @@ Somewhere deep within these endless sterile corridors is you. The air smells of 
 Reexperience the arcade classic, Berzerk, in a new modernized form. Put together by three enthusiastic novices, we hope Bazoik will thrill and challenge you!
 
 ## How to install
-Click on "(number) Release" above and download Bazoik.msi. Double click on the file once downloaded and follow the instructions to install the game.
+Click on "(number) Release" above and download Bazoik.msi. Double click on the file once downloaded and follow the instructions to install the game. Bazoik is for Windows PCs only.
 
 ## How to play
 <img src="https://i.imgur.com/r5hdGoR.png" alt="Bazoik Gameplay" align="right" />
@@ -31,3 +31,9 @@ From either the main menu or pause menu, select "Options". Once in the options m
 
 ## Entering a high score
 If you manage to attain a high score when you get a game over, you wil be taken to the high score screen. To select a initial, simply press the Left and Right buttons, and then press Fire to confirm. Repeat the process for your middle and last initial. High scores are automatically saved to your computer.
+
+
+### Credits
+* Programming - Billy McPherson
+* Art/Music - Aaron Martinez
+* Voice/Design - Argus Swift
