@@ -1,7 +1,7 @@
 # Bazoik
 
 ## About
-<div style="float: right">[!Bazoik](https://i.imgur.com/zC9smwc.png)</div>
+<div style="float: right"><img src="https://i.imgur.com/zC9smwc.png" alt="Bazoik Icon" /></div>
 You're trapped.
 Somewhere deep within these endless sterile corridors is you. The air smells of ozone from the lethal electrified walls. The stomps and threats from the endless robot legion thrum around you in all directions. Lost, confused, you're out of time, and full of rage. All that's left to your name is your wits, a polycarbon prisoner garb, and a handheld High-Focus Teletronic Phase Zapper. The clothes won't protect you from anything. But the Phase Zapper... That oughta take a few of them down.
 
