@@ -21,12 +21,39 @@ void EntitySword::SetDimensionsBasedOnDirection(Directions direction)
 	}
 }
 
+void EntitySword::SetPositionBasedOnDirection(Directions direction)
+{
+	switch (direction)
+	{
+	case Directions::NE:
+	case Directions::SE:
+	case Directions::N:
+		hitbox.left = owner->hitbox.left + (owner->hitbox.width / 2);
+		hitbox.top = owner->hitbox.top - hitbox.height;
+		break;
+	case Directions::S:
+		hitbox.left = owner->hitbox.left + (owner->hitbox.width / 2);
+		hitbox.top = owner->hitbox.top + owner->hitbox.height;
+		break;
+	case Directions::NW:
+	case Directions::SW:
+	case Directions::W:
+		hitbox.left = owner->hitbox.left - hitbox.width;
+		hitbox.top = owner->hitbox.top + (owner->hitbox.height / 2);
+		break;
+	case Directions::E:
+		hitbox.left = owner->hitbox.left + owner->hitbox.width;
+		hitbox.top = owner->hitbox.top + (owner->hitbox.height / 2);
+		break;
+	}
+}
+
 
 EntitySword::EntitySword(Directions direction, Entity* owner)
 {
 	this->owner = owner;
-	hitbox.left = owner->hitbox.left;
-	hitbox.top = owner->hitbox.top;
+	lastDir = direction;
+	SetPositionBasedOnDirection(direction);
 	SetDimensionsBasedOnDirection(direction);
 
 #ifdef _DEBUG
@@ -39,8 +66,7 @@ EntitySword::EntitySword(Directions direction, Entity* owner)
 
 void EntitySword::Think(const float dt)
 {
-	hitbox.left = owner->hitbox.left;
-	hitbox.top = owner->hitbox.top;
+	SetPositionBasedOnDirection(lastDir);
 #ifdef _DEBUG
 	shape.setPosition(hitbox.left, hitbox.top);
 #endif 

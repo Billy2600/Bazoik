@@ -10,8 +10,10 @@ private:
 #ifdef _DEBUG
 	sf::RectangleShape shape;
 #endif
+	Directions lastDir;
 
 	void SetDimensionsBasedOnDirection(Directions direction);
+	void SetPositionBasedOnDirection(Directions direction);
 
 public:
 	Entity* owner;

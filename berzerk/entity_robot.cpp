@@ -127,7 +127,7 @@ void EntityRobot::Draw() const
 
 void EntityRobot::HandleCollision( Entity *other )
 {
-	if( dynamic_cast<EntityBullet*>( other ) != NULL || dynamic_cast<EntityWall*>( other ) != NULL )
+	if( dynamic_cast<EntityBullet*>( other ) != NULL || dynamic_cast<EntityWall*>( other ) != NULL || dynamic_cast<EntitySword*>(other) != NULL)
 	{   
 		hits++;
 		if( !dead ) // Only do this stuff once
