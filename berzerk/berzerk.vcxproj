@@ -128,6 +128,7 @@
     <ClCompile Include="entity_otto.cpp" />
     <ClCompile Include="entity_player.cpp" />
     <ClCompile Include="entity_robot.cpp" />
+    <ClCompile Include="entity_sword.cpp" />
     <ClCompile Include="entity_wall.cpp" />
     <ClCompile Include="error_log.cpp" />
     <ClCompile Include="game.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="entity_otto.h" />
     <ClInclude Include="entity_player.h" />
     <ClInclude Include="entity_robot.h" />
+    <ClInclude Include="entity_sword.h" />
     <ClInclude Include="entity_wall.h" />
     <ClInclude Include="error_log.h" />
     <ClInclude Include="game.h" />

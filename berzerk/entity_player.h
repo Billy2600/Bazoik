@@ -5,6 +5,7 @@
 #include "entity_wall.h"
 #include "entity_robot.h"
 #include "entity_bullet.h"
+#include "entity_sword.h"
 
 #define PLAYER_SPEED 200
 
@@ -49,6 +50,7 @@ private:
 	std::string currentAnim;
 	void LoadSprite();
 	void ChooseFireAnim(sf::Vector2f direction); // Choose firing direction; will set animation (does not return)
+	Directions GetDirectionFromVector(sf::Vector2f vector);
 
 public:
 	bool drawHitbox;

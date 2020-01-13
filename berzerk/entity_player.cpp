@@ -65,6 +65,26 @@ void EntityPlayer::ChooseFireAnim( sf::Vector2f direction )
 		currentAnim = "player_fire_se";
 }
 
+Directions EntityPlayer::GetDirectionFromVector(sf::Vector2f vector)
+{
+	if( direction == sf::Vector2f( -1, -1 ) )
+		return Directions::NW;
+	else if( direction == sf::Vector2f( 0, -1 ) )
+		return Directions::N;
+	else if( direction == sf::Vector2f( 1, -1 ) )
+		return Directions::NE;
+	else if( direction == sf::Vector2f( -1, 0 ) )
+		return Directions::W;
+	else if( direction == sf::Vector2f( 1, 0 ) )
+		return Directions::E;
+	else if( direction == sf::Vector2f( -1, 1 ) )
+		return Directions::SW;
+	else if( direction == sf::Vector2f( 0, 1 ) )
+		return Directions::S;
+	else if( direction == sf::Vector2f( 1, 1) )
+		return Directions::SE;
+}
+
 void EntityPlayer::Think( const float dt )
 {
 	LoadSprite();
@@ -154,7 +174,7 @@ void EntityPlayer::Think( const float dt )
 	// Fire with delay
 	if( direction != sf::Vector2f(0,0) && input.fire && now - lastFire >= fireDelay )
 	{
-		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), direction, this ) );
+		entityManager->Add( new EntitySword( GetDirectionFromVector(direction) , this ) );
 		lastFire = now;
 		game->assetManager.PlaySound( "shoot" );
 	}
