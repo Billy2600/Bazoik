@@ -18,6 +18,7 @@ EntityPlayer::EntityPlayer()
 	deathTime = 0.f;
 	now = clock.getElapsedTime().asMilliseconds();
 	drawHitbox = false;
+	lastDirection = sf::Vector2f(1, 0);
 }
 
 void EntityPlayer::SetPos( const sf::Vector2f pos )
@@ -171,10 +172,15 @@ void EntityPlayer::Think( const float dt )
 		lastHoriz = Directions::E;
 	}
 
-	// Fire with delay
-	if( direction != sf::Vector2f(0,0) && input.fire && now - lastFire >= fireDelay )
+	if (direction != sf::Vector2f(0, 0))
 	{
-		entityManager->Add( new EntitySword( GetDirectionFromVector(direction) , this ) );
+		lastDirection = direction;
+	}
+
+	// Swing with delay
+	if( input.fire && now - lastFire >= fireDelay )
+	{
+		entityManager->Add( new EntitySword( GetDirectionFromVector(lastDirection) , this ) );
 		lastFire = now;
 		game->assetManager.PlaySound( "shoot" );
 	}

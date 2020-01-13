@@ -3,6 +3,7 @@
 
 #define SWORD_HEIGHT 11
 #define SWORD_WIDTH 3
+#define SWORD_SWING_DELAY 80 // In milliseconds
 
 class EntitySword : public Entity
 {
@@ -11,6 +12,7 @@ private:
 	sf::RectangleShape shape;
 #endif
 	Directions lastDir;
+	sf::Clock clock;
 
 	void SetDimensionsBasedOnDirection(Directions direction);
 	void SetPositionBasedOnDirection(Directions direction);

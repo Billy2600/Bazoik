@@ -1,5 +1,22 @@
 #include "entity_sword.h"
 
+EntitySword::EntitySword(Directions direction, Entity* owner)
+{
+	clock.restart();
+
+	this->owner = owner;
+	lastDir = direction;
+	SetPositionBasedOnDirection(direction);
+	SetDimensionsBasedOnDirection(direction);
+
+#ifdef _DEBUG
+	shape.setFillColor(sf::Color::Transparent);
+	shape.setOutlineColor(sf::Color::Red);
+	shape.setOutlineThickness(1.f);
+	shape.setSize(sf::Vector2f(hitbox.width, hitbox.height));
+#endif
+}
+
 void EntitySword::SetDimensionsBasedOnDirection(Directions direction)
 {
 	switch (direction)
@@ -48,22 +65,6 @@ void EntitySword::SetPositionBasedOnDirection(Directions direction)
 	}
 }
 
-
-EntitySword::EntitySword(Directions direction, Entity* owner)
-{
-	this->owner = owner;
-	lastDir = direction;
-	SetPositionBasedOnDirection(direction);
-	SetDimensionsBasedOnDirection(direction);
-
-#ifdef _DEBUG
-	shape.setFillColor(sf::Color::Transparent);
-	shape.setOutlineColor(sf::Color::Red);
-	shape.setOutlineThickness(1.f);
-	shape.setSize(sf::Vector2f(hitbox.width, hitbox.height));
-#endif
-}
-
 void EntitySword::Think(const float dt)
 {
 	SetPositionBasedOnDirection(lastDir);
@@ -71,6 +72,11 @@ void EntitySword::Think(const float dt)
 	shape.setPosition(hitbox.left, hitbox.top);
 #endif 
 
+	// Finish sword "swing"
+	if (clock.getElapsedTime().asMilliseconds() >= SWORD_SWING_DELAY)
+	{
+		deleteMe = true;
+	}
 }
 
 void EntitySword::Draw() const

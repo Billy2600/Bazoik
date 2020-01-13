@@ -34,8 +34,9 @@ private:
 	sf::Clock clock; // Used for measuring delays
 	sf::Int32 now; // Current time, updated every step
 	sf::Int32 lastFire; // Last time we fired
-	const sf::Int32 fireDelay = 500; // Delay between fired shots (in milliseconds)
-	sf::Vector2f direction; // Currently facing direction (will direct bullets)
+	const sf::Int32 fireDelay = 500; // Delay between sword swings (in milliseconds)
+	sf::Vector2f direction; // Currently facing direction (will direct sword swings)
+	sf::Vector2f lastDirection; // Last pressed direction, for when we're standing still
 	Directions lastHoriz; // Last horizontal direction we moved (for animations)
 
 	float deathTime; // Time we died
