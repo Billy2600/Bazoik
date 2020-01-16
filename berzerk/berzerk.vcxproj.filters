@@ -48,9 +48,6 @@
     <ClCompile Include="gui_button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="maze.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="state_options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -132,9 +129,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gui_button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="maze.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="state_options.h">

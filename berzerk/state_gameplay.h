@@ -6,7 +6,6 @@
 #include "entity_wall.h"
 #include "entity_robot.h"
 #include "entity_manager.h"
-#include "maze.h"
 #include "demo.h"
 #include "pause_menu.h"
 
@@ -15,6 +14,9 @@
 #define HORZ_TRANS_SPEED 400
 #define MAX_LIVES 9 // Maximum number of lives to show on screen
 #define ALL_ROBOTS_SCORE 300 // Score added for killing all robots
+#define WALL_THICKNESS 10 // Thickness of walls
+#define WALL_HEIGHT 224 // Height of left/right walls
+#define WALL_WIDTH 384 // Width of top/bottom walls
 
 class StateGameplay : public GameState
 {
@@ -23,9 +25,6 @@ private:
 	EntityPlayer player;
 	PlayerInput input;
 	EntityManager entityManager;
-	Maze maze;
-	bool wallsCreated;
-	bool enemiesSpawned;
 	static bool chicken; // Did you kill all the robots? Static so it will carry over
 	sf::Text txScore;
 	sf::Text respawnPrompt;
@@ -54,6 +53,8 @@ private:
 	void PlayTransitionSound();
 	bool ResetIfDead(); // Reset if player died
 	void ReturnToTitle(); // Return to title screen
+	sf::Vector2f GetPlayerStart(const Directions lastMove, EntityPlayer& player) const;
+	void CreateWalls();
 
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
     std::mt19937 rngEngine = std::mt19937( (unsigned int)time( 0 ) );
