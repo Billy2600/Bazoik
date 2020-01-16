@@ -51,6 +51,7 @@ Game::Game()
 
 	// Load sprite texture
 	assetManager.LoadTexture( "sprites", "assets/Bazoik_Character_Sprite_Sheet.png" );
+	assetManager.LoadTexture( "background", "assets/background.png" );
 	// Load animations
 	AnimManager animManager;
 	animManager.LoadFromFile( "assets/animations.xml" );

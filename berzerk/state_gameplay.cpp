@@ -45,6 +45,8 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 		lives[i].setPosition( (5 + lives[i].getGlobalBounds().width) * i, GAME_HEIGHT - lives[i].getGlobalBounds().height - 5 );
 	}
 
+	background = sf::Sprite( assetManager->GetTextureRef( "background" ) );
+
 	ottoSpawned = false;
 
 	deathSoundPlayed = false;
@@ -384,6 +386,8 @@ void StateGameplay::Update( const float dt )
 
 void StateGameplay::Draw() const
 {
+	game->window.draw(background);
+
 	entityManager.Draw();
 
 	game->window.draw( txScore );

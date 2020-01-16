@@ -32,6 +32,8 @@ private:
 	sf::Sprite lives[MAX_LIVES];
 	AnimManager animManager;
 
+	sf::Sprite background;
+
 	static Directions lastMove;
 	bool transition; // Is the screen moving?
 	sf::Clock clock;
