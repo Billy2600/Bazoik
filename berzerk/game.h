@@ -6,8 +6,8 @@
 #include "anim_manager.h"
 
 #define GAME_NAME "Bazoik"
-#define GAME_WIDTH 848
-#define GAME_HEIGHT 480
+#define GAME_WIDTH 480	
+#define GAME_HEIGHT 320
 #define START_LIVES 3
 #define EXTRA_LIFE_SCORE 1000 // Extra life is awarded every x points
 // Account for OS differences
