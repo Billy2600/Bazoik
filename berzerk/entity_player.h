@@ -40,6 +40,7 @@ private:
 	const sf::Int32 fireDelay = 500; // Delay between fired shots (in milliseconds)
 	sf::Vector2f direction; // Currently facing direction (will direct bullets)
 	Directions lastHoriz; // Last horizontal direction we moved (for animations)
+	sf::Vector2f lastPos; // Last position (to move back on collision with walls, etc.)
 
 	float deathTime; // Time we died
 	const sf::Int32 resetDelay = 500; // Delay before resetting the state after dying
