@@ -235,15 +235,17 @@ void EntityPlayer::HandleCollision( Entity *other )
 	if( dead )
 		return;
 
-	// In most cases, die
-	if( dynamic_cast<EntityWall*>( other ) != NULL || dynamic_cast<EntityRobot*>( other ) != NULL || dynamic_cast<EntityBullet*>( other ) != NULL || dynamic_cast<EntityOtto*>( other ) != NULL )
+	// Move back on collision with walls, etc.
+	if( dynamic_cast<EntityWall*>( other ) != NULL )
 	{
-		Die();
+		hitbox.left = lastPos.x;
+		hitbox.top = lastPos.y;
 	}
 }
 
 void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to produce movement
 {
+	lastPos = sf::Vector2f(hitbox.left, hitbox.top);
 	hitbox.left += move.x * dt;
 	hitbox.top += move.y * dt;
 #ifdef _DEBUG
