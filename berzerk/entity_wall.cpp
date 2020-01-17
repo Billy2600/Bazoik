@@ -18,14 +18,20 @@ void EntityWall::SetBox( sf::Vector2f pos, sf::Vector2f size )
 	hitbox.width = size.x;
 	hitbox.height = size.y;
 
-	shape.setFillColor( sf::Color::Blue );
+#ifdef _DEBUG
+	shape.setFillColor( sf::Color::Transparent );
+	shape.setOutlineColor( sf::Color::Red );
+	shape.setOutlineThickness( 1.f );
 	shape.setPosition( pos );
 	shape.setSize( size );
+#endif
 }
 
 void EntityWall::SetColor( const sf::Color color )
 {
-	shape.setFillColor( color );
+#ifdef _DEBUG
+	shape.setOutlineColor(color);
+#endif
 }
 
 void EntityWall::Think( const float dt )
@@ -35,7 +41,9 @@ void EntityWall::Think( const float dt )
 
 void EntityWall::Draw() const
 {
+#ifdef _DEBUG
 	this->game->window.draw( shape );
+#endif
 }
 
 void EntityWall::HandleCollision( Entity *other )

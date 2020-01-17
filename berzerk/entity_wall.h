@@ -4,7 +4,9 @@
 class EntityWall : public Entity
 {
 private:
+#ifdef _DEBUG
 	sf::RectangleShape shape;
+#endif
 
 public:
 	EntityWall();
