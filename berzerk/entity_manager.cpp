@@ -6,6 +6,7 @@ EntityManager::EntityManager()
 {
 	added = false;
 	player = NULL;
+	game = NULL;
 }
 
 void EntityManager::Add( Entity* entity )

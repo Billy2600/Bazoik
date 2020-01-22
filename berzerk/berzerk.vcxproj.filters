@@ -72,9 +72,6 @@
     <ClCompile Include="anim_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entity_otto.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="state_splash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -150,9 +147,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="anim_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="entity_otto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="state_splash.h">

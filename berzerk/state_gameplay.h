@@ -39,9 +39,6 @@ private:
 	sf::Int32 transStart;
 	sf::FloatRect transBoundry;
 
-	EntityOtto *otto;
-	bool ottoSpawned; // Has Otto already been spawned?
-
 	Demo demo;
 	bool recordDemo;
 	bool playDemo;

@@ -45,8 +45,6 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 
 	background = sf::Sprite( assetManager->GetTextureRef( "background" ) );
 
-	ottoSpawned = false;
-
 	deathSoundPlayed = false;
 
 	clock.restart();
@@ -296,32 +294,6 @@ void StateGameplay::Update( const float dt )
 			game->window.setMouseCursorVisible( true );
 			this->game->SwitchState( new StateHighscore( this->game ) );
 			return;
-		}
-
-		// Spawn Otto if delay has been reached
-		if( pauseTime + now >= OTTO_DELAY && !ottoSpawned )
-		{
-			// Spawn on opposite side of screen from player
-			sf::Vector2f ottoSpawnPos = sf::Vector2f( 0, player.hitbox.top ); // Default to left side of screen
-			float ottoDir = 1;
-
-			const unsigned int halfGameWidth = GAME_WIDTH / 2;
-			if( player.hitbox.left < halfGameWidth )
-			{
-				ottoSpawnPos.x = GAME_WIDTH + OTTO_WIDTH; // Spawn Otto on right side instead
-				ottoDir = -1;
-			}
-
-			otto = new EntityOtto( ottoSpawnPos, player.hitbox.top, player.hitbox.top + player.hitbox.height, CheckEasterEgg(), ottoDir );
-			entityManager.Add( otto );
-			ottoSpawned = true;
-
-			game->assetManager.PlaySound( "intruder_alert", true );
-		}
-		// Tell Otto where to move
-		if( ottoSpawned )
-		{
-			otto->SetMinMaxHeight( player.hitbox.top - OTTO_BUFFER, player.hitbox.top + player.hitbox.height + OTTO_BUFFER );
 		}
 
 		if( player.IsDead() && !deathSoundPlayed )
