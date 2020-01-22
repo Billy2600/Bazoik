@@ -51,7 +51,7 @@ Game::Game()
 	window.setIcon(480, 480, icon.getPixelsPtr());
 
 	// Load sprite texture
-	assetManager.LoadTexture( "sprites", "assets/Bazoik_Character_Sprite_Sheet.png" );
+	assetManager.LoadTexture( "sprites", "assets/sprites.png" );
 	assetManager.LoadTexture( "background", "assets/background.png" );
 	// Load animations
 	AnimManager animManager;

@@ -9,7 +9,7 @@ EntityPlayer::EntityPlayer()
 	shape.setOutlineThickness( 1.f );
 #endif
 	// Hitbox will remain consistent size, regardless of animation
-	hitbox.width = 16.f;
+	hitbox.width = 32.f;
 	hitbox.height = 32.f;
 	clock.restart();
 	dead = false;
