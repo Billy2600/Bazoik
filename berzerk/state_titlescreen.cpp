@@ -15,11 +15,11 @@ StateTitleScreen::StateTitleScreen(Game *game)
 #else
 	title.setFillColor( sf::Color::Green );
 #endif
-	title.setCharacterSize( 90 );
-	title.setPosition( sf::Vector2f(150,30) );
+	title.setCharacterSize( 50 );
+	title.setPosition( sf::Vector2f(30,5) );
 	title.setString( GAME_NAME );
 
-	buttons["start"] = GuiButton( sf::Vector2f( 150, 200 ), sf::Vector2f( 270, 50 ), sf::Vector2f(10,3), "Start Game", assetManager->GetFontRef("joystix"), 0 );
+	buttons["start"] = GuiButton( sf::Vector2f( 30, 80 ), sf::Vector2f( 270, 50 ), sf::Vector2f(10,3), "Start Game", assetManager->GetFontRef("joystix"), 0 );
 	buttons["start"].SetColors( sf::Color::Black, sf::Color::Green, sf::Color::Green );
 	buttons["start"].SetHighlightColors( sf::Color::Black, sf::Color::Red, sf::Color::Red );
 	buttons["start"].SetHighlight( false );
@@ -27,12 +27,12 @@ StateTitleScreen::StateTitleScreen(Game *game)
 	buttons["options"] = buttons["start"];
 	buttons["options"].order = 1;
 	buttons["options"].SetText( "Options" );
-	buttons["options"].SetPos( sf::Vector2f( 150, 275 ) );
+	buttons["options"].SetPos( sf::Vector2f( 30, 160 ) );
 
 	buttons["quit"] = buttons["start"];
 	buttons["quit"].order = 2;
 	buttons["quit"].SetText( "Quit" );
-	buttons["quit"].SetPos( sf::Vector2f( 150, 350 ) );
+	buttons["quit"].SetPos( sf::Vector2f( 30, 240 ) );
 
 	selectedButton = 0;
 	playDemo = false;
