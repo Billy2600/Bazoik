@@ -197,7 +197,6 @@ void EntityPlayer::Think( const float dt )
 
 void EntityPlayer::Die()
 {
-	//sprite.setColor( sf::Color::Red );
 	animManager.ResetAnim( "player_death" );
 	currentAnim = "player_death";
 	dead = true;

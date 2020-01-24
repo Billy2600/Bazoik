@@ -9,7 +9,6 @@ class EntityManager;
 enum Directions { N, NE, E, SE, S, SW, W, NW };
 
 #define DIAG_SPEED 0.4142f // Subtracted from diagonal movements to keep speed consistant
-//#define SPRITE_SCALE 3.f // How much to scale up sprites from original assets
 
 class Entity
 {
