@@ -75,6 +75,15 @@ void EntityManager::CheckCollisions()
 				continue;
 			}
 
+			// Same with sword
+			auto swordCheckA = dynamic_cast<EntitySword*>(entityA);
+			auto swordCheckB = dynamic_cast<EntitySword*>(entityB);
+			if ( (swordCheckA != NULL && swordCheckA->owner == entityB)
+				|| (swordCheckB != NULL && swordCheckB->owner == entityA) )
+			{
+				continue;
+			}
+
 			// Don't bother if one is a dead robot
 			auto robotCheckA = dynamic_cast<EntityRobot*>( entityA );
 			auto robotCheckB = dynamic_cast<EntityRobot*>( entityB );
