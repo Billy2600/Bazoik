@@ -89,3 +89,12 @@ bool AnimManager::IsAnimEmpty( const std::string &name )
 {
 	return animations[name].empty();
 }
+
+sf::Uint8 AnimManager::GetCurrentFrame(const std::string& name)
+{
+	if (frameCounters[name] == NULL)
+		return 0;
+
+	auto test = frameCounters[name];
+	return test;
+}

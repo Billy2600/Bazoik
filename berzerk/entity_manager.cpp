@@ -95,7 +95,7 @@ void EntityManager::CheckCollisions()
 			}
 
 			// Detect collision
-			if( entityA != entityB && entityA->hitbox.intersects(entityB->hitbox) )
+			if( (entityA != NULL && entityB != NULL) && (entityA != entityB && entityA->hitbox.intersects(entityB->hitbox) ) )
 			{
 				// Tell both objects about the other
 				entityA->HandleCollision( entityB );

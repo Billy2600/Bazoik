@@ -23,6 +23,7 @@ public:
 	void ResetAnim( const std::string &name ); // Manually reset an animation
 	bool IsEmpty() const; // Will return true if animation map is empty
 	bool IsAnimEmpty( const std::string &name ); // Will return true if specified animation is empty
+	sf::Uint8  GetCurrentFrame( const std::string& name ); // So we can check which frame we're on
 	~AnimManager();
 };
 

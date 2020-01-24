@@ -61,21 +61,36 @@
 		<frame x="128" y="132" w="32" h="32"></frame>
 		<frame x="160" y="132" w="32" h="32"></frame>
 	</anim>
-	<anim name="player_stand">
+	<anim name="player_stand_s">
 		<frame x="0" y="32" w="32" h="32"></frame>
 	</anim>
-	<anim name="player_walk">
+	<anim name="player_stand_e">
+		<frame x="67" y="32" w="32" h="32"></frame>
+	</anim>
+	<anim name="player_stand_w">
+		<frame x="67" y="32" w="32" h="32"></frame>
+	</anim>
+	<anim name="player_stand_n">
+		<frame x="131" y="32" w="32" h="32"></frame>
+	</anim>
+	<anim name="player_walk_s">
 		<frame x="0" y="32" w="32" h="32"></frame>
 		<frame x="32" y="32" w="32" h="32"></frame>
 	</anim>
-	<anim name="player_fire_nw">
-		<frame x="134" y="64" w="14" h="32"></frame>
+	<anim name="player_walk_e">
+		<frame x="67" y="32" w="32" h="32"></frame>
+		<frame x="103" y="32" w="32" h="32"></frame>
+	</anim>
+	<anim name="player_walk_w">
+		<frame x="67" y="32" w="32" h="32"></frame>
+		<frame x="103" y="32" w="32" h="32"></frame>
+	</anim>
+	<anim name="player_walk_n">
+		<frame x="131" y="32" w="32" h="32"></frame>
+		<frame x="131" y="32" w="32" h="32"></frame>
 	</anim>
 	<anim name="player_fire_n">
 		<frame x="200" y="91" w="32" h="32"></frame>
-	</anim>
-	<anim name="player_fire_ne">
-		<frame x="202" y="64" w="14" h="32"></frame>
 	</anim>
 	<anim name="player_fire_w">
 		<frame x="132" y="93" w="32" h="32"></frame>
@@ -83,14 +98,8 @@
 	<anim name="player_fire_e">
 		<frame x="132" y="93" w="32" h="32"></frame>
 	</anim>
-	<anim name="player_fire_sw">
-		<frame x="328" y="64" w="13" h="32"></frame>
-	</anim>
 	<anim name="player_fire_s">
 		<frame x="38" y="93" w="32" h="32"></frame>
-	</anim>
-	<anim name="player_fire_se">
-		<frame x="300" y="64" w="13" h="32"></frame>
 	</anim>
 	<anim name="player_death">
 		<frame x="10" y="96" w="12" h="32"></frame>

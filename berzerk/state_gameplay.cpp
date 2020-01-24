@@ -379,7 +379,7 @@ void StateGameplay::ScreenTransition( const float dt )
 
 void StateGameplay::PlayTransitionSound()
 {
-	if ( entityManager.GetRobotCount() > 0 ) chicken = true;
+	/*if ( entityManager.GetRobotCount() > 0 ) chicken = true;
 	else chicken = false;
 
 	if ( chicken )
@@ -389,7 +389,7 @@ void StateGameplay::PlayTransitionSound()
 	else
 	{
 		game->assetManager.PlaySound( "intruder", true );
-	}
+	}*/
 }
 
 bool StateGameplay::ResetIfDead()

@@ -19,6 +19,7 @@ EntityPlayer::EntityPlayer()
 	now = clock.getElapsedTime().asMilliseconds();
 	drawHitbox = false;
 	lastDirection = sf::Vector2f(1, 0);
+	lastHoriz = GetDirectionFromVector(lastDirection);
 }
 
 void EntityPlayer::SetPos( const sf::Vector2f pos )
@@ -36,7 +37,7 @@ void EntityPlayer::LoadSprite()
 	if( sprite.getTexture() == NULL )
 	{
 		sprite.setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		currentAnim = "player_stand";
+		currentAnim = "player_stand_s";
 		// Load hitbox based on sprite info
 		sf::IntRect animRect = animManager.Animate( currentAnim );
 #ifdef _DEBUG
@@ -45,44 +46,50 @@ void EntityPlayer::LoadSprite()
 	}
 }
 
-void EntityPlayer::ChooseFireAnim( sf::Vector2f direction )
+std::string EntityPlayer::ChooseAnimDirection( const sf::Vector2f moveVec )
 {
-	if( direction == sf::Vector2f( -1, -1 ) )
-		currentAnim = "player_fire_nw";
-	else if( direction == sf::Vector2f( 0, -1 ) )
-		currentAnim = "player_fire_n";
-	else if( direction == sf::Vector2f( 1, -1 ) )
-		currentAnim = "player_fire_ne";
-	else if( direction == sf::Vector2f( -1, 0 ) )
-		currentAnim = "player_fire_w";
-	else if( direction == sf::Vector2f( 1, 0 ) )
-		currentAnim = "player_fire_e";
-	else if( direction == sf::Vector2f( -1, 1 ) )
-		currentAnim = "player_fire_sw";
-	else if( direction == sf::Vector2f( 0, 1 ) )
-		currentAnim = "player_fire_s";
-	else if( direction == sf::Vector2f( 1, 1) )
-		currentAnim = "player_fire_se";
+	auto direction = GetDirectionFromVector(moveVec);
+	switch (direction)
+	{
+	case Directions::NE:
+	case Directions::SE:
+	case Directions::N:
+		return "n";
+		break;
+	case Directions::S:
+		return "s";
+		break;
+	case Directions::NW:
+	case Directions::SW:
+	case Directions::W:
+		return "w";
+		break;
+	case Directions::E:
+		return "e";
+		break;
+	}
 }
 
 Directions EntityPlayer::GetDirectionFromVector(sf::Vector2f vector)
 {
-	if( direction == sf::Vector2f( -1, -1 ) )
+	if (direction == sf::Vector2f(-1, -1))
 		return Directions::NW;
-	else if( direction == sf::Vector2f( 0, -1 ) )
+	else if (direction == sf::Vector2f(0, -1))
 		return Directions::N;
-	else if( direction == sf::Vector2f( 1, -1 ) )
+	else if (direction == sf::Vector2f(1, -1))
 		return Directions::NE;
-	else if( direction == sf::Vector2f( -1, 0 ) )
+	else if (direction == sf::Vector2f(-1, 0))
 		return Directions::W;
-	else if( direction == sf::Vector2f( 1, 0 ) )
+	else if (direction == sf::Vector2f(1, 0))
 		return Directions::E;
-	else if( direction == sf::Vector2f( -1, 1 ) )
+	else if (direction == sf::Vector2f(-1, 1))
 		return Directions::SW;
-	else if( direction == sf::Vector2f( 0, 1 ) )
+	else if (direction == sf::Vector2f(0, 1))
 		return Directions::S;
-	else if( direction == sf::Vector2f( 1, 1) )
+	else if (direction == sf::Vector2f(1, 1))
 		return Directions::SE;
+	else if (direction == sf::Vector2f(0, 0))
+		return Directions::S;
 }
 
 void EntityPlayer::Think( const float dt )
@@ -187,11 +194,11 @@ void EntityPlayer::Think( const float dt )
 	Move( move, dt );
 	// Change animation
 	if( move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0 )
-		currentAnim = "player_walk";
+		currentAnim = "player_walk_" + ChooseAnimDirection(direction);
 	else if( input.fire )
-		ChooseFireAnim( direction );
+		currentAnim = "player_fire_" + ChooseAnimDirection(direction);
 	else
-		currentAnim = "player_stand";
+		currentAnim = "player_stand_" + ChooseAnimDirection(direction);
 }
 
 void EntityPlayer::Die()
@@ -251,21 +258,20 @@ void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 #endif
 	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 
-	// Flip sprite based on last horizontal movement if walking
-	if( lastHoriz == Directions::W && (currentAnim == "player_stand" || currentAnim == "player_walk") )
+	// Need to flip sprite if moving W, or second frame of walk_n
+	if( (lastHoriz == Directions::W) || (currentAnim == "player_walk_n" && animManager.GetCurrentFrame(currentAnim) > 0) )
 	{
-		//sprite.setScale( -SPRITE_SCALE, SPRITE_SCALE );
 		sprite.setScale( -1, 1 );
 		// Account for sprite mis-aligning with the hitbox when flipped via negative scale
 		sprite.move( sf::Vector2f( hitbox.width, 0 ) );
 	}
 	else
 	{
-		//sprite.setScale( SPRITE_SCALE, SPRITE_SCALE );
 		sprite.setScale( 1, 1 );
 	}
 
-	sprite.setTextureRect( animManager.Animate( currentAnim ) );
+	auto test = animManager.Animate(currentAnim);
+	sprite.setTextureRect( test );
 }
 
 EntityPlayer::~EntityPlayer()
