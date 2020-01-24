@@ -6,8 +6,9 @@ EntitySword::EntitySword(Directions direction, Entity* owner)
 
 	this->owner = owner;
 	lastDir = direction;
-	SetPositionBasedOnDirection(direction);
 	SetDimensionsBasedOnDirection(direction);
+	SetPositionBasedOnDirection(direction);
+	SetSpriteRotationAndPositionBasedOnDirection(direction);
 
 #ifdef _DEBUG
 	shape.setFillColor(sf::Color::Transparent);
@@ -27,7 +28,7 @@ void EntitySword::LoadSprite()
 	}
 }
 
-void EntitySword::SetDimensionsBasedOnDirection(Directions direction)
+void EntitySword::SetDimensionsBasedOnDirection(const Directions direction)
 {
 	switch (direction)
 	{
@@ -48,7 +49,7 @@ void EntitySword::SetDimensionsBasedOnDirection(Directions direction)
 	}
 }
 
-void EntitySword::SetPositionBasedOnDirection(Directions direction)
+void EntitySword::SetPositionBasedOnDirection(const Directions direction)
 {
 	switch (direction)
 	{
@@ -75,14 +76,39 @@ void EntitySword::SetPositionBasedOnDirection(Directions direction)
 	}
 }
 
+void EntitySword::SetSpriteRotationAndPositionBasedOnDirection(const Directions direction)
+{
+	switch (direction)
+	{
+	case Directions::NE:
+	case Directions::SE:
+	case Directions::N:
+		sprite.setRotation(0.f);
+		sprite.setPosition(hitbox.left - SWORD_HILT_EXTRA_PIXELS, hitbox.top);
+		break;
+	case Directions::S:
+		sprite.setRotation(180.f);
+		sprite.setPosition(hitbox.left + (SWORD_WIDTH + SWORD_HILT_EXTRA_PIXELS), hitbox.top + owner->hitbox.height);
+		break;
+	case Directions::NW:
+	case Directions::SW:
+	case Directions::W:
+		sprite.setRotation(270.f);
+		sprite.setPosition(hitbox.left, hitbox.top + (SWORD_WIDTH + SWORD_HILT_EXTRA_PIXELS));
+		break;
+	case Directions::E:
+		sprite.setRotation(90.f);
+		sprite.setPosition(hitbox.left + owner->hitbox.width, hitbox.top - SWORD_HILT_EXTRA_PIXELS);
+		break;
+	}
+}
+
 void EntitySword::Think(const float dt)
 {
 	LoadSprite(); // Will only load once
-	SetPositionBasedOnDirection(lastDir);
 #ifdef _DEBUG
 	shape.setPosition(hitbox.left, hitbox.top);
-#endif 
-	sprite.setPosition(hitbox.left, hitbox.top);
+#endif
 
 	// Finish sword "swing"
 	if (clock.getElapsedTime().asMilliseconds() >= SWORD_SWING_DELAY)

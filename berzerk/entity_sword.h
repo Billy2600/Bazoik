@@ -1,8 +1,9 @@
 #pragma once
 #include "entity.h"
 
-#define SWORD_HEIGHT 11
-#define SWORD_WIDTH 3
+#define SWORD_HEIGHT 32
+#define SWORD_WIDTH 6
+#define SWORD_HILT_EXTRA_PIXELS 4 // For alignment
 #define SWORD_SWING_DELAY 80 // In milliseconds
 
 class EntitySword : public Entity
@@ -17,8 +18,9 @@ private:
 	sf::Clock clock;
 
 	void LoadSprite();
-	void SetDimensionsBasedOnDirection(Directions direction);
-	void SetPositionBasedOnDirection(Directions direction);
+	void SetDimensionsBasedOnDirection(const Directions direction);
+	void SetPositionBasedOnDirection(const Directions direction);
+	void SetSpriteRotationAndPositionBasedOnDirection(const Directions direction);
 
 public:
 	Entity* owner;
