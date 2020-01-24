@@ -51,15 +51,15 @@ std::string EntityPlayer::ChooseAnimDirection( const sf::Vector2f moveVec )
 	auto direction = GetDirectionFromVector(moveVec);
 	switch (direction)
 	{
+	case Directions::NW:
 	case Directions::NE:
-	case Directions::SE:
 	case Directions::N:
 		return "n";
 		break;
 	case Directions::S:
 		return "s";
 		break;
-	case Directions::NW:
+	case Directions::SE:
 	case Directions::SW:
 	case Directions::W:
 		return "w";
@@ -70,25 +70,25 @@ std::string EntityPlayer::ChooseAnimDirection( const sf::Vector2f moveVec )
 	}
 }
 
-Directions EntityPlayer::GetDirectionFromVector(sf::Vector2f vector)
+Directions EntityPlayer::GetDirectionFromVector(const sf::Vector2f vector)
 {
-	if (direction == sf::Vector2f(-1, -1))
+	if (vector == sf::Vector2f(-1, -1))
 		return Directions::NW;
-	else if (direction == sf::Vector2f(0, -1))
+	else if (vector == sf::Vector2f(0, -1))
 		return Directions::N;
-	else if (direction == sf::Vector2f(1, -1))
+	else if (vector == sf::Vector2f(1, -1))
 		return Directions::NE;
-	else if (direction == sf::Vector2f(-1, 0))
+	else if (vector == sf::Vector2f(-1, 0))
 		return Directions::W;
-	else if (direction == sf::Vector2f(1, 0))
+	else if (vector == sf::Vector2f(1, 0))
 		return Directions::E;
-	else if (direction == sf::Vector2f(-1, 1))
+	else if (vector == sf::Vector2f(-1, 1))
 		return Directions::SW;
-	else if (direction == sf::Vector2f(0, 1))
+	else if (vector == sf::Vector2f(0, 1))
 		return Directions::S;
-	else if (direction == sf::Vector2f(1, 1))
+	else if (vector == sf::Vector2f(1, 1))
 		return Directions::SE;
-	else if (direction == sf::Vector2f(0, 0))
+	else if (vector == sf::Vector2f(0, 0))
 		return Directions::S;
 }
 
@@ -194,11 +194,11 @@ void EntityPlayer::Think( const float dt )
 	Move( move, dt );
 	// Change animation
 	if( move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0 )
-		currentAnim = "player_walk_" + ChooseAnimDirection(direction);
+		currentAnim = "player_walk_" + ChooseAnimDirection(lastDirection);
 	else if( input.fire )
-		currentAnim = "player_fire_" + ChooseAnimDirection(direction);
+		currentAnim = "player_fire_" + ChooseAnimDirection(lastDirection);
 	else
-		currentAnim = "player_stand_" + ChooseAnimDirection(direction);
+		currentAnim = "player_stand_" + ChooseAnimDirection(lastDirection);
 }
 
 void EntityPlayer::Die()
