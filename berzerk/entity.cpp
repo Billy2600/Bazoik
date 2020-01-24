@@ -23,22 +23,22 @@ Directions Entity::AngleToDirection( float angle ) const
 	int degree = 360 / directions;
 	angle = angle + degree / 2;
 	if( angle >= 0 * degree && angle < 1 * degree )
-		return N;
+		return Directions::N;
 	if( angle >= 1 * degree && angle < 2 * degree )
-		return NE;
+		return Directions::NE;
 	if( angle >= 2 * degree && angle < 3 * degree )
-		return E;
+		return Directions::E;
 	if( angle >= 3 * degree && angle < 4 * degree )
-		return SE;
+		return Directions::SE;
 	if( angle >= 4 * degree && angle < 5 * degree )
-		return S;
+		return Directions::S;
 	if( angle >= 5 * degree && angle < 6 * degree )
-		return SW;
+		return Directions::SW;
 	if( angle >= 6 * degree && angle < 7 * degree )
-		return W;
+		return Directions::W;
 	if( angle >= 7 * degree && angle < 8 * degree )
-		return NW;
+		return Directions::NW;
 
 	//Should never happen:
-	return N;
+	return Directions::N;
 }

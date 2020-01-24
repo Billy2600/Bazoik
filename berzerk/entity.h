@@ -6,7 +6,7 @@
 class EntityManager;
 
 // Directions
-enum Directions { N, NE, E, SE, S, SW, W, NW };
+enum class Directions { N, NE, E, SE, S, SW, W, NW };
 
 #define DIAG_SPEED 0.4142f // Subtracted from diagonal movements to keep speed consistant
 
