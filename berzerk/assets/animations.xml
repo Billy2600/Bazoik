@@ -98,6 +98,9 @@
 		<frame x="73" y="96" w="12" h="32"></frame>
 		<frame x="104" y="96" w="12" h="32"></frame>
 	</anim>
+	<anim name="sword">
+		<frame x="163" y="0" w="14" h="32"></frame>
+	</anim>
 	<anim name="life_icon">
 		<frame x="380" y="88" w="5" h="8"></frame>
 	</anim>

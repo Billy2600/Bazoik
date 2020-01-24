@@ -11,9 +11,12 @@ private:
 #ifdef _DEBUG
 	sf::RectangleShape shape;
 #endif
+	sf::Sprite sprite;
+	AnimManager animManager;
 	Directions lastDir;
 	sf::Clock clock;
 
+	void LoadSprite();
 	void SetDimensionsBasedOnDirection(Directions direction);
 	void SetPositionBasedOnDirection(Directions direction);
 

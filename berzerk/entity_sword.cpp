@@ -17,6 +17,16 @@ EntitySword::EntitySword(Directions direction, Entity* owner)
 #endif
 }
 
+void EntitySword::LoadSprite()
+{
+	// Load texture if we need to
+	if (sprite.getTexture() == NULL)
+	{
+		sprite.setTexture(game->assetManager.GetTextureRef("sprites"));
+		sprite.setTextureRect(animManager.Animate("sword"));
+	}
+}
+
 void EntitySword::SetDimensionsBasedOnDirection(Directions direction)
 {
 	switch (direction)
@@ -67,10 +77,12 @@ void EntitySword::SetPositionBasedOnDirection(Directions direction)
 
 void EntitySword::Think(const float dt)
 {
+	LoadSprite(); // Will only load once
 	SetPositionBasedOnDirection(lastDir);
 #ifdef _DEBUG
 	shape.setPosition(hitbox.left, hitbox.top);
 #endif 
+	sprite.setPosition(hitbox.left, hitbox.top);
 
 	// Finish sword "swing"
 	if (clock.getElapsedTime().asMilliseconds() >= SWORD_SWING_DELAY)
@@ -84,6 +96,7 @@ void EntitySword::Draw() const
 #ifdef _DEBUG
 	game->window.draw(shape);
 #endif
+	game->window.draw(sprite);
 }
 
 void EntitySword::HandleCollision(Entity* other)
