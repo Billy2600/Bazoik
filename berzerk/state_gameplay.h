@@ -15,8 +15,9 @@
 #define MAX_LIVES 9 // Maximum number of lives to show on screen
 #define ALL_ROBOTS_SCORE 300 // Score added for killing all robots
 #define WALL_THICKNESS 10 // Thickness of walls
-#define WALL_HEIGHT 224 // Height of left/right walls
-#define WALL_WIDTH 384 // Width of top/bottom walls
+#define WALL_HEIGHT 80 // Height of left/right walls
+#define WALL_WIDTH 160 // Width of top/bottom walls
+#define DOOR_WIDTH 64 // Width of doors
 
 class StateGameplay : public GameState
 {
