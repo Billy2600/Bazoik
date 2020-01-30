@@ -193,12 +193,13 @@ void EntityPlayer::Think( const float dt )
 
 	Move( move, dt );
 	// Change animation
-	if( move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0 )
-		currentAnim = "player_walk_" + ChooseAnimDirection(lastDirection);
-	else if( input.fire )
-		currentAnim = "player_fire_" + ChooseAnimDirection(lastDirection);
+	auto animDirection = ChooseAnimDirection(lastDirection);
+	if (move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0)
+		currentAnim = "player_walk_" + animDirection;
+	else if (input.fire)
+		currentAnim = "player_fire_" + animDirection;
 	else
-		currentAnim = "player_stand_" + ChooseAnimDirection(lastDirection);
+		currentAnim = "player_stand_" + animDirection;
 }
 
 void EntityPlayer::Die()
