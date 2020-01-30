@@ -90,6 +90,9 @@
     <ClCompile Include="entity_sword.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="entity_door.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_state.h">
@@ -171,6 +174,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entity_sword.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity_door.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
