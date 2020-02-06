@@ -1,5 +1,9 @@
 #pragma once
 #include "entity.h"
+#include "anim_manager.h"
+
+#define DOOR_WIDTH 64
+#define DOOR_HEIGHT 40
 
 enum DoorStates
 {
@@ -11,12 +15,17 @@ enum DoorStates
 
 class EntityDoor : public Entity
 {
-public:
+private:
 #ifdef _DEBUG
 	sf::RectangleShape shape;
 #endif
-private:
-	EntityDoor();
+	DoorStates state; // What state is this door in?
+	Directions direction; // What direction should door be facing
+
+	void SetPositionRotationBasedOnDirection(const Directions direction);
+
+public:
+	EntityDoor(DoorStates initialState, Directions initialDirection);
 	virtual void Think(const float dt);
 	virtual void Draw() const;
 	virtual void Move(sf::Vector2f move, const float dt);
