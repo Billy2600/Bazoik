@@ -1,6 +1,10 @@
 #pragma once
 #include "entity.h"
 
+#define WALL_THICKNESS 10 // Thickness of walls
+#define WALL_HEIGHT 80 // Height of left/right walls
+#define WALL_WIDTH 160 // Width of top/bottom walls
+
 class EntityWall : public Entity
 {
 private:

@@ -3,6 +3,7 @@
 #include "entity.h"
 #include "entity_manager.h"
 #include "entity_wall.h"
+#include "entity_door.h"
 #include "entity_robot.h"
 #include "entity_bullet.h"
 #include "entity_sword.h"

@@ -30,4 +30,5 @@ public:
 	virtual void Draw() const;
 	virtual void Move(sf::Vector2f move, const float dt);
 	virtual void HandleCollision(Entity* other);
+	DoorStates GetState() const;
 };

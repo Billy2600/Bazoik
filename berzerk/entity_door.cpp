@@ -1,5 +1,6 @@
 #include "entity_door.h"
 #include "entity_player.h"
+#include "entity_wall.h"
 
 EntityDoor::EntityDoor(DoorStates initialState = DoorStates::None, Directions initialDirection = Directions::W)
 {
@@ -13,7 +14,7 @@ EntityDoor::EntityDoor(DoorStates initialState = DoorStates::None, Directions in
 	shape.setOutlineColor(sf::Color::Red);
 	shape.setOutlineThickness(1.f);
 	shape.setSize( sf::Vector2f(hitbox.width, hitbox.height) );
-	shape.setPosition( sf::Vector2f(hitbox.top, hitbox.left) );
+	shape.setPosition( sf::Vector2f(hitbox.left, hitbox.top) );
 #endif
 }
 
@@ -47,9 +48,12 @@ void EntityDoor::HandleCollision(Entity* other)
 
 void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 {
+	const sf::Vector2f topLeft(48, 48);
 	switch (direction)
 	{
 	case Directions::S:
+		hitbox.top = topLeft.y + (WALL_HEIGHT * 2) + DOOR_WIDTH;
+		hitbox.left = topLeft.x + WALL_WIDTH;
 		hitbox.width = DOOR_WIDTH;
 		hitbox.height = DOOR_HEIGHT;
 		break;
@@ -67,4 +71,9 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.height = DOOR_HEIGHT;
 		break;
 	}
+}
+
+DoorStates EntityDoor::GetState() const
+{
+	return state;
 }

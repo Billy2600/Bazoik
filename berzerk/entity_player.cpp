@@ -241,8 +241,9 @@ void EntityPlayer::HandleCollision( Entity *other )
 	if( dead )
 		return;
 
-	// Move back on collision with walls, etc.
-	if( dynamic_cast<EntityWall*>( other ) != NULL )
+	// Move back on collision with walls, doors, etc.
+	if( dynamic_cast<EntityWall*>( other ) != NULL ||
+		dynamic_cast<EntityDoor*>(other) != NULL )
 	{
 		hitbox.left = lastPos.x;
 		hitbox.top = lastPos.y;

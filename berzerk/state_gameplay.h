@@ -4,6 +4,7 @@
 #include "game_state.h"
 #include "entity_player.h"
 #include "entity_wall.h"
+#include "entity_door.h"
 #include "entity_robot.h"
 #include "entity_manager.h"
 #include "demo.h"
@@ -14,10 +15,6 @@
 #define HORZ_TRANS_SPEED 400
 #define MAX_LIVES 9 // Maximum number of lives to show on screen
 #define ALL_ROBOTS_SCORE 300 // Score added for killing all robots
-#define WALL_THICKNESS 10 // Thickness of walls
-#define WALL_HEIGHT 80 // Height of left/right walls
-#define WALL_WIDTH 160 // Width of top/bottom walls
-#define DOOR_WIDTH 64 // Width of doors
 
 class StateGameplay : public GameState
 {
@@ -53,6 +50,7 @@ private:
 	void ReturnToTitle(); // Return to title screen
 	sf::Vector2f GetPlayerStart(const Directions lastMove, EntityPlayer& player) const;
 	void CreateWalls();
+	void CreateDoors();
 
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
     std::mt19937 rngEngine = std::mt19937( (unsigned int)time( 0 ) );

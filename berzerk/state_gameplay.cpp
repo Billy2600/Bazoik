@@ -20,6 +20,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	entityManager.Add( &player );
 	AssetManager *assetManager = &this->game->assetManager;
 	CreateWalls();
+	CreateDoors();
 
 	txScore.setFont( assetManager->GetFontRef( "joystix" ) );
 #ifdef OLD_SFML
@@ -536,6 +537,14 @@ void StateGameplay::CreateWalls()
 	// Bottom
 	entityManager.Add(new EntityWall(sf::Vector2f(topLeft.x, (topLeft.y + WALL_HEIGHT * 2) + DOOR_WIDTH), sf::Vector2f(WALL_WIDTH, WALL_THICKNESS), sf::Color::Red));
 	entityManager.Add(new EntityWall(sf::Vector2f(topLeft.x + WALL_WIDTH + DOOR_WIDTH, (topLeft.y + WALL_HEIGHT * 2) + DOOR_WIDTH), sf::Vector2f(WALL_WIDTH, WALL_THICKNESS), sf::Color::Red));
+}
+
+void StateGameplay::CreateDoors()
+{
+	entityManager.Add(new EntityDoor(DoorStates::Closed, Directions::N));
+	entityManager.Add(new EntityDoor(DoorStates::Closed, Directions::S));
+	entityManager.Add(new EntityDoor(DoorStates::Closed, Directions::E));
+	entityManager.Add(new EntityDoor(DoorStates::Closed, Directions::W));
 }
 
 RobotStats StateGameplay::RandomizeStats()
