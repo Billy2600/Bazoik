@@ -38,7 +38,11 @@ void EntityDoor::Think(const float dt)
 		animRect = animManager.Animate("door_open", true);
 		break;
 	}
+	sprite.setPosition(position);
 	sprite.setTextureRect(animRect);
+#ifdef  _DEBUG
+	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+#endif // _DEBUG
 }
 
 void EntityDoor::Draw() const
@@ -46,13 +50,15 @@ void EntityDoor::Draw() const
 #ifdef _DEBUG
 	game->window.draw(shape);
 #endif // __DEBUG
-
 	game->window.draw(sprite);
 }
 
 void EntityDoor::Move(sf::Vector2f move, const float dt)
 {
-
+	hitbox.left += move.x * dt;
+	hitbox.top += move.y * dt;
+	position.x += move.x * dt;
+	position.y += move.y * dt;
 }
 
 void EntityDoor::HandleCollision(Entity* other)
@@ -62,6 +68,9 @@ void EntityDoor::HandleCollision(Entity* other)
 		if (state == DoorStates::Closed)
 		{
 			state = DoorStates::Open;
+			// Move hitbox somehwere we know won't be collided with
+			hitbox.left = 9000;
+			hitbox.top = 9000;
 		}
 	}
 }
@@ -116,7 +125,7 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		break;
 	}
 
-	sprite.setPosition( sf::Vector2f(hitbox.left, hitbox.top) );
+	position = sf::Vector2f(hitbox.left, hitbox.top);
 }
 
 DoorStates EntityDoor::GetState() const

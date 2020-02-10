@@ -23,6 +23,7 @@ private:
 	Directions direction; // What direction should door be facing
 	AnimManager animManager;
 	sf::Sprite sprite;
+	sf::Vector2f position; // Need to store position seperately, as sprite and hitbox can be in different places
 
 	void SetPositionRotationBasedOnDirection(const Directions direction);
 	void LoadSprite();
