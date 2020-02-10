@@ -19,8 +19,8 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	entityManager.game = game;
 	entityManager.Add( &player );
 	AssetManager *assetManager = &this->game->assetManager;
-	CreateWalls();
-	CreateDoors();
+	room = Room(sf::Vector2i(0, 0), &entityManager);
+	room.SetupRoom();
 
 	txScore.setFont( assetManager->GetFontRef( "joystix" ) );
 #ifdef OLD_SFML
@@ -81,7 +81,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 
 void StateGameplay::Start()
 {
-
+	
 }
 
 void StateGameplay::HandleInput()
@@ -520,31 +520,6 @@ sf::Vector2f StateGameplay::GetPlayerStart(const Directions lastMove, EntityPlay
 	//return sf::Vector2f(0, 0);
 
 	return sf::Vector2f(64, 160);
-}
-
-void StateGameplay::CreateWalls()
-{
-	const sf::Vector2f topLeft(48, 48);
-	// Left
-	entityManager.Add( new EntityWall( sf::Vector2f(topLeft.x - WALL_THICKNESS, topLeft.y), sf::Vector2f(WALL_THICKNESS,WALL_HEIGHT), sf::Color::Red ) );
-	entityManager.Add( new EntityWall( sf::Vector2f(topLeft.x - WALL_THICKNESS, topLeft.y + WALL_HEIGHT + DOOR_WIDTH), sf::Vector2f(WALL_THICKNESS,WALL_HEIGHT), sf::Color::Red ) );
-	// Top
-	entityManager.Add(new EntityWall(sf::Vector2f(topLeft.x, topLeft.y - WALL_THICKNESS), sf::Vector2f(WALL_WIDTH, WALL_THICKNESS), sf::Color::Red));
-	entityManager.Add(new EntityWall(sf::Vector2f(topLeft.x + WALL_WIDTH + DOOR_WIDTH, topLeft.y - WALL_THICKNESS), sf::Vector2f(WALL_WIDTH, WALL_THICKNESS), sf::Color::Red));
-	// Right
-	entityManager.Add(new EntityWall(sf::Vector2f(topLeft.x + (WALL_WIDTH * 2) + DOOR_WIDTH, topLeft.y), sf::Vector2f(WALL_THICKNESS, WALL_HEIGHT), sf::Color::Red));
-	entityManager.Add(new EntityWall(sf::Vector2f(topLeft.x + (WALL_WIDTH * 2) + DOOR_WIDTH, topLeft.y + WALL_HEIGHT + DOOR_WIDTH), sf::Vector2f(WALL_THICKNESS, WALL_HEIGHT), sf::Color::Red));
-	// Bottom
-	entityManager.Add(new EntityWall(sf::Vector2f(topLeft.x, (topLeft.y + WALL_HEIGHT * 2) + DOOR_WIDTH), sf::Vector2f(WALL_WIDTH, WALL_THICKNESS), sf::Color::Red));
-	entityManager.Add(new EntityWall(sf::Vector2f(topLeft.x + WALL_WIDTH + DOOR_WIDTH, (topLeft.y + WALL_HEIGHT * 2) + DOOR_WIDTH), sf::Vector2f(WALL_WIDTH, WALL_THICKNESS), sf::Color::Red));
-}
-
-void StateGameplay::CreateDoors()
-{
-	entityManager.Add(new EntityDoor(DoorStates::Closed, Directions::N));
-	entityManager.Add(new EntityDoor(DoorStates::Closed, Directions::S));
-	entityManager.Add(new EntityDoor(DoorStates::Closed, Directions::E));
-	entityManager.Add(new EntityDoor(DoorStates::Closed, Directions::W));
 }
 
 RobotStats StateGameplay::RandomizeStats()

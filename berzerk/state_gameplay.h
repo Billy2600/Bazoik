@@ -9,6 +9,7 @@
 #include "entity_manager.h"
 #include "demo.h"
 #include "pause_menu.h"
+#include "room.h"
 
 // Different transition speeds so we have time for robot voices (take less time to move screen vertically)
 #define VERT_TRANS_SPEED 250
@@ -28,6 +29,7 @@ private:
 	sf::Text respawnPrompt;
 	sf::Sprite lives[MAX_LIVES];
 	AnimManager animManager;
+	Room room;
 
 	sf::Sprite background;
 
@@ -49,8 +51,6 @@ private:
 	bool ResetIfDead(); // Reset if player died
 	void ReturnToTitle(); // Return to title screen
 	sf::Vector2f GetPlayerStart(const Directions lastMove, EntityPlayer& player) const;
-	void CreateWalls();
-	void CreateDoors();
 
 	RobotStats LoadRobotStats(); // Load robot stats from xml file
     std::mt19937 rngEngine = std::mt19937( (unsigned int)time( 0 ) );
