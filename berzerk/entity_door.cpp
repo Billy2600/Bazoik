@@ -20,7 +20,25 @@ EntityDoor::EntityDoor(DoorStates initialState = DoorStates::None, Directions in
 
 void EntityDoor::Think(const float dt)
 {
-	
+	LoadSprite();
+
+	sf::IntRect animRect;
+	switch (state)
+	{
+	case DoorStates::None:
+		animRect = sf::IntRect(0, 0, 0, 0);
+		break;
+	case DoorStates::Closed:
+		animRect = animManager.Animate("door_closed", true);
+		break;
+	case DoorStates::Locked:
+		animRect = animManager.Animate("door_locked", true);
+		break;
+	case DoorStates::Open:
+		animRect = animManager.Animate("door_open", true);
+		break;
+	}
+	sprite.setTextureRect(animRect);
 }
 
 void EntityDoor::Draw() const
@@ -28,6 +46,8 @@ void EntityDoor::Draw() const
 #ifdef _DEBUG
 	game->window.draw(shape);
 #endif // __DEBUG
+
+	game->window.draw(sprite);
 }
 
 void EntityDoor::Move(sf::Vector2f move, const float dt)
@@ -46,6 +66,15 @@ void EntityDoor::HandleCollision(Entity* other)
 	}
 }
 
+void EntityDoor::LoadSprite()
+{
+	// Load texture if we need to
+	if (sprite.getTexture() == NULL)
+	{
+		sprite.setTexture(game->assetManager.GetTextureRef("sprites"));
+	}
+}
+
 void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 {
 	const sf::Vector2f topLeft(48, 48);
@@ -56,18 +85,24 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.left = topLeft.x + WALL_WIDTH;
 		hitbox.width = DOOR_WIDTH;
 		hitbox.height = DOOR_HEIGHT;
+		sprite.setOrigin(sf::Vector2f(hitbox.width, hitbox.height));
+		sprite.setRotation(180);
 		break;
 	case Directions::E:
 		hitbox.top = topLeft.y + WALL_HEIGHT;
 		hitbox.left = topLeft.x + (WALL_WIDTH * 2) + DOOR_WIDTH;
 		hitbox.width = DOOR_HEIGHT;
 		hitbox.height = DOOR_WIDTH;
+		sprite.setOrigin(sf::Vector2f(0, hitbox.width));
+		sprite.setRotation(90);
 		break;
 	case Directions::W:
 		hitbox.top = topLeft.y + WALL_HEIGHT;
 		hitbox.left = topLeft.x - DOOR_HEIGHT;
 		hitbox.width = DOOR_HEIGHT;
 		hitbox.height = DOOR_WIDTH;
+		sprite.setOrigin(sf::Vector2f(hitbox.height, 0));
+		sprite.setRotation(270);
 		break;
 	case Directions::N:
 	default:
@@ -75,8 +110,13 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.left = topLeft.x + WALL_WIDTH;
 		hitbox.width = DOOR_WIDTH;
 		hitbox.height = DOOR_HEIGHT;
+		// Not technically needed, but let's set 'em anyway
+		sprite.setOrigin(sf::Vector2f(0, 0));
+		sprite.setRotation(0);
 		break;
 	}
+
+	sprite.setPosition( sf::Vector2f(hitbox.left, hitbox.top) );
 }
 
 DoorStates EntityDoor::GetState() const

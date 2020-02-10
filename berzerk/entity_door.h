@@ -21,8 +21,11 @@ private:
 #endif
 	DoorStates state; // What state is this door in?
 	Directions direction; // What direction should door be facing
+	AnimManager animManager;
+	sf::Sprite sprite;
 
 	void SetPositionRotationBasedOnDirection(const Directions direction);
+	void LoadSprite();
 
 public:
 	EntityDoor(DoorStates initialState, Directions initialDirection);
