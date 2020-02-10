@@ -9,6 +9,8 @@ EntityDoor::EntityDoor(DoorStates initialState = DoorStates::None, Directions in
 
 	SetPositionRotationBasedOnDirection(direction);
 
+	if (initialState == DoorStates::Open) OpenDoor();
+
 #ifdef _DEBUG
 	shape.setFillColor(sf::Color::Transparent);
 	shape.setOutlineColor(sf::Color::Red);
@@ -67,10 +69,7 @@ void EntityDoor::HandleCollision(Entity* other)
 	{
 		if (state == DoorStates::Closed)
 		{
-			state = DoorStates::Open;
-			// Move hitbox somehwere we know won't be collided with
-			hitbox.left = 9000;
-			hitbox.top = 9000;
+			OpenDoor();
 		}
 	}
 }
@@ -82,6 +81,14 @@ void EntityDoor::LoadSprite()
 	{
 		sprite.setTexture(game->assetManager.GetTextureRef("sprites"));
 	}
+}
+
+void EntityDoor::OpenDoor()
+{
+	state = DoorStates::Open;
+	// Move hitbox somehwere we know won't be collided with
+	hitbox.left = 9000;
+	hitbox.top = 9000;
 }
 
 void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)

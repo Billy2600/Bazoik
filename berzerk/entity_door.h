@@ -5,7 +5,7 @@
 #define DOOR_WIDTH 64
 #define DOOR_HEIGHT 40
 
-enum DoorStates
+enum class DoorStates
 {
 	None,
 	Closed,
@@ -27,6 +27,7 @@ private:
 
 	void SetPositionRotationBasedOnDirection(const Directions direction);
 	void LoadSprite();
+	void OpenDoor();
 
 public:
 	EntityDoor(DoorStates initialState, Directions initialDirection);
