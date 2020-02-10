@@ -96,6 +96,9 @@
     <ClCompile Include="room.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="state_editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_state.h">
@@ -183,6 +186,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="room.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="state_editor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

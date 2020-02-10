@@ -25,5 +25,6 @@ public:
 	void SetPos( const sf::Vector2f pos );
 	void SetSize( const sf::Vector2f size );
 	void SetText( const std::string text );
+	void SetCharacterSize(const unsigned int size);
 	virtual void draw( sf::RenderTarget& target, sf::RenderStates states ) const;
 };

@@ -2,6 +2,7 @@
 #include "state_gameplay.h"
 #include "state_options.h"
 #include "state_credits.h"
+#include "state_editor.h"
 
 StateTitleScreen::StateTitleScreen(Game *game)
 {
@@ -213,6 +214,12 @@ void StateTitleScreen::HandleInput()
 			recordDemo = true;
 			playDemo = false;
 			title.setString("Record Demo");
+		}
+
+		if (event.key.code == sf::Keyboard::Key::F5)
+		{
+			game->music.stop();
+			this->game->states.push(new StateEditor(this->game));
 		}
 #endif
 	}

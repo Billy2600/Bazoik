@@ -74,6 +74,11 @@ void GuiButton::SetText( const std::string text )
 	this->text.setString( text );
 }
 
+void GuiButton::SetCharacterSize(const unsigned int size)
+{
+	this->text.setCharacterSize(size);
+}
+
 void GuiButton::draw( sf::RenderTarget& target, sf::RenderStates states ) const
 {
 	target.draw( shape );
