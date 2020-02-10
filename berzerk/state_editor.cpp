@@ -52,7 +52,37 @@ void StateEditor::InitDoors()
 	doors['n'].shape.setOutlineThickness(1.f);
 	doors['n'].shape.setFillColor(sf::Color::Transparent);
 	doors['n'].shape.setPosition(posN);
-	doors['n'].hitbox = sf::FloatRect(doors['n'].shape.getPosition(), doors['n'].shape.getSize());
+	doors['n'].hitbox = sf::FloatRect(posN, doors['n'].shape.getSize());
+
+	const sf::Vector2f posS = sf::Vector2f(208, 280);
+	doors['s'] = doors['n'];
+	doors['s'].sprite.setRotation(180.f);
+	doors['s'].sprite.setOrigin(DOOR_WIDTH, DOOR_HEIGHT);
+	doors['s'].sprite.setPosition(posS);
+	doors['s'].shape.setPosition(posS);
+	doors['s'].hitbox.left = posS.x;
+	doors['s'].hitbox.top = posS.y;
+
+	const sf::Vector2f posW = sf::Vector2f(10, 128);
+	doors['w'] = doors['n'];
+	doors['w'].sprite.setRotation(270.f);
+	doors['w'].sprite.setPosition(posW);
+	doors['w'].sprite.setOrigin(DOOR_WIDTH, 0);
+	doors['w'].shape.setPosition(posW);
+	doors['w'].shape.setSize(sf::Vector2f(DOOR_HEIGHT, DOOR_WIDTH)); // Put it on its side
+	doors['w'].hitbox.left = posW.x;
+	doors['w'].hitbox.top = posW.y;
+	doors['w'].hitbox.width = DOOR_HEIGHT;
+	doors['w'].hitbox.height = DOOR_WIDTH;
+
+	const sf::Vector2f posE = sf::Vector2f(431, 128);
+	doors['e'] = doors['w'];
+	doors['e'].sprite.setRotation(90.f);
+	doors['e'].sprite.setPosition(posE);
+	doors['e'].sprite.setOrigin(0, DOOR_HEIGHT);
+	doors['e'].shape.setPosition(posE);
+	doors['e'].hitbox.left = posE.x;
+	doors['e'].hitbox.top = posE.y;
 }
 
 void StateEditor::Load()
@@ -74,7 +104,7 @@ void StateEditor::Draw() const
 {
 	game->window.draw(spBackground);
 
-	for (auto door : doors)
+	for (auto& door : doors)
 	{
 		game->window.draw(door.second.sprite);
 		game->window.draw(door.second.shape);
@@ -85,7 +115,7 @@ void StateEditor::Draw() const
 		game->window.draw(menuBg);
 	}
 
-	for (auto button : buttons)
+	for (auto& button : buttons)
 	{
 		if ( (button.first.substr(0, 4) == "menu" && showMenu) || // Show menu items when menu is open
 			(button.first.substr(0, 4) != "menu" && !showMenu) ) // Show other items when it's not
@@ -149,7 +179,7 @@ void StateEditor::HandleInput()
 					break;
 				case DoorStates::Locked:
 					door.second.state = DoorStates::None;
-					door.second.sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
+					door.second.sprite.setTextureRect(animManager.Animate("door_none"));
 					break;
 				case DoorStates::None:
 					door.second.state = DoorStates::Closed;

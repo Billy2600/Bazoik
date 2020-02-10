@@ -102,7 +102,7 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.width = DOOR_WIDTH;
 		hitbox.height = DOOR_HEIGHT;
 		sprite.setOrigin(sf::Vector2f(hitbox.width, hitbox.height));
-		sprite.setRotation(180);
+		sprite.setRotation(180.f);
 		break;
 	case Directions::E:
 		hitbox.top = topLeft.y + WALL_HEIGHT;
@@ -110,7 +110,7 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.width = DOOR_HEIGHT;
 		hitbox.height = DOOR_WIDTH;
 		sprite.setOrigin(sf::Vector2f(0, hitbox.width));
-		sprite.setRotation(90);
+		sprite.setRotation(90.f);
 		break;
 	case Directions::W:
 		hitbox.top = topLeft.y + WALL_HEIGHT;
@@ -118,7 +118,7 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.width = DOOR_HEIGHT;
 		hitbox.height = DOOR_WIDTH;
 		sprite.setOrigin(sf::Vector2f(hitbox.height, 0));
-		sprite.setRotation(270);
+		sprite.setRotation(270.f);
 		break;
 	case Directions::N:
 	default:
@@ -128,7 +128,7 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.height = DOOR_HEIGHT;
 		// Not technically needed, but let's set 'em anyway
 		sprite.setOrigin(sf::Vector2f(0, 0));
-		sprite.setRotation(0);
+		sprite.setRotation(0.f);
 		break;
 	}
 
