@@ -55,5 +55,7 @@ void EntityWall::Move( sf::Vector2f move, const float dt )
 {
 	hitbox.left += move.x * dt;
 	hitbox.top += move.y * dt;
+#ifdef _DEBUG
 	shape.move( move * dt );
+#endif
 }

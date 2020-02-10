@@ -21,5 +21,9 @@ public:
 	virtual void Draw() const;
 	virtual void Move(sf::Vector2f move, const float dt);
 	virtual void HandleCollision( Entity *other );
-	void SetColor(int i = 0) { shape.setFillColor( sf::Color(i,0,0) ); }
+	void SetColor(int i = 0) {
+		#ifdef _DEBUG
+			shape.setFillColor( sf::Color(i,0,0) );
+		#endif
+	}
 };
