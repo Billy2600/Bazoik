@@ -4,15 +4,12 @@ StateEditor::StateEditor(Game* game)
 {
 	this->game = game;
 
-	if (!txBackground.loadFromFile("assets/background.png"))
-		log.Write("Could not load title screen image");
-	else
-	{
-		spBackground.setTexture(txBackground);
-		spBackground.setPosition(0, 0);
-	}
+
+	spBackground.setTexture(game->assetManager.GetTextureRef("background"));
+	spBackground.setPosition(0, 0);
 
 	InitMenu();
+	InitDoors();
 }
 
 void StateEditor::InitMenu()
@@ -35,11 +32,27 @@ void StateEditor::InitMenu()
 	buttons["menu_close"].SetHighlight(false);
 	buttons["menu_close"].SetCharacterSize(15);
 
-	buttons["show_menu"] = GuiButton(sf::Vector2f(450, 270), sf::Vector2f(25, 40), sf::Vector2f(0, 0), "<", assetManager->GetFontRef("joystix"), 0);
+	buttons["show_menu"] = GuiButton(sf::Vector2f(450, 270), sf::Vector2f(20, 20), sf::Vector2f(0, 0), "<", assetManager->GetFontRef("joystix"), 0);
 	buttons["show_menu"].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
 	buttons["show_menu"].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
 	buttons["show_menu"].SetHighlight(false);
-	buttons["menu_close"].SetCharacterSize(15);
+	buttons["show_menu"].SetCharacterSize(15);
+}
+
+void StateEditor::InitDoors()
+{
+	const sf::Vector2f posN = sf::Vector2f(208, 10);
+	doors['n'] = EditorDoor();
+	doors['n'].state = DoorStates::Closed;
+	doors['n'].sprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"));
+	doors['n'].sprite.setPosition(posN);
+	doors['n'].sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
+	doors['n'].shape = sf::RectangleShape(sf::Vector2f(DOOR_WIDTH, DOOR_HEIGHT));
+	doors['n'].shape.setOutlineColor(sf::Color::Red);
+	doors['n'].shape.setOutlineThickness(1.f);
+	doors['n'].shape.setFillColor(sf::Color::Transparent);
+	doors['n'].shape.setPosition(posN);
+	doors['n'].hitbox = sf::FloatRect(doors['n'].shape.getPosition(), doors['n'].shape.getSize());
 }
 
 void StateEditor::Load()
@@ -60,6 +73,13 @@ void StateEditor::Start()
 void StateEditor::Draw() const
 {
 	game->window.draw(spBackground);
+
+	for (auto door : doors)
+	{
+		game->window.draw(door.second.sprite);
+		game->window.draw(door.second.shape);
+	}
+
 	if (showMenu)
 	{
 		game->window.draw(menuBg);
@@ -67,16 +87,17 @@ void StateEditor::Draw() const
 
 	for (auto button : buttons)
 	{
-		if(button.first.substr(0,4) == "menu" && showMenu)
+		if ( (button.first.substr(0, 4) == "menu" && showMenu) || // Show menu items when menu is open
+			(button.first.substr(0, 4) != "menu" && !showMenu) ) // Show other items when it's not
+		{
 			game->window.draw(button.second);
-		else if (button.first.substr(0, 4) != "menu" && !showMenu)
-			game->window.draw(button.second);
+		}
 	}
 }
 
 void StateEditor::Update(const float dt)
 {
-
+	
 }
 
 void StateEditor::HandleInput()
@@ -106,6 +127,34 @@ void StateEditor::HandleInput()
 				if (button.first == "show_menu" && !showMenu)
 				{
 					showMenu = true;
+				}
+			}
+		}
+
+		// Click on doors
+		for (auto& door : doors)
+		{
+			if (event.type == sf::Event::MouseButtonPressed && door.second.hitbox.contains(m))
+			{
+				// Rotate through states when clicked
+				switch (door.second.state)
+				{
+				case DoorStates::Closed:
+					door.second.state = DoorStates::Open;
+					door.second.sprite.setTextureRect(animManager.Animate("door_open"));
+					break;
+				case DoorStates::Open:
+					door.second.state = DoorStates::Locked;
+					door.second.sprite.setTextureRect(animManager.Animate("door_locked"));
+					break;
+				case DoorStates::Locked:
+					door.second.state = DoorStates::None;
+					door.second.sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
+					break;
+				case DoorStates::None:
+					door.second.state = DoorStates::Closed;
+					door.second.sprite.setTextureRect(animManager.Animate("door_closed"));
+					break;
 				}
 			}
 		}
