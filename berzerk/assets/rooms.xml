@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <rooms>
-    <room x="0" y="0" wall_w="none" wall_n="locked" wall_e="closed" wall_w="open">
+    <room x="0" y="0" door_n="none" door_s="locked" door_e="closed" door_w="open">
         <entity type="robot" x="255" y="255"></entity>
         <entity type="robot" x="50" y="50"></entity>
     </room>

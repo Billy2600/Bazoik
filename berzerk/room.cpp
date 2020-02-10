@@ -9,14 +9,14 @@ Room::Room()
 	log = NULL;
 }
 
-Room::Room(sf::Vector2i roomPos, EntityManager* entityManager, ErrorLog* log)
+Room::Room(const sf::Vector2i roomPos, EntityManager* entityManager, ErrorLog* log)
 {
 	this->roomPos = roomPos;
 	this->entityManager = entityManager;
 	this->log = log;
 }
 
-void Room::SpawnEntity(std::string type, sf::Vector2f pos)
+void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 {
 	if (type == "robot")
 	{
@@ -25,6 +25,19 @@ void Room::SpawnEntity(std::string type, sf::Vector2f pos)
 	else
 	{
 		log->Write("Invalid entity type specified: " + type);
+	}
+}
+
+void Room::SetDoorState(const char direction, const std::string strState)
+{
+	if (strState == "none") doors.insert(std::make_pair(direction, DoorStates::None));
+	else if (strState == "closed") doors.insert(std::make_pair(direction, DoorStates::Closed));
+	else if (strState == "locked") doors.insert(std::make_pair(direction, DoorStates::Locked));
+	else if (strState == "open") doors.insert(std::make_pair(direction, DoorStates::Open));
+	else
+	{
+		doors.insert(std::make_pair(direction, DoorStates::None));
+		log->Write("Invalid door state chosen: " + strState);
 	}
 }
 
@@ -42,6 +55,15 @@ void Room::LoadRoomContents()
 		pugi::xml_node roomNodes = doc.child("rooms");
 		for (pugi::xml_node room : roomNodes.children("room"))
 		{
+			if (room.attribute("door_n") != NULL)
+				SetDoorState('n', room.attribute("door_n").value());
+			if (room.attribute("door_s") != NULL)
+				SetDoorState('s', room.attribute("door_s").value());
+			if (room.attribute("door_e") != NULL)
+				SetDoorState('e', room.attribute("door_e").value());
+			if (room.attribute("door_w") != NULL)
+				SetDoorState('w', room.attribute("door_w").value());
+
 			// Don't do anything if this isn't the right room position
 			if( (room.attribute("x") != NULL && std::stoi(room.attribute("x").value()) == roomPos.x)
 				&& (room.attribute("y") != NULL && std::stoi(room.attribute("y").value()) == roomPos.y) )
@@ -90,10 +112,10 @@ void Room::CreateWalls()
 
 void Room::CreateDoors()
 {
-	entityManager->Add(new EntityDoor(DoorStates::Closed, Directions::N));
-	entityManager->Add(new EntityDoor(DoorStates::Closed, Directions::S));
-	entityManager->Add(new EntityDoor(DoorStates::Closed, Directions::E));
-	entityManager->Add(new EntityDoor(DoorStates::Closed, Directions::W));
+	entityManager->Add(new EntityDoor(doors['n'], Directions::N));
+	entityManager->Add(new EntityDoor(doors['s'], Directions::S));
+	entityManager->Add(new EntityDoor(doors['e'], Directions::E));
+	entityManager->Add(new EntityDoor(doors['w'], Directions::W));
 }
 
 void Room::SetupRoom()
