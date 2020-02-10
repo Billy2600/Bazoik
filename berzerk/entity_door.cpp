@@ -58,15 +58,21 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.height = DOOR_HEIGHT;
 		break;
 	case Directions::E:
+		hitbox.top = topLeft.y + WALL_HEIGHT;
+		hitbox.left = topLeft.x + (WALL_WIDTH * 2) + DOOR_WIDTH;
 		hitbox.width = DOOR_HEIGHT;
 		hitbox.height = DOOR_WIDTH;
 		break;
 	case Directions::W:
+		hitbox.top = topLeft.y + WALL_HEIGHT;
+		hitbox.left = topLeft.x - DOOR_HEIGHT;
 		hitbox.width = DOOR_HEIGHT;
 		hitbox.height = DOOR_WIDTH;
 		break;
 	case Directions::N:
 	default:
+		hitbox.top = topLeft.y - DOOR_HEIGHT;
+		hitbox.left = topLeft.x + WALL_WIDTH;
 		hitbox.width = DOOR_WIDTH;
 		hitbox.height = DOOR_HEIGHT;
 		break;
