@@ -124,7 +124,7 @@
 	<anim name="door_open">
 		<frame x="243" y="27" w="64" h="40"></frame>
 	</anim>
-	<anim name="door_shut">
+	<anim name="door_closed">
 		<frame x="243" y="67" w="64" h="40"></frame>
 	</anim>
 	<anim name="door_locked">
