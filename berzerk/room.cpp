@@ -4,16 +4,14 @@
 
 Room::Room()
 {
-	roomPos = sf::Vector2i(0, 0);
+	roomCoord = sf::Vector2i(0, 0);
 	entityManager = NULL;
-	log = NULL;
 }
 
-Room::Room(const sf::Vector2i roomPos, EntityManager* entityManager, ErrorLog* log)
+Room::Room(const sf::Vector2i roomPos, EntityManager* entityManager)
 {
-	this->roomPos = roomPos;
+	this->roomCoord = roomPos;
 	this->entityManager = entityManager;
-	this->log = log;
 }
 
 void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
@@ -24,11 +22,11 @@ void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 	}
 	else
 	{
-		log->Write("Invalid entity type specified: " + type);
+		log.Write("Invalid entity type specified: " + type);
 	}
 }
 
-DoorStates Room::GetDoorStateFromString(const std::string strState, const ErrorLog* log)
+DoorStates Room::GetDoorStateFromString(const std::string strState)
 {
 	if (strState == "none") return DoorStates::None;
 	else if (strState == "closed") return DoorStates::Closed;
@@ -36,7 +34,8 @@ DoorStates Room::GetDoorStateFromString(const std::string strState, const ErrorL
 	else if (strState == "open") return DoorStates::Open;
 	else
 	{
-		if(log != NULL) log->Write("Invalid door state chosen: " + strState);
+		ErrorLog log;
+		log.Write("Invalid door state chosen: " + strState);
 		return DoorStates::None;
 	}
 }
@@ -55,19 +54,20 @@ void Room::LoadRoomContents()
 		pugi::xml_node roomNodes = doc.child("rooms");
 		for (pugi::xml_node room : roomNodes.children("room"))
 		{
-			if (room.attribute("door_n") != NULL)
-				doors.insert( std::make_pair( Directions::N, GetDoorStateFromString( room.attribute("door_n").value(), this->log ) ) );
-			if (room.attribute("door_s") != NULL)
-				doors.insert( std::make_pair( Directions::S, GetDoorStateFromString( room.attribute("door_s").value(), this->log ) ) );
-			if (room.attribute("door_e") != NULL)
-				doors.insert( std::make_pair( Directions::E, GetDoorStateFromString( room.attribute("door_e").value(), this->log ) ) );
-			if (room.attribute("door_w") != NULL)
-				doors.insert( std::make_pair( Directions::W, GetDoorStateFromString( room.attribute("door_w").value(), this->log ) ) );
-
 			// Don't do anything if this isn't the right room position
-			if( (room.attribute("x") != NULL && std::stoi(room.attribute("x").value()) == roomPos.x)
-				&& (room.attribute("y") != NULL && std::stoi(room.attribute("y").value()) == roomPos.y) )
+			if( (room.attribute("x") != NULL && std::stoi(room.attribute("x").value()) == roomCoord.x)
+				&& (room.attribute("y") != NULL && std::stoi(room.attribute("y").value()) == roomCoord.y) )
 			{
+
+				if (room.attribute("door_n") != NULL)
+					doors.insert(std::make_pair(Directions::N, GetDoorStateFromString(room.attribute("door_n").value())));
+				if (room.attribute("door_s") != NULL)
+					doors.insert(std::make_pair(Directions::S, GetDoorStateFromString(room.attribute("door_s").value())));
+				if (room.attribute("door_e") != NULL)
+					doors.insert(std::make_pair(Directions::E, GetDoorStateFromString(room.attribute("door_e").value())));
+				if (room.attribute("door_w") != NULL)
+					doors.insert(std::make_pair(Directions::W, GetDoorStateFromString(room.attribute("door_w").value())));
+
 				for (pugi::xml_node entity : room.children("entity"))
 				{
 					sf::Vector2f pos = sf::Vector2f(0, 0);
@@ -89,7 +89,7 @@ void Room::LoadRoomContents()
 	}
 	catch (int e)
 	{
-		log->Write("Error while loading assets/rooms.xml");
+		log.Write("Error while loading assets/rooms.xml");
 	}
 }
 

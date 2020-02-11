@@ -19,7 +19,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	entityManager.game = game;
 	entityManager.Add( &player );
 	AssetManager *assetManager = &this->game->assetManager;
-	room = Room(sf::Vector2i(0, 0), &entityManager, &log);
+	room = Room(sf::Vector2i(0, 0), &entityManager);
 	room.SetupRoom();
 
 	txScore.setFont( assetManager->GetFontRef( "joystix" ) );
@@ -291,7 +291,7 @@ void StateGameplay::Update( const float dt )
 		{
 			game->music.stop();
 			game->assetManager.StopSound( "death" );
-			lastMove == Directions::W;
+			lastMove = Directions::W;
 			game->window.setMouseCursorVisible( true );
 			this->game->SwitchState( new StateHighscore( this->game ) );
 			return;
