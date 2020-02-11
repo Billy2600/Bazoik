@@ -104,6 +104,11 @@ void StateEditor::InitDoors()
 	doors[Directions::E].hitbox.top = pos.at(Directions::E).y;
 
 	// Init door states
+	UpdateDoors();
+}
+
+void StateEditor::UpdateDoors()
+{
 	for (auto& door : doors)
 	{
 		auto& state = rooms[currentRoom.x][currentRoom.y].doorStates[door.first];
@@ -172,6 +177,7 @@ void StateEditor::ChangeRoom(const sf::Vector2i newRoom)
 {
 	currentRoom = newRoom;
 	text["menu_coord"].setString( std::to_string(newRoom.x) + "," + std::to_string(newRoom.y) );
+	UpdateDoors();
 }
 
 void StateEditor::Start()

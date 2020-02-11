@@ -39,6 +39,7 @@ private:
 
 	void InitMenu();
 	void InitDoors();
+	void UpdateDoors();
 	void Load(); // Load from XML file
 	void Save(); // Save out XML file
 	void ChangeRoom(const sf::Vector2i newRoom);
