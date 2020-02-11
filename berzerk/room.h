@@ -10,10 +10,9 @@ private:
 	sf::Vector2i roomPos; // Room position in level grid
 	EntityManager* entityManager;
 	ErrorLog* log;
-	std::map<char, DoorStates> doors; // The states in which to spawn doors, with single char indentifier (n, s, e, or w)
+	std::map<Directions, DoorStates> doors; // The states in which to spawn doors, with single char indentifier (n, s, e, or w)
 
 	void SpawnEntity(const std::string type, const sf::Vector2f pos);
-	void SetDoorState(const char direction, const std::string strState);
 
 public:
 	Room();
@@ -22,5 +21,6 @@ public:
 	void CreateWalls();
 	void CreateDoors();
 	void SetupRoom();
+	static DoorStates GetDoorStateFromString(const std::string strState, const ErrorLog* log = NULL);
 };
 

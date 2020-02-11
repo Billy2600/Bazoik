@@ -28,16 +28,16 @@ void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 	}
 }
 
-void Room::SetDoorState(const char direction, const std::string strState)
+DoorStates Room::GetDoorStateFromString(const std::string strState, const ErrorLog* log)
 {
-	if (strState == "none") doors.insert(std::make_pair(direction, DoorStates::None));
-	else if (strState == "closed") doors.insert(std::make_pair(direction, DoorStates::Closed));
-	else if (strState == "locked") doors.insert(std::make_pair(direction, DoorStates::Locked));
-	else if (strState == "open") doors.insert(std::make_pair(direction, DoorStates::Open));
+	if (strState == "none") return DoorStates::None;
+	else if (strState == "closed") return DoorStates::Closed;
+	else if (strState == "locked") return DoorStates::Locked;
+	else if (strState == "open") return DoorStates::Open;
 	else
 	{
-		doors.insert(std::make_pair(direction, DoorStates::None));
-		log->Write("Invalid door state chosen: " + strState);
+		if(log != NULL) log->Write("Invalid door state chosen: " + strState);
+		return DoorStates::None;
 	}
 }
 
@@ -56,13 +56,13 @@ void Room::LoadRoomContents()
 		for (pugi::xml_node room : roomNodes.children("room"))
 		{
 			if (room.attribute("door_n") != NULL)
-				SetDoorState('n', room.attribute("door_n").value());
+				doors.insert( std::make_pair( Directions::N, GetDoorStateFromString( room.attribute("door_n").value(), this->log ) ) );
 			if (room.attribute("door_s") != NULL)
-				SetDoorState('s', room.attribute("door_s").value());
+				doors.insert( std::make_pair( Directions::S, GetDoorStateFromString( room.attribute("door_s").value(), this->log ) ) );
 			if (room.attribute("door_e") != NULL)
-				SetDoorState('e', room.attribute("door_e").value());
+				doors.insert( std::make_pair( Directions::E, GetDoorStateFromString( room.attribute("door_e").value(), this->log ) ) );
 			if (room.attribute("door_w") != NULL)
-				SetDoorState('w', room.attribute("door_w").value());
+				doors.insert( std::make_pair( Directions::W, GetDoorStateFromString( room.attribute("door_w").value(), this->log ) ) );
 
 			// Don't do anything if this isn't the right room position
 			if( (room.attribute("x") != NULL && std::stoi(room.attribute("x").value()) == roomPos.x)
@@ -112,10 +112,10 @@ void Room::CreateWalls()
 
 void Room::CreateDoors()
 {
-	entityManager->Add(new EntityDoor(doors['n'], Directions::N));
-	entityManager->Add(new EntityDoor(doors['s'], Directions::S));
-	entityManager->Add(new EntityDoor(doors['e'], Directions::E));
-	entityManager->Add(new EntityDoor(doors['w'], Directions::W));
+	entityManager->Add(new EntityDoor(doors[Directions::N], Directions::N));
+	entityManager->Add(new EntityDoor(doors[Directions::S], Directions::S));
+	entityManager->Add(new EntityDoor(doors[Directions::E], Directions::E));
+	entityManager->Add(new EntityDoor(doors[Directions::W], Directions::W));
 }
 
 void Room::SetupRoom()
