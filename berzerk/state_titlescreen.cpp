@@ -264,7 +264,8 @@ void StateTitleScreen::StartGame()
 {
 	log.Write( "Switching to gameplay state" );
 	game->ResetLives();
-	game->level = startLevel;
+	game->currentRoom = sf::Vector2i(0, 0); // TODO: Allow change of start room
+	//game->level = startLevel;
 	if( currentDemo >= NUM_DEMOS )
 		this->game->states.push( new StateCredits( this->game) );
 	else

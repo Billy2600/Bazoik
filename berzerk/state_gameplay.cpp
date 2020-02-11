@@ -19,7 +19,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	entityManager.game = game;
 	entityManager.Add( &player );
 	AssetManager *assetManager = &this->game->assetManager;
-	room = Room(sf::Vector2i(0, 0), &entityManager);
+	room = Room(game->currentRoom, &entityManager);
 	room.SetupRoom();
 
 	txScore.setFont( assetManager->GetFontRef( "joystix" ) );
@@ -55,11 +55,11 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	if ( playDemo )
 	{
 		demo.LoadFromFile( demoName );
-		game->level = demo.GetLevel();
+		//game->level = demo.GetLevel();
 	}
 	if ( recordDemo )
 	{
-		demo.SetLevel( game->level );
+		//demo.SetLevel( game->level );
 	}
 
 	pause.SetGame( game );
@@ -242,7 +242,8 @@ void StateGameplay::Update( const float dt )
 	{
 		entityManager.Think( dt );
 		entityManager.CheckCollisions();
-		txScore.setString( std::to_string( game->score ) );
+		//txScore.setString( std::to_string( game->score ) );
+		txScore.setString( std::to_string(game->currentRoom.x) + "," + std::to_string(game->currentRoom.y) );
 
 		// Begin screen transition if player moves outside screen
 		sf::Vector2f plPos( player.hitbox.left, player.hitbox.top );
@@ -275,7 +276,6 @@ void StateGameplay::Update( const float dt )
 		if ( startTrans )
 		{
 			transition = true;
-			game->level++;
 			AddLastMove( lastMove );
 			transStart = now;
 			PlayTransitionSound();
@@ -345,19 +345,25 @@ void StateGameplay::Draw() const
 void StateGameplay::ScreenTransition( const float dt )
 {
 	sf::Vector2f move;
+	sf::Vector2i nextRoom = game->currentRoom;
+
 	switch( lastMove )
 	{
 	case Directions::N:
 		move = sf::Vector2f( 0, -VERT_TRANS_SPEED );
+		nextRoom.y++;
 		break;
 	case Directions::E:
 		move = sf::Vector2f( HORZ_TRANS_SPEED, 0 );
+		nextRoom.x--;
 		break;
 	case Directions::S:
 		move = sf::Vector2f( 0, VERT_TRANS_SPEED );
+		nextRoom.y--;
 		break;
 	case Directions::W:
 		move = sf::Vector2f( -HORZ_TRANS_SPEED, 0 );
+		nextRoom.x++;
 		break;
 	}
 
@@ -374,6 +380,7 @@ void StateGameplay::ScreenTransition( const float dt )
 	if ( ( transBoundry.left + transBoundry.width ) < 0 || transBoundry.left > GAME_WIDTH ||
 		( transBoundry.top + transBoundry.height ) < 0 || transBoundry.top > GAME_HEIGHT )
 	{
+		this->game->currentRoom = nextRoom;
 		this->game->SwitchState( new StateGameplay( this->game ) );
 	}
 }
@@ -425,128 +432,29 @@ void StateGameplay::ReturnToTitle()
 	game->PopState();
 }
 
-RobotStats StateGameplay::LoadRobotStats()
-{
-	RobotStats stats{ false, true, 50, 3000, 5, ERROR_COLOR, 1, false }; // Default values in case of error
-
-	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file( "assets/robotstats.xml" );
-	if( !result ) // Error check
-	{
-		return stats;
-	}
-
-	try
-	{
-		pugi::xml_node levelNodes = doc.child( "levels" );
-
-		for ( pugi::xml_node level : levelNodes.children( "level" ) )
-		{
-			if ( game->level >= (unsigned int)std::stoi( level.attribute( "min" ).value() ) )
-			{
-                if (level.attribute( "random" ) != NULL && std::stoi( level.attribute( "random" ).value() ) == 1)
-                    stats.random = true;
-                else stats.random = false;
-                
-				if ( level.attribute( "stop_if_see_player") != NULL && std::stoi( level.attribute( "stop_if_see_player" ).value() ) == 0 )
-					stats.stopIfSeePlayer = false;
-				else
-					stats.stopIfSeePlayer = true;
-
-				if ( level.attribute( "speed" ) != NULL ) stats.movementSpeed = (float)std::stoi( level.attribute( "speed" ).value() );
-				else stats.movementSpeed = 5;
-
-				if ( level.attribute( "firedelay" ) != NULL ) stats.fireDelay = std::stoi( level.attribute( "firedelay" ).value() );
-				else stats.fireDelay = 100;
-
-				if ( level.attribute( "num_bots" ) != NULL ) stats.numRobots = std::stoi( level.attribute( "num_bots" ).value() );
-				else stats.numRobots = 5;
-
-				if( level.attribute( "scale" ) != NULL ) stats.scale = std::stof( level.attribute( "scale" ).value() );
-				else stats.scale = 1;
-
-				if ( level.attribute( "can_shoot" ) != NULL && std::stoi( level.attribute( "can_shoot" ).value() ) == 0 )
-					stats.canShoot = false;
-				else
-					stats.canShoot = true;
-
-				if ( level.child( "color" ) != NULL )
-				{
-					pugi::xml_node color = level.child( "color" );
-					int r = std::stoi( color.attribute( "r" ).value() );
-					int g = std::stoi( color.attribute( "g" ).value() );
-					int b = std::stoi( color.attribute( "b" ).value() );
-					stats.color = sf::Color( r, g, b );
-				}
-				else
-					stats.color = ERROR_COLOR;
-			}
-		}
-
-        if (stats.random)
-            return RandomizeStats();
-
-		return stats;
-	}
-	catch ( int e )
-	{
-		log.Write( "Error while loading assets/robotstats.xml" );
-		return stats;
-	}
-}
-
 sf::Vector2f StateGameplay::GetPlayerStart(const Directions lastMove, EntityPlayer& player) const
 {
-	//// Spawn player based on last move
-	//switch (lastMove)
-	//{
-	//	// Keep in mind you'll end up on the other side that you exited
-	//case Directions::S:
-	//	return sf::Vector2f(GAME_WIDTH / 2, GAME_HEIGHT - player.hitbox.height - WALL_THICKNESS);
-	//	break;
-	//case Directions::N:
-	//	return sf::Vector2f(GAME_WIDTH / 2, WALL_THICKNESS);
-	//	break;
-	//case Directions::E:
-	//	return sf::Vector2f(GAME_WIDTH - player.hitbox.width - WALL_THICKNESS, GAME_HEIGHT / 2);
-	//	break;
-	//case Directions::W:
-	//default:
-	//	return sf::Vector2f(WALL_THICKNESS, GAME_HEIGHT / 2);
-	//	break;
-	//}
+	// Spawn player based on last move
+	switch (lastMove)
+	{
+		// Keep in mind you'll end up on the other side that you exited
+	case Directions::S:
+		return sf::Vector2f(GAME_WIDTH / 2, GAME_HEIGHT - player.hitbox.height - WALL_WIDTH);
+		break;
+	case Directions::N:
+		return sf::Vector2f(GAME_WIDTH / 2, WALL_WIDTH);
+		break;
+	case Directions::E:
+		return sf::Vector2f(GAME_WIDTH - player.hitbox.width - WALL_HEIGHT, GAME_HEIGHT / 2);
+		break;
+	case Directions::W:
+	default:
+		return sf::Vector2f(WALL_HEIGHT, GAME_HEIGHT / 2);
+		break;
+	}
 
-	//// Should never happen
-	//return sf::Vector2f(0, 0);
-
-	return sf::Vector2f(64, 160);
-}
-
-RobotStats StateGameplay::RandomizeStats()
-{
-    // Roll a bunch of dice
-    std::uniform_int_distribution<unsigned int> rndCanShoot( 0, 3 ); // All > 1 evaluate to true, so we're making it more likely they can shoot
-    std::uniform_int_distribution<unsigned int> rndStopIfSeePlayer( 0, 1 );
-    std::uniform_int_distribution<unsigned int> rndFireDelay( 500, 2000 );
-    std::uniform_int_distribution<unsigned int> rndMovementSpeed( 1, 60 );
-    std::uniform_int_distribution<unsigned int> rndNumRobots( 2, 14 );
-    std::uniform_real_distribution<double> rndScale( 0.5, 2.5 );
-    // Random colors
-    std::uniform_int_distribution<unsigned int> rndR( 0, 255 );
-    std::uniform_int_distribution<unsigned int> rndG( 0, 255 );
-    std::uniform_int_distribution<unsigned int> rndB( 0, 255 );
-
-    // Assign values
-    RobotStats rndStats;
-    rndStats.canShoot = rndCanShoot( rngEngine );
-    rndStats.stopIfSeePlayer = rndStopIfSeePlayer( rngEngine );
-    rndStats.fireDelay = rndFireDelay( rngEngine );
-    rndStats.movementSpeed = rndMovementSpeed( rngEngine );
-    rndStats.numRobots = rndNumRobots( rngEngine );
-    rndStats.scale = (float)rndScale( rngEngine );
-    rndStats.color = sf::Color( rndR( rngEngine ), rndB( rngEngine ), rndG( rngEngine ) );
-
-    return rndStats;
+	// Should never happen
+	return sf::Vector2f(0, 0);
 }
 
 void StateGameplay::AddLastMove( Directions move )

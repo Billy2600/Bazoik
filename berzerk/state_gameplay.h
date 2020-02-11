@@ -52,10 +52,6 @@ private:
 	void ReturnToTitle(); // Return to title screen
 	sf::Vector2f GetPlayerStart(const Directions lastMove, EntityPlayer& player) const;
 
-	RobotStats LoadRobotStats(); // Load robot stats from xml file
-    std::mt19937 rngEngine = std::mt19937( (unsigned int)time( 0 ) );
-    RobotStats RandomizeStats(); // Randomize robot stats, if that option was selected
-
 	static std::vector<Directions> lastFourMoves; // Used to keep track for easter egg
 	void AddLastMove( Directions move ); // Add last move to vector
 	bool CheckEasterEgg() const; // Check if we should fire easter egg

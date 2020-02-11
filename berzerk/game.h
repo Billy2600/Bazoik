@@ -34,7 +34,7 @@ public:
 	AssetManager assetManager;
 	unsigned int score;
 	InputManager inputManager;
-	int unsigned level; // Current level, certain behaviors will change based on this
+	sf::Vector2i currentRoom;
 	sf::Music music;
 
 	Game();
