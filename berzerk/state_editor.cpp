@@ -182,11 +182,17 @@ void StateEditor::HandleInput()
 			if (event.type == sf::Event::MouseButtonPressed && button.second.hitbox.contains(m))
 			{
 				// Perform action based on which button this is
-				if (button.first == "menu_close" && showMenu)
+				if (button.first.substr(0, 10) == "menu_room_")
+				{
+					int x = std::stoi( button.first.substr(10, 1) );
+					int y = std::stoi( button.first.substr(11, 1) );
+					ChangeRoom(sf::Vector2i(x, y));
+				}
+				else if (button.first == "menu_close" && showMenu)
 				{
 					showMenu = false;
 				}
-				if (button.first == "show_menu" && !showMenu)
+				else if (button.first == "show_menu" && !showMenu)
 				{
 					showMenu = true;
 				}
