@@ -50,6 +50,10 @@ void StateEditor::InitMenu()
 	text["menu_coord"].setFillColor(sf::Color::Green);
 	text["menu_coord"].setPosition(sf::Vector2f(414, 5));
 
+	text["saved"] = sf::Text("Saved to file", assetManager->GetFontRef("joystix"), 15);
+	text["saved"].setFillColor(sf::Color::Transparent);
+	text["saved"].setPosition(sf::Vector2f(5, 5));
+
 	buttons["show_menu"] = GuiButton(sf::Vector2f(450, 270), sf::Vector2f(20, 20), sf::Vector2f(0, 0), "<", assetManager->GetFontRef("joystix"), 0);
 	buttons["show_menu"].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
 	buttons["show_menu"].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
@@ -113,7 +117,7 @@ void StateEditor::UpdateDoors()
 	{
 		auto& state = rooms[currentRoom.x][currentRoom.y].doorStates[door.first];
 		door.second.state = state;
-		door.second.sprite.setTextureRect(animManager.Animate("door_" + Room::DoorStateStringFromState(state)));
+		door.second.sprite.setTextureRect(animManager.Animate("door_" + Room::GetDoorStateStringFromState(state)));
 	}
 }
 
@@ -123,6 +127,7 @@ void StateEditor::Load()
 	pugi::xml_parse_result result = doc.load_file("assets/rooms.xml");
 	if (!result) // Error check
 	{
+		log.Write("Unable to load assets/rooms.xml");
 		return;
 	}
 
@@ -131,7 +136,7 @@ void StateEditor::Load()
 		pugi::xml_node roomNodes = doc.child("rooms");
 		for (pugi::xml_node room : roomNodes.children("room"))
 		{
-			// Don't do anything if this isn't the right room position
+			// Don't do anything if room position is invalid
 			if (room.attribute("x") != NULL && room.attribute("y") != NULL)
 			{
 				auto x = room.attribute("x").as_int();
@@ -170,7 +175,44 @@ void StateEditor::Load()
 
 void StateEditor::Save()
 {
+	pugi::xml_document doc;
 
+	try
+	{
+		pugi::xml_node roomNode = doc.append_child("rooms");
+
+		for (int x = 0; x < MAX_ROOM_X; x++)
+		{
+			for (int y = 0; y < MAX_ROOM_Y; y++)
+			{
+				pugi::xml_node room = roomNode.append_child("room");
+
+				room.append_attribute("x").set_value(x);
+				room.append_attribute("y").set_value(y);
+
+				room.append_attribute("door_n").set_value(Room::GetDoorStateStringFromState(rooms[x][y].doorStates[Directions::N]).c_str());
+				room.append_attribute("door_s").set_value(Room::GetDoorStateStringFromState(rooms[x][y].doorStates[Directions::S]).c_str());
+				room.append_attribute("door_e").set_value(Room::GetDoorStateStringFromState(rooms[x][y].doorStates[Directions::E]).c_str());
+				room.append_attribute("door_w").set_value(Room::GetDoorStateStringFromState(rooms[x][y].doorStates[Directions::W]).c_str());
+
+				// TODO: Insert entities
+			}
+		}
+
+		if (!doc.save_file("assets/rooms.xml"))
+		{
+			log.Write("Unable to save assets/rooms.xml");
+			return;
+		}
+	}
+	catch (int e)
+	{
+		log.Write("Error while saving assets/rooms.xml");
+	}
+
+	// Show message on screen
+	text["saved"].setFillColor(sf::Color::Green);
+	lastSave.restart();
 }
 
 void StateEditor::ChangeRoom(const sf::Vector2i newRoom)
@@ -211,8 +253,9 @@ void StateEditor::Draw() const
 
 	for (auto& t : text)
 	{
-		if ((t.first.substr(0, 4) == "menu" && showMenu) || // Show menu items when menu is open
-			(t.first.substr(0, 4) != "menu" && !showMenu)) // Show other items when it's not
+		if ((t.first.substr(0, 4) == "menu" && showMenu) || // Same conditions as above
+			(t.first.substr(0, 4) != "menu" && !showMenu) ||
+			(t.first == "saved") )  // Exceptions
 		{
 			game->window.draw(t.second);
 		}
@@ -221,7 +264,10 @@ void StateEditor::Draw() const
 
 void StateEditor::Update(const float dt)
 {
-	
+	if (lastSave.getElapsedTime().asSeconds() > SHOW_MESSAGE_TIME)
+	{
+		text["saved"].setFillColor(sf::Color::Transparent);
+	}
 }
 
 void StateEditor::HandleInput()
@@ -258,6 +304,10 @@ void StateEditor::HandleInput()
 				{
 					showMenu = true;
 				}
+				else if (button.first == "menu_save")
+				{
+					Save();
+				}
 			}
 		}
 
@@ -270,22 +320,22 @@ void StateEditor::HandleInput()
 				switch (door.second.state)
 				{
 				case DoorStates::Closed:
-					door.second.state = DoorStates::Open;
-					door.second.sprite.setTextureRect(animManager.Animate("door_open"));
+					// Open the underlying room door state
+					// Actual interactable door will be updated by UpdateDoors() below
+					rooms[currentRoom.x][currentRoom.y].doorStates[door.first] = DoorStates::Open;
 					break;
 				case DoorStates::Open:
-					door.second.state = DoorStates::Locked;
-					door.second.sprite.setTextureRect(animManager.Animate("door_locked"));
+					rooms[currentRoom.x][currentRoom.y].doorStates[door.first] = DoorStates::Locked;
 					break;
 				case DoorStates::Locked:
-					door.second.state = DoorStates::None;
-					door.second.sprite.setTextureRect(animManager.Animate("door_none"));
+					rooms[currentRoom.x][currentRoom.y].doorStates[door.first] = DoorStates::None;
 					break;
 				case DoorStates::None:
-					door.second.state = DoorStates::Closed;
-					door.second.sprite.setTextureRect(animManager.Animate("door_closed"));
+					rooms[currentRoom.x][currentRoom.y].doorStates[door.first] = DoorStates::Closed;
 					break;
 				}
+
+				UpdateDoors();
 			}
 		}
 

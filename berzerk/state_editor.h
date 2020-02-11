@@ -7,6 +7,8 @@
 #include "entity_door.h"
 #include "room.h"
 
+#define SHOW_MESSAGE_TIME 3 // How long to show messages (e.g. saved) on screen (in seconds)
+
 class StateEditor : public GameState
 {
 private:
@@ -28,6 +30,7 @@ private:
 	std::map<std::string, sf::Text> text;
 	AnimManager animManager;
 	sf::Sprite spBackground;
+	sf::Clock lastSave;
 
 	EditorRooms rooms[MAX_ROOM_X][MAX_ROOM_Y];
 	sf::Vector2i currentRoom;

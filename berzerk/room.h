@@ -25,6 +25,6 @@ public:
 	void CreateDoors();
 	void SetupRoom();
 	static DoorStates GetDoorStateFromString(const std::string strState);
-	static std::string DoorStateStringFromState(const DoorStates state);
+	static std::string GetDoorStateStringFromState(const DoorStates state);
 };
 

@@ -40,7 +40,7 @@ DoorStates Room::GetDoorStateFromString(const std::string strState)
 	}
 }
 
-std::string Room::DoorStateStringFromState(const DoorStates state)
+std::string Room::GetDoorStateStringFromState(const DoorStates state)
 {
 	switch (state)
 	{
