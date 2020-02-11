@@ -59,58 +59,57 @@ void StateEditor::InitMenu()
 
 void StateEditor::InitDoors()
 {
-	const sf::Vector2f posN = sf::Vector2f(208, 10);
-	auto& state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::N];
+	const std::map<Directions, sf::Vector2f> pos = {
+		std::make_pair(Directions::N, sf::Vector2f(208, 10)),
+		std::make_pair(Directions::S, sf::Vector2f(208, 280)),
+		std::make_pair(Directions::W, sf::Vector2f(10, 128)),
+		std::make_pair(Directions::E, sf::Vector2f(431, 128))
+	};
+
 	doors[Directions::N] = EditorDoor();
-	doors[Directions::N].state = state;
 	doors[Directions::N].sprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"));
-	doors[Directions::N].sprite.setPosition(posN);
-	doors[Directions::N].sprite.setTextureRect( animManager.Animate("door_" + Room::DoorStateStringFromState(state)) );
+	doors[Directions::N].sprite.setPosition(pos.at(Directions::N)); // Have to use .at() because const
 	doors[Directions::N].shape = sf::RectangleShape(sf::Vector2f(DOOR_WIDTH, DOOR_HEIGHT));
 	doors[Directions::N].shape.setOutlineColor(sf::Color::Red);
 	doors[Directions::N].shape.setOutlineThickness(1.f);
 	doors[Directions::N].shape.setFillColor(sf::Color::Transparent);
-	doors[Directions::N].shape.setPosition(posN);
-	doors[Directions::N].hitbox = sf::FloatRect(posN, doors[Directions::N].shape.getSize());
+	doors[Directions::N].shape.setPosition(pos.at(Directions::N));
+	doors[Directions::N].hitbox = sf::FloatRect(pos.at(Directions::N), doors[Directions::N].shape.getSize());
 
-	const sf::Vector2f posS = sf::Vector2f(208, 280);
-	state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::S];
 	doors[Directions::S] = doors[Directions::N];
-	doors[Directions::S].state = state;
-	doors[Directions::S].sprite.setTextureRect(animManager.Animate("door_" + Room::DoorStateStringFromState(state)));
 	doors[Directions::S].sprite.setRotation(180.f);
 	doors[Directions::S].sprite.setOrigin(DOOR_WIDTH, DOOR_HEIGHT);
-	doors[Directions::S].sprite.setPosition(posS);
-	doors[Directions::S].shape.setPosition(posS);
-	doors[Directions::S].hitbox.left = posS.x;
-	doors[Directions::S].hitbox.top = posS.y;
+	doors[Directions::S].sprite.setPosition(pos.at(Directions::S));
+	doors[Directions::S].shape.setPosition(pos.at(Directions::S));
+	doors[Directions::S].hitbox.left = pos.at(Directions::S).x;
+	doors[Directions::S].hitbox.top = pos.at(Directions::S).y;
 
-	const sf::Vector2f posW = sf::Vector2f(10, 128);
-	state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::W];
 	doors[Directions::W] = doors[Directions::N];
-	doors[Directions::W].state = state;
-	doors[Directions::W].sprite.setTextureRect(animManager.Animate("door_" + Room::DoorStateStringFromState(state)));
 	doors[Directions::W].sprite.setRotation(270.f);
-	doors[Directions::W].sprite.setPosition(posW);
+	doors[Directions::W].sprite.setPosition(pos.at(Directions::W));
 	doors[Directions::W].sprite.setOrigin(DOOR_WIDTH, 0);
-	doors[Directions::W].shape.setPosition(posW);
+	doors[Directions::W].shape.setPosition(pos.at(Directions::W));
 	doors[Directions::W].shape.setSize(sf::Vector2f(DOOR_HEIGHT, DOOR_WIDTH)); // Put it on its side
-	doors[Directions::W].hitbox.left = posW.x;
-	doors[Directions::W].hitbox.top = posW.y;
+	doors[Directions::W].hitbox.left = pos.at(Directions::W).x;
+	doors[Directions::W].hitbox.top = pos.at(Directions::W).y;
 	doors[Directions::W].hitbox.width = DOOR_HEIGHT;
 	doors[Directions::W].hitbox.height = DOOR_WIDTH;
 
-	const sf::Vector2f posE = sf::Vector2f(431, 128);
-	state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::E];
 	doors[Directions::E] = doors[Directions::W];
-	doors[Directions::E].state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::E];
-	doors[Directions::E].sprite.setTextureRect(animManager.Animate("door_" + Room::DoorStateStringFromState(state)));
 	doors[Directions::E].sprite.setRotation(90.f);
-	doors[Directions::E].sprite.setPosition(posE);
+	doors[Directions::E].sprite.setPosition(pos.at(Directions::E));
 	doors[Directions::E].sprite.setOrigin(0, DOOR_HEIGHT);
-	doors[Directions::E].shape.setPosition(posE);
-	doors[Directions::E].hitbox.left = posE.x;
-	doors[Directions::E].hitbox.top = posE.y;
+	doors[Directions::E].shape.setPosition(pos.at(Directions::E));
+	doors[Directions::E].hitbox.left = pos.at(Directions::E).x;
+	doors[Directions::E].hitbox.top = pos.at(Directions::E).y;
+
+	// Init door states
+	for (auto& door : doors)
+	{
+		auto& state = rooms[currentRoom.x][currentRoom.y].doorStates[door.first];
+		door.second.state = state;
+		door.second.sprite.setTextureRect(animManager.Animate("door_" + Room::DoorStateStringFromState(state)));
+	}
 }
 
 void StateEditor::Load()
