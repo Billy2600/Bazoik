@@ -5,6 +5,7 @@
 #include "game_state.h"
 #include "gui_button.h"
 #include "entity_door.h"
+#include "room.h"
 
 class StateEditor : public GameState
 {
@@ -17,11 +18,21 @@ private:
 		sf::FloatRect hitbox;
 	};
 
+	struct EditorRooms
+	{
+		std::map<std::string, sf::Vector2f> entities;
+		DoorStates doorStates;
+	};
+
 	std::map<std::string, GuiButton> buttons;
+	std::map<std::string, sf::Text> text;
 	AnimManager animManager;
 	sf::Sprite spBackground;
-	std::map<std::string, sf::Vector2f> objects;
-	std::map<Directions, EditorDoor> doors; // n, s, e, w doors
+
+	std::map<sf::Vector2i, EditorRooms> rooms;
+	sf::Vector2i currentRoom;
+	std::map<Directions, EditorDoor> doors; // For working on doors in current room; the actual intractable on-screen element
+	std::map<std::string, sf::Sprite> entities; // On-screen entities, for drawing/interacting
 	
 	bool showMenu;
 	sf::RectangleShape menuBg;
@@ -30,6 +41,7 @@ private:
 	void InitDoors();
 	void Load(); // Load from XML file
 	void Save(); // Save out XML file
+	void ChangeRoom(const sf::Vector2i newRoom);
 
 public:
 

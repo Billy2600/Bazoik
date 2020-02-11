@@ -7,6 +7,7 @@ StateEditor::StateEditor(Game* game)
 
 	spBackground.setTexture(game->assetManager.GetTextureRef("background"));
 	spBackground.setPosition(0, 0);
+	currentRoom = sf::Vector2i(0, 0);
 
 	InitMenu();
 	InitDoors();
@@ -31,6 +32,22 @@ void StateEditor::InitMenu()
 	buttons["menu_close"].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
 	buttons["menu_close"].SetHighlight(false);
 	buttons["menu_close"].SetCharacterSize(15);
+
+	for (int x = 0; x < MAX_ROOM_X; x++)
+	{
+		for (int y = 0; y < MAX_ROOM_Y; y++)
+		{
+			auto strCoord = std::to_string(x) + std::to_string(y);
+			buttons["menu_room_" + strCoord] = GuiButton(sf::Vector2f(342 + (x * 9), 5 + (y * 9)), sf::Vector2f(3, 3), sf::Vector2f(0, 0), " ", assetManager->GetFontRef("joystix"), 0);
+			buttons["menu_room_" + strCoord].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
+			buttons["menu_room_" + strCoord].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
+			buttons["menu_room_" + strCoord].SetHighlight(false);
+		}
+	}
+
+	text["menu_coord"] = sf::Text("0,0", assetManager->GetFontRef("joystix"), 10);
+	text["menu_coord"].setFillColor(sf::Color::Green);
+	text["menu_coord"].setPosition(sf::Vector2f(414, 5));
 
 	buttons["show_menu"] = GuiButton(sf::Vector2f(450, 270), sf::Vector2f(20, 20), sf::Vector2f(0, 0), "<", assetManager->GetFontRef("joystix"), 0);
 	buttons["show_menu"].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
@@ -95,6 +112,12 @@ void StateEditor::Save()
 
 }
 
+void StateEditor::ChangeRoom(const sf::Vector2i newRoom)
+{
+	currentRoom = newRoom;
+	text["menu_coord"].setString( std::to_string(newRoom.x) + "," + std::to_string(newRoom.y) );
+}
+
 void StateEditor::Start()
 {
 
@@ -121,6 +144,15 @@ void StateEditor::Draw() const
 			(button.first.substr(0, 4) != "menu" && !showMenu) ) // Show other items when it's not
 		{
 			game->window.draw(button.second);
+		}
+	}
+
+	for (auto& t : text)
+	{
+		if ((t.first.substr(0, 4) == "menu" && showMenu) || // Show menu items when menu is open
+			(t.first.substr(0, 4) != "menu" && !showMenu)) // Show other items when it's not
+		{
+			game->window.draw(t.second);
 		}
 	}
 }
