@@ -42,47 +42,47 @@ void StateEditor::InitMenu()
 void StateEditor::InitDoors()
 {
 	const sf::Vector2f posN = sf::Vector2f(208, 10);
-	doors['n'] = EditorDoor();
-	doors['n'].state = DoorStates::Closed;
-	doors['n'].sprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"));
-	doors['n'].sprite.setPosition(posN);
-	doors['n'].sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
-	doors['n'].shape = sf::RectangleShape(sf::Vector2f(DOOR_WIDTH, DOOR_HEIGHT));
-	doors['n'].shape.setOutlineColor(sf::Color::Red);
-	doors['n'].shape.setOutlineThickness(1.f);
-	doors['n'].shape.setFillColor(sf::Color::Transparent);
-	doors['n'].shape.setPosition(posN);
-	doors['n'].hitbox = sf::FloatRect(posN, doors['n'].shape.getSize());
+	doors[Directions::N] = EditorDoor();
+	doors[Directions::N].state = DoorStates::Closed;
+	doors[Directions::N].sprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"));
+	doors[Directions::N].sprite.setPosition(posN);
+	doors[Directions::N].sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
+	doors[Directions::N].shape = sf::RectangleShape(sf::Vector2f(DOOR_WIDTH, DOOR_HEIGHT));
+	doors[Directions::N].shape.setOutlineColor(sf::Color::Red);
+	doors[Directions::N].shape.setOutlineThickness(1.f);
+	doors[Directions::N].shape.setFillColor(sf::Color::Transparent);
+	doors[Directions::N].shape.setPosition(posN);
+	doors[Directions::N].hitbox = sf::FloatRect(posN, doors[Directions::N].shape.getSize());
 
 	const sf::Vector2f posS = sf::Vector2f(208, 280);
-	doors['s'] = doors['n'];
-	doors['s'].sprite.setRotation(180.f);
-	doors['s'].sprite.setOrigin(DOOR_WIDTH, DOOR_HEIGHT);
-	doors['s'].sprite.setPosition(posS);
-	doors['s'].shape.setPosition(posS);
-	doors['s'].hitbox.left = posS.x;
-	doors['s'].hitbox.top = posS.y;
+	doors[Directions::S] = doors[Directions::N];
+	doors[Directions::S].sprite.setRotation(180.f);
+	doors[Directions::S].sprite.setOrigin(DOOR_WIDTH, DOOR_HEIGHT);
+	doors[Directions::S].sprite.setPosition(posS);
+	doors[Directions::S].shape.setPosition(posS);
+	doors[Directions::S].hitbox.left = posS.x;
+	doors[Directions::S].hitbox.top = posS.y;
 
 	const sf::Vector2f posW = sf::Vector2f(10, 128);
-	doors['w'] = doors['n'];
-	doors['w'].sprite.setRotation(270.f);
-	doors['w'].sprite.setPosition(posW);
-	doors['w'].sprite.setOrigin(DOOR_WIDTH, 0);
-	doors['w'].shape.setPosition(posW);
-	doors['w'].shape.setSize(sf::Vector2f(DOOR_HEIGHT, DOOR_WIDTH)); // Put it on its side
-	doors['w'].hitbox.left = posW.x;
-	doors['w'].hitbox.top = posW.y;
-	doors['w'].hitbox.width = DOOR_HEIGHT;
-	doors['w'].hitbox.height = DOOR_WIDTH;
+	doors[Directions::W] = doors[Directions::N];
+	doors[Directions::W].sprite.setRotation(270.f);
+	doors[Directions::W].sprite.setPosition(posW);
+	doors[Directions::W].sprite.setOrigin(DOOR_WIDTH, 0);
+	doors[Directions::W].shape.setPosition(posW);
+	doors[Directions::W].shape.setSize(sf::Vector2f(DOOR_HEIGHT, DOOR_WIDTH)); // Put it on its side
+	doors[Directions::W].hitbox.left = posW.x;
+	doors[Directions::W].hitbox.top = posW.y;
+	doors[Directions::W].hitbox.width = DOOR_HEIGHT;
+	doors[Directions::W].hitbox.height = DOOR_WIDTH;
 
 	const sf::Vector2f posE = sf::Vector2f(431, 128);
-	doors['e'] = doors['w'];
-	doors['e'].sprite.setRotation(90.f);
-	doors['e'].sprite.setPosition(posE);
-	doors['e'].sprite.setOrigin(0, DOOR_HEIGHT);
-	doors['e'].shape.setPosition(posE);
-	doors['e'].hitbox.left = posE.x;
-	doors['e'].hitbox.top = posE.y;
+	doors[Directions::E] = doors[Directions::W];
+	doors[Directions::E].sprite.setRotation(90.f);
+	doors[Directions::E].sprite.setPosition(posE);
+	doors[Directions::E].sprite.setOrigin(0, DOOR_HEIGHT);
+	doors[Directions::E].shape.setPosition(posE);
+	doors[Directions::E].hitbox.left = posE.x;
+	doors[Directions::E].hitbox.top = posE.y;
 }
 
 void StateEditor::Load()

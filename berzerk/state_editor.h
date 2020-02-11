@@ -21,7 +21,7 @@ private:
 	AnimManager animManager;
 	sf::Sprite spBackground;
 	std::map<std::string, sf::Vector2f> objects;
-	std::map<char, EditorDoor> doors; // n, s, e, w doors
+	std::map<Directions, EditorDoor> doors; // n, s, e, w doors
 	
 	bool showMenu;
 	sf::RectangleShape menuBg;
