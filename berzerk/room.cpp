@@ -40,6 +40,22 @@ DoorStates Room::GetDoorStateFromString(const std::string strState)
 	}
 }
 
+std::string Room::DoorStateStringFromState(const DoorStates state)
+{
+	switch (state)
+	{
+		case DoorStates::Closed:
+			return "closed";
+		case DoorStates::Locked:
+			return "locked";
+		case DoorStates::Open:
+			return "open";
+		case DoorStates::None:
+		default:
+			return "none";
+	}
+}
+
 void Room::LoadRoomContents()
 {
 	pugi::xml_document doc;

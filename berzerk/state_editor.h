@@ -21,7 +21,7 @@ private:
 	struct EditorRooms
 	{
 		std::map<std::string, sf::Vector2f> entities;
-		DoorStates doorStates;
+		std::map<Directions, DoorStates> doorStates;
 	};
 
 	std::map<std::string, GuiButton> buttons;
@@ -29,7 +29,7 @@ private:
 	AnimManager animManager;
 	sf::Sprite spBackground;
 
-	std::map<sf::Vector2i, EditorRooms> rooms;
+	EditorRooms rooms[MAX_ROOM_X][MAX_ROOM_Y];
 	sf::Vector2i currentRoom;
 	std::map<Directions, EditorDoor> doors; // For working on doors in current room; the actual intractable on-screen element
 	std::map<std::string, sf::Sprite> entities; // On-screen entities, for drawing/interacting

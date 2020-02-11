@@ -9,6 +9,7 @@ StateEditor::StateEditor(Game* game)
 	spBackground.setPosition(0, 0);
 	currentRoom = sf::Vector2i(0, 0);
 
+	Load();
 	InitMenu();
 	InitDoors();
 }
@@ -59,11 +60,12 @@ void StateEditor::InitMenu()
 void StateEditor::InitDoors()
 {
 	const sf::Vector2f posN = sf::Vector2f(208, 10);
+	auto& state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::N];
 	doors[Directions::N] = EditorDoor();
-	doors[Directions::N].state = DoorStates::Closed;
+	doors[Directions::N].state = state;
 	doors[Directions::N].sprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"));
 	doors[Directions::N].sprite.setPosition(posN);
-	doors[Directions::N].sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
+	doors[Directions::N].sprite.setTextureRect( animManager.Animate("door_" + Room::DoorStateStringFromState(state)) );
 	doors[Directions::N].shape = sf::RectangleShape(sf::Vector2f(DOOR_WIDTH, DOOR_HEIGHT));
 	doors[Directions::N].shape.setOutlineColor(sf::Color::Red);
 	doors[Directions::N].shape.setOutlineThickness(1.f);
@@ -72,7 +74,10 @@ void StateEditor::InitDoors()
 	doors[Directions::N].hitbox = sf::FloatRect(posN, doors[Directions::N].shape.getSize());
 
 	const sf::Vector2f posS = sf::Vector2f(208, 280);
+	state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::S];
 	doors[Directions::S] = doors[Directions::N];
+	doors[Directions::S].state = state;
+	doors[Directions::S].sprite.setTextureRect(animManager.Animate("door_" + Room::DoorStateStringFromState(state)));
 	doors[Directions::S].sprite.setRotation(180.f);
 	doors[Directions::S].sprite.setOrigin(DOOR_WIDTH, DOOR_HEIGHT);
 	doors[Directions::S].sprite.setPosition(posS);
@@ -81,7 +86,10 @@ void StateEditor::InitDoors()
 	doors[Directions::S].hitbox.top = posS.y;
 
 	const sf::Vector2f posW = sf::Vector2f(10, 128);
+	state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::W];
 	doors[Directions::W] = doors[Directions::N];
+	doors[Directions::W].state = state;
+	doors[Directions::W].sprite.setTextureRect(animManager.Animate("door_" + Room::DoorStateStringFromState(state)));
 	doors[Directions::W].sprite.setRotation(270.f);
 	doors[Directions::W].sprite.setPosition(posW);
 	doors[Directions::W].sprite.setOrigin(DOOR_WIDTH, 0);
@@ -93,7 +101,10 @@ void StateEditor::InitDoors()
 	doors[Directions::W].hitbox.height = DOOR_WIDTH;
 
 	const sf::Vector2f posE = sf::Vector2f(431, 128);
+	state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::E];
 	doors[Directions::E] = doors[Directions::W];
+	doors[Directions::E].state = rooms[currentRoom.x][currentRoom.y].doorStates[Directions::E];
+	doors[Directions::E].sprite.setTextureRect(animManager.Animate("door_" + Room::DoorStateStringFromState(state)));
 	doors[Directions::E].sprite.setRotation(90.f);
 	doors[Directions::E].sprite.setPosition(posE);
 	doors[Directions::E].sprite.setOrigin(0, DOOR_HEIGHT);
@@ -104,7 +115,53 @@ void StateEditor::InitDoors()
 
 void StateEditor::Load()
 {
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_file("assets/rooms.xml");
+	if (!result) // Error check
+	{
+		return;
+	}
 
+	try
+	{
+		pugi::xml_node roomNodes = doc.child("rooms");
+		for (pugi::xml_node room : roomNodes.children("room"))
+		{
+			// Don't do anything if this isn't the right room position
+			if (room.attribute("x") != NULL && room.attribute("y") != NULL)
+			{
+				auto x = room.attribute("x").as_int();
+				auto y = room.attribute("t").as_int();
+
+				if (room.attribute("door_n") != NULL)
+					rooms[x][y].doorStates.insert( std::make_pair( Directions::N, Room::GetDoorStateFromString( room.attribute("door_n").value() ) ) );
+				if (room.attribute("door_s") != NULL)
+					rooms[x][y].doorStates.insert( std::make_pair( Directions::S, Room::GetDoorStateFromString( room.attribute("door_s").value() ) ) );
+				if (room.attribute("door_e") != NULL)
+					rooms[x][y].doorStates.insert( std::make_pair( Directions::E, Room::GetDoorStateFromString (room.attribute("door_e").value() ) ) );
+				if (room.attribute("door_w") != NULL)
+					rooms[x][y].doorStates.insert( std::make_pair( Directions::W, Room::GetDoorStateFromString( room.attribute("door_w").value() ) ) );
+
+				for (pugi::xml_node entity : room.children("entity"))
+				{
+					sf::Vector2f pos = sf::Vector2f(0, 0);
+					if (entity.attribute("x") != NULL && entity.attribute("y") != NULL)
+					{
+						pos.x = std::stof(entity.attribute("x").value());
+						pos.y = std::stof(entity.attribute("y").value());
+					}
+					if (entity.attribute("type") != NULL)
+					{
+						rooms[x][y].entities.insert(std::make_pair(entity.attribute("type").value(), pos));
+					}
+				}
+			} // End if
+		} // End for
+	}
+	catch (int e)
+	{
+		log.Write("Error while loading assets/rooms.xml");
+	}
 }
 
 void StateEditor::Save()
