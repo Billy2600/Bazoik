@@ -11,6 +11,9 @@ private:
 	sf::Sprite sprite;
 	bool moving;
 	sf::Clock moveTimer;
+#ifdef _DEBUG
+	sf::RectangleShape shape;
+#endif
 
 	void LoadSprite();
 
