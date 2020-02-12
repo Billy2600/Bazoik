@@ -44,7 +44,6 @@ private:
 	EditorRooms rooms[MAX_ROOM_X][MAX_ROOM_Y];
 	sf::Vector2i currentRoom;
 	std::map<Directions, EditorDoor> doors; // For working on doors in current room; the actual intractable on-screen element
-	std::map<std::string, sf::Sprite> entities; // On-screen entities, for drawing/interacting
 	
 	bool showMenu;
 	sf::RectangleShape menuBg;
@@ -52,7 +51,7 @@ private:
 	void InitMenu();
 	void InitDoors();
 	void UpdateDoors();
-	void AddEntity(const std::string type, const sf::Vector2f pos);
+	void AddEntity(const std::string type, const sf::Vector2f pos, sf::Vector2i room = sf::Vector2i(-999, -999));
 	void Load(); // Load from XML file
 	void Save(); // Save out XML file
 	void ChangeRoom(const sf::Vector2i newRoom);

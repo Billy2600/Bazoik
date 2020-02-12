@@ -126,13 +126,18 @@ void StateEditor::UpdateDoors()
 	}
 }
 
-void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos)
+void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos, sf::Vector2i room)
 {
+	if (room == sf::Vector2i(-999, -999))
+	{
+		room = currentRoom;
+	}
+
 	if (type == "keese")
 	{
 		auto newSprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("keese_still"));
 		newSprite.setPosition(pos);
-		rooms[currentRoom.x][currentRoom.y].entities.push_back(EditorEntities { type, newSprite });
+		rooms[room.x][room.y].entities.push_back(EditorEntities { type, newSprite });
 	}
 	else
 	{
@@ -180,7 +185,7 @@ void StateEditor::Load()
 					}
 					if (entity.attribute("type") != NULL)
 					{
-						AddEntity(entity.attribute("type").value(), pos);
+						AddEntity(entity.attribute("type").value(), pos, sf::Vector2i(x, y));
 					}
 				}
 			} // End if
