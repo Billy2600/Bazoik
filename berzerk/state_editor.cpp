@@ -8,6 +8,7 @@ StateEditor::StateEditor(Game* game)
 	spBackground.setTexture(game->assetManager.GetTextureRef("background"));
 	spBackground.setPosition(0, 0);
 	currentRoom = sf::Vector2i(0, 0);
+	currentlyDragging = NULL;
 
 	Load();
 	InitMenu();
@@ -209,7 +210,13 @@ void StateEditor::Save()
 				room.append_attribute("door_e").set_value(Room::GetDoorStateStringFromState(rooms[x][y].doorStates[Directions::E]).c_str());
 				room.append_attribute("door_w").set_value(Room::GetDoorStateStringFromState(rooms[x][y].doorStates[Directions::W]).c_str());
 
-				// TODO: Insert entities
+				for (auto& entity : rooms[x][y].entities)
+				{
+					pugi::xml_node entityNode = room.append_child("entity");
+					entityNode.append_attribute("type").set_value(entity.type.c_str());
+					entityNode.append_attribute("x").set_value(entity.sprite.getPosition().x);
+					entityNode.append_attribute("y").set_value(entity.sprite.getPosition().y);
+				}
 			}
 		}
 
@@ -358,6 +365,21 @@ void StateEditor::HandleInput()
 			}
 		}
 
+		// Click on entities
+		for (auto& entity : rooms[currentRoom.x][currentRoom.y].entities)
+		{
+			if (event.type == sf::Event::MouseButtonPressed && entity.sprite.getGlobalBounds().contains(m))
+			{
+				currentlyDragging = &entity.sprite;
+			}
+		}
+
+		if (event.type == sf::Event::MouseButtonReleased)
+		{
+			// Stop dragging item
+			currentlyDragging = NULL;
+		}
+
 		if (event.type == sf::Event::MouseMoved)
 		{
 			// Check GUI highlights
@@ -367,6 +389,12 @@ void StateEditor::HandleInput()
 					button.second.SetHighlight(true);
 				else
 					button.second.SetHighlight(false);
+			}
+
+			// Move object we're currently dragging, if applicable
+			if (currentlyDragging != NULL)
+			{
+				currentlyDragging->setPosition( sf::Vector2f(round(m.x), round(m.y)) ); // Keep position to pixel level
 			}
 		}
 	} // End while pollEvent

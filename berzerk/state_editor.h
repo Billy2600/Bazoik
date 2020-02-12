@@ -37,6 +37,7 @@ private:
 	AnimManager animManager;
 	sf::Sprite spBackground;
 	sf::Clock lastSave;
+	sf::Sprite* currentlyDragging; // Which object are we currently dragging? NULL when none
 
 	EditorRooms rooms[MAX_ROOM_X][MAX_ROOM_Y];
 	sf::Vector2i currentRoom;
