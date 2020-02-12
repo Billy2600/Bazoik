@@ -20,9 +20,15 @@ private:
 		sf::FloatRect hitbox;
 	};
 
+	struct EditorEntities
+	{
+		std::string type;
+		sf::Sprite sprite; // Sprite can be used for positioning, bounds, etc.
+	};
+
 	struct EditorRooms
 	{
-		std::map<std::string, sf::Vector2f> entities;
+		std::vector<EditorEntities> entities;
 		std::map<Directions, DoorStates> doorStates;
 	};
 
@@ -43,6 +49,7 @@ private:
 	void InitMenu();
 	void InitDoors();
 	void UpdateDoors();
+	void AddEntity(const std::string type, const sf::Vector2f pos);
 	void Load(); // Load from XML file
 	void Save(); // Save out XML file
 	void ChangeRoom(const sf::Vector2i newRoom);
