@@ -125,6 +125,8 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entity_bullet.cpp" />
     <ClCompile Include="entity_door.cpp" />
+    <ClCompile Include="entity_enemy.cpp" />
+    <ClCompile Include="entity_keese.cpp" />
     <ClCompile Include="entity_manager.cpp" />
     <ClCompile Include="entity_player.cpp" />
     <ClCompile Include="entity_robot.cpp" />
@@ -155,6 +157,8 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="entity_bullet.h" />
     <ClInclude Include="entity_door.h" />
+    <ClInclude Include="entity_enemy.h" />
+    <ClInclude Include="entity_keese.h" />
     <ClInclude Include="entity_manager.h" />
     <ClInclude Include="entity_player.h" />
     <ClInclude Include="entity_robot.h" />

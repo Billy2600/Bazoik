@@ -61,6 +61,13 @@
 		<frame x="128" y="132" w="32" h="32"></frame>
 		<frame x="160" y="132" w="32" h="32"></frame>
 	</anim>
+	<anim name="keese_still">
+		<frame x="243" y="0" w="32" h="16"></frame>
+	</anim>
+	<anim name="keese_fly">
+		<frame x="243" y="0" w="32" h="16"></frame>
+		<frame x="279" y="0" w="20" h="20"></frame>
+	</anim>
 	<anim name="player_stand_s">
 		<frame x="0" y="32" w="32" h="32"></frame>
 	</anim>
@@ -120,6 +127,9 @@
 	</anim>
 	<anim name="dopefish">
 		<frame x="162" y="100" w="29" h="26"></frame>
+	</anim>
+	<anim name="door_none">
+		<frame x="0" y="0" w="0" h="0"></frame>
 	</anim>
 	<anim name="door_open">
 		<frame x="243" y="27" w="64" h="40"></frame>

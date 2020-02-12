@@ -1,6 +1,7 @@
 #include <cmath>
 #include "entity_manager.h"
 #include "entity_player.h"
+#include "entity_enemy.h"
 
 EntityManager::EntityManager()
 {
@@ -178,10 +179,10 @@ void EntityManager::Think( const float dt )
 
 	for( auto entity : entities )
 	{
-		// Tell the robots where the player is
-		if( dynamic_cast<EntityRobot*>( entity ) != NULL && player != NULL)
+		// Tell the enemies where the player is
+		if( dynamic_cast<EntityEnemy*>( entity ) != NULL && player != NULL)
 		{
-			dynamic_cast<EntityRobot*>( entity )->SetPlayerPos( sf::Vector2f( player->hitbox.left, player->hitbox.top ) );
+			dynamic_cast<EntityEnemy*>( entity )->SetPlayerPos( sf::Vector2f( player->hitbox.left, player->hitbox.top ) );
 		}
 
 		entity->Think( dt );
