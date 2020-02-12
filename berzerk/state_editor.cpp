@@ -272,6 +272,12 @@ void StateEditor::Draw() const
 		game->window.draw(menuBg);
 		for (auto& menuEntity : menuEntities)
 		{
+			auto shape = sf::RectangleShape();
+			shape.setPosition(menuEntity.second.getPosition());
+			shape.setSize(sf::Vector2f(menuEntity.second.getGlobalBounds().width, menuEntity.second.getGlobalBounds().height));
+			shape.setFillColor(sf::Color(0,255,0,100));
+
+			game->window.draw(shape);
 			game->window.draw(menuEntity.second);
 		}
 	}
@@ -316,6 +322,17 @@ void StateEditor::HandleInput()
 		{
 			game->Close();
 			return;
+		}
+
+		// Return to title screen
+		if (event.type == sf::Event::KeyPressed)
+		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+			{
+				Save();
+				game->PopState();
+				return;
+			}
 		}
 
 		// Click on/select button
