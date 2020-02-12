@@ -258,6 +258,11 @@ void StateEditor::Draw() const
 		game->window.draw(door.second.shape);
 	}
 
+	for (auto& entity : rooms[currentRoom.x][currentRoom.y].entities)
+	{
+		game->window.draw(entity.sprite);
+	}
+
 	if (showMenu)
 	{
 		game->window.draw(menuBg);
@@ -280,11 +285,6 @@ void StateEditor::Draw() const
 		{
 			game->window.draw(t.second);
 		}
-	}
-
-	for (auto& entity : rooms[currentRoom.x][currentRoom.y].entities)
-	{
-		game->window.draw(entity.sprite);
 	}
 }
 
@@ -330,7 +330,7 @@ void StateEditor::HandleInput()
 				{
 					showMenu = true;
 				}
-				else if (button.first == "menu_save")
+				else if (button.first == "menu_save" && showMenu)
 				{
 					Save();
 				}
@@ -340,8 +340,11 @@ void StateEditor::HandleInput()
 		// Click on doors
 		for (auto& door : doors)
 		{
-			if (event.type == sf::Event::MouseButtonPressed && door.second.hitbox.contains(m))
+			if ( (event.type == sf::Event::MouseButtonPressed && door.second.hitbox.contains(m))) 
 			{
+				if (showMenu && door.first == Directions::E) // E door is under the menu
+					continue;
+
 				// Rotate through states when clicked
 				switch (door.second.state)
 				{
@@ -370,6 +373,11 @@ void StateEditor::HandleInput()
 		{
 			if (event.type == sf::Event::MouseButtonPressed && entity.sprite.getGlobalBounds().contains(m))
 			{
+				// Don't allow clicking anything 'under' the menu when it's showing
+				if (showMenu && entity.sprite.getGlobalBounds().intersects(menuBg.getGlobalBounds()))
+					continue;
+
+				showMenu = false;
 				currentlyDragging = &entity.sprite;
 			}
 		}

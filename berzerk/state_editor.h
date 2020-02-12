@@ -34,6 +34,7 @@ private:
 
 	std::map<std::string, GuiButton> buttons;
 	std::map<std::string, sf::Text> text;
+	std::map<std::string, sf::Sprite> menuEntities; // Buttons for entities we can add
 	AnimManager animManager;
 	sf::Sprite spBackground;
 	sf::Clock lastSave;
