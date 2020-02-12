@@ -47,6 +47,12 @@ void StateEditor::InitMenu()
 		}
 	}
 
+	buttons["show_menu"] = GuiButton(sf::Vector2f(450, 270), sf::Vector2f(20, 20), sf::Vector2f(0, 0), "<", assetManager->GetFontRef("joystix"), 0);
+	buttons["show_menu"].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
+	buttons["show_menu"].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
+	buttons["show_menu"].SetHighlight(false);
+	buttons["show_menu"].SetCharacterSize(15);
+
 	text["menu_coord"] = sf::Text("0,0", assetManager->GetFontRef("joystix"), 10);
 	text["menu_coord"].setFillColor(sf::Color::Green);
 	text["menu_coord"].setPosition(sf::Vector2f(414, 5));
@@ -55,11 +61,9 @@ void StateEditor::InitMenu()
 	text["saved"].setFillColor(sf::Color::Transparent);
 	text["saved"].setPosition(sf::Vector2f(5, 5));
 
-	buttons["show_menu"] = GuiButton(sf::Vector2f(450, 270), sf::Vector2f(20, 20), sf::Vector2f(0, 0), "<", assetManager->GetFontRef("joystix"), 0);
-	buttons["show_menu"].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
-	buttons["show_menu"].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
-	buttons["show_menu"].SetHighlight(false);
-	buttons["show_menu"].SetCharacterSize(15);
+	menuEntities["keese"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("keese_still"));
+	menuEntities["keese"].setScale(sf::Vector2f(0.5f, 0.5f));
+	menuEntities["keese"].setPosition(sf::Vector2f(342, 80));
 }
 
 void StateEditor::InitDoors()
@@ -266,6 +270,10 @@ void StateEditor::Draw() const
 	if (showMenu)
 	{
 		game->window.draw(menuBg);
+		for (auto& menuEntity : menuEntities)
+		{
+			game->window.draw(menuEntity.second);
+		}
 	}
 
 	for (auto& button : buttons)
@@ -333,6 +341,17 @@ void StateEditor::HandleInput()
 				else if (button.first == "menu_save" && showMenu)
 				{
 					Save();
+				}
+			}
+		}
+
+		if (showMenu && event.type == sf::Event::MouseButtonPressed)
+		{
+			for (auto& menuEntity : menuEntities)
+			{
+				if (menuEntity.second.getGlobalBounds().contains(m))
+				{
+					AddEntity(menuEntity.first, ENTITY_SPAWN_POS);
 				}
 			}
 		}

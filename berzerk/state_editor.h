@@ -8,6 +8,7 @@
 #include "room.h"
 
 #define SHOW_MESSAGE_TIME 3 // How long to show messages (e.g. saved) on screen (in seconds)
+#define ENTITY_SPAWN_POS sf::Vector2f(0,0)
 
 class StateEditor : public GameState
 {
@@ -34,7 +35,7 @@ private:
 
 	std::map<std::string, GuiButton> buttons;
 	std::map<std::string, sf::Text> text;
-	std::map<std::string, sf::Sprite> menuEntities; // Buttons for entities we can add
+	std::map<std::string, sf::Sprite> menuEntities; // Buttons for entities we can add; string identifier is also the type
 	AnimManager animManager;
 	sf::Sprite spBackground;
 	sf::Clock lastSave;
