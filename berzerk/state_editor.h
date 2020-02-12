@@ -25,6 +25,16 @@ private:
 	{
 		std::string type;
 		sf::Sprite sprite; // Sprite can be used for positioning, bounds, etc.
+
+		bool EditorEntities::operator ==(const EditorEntities& rhs) // Need to overload == operator for vector deletes
+		{
+			return (
+				this->sprite.getTextureRect() == rhs.sprite.getTextureRect()
+				&& this->sprite.getTexture() == rhs.sprite.getTexture()
+				&& this->sprite.getGlobalBounds() == rhs.sprite.getGlobalBounds()
+				&& this->type == rhs.type
+			);
+		}
 	};
 
 	struct EditorRooms
@@ -47,6 +57,8 @@ private:
 	
 	bool showMenu;
 	sf::RectangleShape menuBg;
+	bool deleteMode;
+	sf::Sprite deleteIcon; // Show delete icon where mouse is
 
 	void InitMenu();
 	void InitDoors();
@@ -55,6 +67,7 @@ private:
 	void Load(); // Load from XML file
 	void Save(); // Save out XML file
 	void ChangeRoom(const sf::Vector2i newRoom);
+	void RemoveEntity(const EditorEntities entity); // Purposefully taking in by value
 
 public:
 

@@ -4,11 +4,11 @@ StateEditor::StateEditor(Game* game)
 {
 	this->game = game;
 
-
 	spBackground.setTexture(game->assetManager.GetTextureRef("background"));
 	spBackground.setPosition(0, 0);
 	currentRoom = sf::Vector2i(0, 0);
 	currentlyDragging = NULL;
+	deleteMode = false;
 
 	Load();
 	InitMenu();
@@ -64,6 +64,13 @@ void StateEditor::InitMenu()
 	menuEntities["keese"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("keese_still"));
 	menuEntities["keese"].setScale(sf::Vector2f(0.5f, 0.5f));
 	menuEntities["keese"].setPosition(sf::Vector2f(342, 80));
+
+	menuEntities["delete"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
+	menuEntities["delete"].setScale(sf::Vector2f(0.5f, 0.5f));
+	menuEntities["delete"].setPosition(sf::Vector2f(380, 80));
+
+	deleteIcon = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
+	deleteIcon.setOrigin(deleteIcon.getGlobalBounds().width / 2, deleteIcon.getGlobalBounds().height / 2);
 }
 
 void StateEditor::InitDoors()
@@ -138,6 +145,11 @@ void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos, sf::
 		auto newSprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("keese_still"));
 		newSprite.setPosition(pos);
 		rooms[room.x][room.y].entities.push_back(EditorEntities { type, newSprite });
+	}
+	// Special exception: Enable delete mode
+	else if (type == "delete")
+	{
+		deleteMode = !deleteMode;
 	}
 	else
 	{
@@ -305,6 +317,11 @@ void StateEditor::Draw() const
 			game->window.draw(t.second);
 		}
 	}
+
+	if (deleteMode)
+	{
+		game->window.draw(deleteIcon);
+	}
 }
 
 void StateEditor::Update(const float dt)
@@ -319,6 +336,11 @@ void StateEditor::HandleInput()
 {
 	sf::Event event;
 	sf::Vector2f m = game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window));
+
+	if (deleteMode)
+	{
+		deleteIcon.setPosition(m);
+	}
 
 	while (game->window.pollEvent(event))
 	{
@@ -419,7 +441,14 @@ void StateEditor::HandleInput()
 					continue;
 
 				showMenu = false;
-				currentlyDragging = &entity.sprite;
+				if (deleteMode)
+				{
+					RemoveEntity(entity);
+				}
+				else
+				{
+					currentlyDragging = &entity.sprite;
+				}
 			}
 		}
 
@@ -448,3 +477,15 @@ void StateEditor::HandleInput()
 		}
 	} // End while pollEvent
 } // End HandleInput()
+
+void StateEditor::RemoveEntity(const EditorEntities entity)
+{
+	rooms[currentRoom.x][currentRoom.y].entities.erase(
+		std::remove(
+			rooms[currentRoom.x][currentRoom.y].entities.begin(),
+			rooms[currentRoom.x][currentRoom.y].entities.end(),
+			entity
+		),
+		rooms[currentRoom.x][currentRoom.y].entities.end()
+	);
+}

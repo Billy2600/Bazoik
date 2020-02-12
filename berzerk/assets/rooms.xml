@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <rooms>
-	<room x="0" y="0" door_n="none" door_s="open" door_e="open" door_w="none">
-		<entity type="keese" x="100" y="100" />
+	<room x="0" y="0" door_n="none" door_s="closed" door_e="open" door_w="none">
+		<entity type="keese" x="226" y="126" />
 	</room>
-	<room x="0" y="1" door_n="open" door_s="closed" door_e="closed" door_w="closed" />
+	<room x="0" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
