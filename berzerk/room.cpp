@@ -2,6 +2,7 @@
 #include "pugixml.hpp"
 #include "entity_robot.h"
 #include "entity_keese.h"
+#include "entity_block.h"
 
 Room::Room()
 {
@@ -24,6 +25,10 @@ void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 	else if (type == "keese")
 	{
 		entityManager->Add(new EntityKeese(pos));
+	}
+	else if (type == "block")
+	{
+		entityManager->Add(new EntityBlock(pos));
 	}
 	else
 	{

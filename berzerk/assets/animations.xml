@@ -68,6 +68,14 @@
 		<frame x="243" y="0" w="32" h="16"></frame>
 		<frame x="279" y="0" w="20" h="20"></frame>
 	</anim>
+	<anim name="stalfos_walk">
+		<frame x="408" y="0" w="32" h="32"></frame>
+		<frame x="443" y="0" w="32" h="32"></frame>
+	</anim>
+	<anim name="gel_move">
+		<frame x="303" y="0" w="16" h="18"></frame>
+		<frame x="321" y="0" w="16" h="18"></frame>
+	</anim>
 	<anim name="player_stand_s">
 		<frame x="0" y="32" w="32" h="32"></frame>
 	</anim>
@@ -142,5 +150,38 @@
 	</anim>
 	<anim name="eraser">
 		<frame x="371" y="27" w="32" h="32"></frame>
+	</anim>
+	<anim name="block">
+		<frame x="307" y="27" w="32" h="32"></frame>
+	</anim>
+	<anim name="block_inverted">
+		<frame x="339" y="27" w="32" h="32"></frame>
+	</anim>
+	<anim name="water">
+		<frame x="307" y="59" w="32" h="32"></frame>
+	</anim>
+	<anim name="hole">
+		<frame x="307" y="91" w="32" h="32"></frame>
+	</anim>
+	<anim name="face_right_light">
+		<frame x="339" y="59" w="32" h="32"></frame>
+	</anim>
+	<anim name="face_right_dark">
+		<frame x="371" y="59" w="32" h="32"></frame>
+	</anim>
+	<anim name="face_left_light">
+		<frame x="339" y="91" w="32" h="32"></frame>
+	</anim>
+	<anim name="face_left_dark">
+		<frame x="371" y="91" w="32" h="32"></frame>
+	</anim>
+	<anim name="gravel_1">
+		<frame x="307" y="123" w="32" h="32"></frame>
+	</anim>
+	<anim name="gravel_2">
+		<frame x="339" y="123" w="32" h="32"></frame>
+	</anim>
+	<anim name="gravel_3">
+		<frame x="369" y="123" w="32" h="32"></frame>
 	</anim>
 </animations>

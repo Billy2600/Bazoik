@@ -123,6 +123,7 @@
     <ClCompile Include="anim_manager.cpp" />
     <ClCompile Include="asset_manager.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="entity_block.cpp" />
     <ClCompile Include="entity_bullet.cpp" />
     <ClCompile Include="entity_door.cpp" />
     <ClCompile Include="entity_enemy.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="anim_manager.h" />
     <ClInclude Include="asset_manager.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="entity_block.h" />
     <ClInclude Include="entity_bullet.h" />
     <ClInclude Include="entity_door.h" />
     <ClInclude Include="entity_enemy.h" />

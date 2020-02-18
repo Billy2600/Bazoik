@@ -65,6 +65,10 @@ void StateEditor::InitMenu()
 	menuEntities["keese"].setScale(sf::Vector2f(0.5f, 0.5f));
 	menuEntities["keese"].setPosition(sf::Vector2f(342, 80));
 
+	menuEntities["block"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("block"));
+	menuEntities["block"].setScale(sf::Vector2f(0.5f, 0.5f));
+	menuEntities["block"].setPosition(sf::Vector2f(362, 80));
+
 	menuEntities["delete"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
 	menuEntities["delete"].setScale(sf::Vector2f(0.5f, 0.5f));
 	menuEntities["delete"].setPosition(sf::Vector2f(380, 80));
@@ -145,6 +149,12 @@ void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos, sf::
 		auto newSprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("keese_still"));
 		newSprite.setPosition(pos);
 		rooms[room.x][room.y].entities.push_back(EditorEntities { type, newSprite });
+	}
+	if (type == "block")
+	{
+		auto newSprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("block"));
+		newSprite.setPosition(pos);
+		rooms[room.x][room.y].entities.push_back(EditorEntities{ type, newSprite });
 	}
 	// Special exception: Enable delete mode
 	else if (type == "delete")
