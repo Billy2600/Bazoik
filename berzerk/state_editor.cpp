@@ -69,6 +69,7 @@ void StateEditor::InitMenu()
 		{"block", "block"},
 		{"block_inverted", "block_inverted"},
 		{"water", "water"},
+		{"hole", "hole"},
 		{"delete", "eraser"}
 	};
 
@@ -161,22 +162,11 @@ void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos, sf::
 	}
 
 	std::string  animName = "";
-	if (type == "keese")
-	{
-		animName = "keese_still";
-	}
-	else if (type == "block")
-	{
-		animName = "block";
-	}
-	else if (type == "block_inverted")
-	{
-		animName = "block_inverted";
-	}
-	else if (type == "water")
-	{
-		animName = "water";
-	}
+	if (type == "keese") animName = "keese_still";
+	else if (type == "block") animName = "block";
+	else if (type == "block_inverted") animName = "block_inverted";
+	else if (type == "water") animName = "water";
+	else if (type == "hole") animName = "hole";
 	// Special exception: Enable delete mode
 	else if (type == "delete")
 	{
