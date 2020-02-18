@@ -226,19 +226,32 @@ int EntityManager::GetRobotCount() const
 
 bool EntityManager::TryMove(Entity* entity, const sf::Vector2f move, const float dt) const
 {
+	Quadtree quadtree = Quadtree(0, sf::IntRect(0, 0, GAME_WIDTH, GAME_HEIGHT));
+
+	for (auto entity : entities)
+	{
+		quadtree.Insert(entity);
+	}
+
+	std::vector<Entity*> returnObjects;
+
 	sf::FloatRect newHitbox = entity->hitbox;
 	newHitbox.top += move.y * dt;
 	newHitbox.left += move.x * dt;
 
-	for (auto entityB : entities)
+	returnObjects.clear();
+	quadtree.Retrieve(returnObjects, entity); // Get possible collisions for entity passed in
+
+	for (auto entityB : returnObjects)
 	{
-		
 		// Detect collision
 		if ((entity != NULL && entityB != NULL) && (entity != entityB && newHitbox.intersects(entityB->hitbox)))
 		{
 			return false; // You cannot move
 		}
 	}
+
+	quadtree.Clear();
 
 	return true; // No possible collisions detected, you can move
 }
