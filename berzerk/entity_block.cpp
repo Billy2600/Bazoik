@@ -46,7 +46,7 @@ void EntityBlock::SetupSprite()
 		sprite.setTextureRect(animManager.Animate("face_right_dark", true));
 		break;
 	case BlockTypes::FaceLeftLight:
-		sprite.setTextureRect(animManager.Animate("block_inverted", true));
+		sprite.setTextureRect(animManager.Animate("face_left_light", true));
 		break;
 	case BlockTypes::FaceLeftDark:
 		sprite.setTextureRect(animManager.Animate("face_left_dark", true));

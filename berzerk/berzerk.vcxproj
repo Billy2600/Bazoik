@@ -160,6 +160,7 @@
     <ClInclude Include="entity_bullet.h" />
     <ClInclude Include="entity_door.h" />
     <ClInclude Include="entity_enemy.h" />
+    <ClInclude Include="entity_floor.h" />
     <ClInclude Include="entity_keese.h" />
     <ClInclude Include="entity_manager.h" />
     <ClInclude Include="entity_player.h" />

@@ -3,6 +3,7 @@
 #include "entity_robot.h"
 #include "entity_keese.h"
 #include "entity_block.h"
+#include "entity_floor.h"
 
 Room::Room()
 {
@@ -41,6 +42,34 @@ void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 	else if (type == "hole")
 	{
 		entityManager->Add(new EntityBlock(pos, BlockTypes::Hole));
+	}
+	else if (type == "face_right_light")
+	{
+		entityManager->Add(new EntityBlock(pos, BlockTypes::FaceRightLight));
+	}
+	else if (type == "face_right_dark")
+	{
+		entityManager->Add(new EntityBlock(pos, BlockTypes::FaceRightDark));
+	}
+	else if (type == "face_left_light")
+	{
+		entityManager->Add(new EntityBlock(pos, BlockTypes::FaceLeftLight));
+	}
+	else if (type == "face_left_dark")
+	{
+		entityManager->Add(new EntityBlock(pos, BlockTypes::FaceLeftDark));
+	}
+	else if (type == "gravel_1")
+	{
+		entityManager->Add(new EntityFloor(pos, FloorTypes::GravelOne));
+	}
+	else if (type == "gravel_2")
+	{
+		entityManager->Add(new EntityFloor(pos, FloorTypes::GravelTwo));
+	}
+	else if (type == "gravel_3")
+	{
+		entityManager->Add(new EntityFloor(pos, FloorTypes::GravelThree));
 	}
 	else
 	{

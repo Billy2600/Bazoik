@@ -209,6 +209,9 @@
     <ClInclude Include="entity_block.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="entity_floor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

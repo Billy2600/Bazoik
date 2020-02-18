@@ -70,6 +70,13 @@ void StateEditor::InitMenu()
 		{"block_inverted", "block_inverted"},
 		{"water", "water"},
 		{"hole", "hole"},
+		{"face_right_light", "face_right_light"},
+		{"face_right_dark", "face_right_dark"},
+		{"face_left_light", "face_left_light"},
+		{"face_left_dark", "face_left_dark"},
+		{"gravel_1", "gravel_1"},
+		{"gravel_2", "gravel_2"},
+		{"gravel_3", "gravel_3"},
 		{"delete", "eraser"}
 	};
 
@@ -85,7 +92,7 @@ void StateEditor::InitMenu()
 		// New line
 		if (pos.x > GAME_WIDTH - posIncrement.x)
 		{
-			pos.x = 0;
+			pos.x = 342;
 			pos.y += posIncrement.y;
 		}
 	}
@@ -167,6 +174,13 @@ void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos, sf::
 	else if (type == "block_inverted") animName = "block_inverted";
 	else if (type == "water") animName = "water";
 	else if (type == "hole") animName = "hole";
+	else if (type == "face_right_light") animName = "face_right_light";
+	else if (type == "face_right_dark") animName = "face_right_dark";
+	else if (type == "face_left_light") animName = "face_left_light";
+	else if (type == "face_left_dark") animName = "face_left_dark";
+	else if (type == "gravel_1") animName = "gravel_1";
+	else if (type == "gravel_2") animName = "gravel_2";
+	else if (type == "gravel_3") animName = "gravel_3";
 	// Special exception: Enable delete mode
 	else if (type == "delete")
 	{
