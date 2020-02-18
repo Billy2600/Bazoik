@@ -10,6 +10,11 @@ EntityManager::EntityManager()
 	game = NULL;
 }
 
+void EntityManager::SortByDrawPriority()
+{
+	std::sort(entities.begin(), entities.end(), DrawPriority());
+}
+
 void EntityManager::Add( Entity* entity )
 {
 	added = true;
@@ -27,6 +32,8 @@ void EntityManager::Add( Entity* entity )
 	{
 		walls.push_back( dynamic_cast<EntityWall*>( entity ) );
 	}
+
+	SortByDrawPriority();
 }
 
 void EntityManager::CheckCollisions()
@@ -153,6 +160,7 @@ void EntityManager::CheckLineOfSight()
 
 void EntityManager::CheckDelete()
 {
+	bool itemDeleted = false;
 	for( unsigned int i = 0; i < entities.size(); i++ )
 	{
 		if( entities.at( i )->deleteMe )
@@ -169,7 +177,14 @@ void EntityManager::CheckDelete()
 
 			delete entities.at( i );
 			entities.erase( entities.begin() + i );
+			itemDeleted = true;
 		}
+	}
+
+	// Re-sort if we deleted anything
+	if (itemDeleted)
+	{
+		SortByDrawPriority();
 	}
 }
 

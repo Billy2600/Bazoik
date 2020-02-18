@@ -4,6 +4,7 @@
 
 EntityDoor::EntityDoor(DoorStates initialState = DoorStates::None, Directions initialDirection = Directions::W)
 {
+	drawPriority = 2;
 	state = initialState;
 	direction = initialDirection;
 

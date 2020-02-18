@@ -15,6 +15,8 @@ private:
 	std::vector<EntityWall*> walls; // Keep track of walls
 	AnimManager animManager;
 
+	void SortByDrawPriority();
+
 public:
 	Game *game;
 

@@ -1,5 +1,24 @@
 #include "entity.h"
 
+void Entity::Move(sf::Vector2f move, const float dt)
+{
+	hitbox.left += move.x * dt;
+	hitbox.top += move.y * dt;
+}
+
+sf::Vector2f Entity::GetMoveTowardsVec(const sf::Vector2f target, float speed) // Get vector to move towards point, will not do actual movement
+{
+	sf::Vector2f targetVec = target - sf::Vector2f(hitbox.left, hitbox.top);
+	float targetVecMagnitude = sqrtf(targetVec.x * targetVec.x) + (targetVec.y * targetVec.y);
+	sf::Vector2f normalizedTargetVec = targetVec / targetVecMagnitude;
+	sf::Vector2f moveVec;
+	float angle = atan2f(normalizedTargetVec.y, normalizedTargetVec.x);
+	moveVec.x = cosf(angle) * speed;
+	moveVec.y = sinf(angle) * speed;
+
+	return moveVec;
+}
+
 float Entity::GetAngle( const sf::Vector2f posA, const sf::Vector2f posB ) const
 {
 	float dot = posA.x * posB.x + posA.y * posB.y;
@@ -41,4 +60,9 @@ Directions Entity::AngleToDirection( float angle ) const
 
 	//Should never happen:
 	return Directions::N;
+}
+
+bool DrawPriority::operator() (const Entity* entityA, const Entity* entityB) const
+{
+	return entityA->drawPriority < entityB->drawPriority;
 }
