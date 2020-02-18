@@ -30,6 +30,10 @@ void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 	{
 		entityManager->Add(new EntityBlock(pos));
 	}
+	else if (type == "block_inverted")
+	{
+		entityManager->Add(new EntityBlock(pos, BlockTypes::Inverted));
+	}
 	else
 	{
 		log.Write("Invalid entity type specified: " + type);

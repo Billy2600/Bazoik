@@ -69,9 +69,13 @@ void StateEditor::InitMenu()
 	menuEntities["block"].setScale(sf::Vector2f(0.5f, 0.5f));
 	menuEntities["block"].setPosition(sf::Vector2f(362, 80));
 
+	menuEntities["block_inverted"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("block_inverted"));
+	menuEntities["block_inverted"].setScale(sf::Vector2f(0.5f, 0.5f));
+	menuEntities["block_inverted"].setPosition(sf::Vector2f(382, 80));
+
 	menuEntities["delete"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
 	menuEntities["delete"].setScale(sf::Vector2f(0.5f, 0.5f));
-	menuEntities["delete"].setPosition(sf::Vector2f(380, 80));
+	menuEntities["delete"].setPosition(sf::Vector2f(402, 80));
 
 	deleteIcon = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
 	deleteIcon.setOrigin(deleteIcon.getGlobalBounds().width / 2, deleteIcon.getGlobalBounds().height / 2);
@@ -144,27 +148,33 @@ void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos, sf::
 		room = currentRoom;
 	}
 
+	std::string  animName = "";
 	if (type == "keese")
 	{
-		auto newSprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("keese_still"));
-		newSprite.setPosition(pos);
-		rooms[room.x][room.y].entities.push_back(EditorEntities { type, newSprite });
+		animName = "keese_still";
 	}
-	if (type == "block")
+	else if (type == "block")
 	{
-		auto newSprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("block"));
-		newSprite.setPosition(pos);
-		rooms[room.x][room.y].entities.push_back(EditorEntities{ type, newSprite });
+		animName = "block";
+	}
+	else if (type == "block_inverted")
+	{
+		animName = "block_inverted";
 	}
 	// Special exception: Enable delete mode
 	else if (type == "delete")
 	{
 		deleteMode = !deleteMode;
+		return; // Don't add sprite to screen
 	}
 	else
 	{
 		log.Write("Invalid entity type specified: " + type);
 	}
+
+	auto newSprite = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate(animName));
+	newSprite.setPosition(pos);
+	rooms[room.x][room.y].entities.push_back(EditorEntities{ type, newSprite });
 }
 
 void StateEditor::Load()
