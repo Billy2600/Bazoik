@@ -224,6 +224,25 @@ int EntityManager::GetRobotCount() const
 	return count;
 }
 
+bool EntityManager::TryMove(Entity* entity, const sf::Vector2f move, const float dt) const
+{
+	sf::FloatRect newHitbox = entity->hitbox;
+	newHitbox.top += move.y * dt;
+	newHitbox.left += move.x * dt;
+
+	for (auto entityB : entities)
+	{
+		
+		// Detect collision
+		if ((entity != NULL && entityB != NULL) && (entity != entityB && newHitbox.intersects(entityB->hitbox)))
+		{
+			return false; // You cannot move
+		}
+	}
+
+	return true; // No possible collisions detected, you can move
+}
+
 EntityManager::~EntityManager()
 {
 	for( auto entity : entities )

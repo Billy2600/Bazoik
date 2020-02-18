@@ -191,7 +191,9 @@ void EntityPlayer::Think( const float dt )
 		game->assetManager.PlaySound( "shoot" );
 	}
 
-	Move( move, dt );
+	// Perform move
+	Move(move, dt);
+
 	// Change animation
 	auto animDirection = ChooseAnimDirection(lastDirection);
 	if (move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0)
@@ -240,40 +242,37 @@ void EntityPlayer::HandleCollision( Entity *other )
 	// Early out if dead
 	if( dead )
 		return;
-
-	// Move back on collision with walls, doors, etc.
-	if( dynamic_cast<EntityWall*>( other ) != NULL ||
-		dynamic_cast<EntityDoor*>(other) != NULL )
-	{
-		hitbox.left = lastPos.x;
-		hitbox.top = lastPos.y;
-	}
 }
 
-void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to produce movement
+void EntityPlayer::Move(sf::Vector2f move, const float dt) // Add vector to produce movement
 {
-	lastPos = sf::Vector2f(hitbox.left, hitbox.top);
-	hitbox.left += move.x * dt;
-	hitbox.top += move.y * dt;
+	bool allowMoveX = entityManager->TryMove(this, sf::Vector2f(move.x, 0), dt); // Check x and y separately, to allow 'sliding' along walls, etc.
+	bool allowMoveY = entityManager->TryMove(this, sf::Vector2f(0, move.y), dt);
+
+	if (move != sf::Vector2f(0, 0) && (allowMoveX || allowMoveY))
+	{
+		if(allowMoveX) hitbox.left += move.x * dt;
+		if(allowMoveY) hitbox.top += move.y * dt;
 #ifdef _DEBUG
-	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+		shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
 #endif
-	sprite.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
+		sprite.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
 
-	// Need to flip sprite if moving W, or second frame of walk_n
-	if( (lastHoriz == Directions::W && currentAnim != "player_fire_n") || (currentAnim == "player_walk_n" && animManager.GetCurrentFrame(currentAnim) > 0) )
-	{
-		sprite.setScale( -1, 1 );
-		// Account for sprite mis-aligning with the hitbox when flipped via negative scale
-		sprite.move( sf::Vector2f( hitbox.width, 0 ) );
-	}
-	else
-	{
-		sprite.setScale( 1, 1 );
+		// Need to flip sprite if moving W, or second frame of walk_n
+		if ((lastHoriz == Directions::W && currentAnim != "player_fire_n") || (currentAnim == "player_walk_n" && animManager.GetCurrentFrame(currentAnim) > 0))
+		{
+			sprite.setScale(-1, 1);
+			// Account for sprite mis-aligning with the hitbox when flipped via negative scale
+			sprite.move(sf::Vector2f(hitbox.width, 0));
+		}
+		else
+		{
+			sprite.setScale(1, 1);
+		}
 	}
 
-	auto test = animManager.Animate(currentAnim);
-	sprite.setTextureRect( test );
+	// Keep animating even if we didn't actually move anywhere
+	sprite.setTextureRect( animManager.Animate(currentAnim) );
 }
 
 EntityPlayer::~EntityPlayer()

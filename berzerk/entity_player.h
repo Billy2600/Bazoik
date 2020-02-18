@@ -39,7 +39,6 @@ private:
 	sf::Vector2f direction; // Currently facing direction (will direct sword swings)
 	sf::Vector2f lastDirection; // Last pressed direction, for when we're standing still
 	Directions lastHoriz; // Last horizontal direction we moved (for animations)
-	sf::Vector2f lastPos; // Last position (to move back on collision with walls, etc.)
 
 	float deathTime; // Time we died
 	const sf::Int32 resetDelay = 500; // Delay before resetting the state after dying
