@@ -61,25 +61,33 @@ void StateEditor::InitMenu()
 	text["saved"].setFillColor(sf::Color::Transparent);
 	text["saved"].setPosition(sf::Vector2f(5, 5));
 
-	menuEntities["keese"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("keese_still"));
-	menuEntities["keese"].setScale(sf::Vector2f(0.5f, 0.5f));
-	menuEntities["keese"].setPosition(sf::Vector2f(342, 80));
+	// Using a vector/loop to make it easy to populate menu
+	auto pos = sf::Vector2f(342, 80);
+	const auto posIncrement = sf::Vector2f(20, 20);
+	std::vector< std::tuple<std::string, std::string> > menuEntityItems = {
+		{"keese", "keese_still"}, // Type, animation name (in XML)
+		{"block", "block"},
+		{"block_inverted", "block_inverted"},
+		{"water", "water"},
+		{"delete", "eraser"}
+	};
 
-	menuEntities["block"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("block"));
-	menuEntities["block"].setScale(sf::Vector2f(0.5f, 0.5f));
-	menuEntities["block"].setPosition(sf::Vector2f(362, 80));
+	for (auto item : menuEntityItems)
+	{
+		auto type = std::get<0>(item);
+		auto animName = std::get<1>(item);
+		menuEntities[type] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate(animName));
+		menuEntities[type].setScale(sf::Vector2f(0.5f, 0.5f));
+		menuEntities[type].setPosition(pos);
 
-	menuEntities["block_inverted"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("block_inverted"));
-	menuEntities["block_inverted"].setScale(sf::Vector2f(0.5f, 0.5f));
-	menuEntities["block_inverted"].setPosition(sf::Vector2f(382, 80));
-
-	menuEntities["water"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("water"));
-	menuEntities["water"].setScale(sf::Vector2f(0.5f, 0.5f));
-	menuEntities["water"].setPosition(sf::Vector2f(402, 80));
-
-	menuEntities["delete"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
-	menuEntities["delete"].setScale(sf::Vector2f(0.5f, 0.5f));
-	menuEntities["delete"].setPosition(sf::Vector2f(422, 80));
+		pos.x += posIncrement.x;
+		// New line
+		if (pos.x > GAME_WIDTH - posIncrement.x)
+		{
+			pos.x = 0;
+			pos.y += posIncrement.y;
+		}
+	}
 
 	deleteIcon = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
 	deleteIcon.setOrigin(deleteIcon.getGlobalBounds().width / 2, deleteIcon.getGlobalBounds().height / 2);
