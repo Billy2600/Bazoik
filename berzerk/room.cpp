@@ -34,6 +34,10 @@ void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 	{
 		entityManager->Add(new EntityBlock(pos, BlockTypes::Inverted));
 	}
+	else if (type == "water")
+	{
+		entityManager->Add(new EntityBlock(pos, BlockTypes::Water));
+	}
 	else
 	{
 		log.Write("Invalid entity type specified: " + type);

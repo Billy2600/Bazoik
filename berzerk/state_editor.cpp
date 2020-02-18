@@ -73,9 +73,13 @@ void StateEditor::InitMenu()
 	menuEntities["block_inverted"].setScale(sf::Vector2f(0.5f, 0.5f));
 	menuEntities["block_inverted"].setPosition(sf::Vector2f(382, 80));
 
+	menuEntities["water"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("water"));
+	menuEntities["water"].setScale(sf::Vector2f(0.5f, 0.5f));
+	menuEntities["water"].setPosition(sf::Vector2f(402, 80));
+
 	menuEntities["delete"] = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
 	menuEntities["delete"].setScale(sf::Vector2f(0.5f, 0.5f));
-	menuEntities["delete"].setPosition(sf::Vector2f(402, 80));
+	menuEntities["delete"].setPosition(sf::Vector2f(422, 80));
 
 	deleteIcon = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
 	deleteIcon.setOrigin(deleteIcon.getGlobalBounds().width / 2, deleteIcon.getGlobalBounds().height / 2);
@@ -160,6 +164,10 @@ void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos, sf::
 	else if (type == "block_inverted")
 	{
 		animName = "block_inverted";
+	}
+	else if (type == "water")
+	{
+		animName = "water";
 	}
 	// Special exception: Enable delete mode
 	else if (type == "delete")
