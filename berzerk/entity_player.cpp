@@ -27,6 +27,7 @@ void EntityPlayer::SetPos( const sf::Vector2f pos )
 {
 	hitbox.left = pos.x;
 	hitbox.top = pos.y;
+	sprite.setPosition( pos );
 #ifdef _DEBUG
 	shape.setPosition( pos );
 #endif
