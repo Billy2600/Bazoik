@@ -1,7 +1,17 @@
 <?xml version="1.0"?>
 <rooms>
-	<room x="0" y="0" door_n="none" door_s="closed" door_e="open" door_w="none">
-		<entity type="keese" x="226" y="126" />
+	<room x="0" y="0" door_n="none" door_s="none" door_e="none" door_w="open">
+		<entity type="block" x="144" y="111" />
+		<entity type="block_inverted" x="176" y="111" />
+		<entity type="water" x="208" y="111" />
+		<entity type="hole" x="240" y="110" />
+		<entity type="face_right_light" x="143" y="176" />
+		<entity type="face_right_dark" x="145" y="209" />
+		<entity type="face_left_light" x="177" y="209" />
+		<entity type="face_left_dark" x="176" y="176" />
+		<entity type="gravel_1" x="240" y="240" />
+		<entity type="gravel_2" x="272" y="240" />
+		<entity type="gravel_3" x="304" y="240" />
 	</room>
 	<room x="0" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
@@ -22,7 +32,30 @@
 	<room x="2" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="2" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="2" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="2" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="2" y="4" door_n="open" door_s="none" door_e="open" door_w="open">
+		<entity type="face_right_light" x="79" y="79" />
+		<entity type="face_right_light" x="79" y="142" />
+		<entity type="face_right_light" x="79" y="206" />
+		<entity type="face_right_light" x="175" y="79" />
+		<entity type="face_right_light" x="176" y="144" />
+		<entity type="face_right_light" x="176" y="207" />
+		<entity type="gravel_2" x="176" y="240" />
+		<entity type="gravel_2" x="208" y="240" />
+		<entity type="gravel_2" x="238" y="240" />
+		<entity type="gravel_2" x="270" y="240" />
+		<entity type="gravel_2" x="144" y="240" />
+		<entity type="gravel_2" x="302" y="240" />
+		<entity type="gravel_2" x="144" y="208" />
+		<entity type="gravel_2" x="208" y="208" />
+		<entity type="gravel_2" x="240" y="208" />
+		<entity type="gravel_2" x="302" y="208" />
+		<entity type="face_left_light" x="272" y="207" />
+		<entity type="face_left_light" x="272" y="143" />
+		<entity type="face_left_light" x="272" y="79" />
+		<entity type="face_left_light" x="368" y="207" />
+		<entity type="face_left_light" x="368" y="143" />
+		<entity type="face_left_light" x="368" y="78" />
+	</room>
 	<room x="2" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="2" y="6" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="2" y="7" door_n="none" door_s="none" door_e="none" door_w="none" />

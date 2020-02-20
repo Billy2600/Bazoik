@@ -3,7 +3,7 @@
 #include "state_titlescreen.h"
 #include "pugixml.hpp"
 
-Directions StateGameplay::lastMove = Directions::W;
+Directions StateGameplay::lastMove = Directions::N;
 std::vector<Directions> StateGameplay::lastFourMoves = std::vector<Directions>();
 
 bool StateGameplay::chicken = false;

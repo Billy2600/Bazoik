@@ -7,7 +7,7 @@
 
 Room::Room()
 {
-	roomCoord = sf::Vector2i(0, 0);
+	roomCoord = START_ROOM;
 	entityManager = NULL;
 }
 

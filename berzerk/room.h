@@ -6,6 +6,7 @@
 
 #define MAX_ROOM_X 8
 #define MAX_ROOM_Y 8
+#define START_ROOM sf::Vector2i(2,4)
 
 class Room
 {
