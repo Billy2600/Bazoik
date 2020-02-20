@@ -53,6 +53,7 @@ private:
 	void LoadSprite();
 	std::string ChooseAnimDirection(sf::Vector2f direction); // Choose firing direction; will set animation (does not return)
 	Directions GetDirectionFromVector(const sf::Vector2f vector);
+	sf::Vector2f GetSpritePos() const; // Get sprite offset
 
 public:
 	bool drawHitbox;

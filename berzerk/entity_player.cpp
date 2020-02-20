@@ -11,7 +11,7 @@ EntityPlayer::EntityPlayer()
 #endif
 	// Hitbox will remain consistent size, regardless of animation
 	hitbox.width = 32.f;
-	hitbox.height = 32.f;
+	hitbox.height = 16.f;
 	clock.restart();
 	dead = false;
 	reset = false;
@@ -19,7 +19,7 @@ EntityPlayer::EntityPlayer()
 	deathTime = 0.f;
 	now = clock.getElapsedTime().asMilliseconds();
 	drawHitbox = false;
-	lastDirection = sf::Vector2f(1, 0);
+	lastDirection = sf::Vector2f(0, -1);
 	lastHoriz = GetDirectionFromVector(lastDirection);
 }
 
@@ -27,7 +27,7 @@ void EntityPlayer::SetPos( const sf::Vector2f pos )
 {
 	hitbox.left = pos.x;
 	hitbox.top = pos.y;
-	sprite.setPosition( pos );
+	sprite.setPosition( GetSpritePos() );
 #ifdef _DEBUG
 	shape.setPosition( pos );
 #endif
@@ -92,6 +92,11 @@ Directions EntityPlayer::GetDirectionFromVector(const sf::Vector2f vector)
 		return Directions::SE;
 	else if (vector == sf::Vector2f(0, 0))
 		return Directions::S;
+}
+
+sf::Vector2f EntityPlayer::GetSpritePos() const
+{
+	return sf::Vector2f(hitbox.left, hitbox.top - 16.f);
 }
 
 void EntityPlayer::Think( const float dt )
@@ -258,7 +263,7 @@ void EntityPlayer::Move(sf::Vector2f move, const float dt) // Add vector to prod
 #ifdef _DEBUG
 		shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
 #endif
-		sprite.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+		sprite.setPosition( GetSpritePos() );
 
 		// Need to flip sprite if moving W, or second frame of walk_n
 		if ((lastHoriz == Directions::W && currentAnim != "player_fire_n") || (currentAnim == "player_walk_n" && animManager.GetCurrentFrame(currentAnim) > 0))
