@@ -92,16 +92,6 @@ void EntityManager::CheckCollisions()
 				continue;
 			}
 
-			// Don't bother if one is a dead robot
-			auto robotCheckA = dynamic_cast<EntityRobot*>( entityA );
-			auto robotCheckB = dynamic_cast<EntityRobot*>( entityB );
-
-			if( robotCheckA != NULL && robotCheckA->IsDead()
-				|| robotCheckB != NULL && robotCheckB->IsDead() )
-			{
-				continue;
-			}
-
 			// Detect collision
 			if( (entityA != NULL && entityB != NULL) && (entityA != entityB && entityA->hitbox.intersects(entityB->hitbox) ) )
 			{
@@ -124,19 +114,19 @@ void EntityManager::CheckLineOfSight()
 	{
 		for( auto entityB : entities )
 		{
-			// Make sure we're working with player and robot
-			EntityRobot* robot = NULL;
-			if( dynamic_cast<EntityRobot*>( entityA ) != NULL ) robot = dynamic_cast<EntityRobot*>( entityA );
-			else if( dynamic_cast<EntityRobot*>( entityB ) != NULL ) robot = dynamic_cast<EntityRobot*>( entityB );
+			// Make sure we're working with player and enemy
+			EntityEnemy* enemy = NULL;
+			if( dynamic_cast<EntityEnemy*>( entityA ) != NULL ) enemy = dynamic_cast<EntityEnemy*>( entityA );
+			else if( dynamic_cast<EntityEnemy*>( entityB ) != NULL ) enemy = dynamic_cast<EntityEnemy*>( entityB );
 			EntityPlayer* player = NULL;
 			if( dynamic_cast<EntityPlayer*>( entityA ) != NULL ) player = dynamic_cast<EntityPlayer*>( entityA );
 			else if( dynamic_cast<EntityPlayer*>( entityB ) != NULL ) player = dynamic_cast<EntityPlayer*>( entityB );
 
-			std::vector<EntityRobot*> canSee;
-			if( player != NULL && robot != NULL )
+			std::vector<EntityEnemy*> canSee;
+			if( player != NULL && enemy != NULL )
 			{
 				int found = false;
-				robot->seePlayer = true;
+				enemy->seePlayer = true;
 				for( auto wall : walls )
 				{
 					if( found ) break;
@@ -144,13 +134,13 @@ void EntityManager::CheckLineOfSight()
 
 					int x1 = static_cast<int>( player->hitbox.left + ( player->hitbox.width / 2 ) );
 					int y1 = static_cast<int>( player->hitbox.top + ( player->hitbox.height / 2 ) );
-					int x2 = static_cast<int>( robot->hitbox.left + ( robot->hitbox.width / 2 ) );
-					int y2 = static_cast<int>( robot->hitbox.top + ( robot->hitbox.height / 2 ) );
+					int x2 = static_cast<int>( enemy->hitbox.left + ( enemy->hitbox.width / 2 ) );
+					int y2 = static_cast<int>( enemy->hitbox.top + ( enemy->hitbox.height / 2 ) );
 
 					found = clip_line( &window, &x1, &y1, &x2, &y2 );
 					if( found )
 					{
-						robot->seePlayer = false;
+						enemy->seePlayer = false;
 					}
 				}
 			}
@@ -224,19 +214,6 @@ void EntityManager::MoveAllEntities(sf::Vector2f move, const float dt)
 
 			entity->Move( move, dt );
 	}
-}
-
-int EntityManager::GetRobotCount() const
-{
-	int count = 0;
-
-	for( auto entity : entities )
-	{
-		if( dynamic_cast<EntityRobot*>( entity ) != NULL )
-			count++;
-	}
-
-	return count;
 }
 
 bool EntityManager::TryMove(Entity* entity, const sf::Vector2f move, const float dt) const

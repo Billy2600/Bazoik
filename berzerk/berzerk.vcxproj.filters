@@ -36,9 +36,6 @@
     <ClCompile Include="entity_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entity_robot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="entity_bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -132,9 +129,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entity_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="entity_robot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entity_bullet.h">

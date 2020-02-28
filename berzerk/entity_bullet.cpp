@@ -1,5 +1,5 @@
 #include "entity_bullet.h"
-#include "entity_robot.h"
+#include "entity_player.h"
 
 EntityBullet::EntityBullet( sf::Vector2f pos, sf::Vector2f direction, Entity* owner = NULL )
 {

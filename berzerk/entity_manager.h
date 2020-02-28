@@ -28,7 +28,6 @@ public:
 	void Think(const float dt); // All entities will think
 	void Draw() const; // All entities will draw
 	void MoveAllEntities( sf::Vector2f move, const float dt );
-	int GetRobotCount() const; // How many robots are alive?
 	bool TryMove(Entity *entity, const sf::Vector2f move, const float dt) const; // Can entity move, or will it hit something?
 	~EntityManager();
 };

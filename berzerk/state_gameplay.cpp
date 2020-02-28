@@ -279,11 +279,6 @@ void StateGameplay::Update( const float dt )
 			AddLastMove( lastMove );
 			transStart = now;
 			PlayTransitionSound();
-			// Add score if all robots were killed
-			if ( entityManager.GetRobotCount() == 0 )
-			{
-				game->score += ALL_ROBOTS_SCORE;
-			}
 		}
 
 		// Did we run out of lives?

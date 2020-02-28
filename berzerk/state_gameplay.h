@@ -5,7 +5,6 @@
 #include "entity_player.h"
 #include "entity_wall.h"
 #include "entity_door.h"
-#include "entity_robot.h"
 #include "entity_manager.h"
 #include "demo.h"
 #include "pause_menu.h"
