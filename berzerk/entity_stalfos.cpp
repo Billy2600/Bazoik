@@ -47,11 +47,6 @@ void EntityStalfos::Think(const float dt)
 	{
 		sprite.setTextureRect(animManager.Animate("stalfos_still"));
 	}
-
-	sprite.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
-#ifdef _DEBUG
-	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
-#endif
 }
 
 void EntityStalfos::Draw() const
@@ -68,4 +63,15 @@ void EntityStalfos::HandleCollision(Entity* other)
 	{
 		deleteMe = true;
 	}
+}
+
+void EntityStalfos::Move(sf::Vector2f move, const float dt)
+{
+	hitbox.left += move.x * dt;
+	hitbox.top += move.y * dt;
+
+	sprite.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+#ifdef _DEBUG
+	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+#endif
 }

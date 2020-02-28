@@ -369,6 +369,9 @@ void StateGameplay::ScreenTransition( const float dt )
 
 	player.SetPos( sf::Vector2f( -1000, -1000 ) ); // Move player off of screen
 
+	auto backgroundPos = background.getPosition();
+	background.setPosition(sf::Vector2f(backgroundPos.x + (move.x * dt), backgroundPos.y + (move.y * dt)));
+
 	entityManager.MoveAllEntities( move, dt );
 
 	// Check for done

@@ -19,5 +19,6 @@ public:
 	virtual void Think(const float dt);
 	virtual void Draw() const;
 	virtual void HandleCollision(Entity* other);
+	virtual void Move(sf::Vector2f move, const float dt);
 };
 

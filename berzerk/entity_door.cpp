@@ -62,6 +62,9 @@ void EntityDoor::Move(sf::Vector2f move, const float dt)
 	hitbox.top += move.y * dt;
 	position.x += move.x * dt;
 	position.y += move.y * dt;
+
+	sprite.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
 }
 
 void EntityDoor::HandleCollision(Entity* other)

@@ -47,11 +47,6 @@ void EntityKeese::Think(const float dt)
 	{
 		sprite.setTextureRect(animManager.Animate("keese_still"));
 	}
-
-	sprite.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
-#ifdef _DEBUG
-	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
-#endif
 }
 
 void EntityKeese::Draw() const
@@ -68,4 +63,15 @@ void EntityKeese::HandleCollision(Entity* other)
 	{
 		deleteMe = true;
 	}
+}
+
+void EntityKeese::Move(sf::Vector2f move, const float dt)
+{
+	hitbox.left += move.x * dt;
+	hitbox.top += move.y * dt;
+
+	sprite.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+#ifdef _DEBUG
+	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+#endif
 }
