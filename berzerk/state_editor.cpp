@@ -42,6 +42,10 @@ void StateEditor::InitMenu()
 			auto strCoord = std::to_string(x) + std::to_string(y);
 			buttons["menu_room_" + strCoord] = GuiButton(sf::Vector2f(342 + (x * 9), 5 + (y * 9)), sf::Vector2f(3, 3), sf::Vector2f(0, 0), " ", assetManager->GetFontRef("joystix"), 0);
 			buttons["menu_room_" + strCoord].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
+			if(x == currentRoom.x && y == currentRoom.y)
+				buttons["menu_room_" + strCoord].SetColors(sf::Color::Black, sf::Color::Blue, sf::Color::Blue);
+			else
+				buttons["menu_room_" + strCoord].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
 			buttons["menu_room_" + strCoord].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
 			buttons["menu_room_" + strCoord].SetHighlight(false);
 		}
@@ -301,6 +305,10 @@ void StateEditor::Save()
 
 void StateEditor::ChangeRoom(const sf::Vector2i newRoom)
 {
+	// Highlight current room/de-highlight old room
+	buttons["menu_room_" + std::to_string(currentRoom.x) + std::to_string(currentRoom.y) ].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
+	buttons["menu_room_" + std::to_string(newRoom.x) + std::to_string(newRoom.y)].SetColors(sf::Color::Black, sf::Color::Blue, sf::Color::Blue);
+
 	currentRoom = newRoom;
 	text["menu_coord"].setString( std::to_string(newRoom.x) + "," + std::to_string(newRoom.y) );
 	UpdateDoors();
