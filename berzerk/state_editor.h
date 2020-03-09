@@ -50,6 +50,7 @@ private:
 	sf::Sprite spBackground;
 	sf::Clock lastSave;
 	sf::Sprite* currentlyDragging; // Which object are we currently dragging? NULL when none
+	sf::Vector2f draggingOffset; // Offset used while dragging object
 
 	EditorRooms rooms[MAX_ROOM_X][MAX_ROOM_Y];
 	sf::Vector2i currentRoom;

@@ -476,8 +476,12 @@ void StateEditor::HandleInput()
 		// Click on entities
 		for (auto& entity : rooms[currentRoom.x][currentRoom.y].entities)
 		{
-			if (event.type == sf::Event::MouseButtonPressed && entity.sprite.getGlobalBounds().contains(m))
+			const sf::FloatRect spriteBounds = entity.sprite.getGlobalBounds();
+
+			if (event.type == sf::Event::MouseButtonPressed && spriteBounds.contains(m))
 			{
+				draggingOffset = sf::Vector2f( m.x - spriteBounds.left, m.y - spriteBounds.top );
+
 				// Don't allow clicking anything 'under' the menu when it's showing
 				if (showMenu && entity.sprite.getGlobalBounds().intersects(menuBg.getGlobalBounds()))
 					continue;
@@ -514,7 +518,8 @@ void StateEditor::HandleInput()
 			// Move object we're currently dragging, if applicable
 			if (currentlyDragging != NULL)
 			{
-				currentlyDragging->setPosition( sf::Vector2f(round(m.x), round(m.y)) ); // Keep position to pixel level
+				// Using round to keep position at pixel (not subpixel) level
+				currentlyDragging->setPosition( sf::Vector2f( round(m.x - draggingOffset.x), round(m.y - draggingOffset.y) ) );
 			}
 		}
 	} // End while pollEvent
