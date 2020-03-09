@@ -58,6 +58,7 @@ void EntityDoor::Draw() const
 	game->window.draw(shape);
 #endif // __DEBUG
 	game->window.draw(sprite);
+	game->window.draw(wallPiece);
 }
 
 void EntityDoor::Move(sf::Vector2f move, const float dt)
@@ -67,8 +68,10 @@ void EntityDoor::Move(sf::Vector2f move, const float dt)
 	position.x += move.x * dt;
 	position.y += move.y * dt;
 
-	sprite.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
-	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+	const sf::Vector2f moveDelta = sf::Vector2f(move.x * dt, move.y * dt);
+	sprite.setPosition(sprite.getPosition() + moveDelta);
+	shape.setPosition(shape.getPosition() + moveDelta);
+	wallPiece.setPosition(wallPiece.getPosition() + moveDelta);
 }
 
 void EntityDoor::HandleCollision(Entity* other)
@@ -108,6 +111,8 @@ void EntityDoor::OpenDoor()
 
 void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 {
+	wallPiece = sf::RectangleShape();
+
 	const sf::Vector2f topLeft(48, 48);
 	switch (direction)
 	{
@@ -118,6 +123,9 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.height = DOOR_HEIGHT;
 		sprite.setOrigin(sf::Vector2f(hitbox.width, hitbox.height));
 		sprite.setRotation(180.f);
+		wallPiece.setFillColor(sf::Color(0, 132, 132));
+		wallPiece.setSize(sf::Vector2f(64, 8));
+		wallPiece.setPosition(sf::Vector2f(hitbox.left, hitbox.top + hitbox.height + 8));
 		break;
 	case Directions::E:
 		hitbox.top = topLeft.y + WALL_HEIGHT;
@@ -126,6 +134,9 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.height = DOOR_WIDTH;
 		sprite.setOrigin(sf::Vector2f(0, hitbox.width));
 		sprite.setRotation(90.f);
+		wallPiece.setFillColor(sf::Color(0, 132, 132));
+		wallPiece.setSize(sf::Vector2f(8, 64));
+		wallPiece.setPosition(sf::Vector2f(hitbox.left + hitbox.width + 8, hitbox.top));
 		break;
 	case Directions::W:
 		hitbox.top = topLeft.y + WALL_HEIGHT;
@@ -134,6 +145,9 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		hitbox.height = DOOR_WIDTH;
 		sprite.setOrigin(sf::Vector2f(hitbox.height, 0));
 		sprite.setRotation(270.f);
+		wallPiece.setFillColor(sf::Color(0, 132, 132));
+		wallPiece.setSize(sf::Vector2f(8, 64));
+		wallPiece.setPosition(sf::Vector2f(hitbox.left - 8, hitbox.top));
 		break;
 	case Directions::N:
 	default:
@@ -144,6 +158,10 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 		// Not technically needed, but let's set 'em anyway
 		sprite.setOrigin(sf::Vector2f(0, 0));
 		sprite.setRotation(0.f);
+		// Definitely needed for open doors
+		wallPiece.setFillColor(sf::Color(0, 132, 132));
+		wallPiece.setSize(sf::Vector2f(64, 8));
+		wallPiece.setPosition(sf::Vector2f(hitbox.left, hitbox.top - 8));
 		break;
 	}
 
