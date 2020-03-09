@@ -4,9 +4,9 @@
 #include "entity_door.h"
 #include "error_log.h"
 
-#define MAX_ROOM_X 8
-#define MAX_ROOM_Y 8
-#define START_ROOM sf::Vector2i(2,4)
+#define MAX_ROOM_X 7
+#define MAX_ROOM_Y 6
+#define START_ROOM sf::Vector2i(3,5)
 
 class Room
 {
