@@ -216,7 +216,7 @@ void StateEditor::Load()
 			if (room.attribute("x") != NULL && room.attribute("y") != NULL)
 			{
 				auto x = room.attribute("x").as_int();
-				auto y = room.attribute("t").as_int();
+				auto y = room.attribute("y").as_int();
 
 				if (room.attribute("door_n") != NULL)
 					rooms[x][y].doorStates.insert( std::make_pair( Directions::N, Room::GetDoorStateFromString( room.attribute("door_n").value() ) ) );
