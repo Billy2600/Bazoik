@@ -6,7 +6,7 @@ StateEditor::StateEditor(Game* game)
 
 	spBackground.setTexture(game->assetManager.GetTextureRef("background"));
 	spBackground.setPosition(0, 0);
-	currentRoom = sf::Vector2i(0, 0);
+	currentRoom = START_ROOM;
 	currentlyDragging = NULL;
 	deleteMode = false;
 
@@ -57,7 +57,7 @@ void StateEditor::InitMenu()
 	buttons["show_menu"].SetHighlight(false);
 	buttons["show_menu"].SetCharacterSize(15);
 
-	text["menu_coord"] = sf::Text("0,0", assetManager->GetFontRef("joystix"), 10);
+	text["menu_coord"] = sf::Text( std::to_string(START_ROOM.x) + "," + std::to_string(START_ROOM.y), assetManager->GetFontRef("joystix"), 10 );
 	text["menu_coord"].setFillColor(sf::Color::Green);
 	text["menu_coord"].setPosition(sf::Vector2f(414, 5));
 
@@ -219,7 +219,8 @@ void StateEditor::Load()
 		for (pugi::xml_node room : roomNodes.children("room"))
 		{
 			// Don't do anything if room position is invalid
-			if (room.attribute("x") != NULL && room.attribute("y") != NULL)
+			if (room.attribute("x") != NULL && room.attribute("y") != NULL
+				&& room.attribute("x").as_int() < MAX_ROOM_X && room.attribute("y").as_int() < MAX_ROOM_Y)
 			{
 				auto x = room.attribute("x").as_int();
 				auto y = room.attribute("y").as_int();
