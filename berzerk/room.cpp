@@ -3,6 +3,7 @@
 #include "entity_keese.h"
 #include "entity_block.h"
 #include "entity_floor.h"
+#include "entity_stalfos.h"
 
 Room::Room()
 {
@@ -21,6 +22,10 @@ void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 	if (type == "keese")
 	{
 		entityManager->Add(new EntityKeese(pos));
+	}
+	else if (type == "stalfos")
+	{
+		entityManager->Add(new EntityStalfos(pos));
 	}
 	else if (type == "block")
 	{

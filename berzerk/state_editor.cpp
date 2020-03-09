@@ -66,6 +66,7 @@ void StateEditor::InitMenu()
 	const auto posIncrement = sf::Vector2f(20, 20);
 	std::vector< std::tuple<std::string, std::string> > menuEntityItems = {
 		{"keese", "keese_still"}, // Type, animation name (in XML)
+		{"stalfos", "stalfos_still"},
 		{"block", "block"},
 		{"block_inverted", "block_inverted"},
 		{"water", "water"},
@@ -170,6 +171,7 @@ void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos, sf::
 
 	std::string  animName = "";
 	if (type == "keese") animName = "keese_still";
+	else if (type == "stalfos") animName = "stalfos_still";
 	else if (type == "block") animName = "block";
 	else if (type == "block_inverted") animName = "block_inverted";
 	else if (type == "water") animName = "water";
