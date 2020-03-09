@@ -220,14 +220,19 @@ void StateEditor::Load()
 				auto x = room.attribute("x").as_int();
 				auto y = room.attribute("y").as_int();
 
-				if (room.attribute("door_n") != NULL)
-					rooms[x][y].doorStates.insert( std::make_pair( Directions::N, Room::GetDoorStateFromString( room.attribute("door_n").as_string() ) ) );
-				if (room.attribute("door_s") != NULL)
-					rooms[x][y].doorStates.insert( std::make_pair( Directions::S, Room::GetDoorStateFromString( room.attribute("door_s").as_string() ) ) );
-				if (room.attribute("door_e") != NULL)
-					rooms[x][y].doorStates.insert( std::make_pair( Directions::E, Room::GetDoorStateFromString (room.attribute("door_e").as_string() ) ) );
-				if (room.attribute("door_w") != NULL)
-					rooms[x][y].doorStates.insert( std::make_pair( Directions::W, Room::GetDoorStateFromString( room.attribute("door_w").as_string() ) ) );
+				// Add a door for each direction, even if the door is "none"
+				const std::map<Directions, std::string> doorDirections = {
+					{ Directions::N, "door_n" },
+					{ Directions::S, "door_s" },
+					{ Directions::E, "door_e" },
+					{ Directions::W, "door_w" },
+				};
+
+				for (auto direction : doorDirections)
+				{
+					if (room.attribute(direction.second.c_str()) != NULL)
+						rooms[x][y].doorStates.insert( std::make_pair( direction.first, Room::GetDoorStateFromString( room.attribute( direction.second.c_str() ).as_string() ) ) );
+				}
 
 				for (pugi::xml_node entity : room.children("entity"))
 				{
