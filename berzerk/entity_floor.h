@@ -50,6 +50,11 @@ public:
 		game->window.draw(sprite);
 	}
 
-	virtual void Move(sf::Vector2f move, const float dt) {}
+	// Still need to move floors on screen transition
+	virtual void Move(sf::Vector2f move, const float dt)
+	{
+		sprite.move(move.x * dt, move.y * dt);
+	}
+
 	virtual void HandleCollision(Entity* other) {}
 };

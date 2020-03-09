@@ -73,6 +73,12 @@ void EntityBlock::Draw() const
 
 void EntityBlock::Move(sf::Vector2f move, const float dt)
 {
+	hitbox.left += move.x * dt;
+	hitbox.top += move.y * dt;
+	sprite.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+#ifdef _DEBUG
+	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+#endif // _DEBUG
 
 }
 
