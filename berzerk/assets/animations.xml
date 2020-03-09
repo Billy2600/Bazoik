@@ -68,6 +68,9 @@
 		<frame x="243" y="0" w="32" h="16"></frame>
 		<frame x="279" y="0" w="20" h="20"></frame>
 	</anim>
+	<anim name="stalfos_still">
+		<frame x="408" y="0" w="32" h="32"></frame>
+	</anim>
 	<anim name="stalfos_walk">
 		<frame x="408" y="0" w="32" h="32"></frame>
 		<frame x="443" y="0" w="32" h="32"></frame>
