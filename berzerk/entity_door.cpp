@@ -196,3 +196,8 @@ void EntityDoorFloor::Think(const float dt)
 		sprite.setTexture(game->assetManager.GetTextureRef("sprites"));
 	}
 }
+
+void EntityDoorFloor::Move(sf::Vector2f move, const float dt)
+{
+	sprite.setPosition(sprite.getPosition() + sf::Vector2f(move.x * dt, move.y * dt));
+}
