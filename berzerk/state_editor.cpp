@@ -221,13 +221,13 @@ void StateEditor::Load()
 				auto y = room.attribute("y").as_int();
 
 				if (room.attribute("door_n") != NULL)
-					rooms[x][y].doorStates.insert( std::make_pair( Directions::N, Room::GetDoorStateFromString( room.attribute("door_n").value() ) ) );
+					rooms[x][y].doorStates.insert( std::make_pair( Directions::N, Room::GetDoorStateFromString( room.attribute("door_n").as_string() ) ) );
 				if (room.attribute("door_s") != NULL)
-					rooms[x][y].doorStates.insert( std::make_pair( Directions::S, Room::GetDoorStateFromString( room.attribute("door_s").value() ) ) );
+					rooms[x][y].doorStates.insert( std::make_pair( Directions::S, Room::GetDoorStateFromString( room.attribute("door_s").as_string() ) ) );
 				if (room.attribute("door_e") != NULL)
-					rooms[x][y].doorStates.insert( std::make_pair( Directions::E, Room::GetDoorStateFromString (room.attribute("door_e").value() ) ) );
+					rooms[x][y].doorStates.insert( std::make_pair( Directions::E, Room::GetDoorStateFromString (room.attribute("door_e").as_string() ) ) );
 				if (room.attribute("door_w") != NULL)
-					rooms[x][y].doorStates.insert( std::make_pair( Directions::W, Room::GetDoorStateFromString( room.attribute("door_w").value() ) ) );
+					rooms[x][y].doorStates.insert( std::make_pair( Directions::W, Room::GetDoorStateFromString( room.attribute("door_w").as_string() ) ) );
 
 				for (pugi::xml_node entity : room.children("entity"))
 				{
