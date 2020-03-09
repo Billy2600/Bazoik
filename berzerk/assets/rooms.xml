@@ -1,38 +1,41 @@
 <?xml version="1.0"?>
 <rooms>
-	<room x="0" y="0" door_n="none" door_s="none" door_e="none" door_w="open">
-		<entity type="block" x="144" y="111" />
-		<entity type="block_inverted" x="176" y="111" />
-		<entity type="water" x="208" y="111" />
-		<entity type="hole" x="240" y="110" />
-		<entity type="face_right_light" x="143" y="176" />
-		<entity type="face_right_dark" x="145" y="209" />
-		<entity type="face_left_light" x="177" y="209" />
-		<entity type="face_left_dark" x="176" y="176" />
-		<entity type="gravel_1" x="240" y="240" />
-		<entity type="gravel_2" x="272" y="240" />
-		<entity type="gravel_3" x="304" y="240" />
-	</room>
+	<room x="0" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="0" y="6" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="0" y="7" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="1" y="0" door_n="locked" door_s="locked" door_e="locked" door_w="open" />
+	<room x="1" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="1" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="1" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="1" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="1" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="1" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="1" y="6" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="1" y="7" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="2" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="2" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="2" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="2" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="2" y="4" door_n="open" door_s="none" door_e="open" door_w="open">
+	<room x="2" y="4" door_n="open" door_s="none" door_e="open" door_w="none">
+		<entity type="gravel_1" x="80" y="48" />
+		<entity type="gravel_1" x="48" y="48" />
+		<entity type="gravel_1" x="48" y="80" />
+		<entity type="gravel_1" x="400" y="80" />
+		<entity type="gravel_1" x="401" y="48" />
+		<entity type="gravel_1" x="370" y="48" />
+	</room>
+	<room x="2" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="3" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="3" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="3" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="3" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="3" y="4" door_n="none" door_s="open" door_e="none" door_w="open">
+		<entity type="block" x="112" y="111" />
+		<entity type="block" x="336" y="112" />
+		<entity type="keese" x="175" y="149" />
+		<entity type="keese" x="271" y="150" />
+	</room>
+	<room x="3" y="5" door_n="open" door_s="closed" door_e="none" door_w="none">
 		<entity type="face_right_light" x="79" y="79" />
 		<entity type="face_right_light" x="79" y="142" />
 		<entity type="face_right_light" x="79" y="206" />
@@ -56,47 +59,22 @@
 		<entity type="face_left_light" x="368" y="143" />
 		<entity type="face_left_light" x="368" y="78" />
 	</room>
-	<room x="2" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="2" y="6" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="2" y="7" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="3" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="3" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="3" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="3" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="3" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="3" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="3" y="6" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="3" y="7" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="4" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="4" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="4" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="4" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="4" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="4" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="4" y="6" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="4" y="7" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="5" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="5" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="5" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="5" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="5" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="5" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="5" y="6" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="5" y="7" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="6" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="6" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="6" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="6" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="6" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="6" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="6" y="6" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="6" y="7" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="7" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="7" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="7" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="7" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="7" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="7" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="7" y="6" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="7" y="7" door_n="none" door_s="none" door_e="none" door_w="none" />
 </rooms>
