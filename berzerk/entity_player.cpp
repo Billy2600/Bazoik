@@ -3,7 +3,7 @@
 
 EntityPlayer::EntityPlayer()
 {
-	drawPriority = 1;
+	drawPriority = 2;
 #ifdef _DEBUG
 	shape.setFillColor( sf::Color::Transparent );
 	shape.setOutlineColor( sf::Color::Red );

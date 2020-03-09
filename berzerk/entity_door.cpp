@@ -4,13 +4,13 @@
 
 EntityDoor::EntityDoor(DoorStates initialState = DoorStates::None, Directions initialDirection = Directions::W)
 {
-	drawPriority = 2;
+	drawPriority = 3;
 	state = initialState;
 	direction = initialDirection;
 
 	SetPositionRotationBasedOnDirection(direction);
 
-	if (initialState == DoorStates::Open) OpenDoor();
+	if (initialState == DoorStates::Open) doorOpened = true;
 
 #ifdef _DEBUG
 	shape.setFillColor(sf::Color::Transparent);
@@ -25,6 +25,7 @@ void EntityDoor::Think(const float dt)
 {
 	LoadSprite();
 
+	// This stuff is here so sprite can change if door state is changed
 	sf::IntRect animRect;
 	switch (state)
 	{
@@ -46,6 +47,9 @@ void EntityDoor::Think(const float dt)
 #ifdef  _DEBUG
 	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
 #endif // _DEBUG
+
+	if (doorOpened)
+		OpenDoor();
 }
 
 void EntityDoor::Draw() const
@@ -73,7 +77,7 @@ void EntityDoor::HandleCollision(Entity* other)
 	{
 		if (state == DoorStates::Closed)
 		{
-			OpenDoor();
+			doorOpened = true;
 		}
 	}
 }
@@ -89,10 +93,17 @@ void EntityDoor::LoadSprite()
 
 void EntityDoor::OpenDoor()
 {
-	state = DoorStates::Open;
-	// Move hitbox somehwere we know won't be collided with
-	hitbox.left = 9000;
-	hitbox.top = 9000;
+	if (entityManager != NULL)
+	{
+		entityManager->Add(new EntityDoorFloor(sf::Vector2f(hitbox.left + 16, hitbox.top + 8), game));
+
+		// Move hitbox somehwere we know won't be collided with
+		hitbox.left = 9000;
+		hitbox.top = 9000;
+
+		state = DoorStates::Open;
+		doorOpened = false;
+	}
 }
 
 void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
@@ -142,4 +153,28 @@ void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
 DoorStates EntityDoor::GetState() const
 {
 	return state;
+}
+
+EntityDoorFloor::EntityDoorFloor(sf::Vector2f pos, Game *game)
+{
+	this->game = game;
+
+	hitbox.left = -999; // Don't want any collision
+	hitbox.top = -999;
+	drawPriority = 1;
+	sprite.setPosition(pos);
+	sprite.setTextureRect(sf::IntRect(403, 59, 32, 32)); // TODO: Load this from animManager
+}
+
+void EntityDoorFloor::Draw() const
+{
+	game->window.draw(sprite);
+}
+
+void EntityDoorFloor::Think(const float dt)
+{
+	if (sprite.getTexture() == NULL)
+	{
+		sprite.setTexture(game->assetManager.GetTextureRef("sprites"));
+	}
 }
