@@ -132,6 +132,29 @@ void Game::AddLife()
 	lives++;
 }
 
+void Game::ResetKeys()
+{
+	keys = 0;
+}
+
+bool Game::UseKey()
+{
+	if (keys > 0)
+	{
+		keys--;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Game::AddKey()
+{
+	keys++;
+}
+
 void Game::PopState()
 {
 	if( states.top() != NULL )

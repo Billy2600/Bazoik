@@ -190,4 +190,7 @@
 	<anim name="gravel_3">
 		<frame x="369" y="123" w="32" h="32"></frame>
 	</anim>
+	<anim name="key">
+		<frame x="403" y="91" w="16" h="32"></frame>
+	</anim>
 </animations>

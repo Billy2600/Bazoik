@@ -26,6 +26,7 @@ class Game
 {
 private:
 	unsigned int lives;
+	sf::Int8 keys;
 
 public:
 	bool popped; // Flag for when state was popped
@@ -46,6 +47,9 @@ public:
 	void ResetLives();
 	void RemoveLife(); // Remove one life
 	void AddLife(); // Add one life
+	void ResetKeys();
+	bool UseKey(); // Will return if you have any keys to use
+	void AddKey();
 	void Draw(); // Runs every frame
 	static std::string GetConfigDir(); // Get directory for saving/loading files; includes trailing slash
 	bool FileExists( const std::string path ) const;
