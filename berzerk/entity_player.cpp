@@ -276,10 +276,17 @@ void EntityPlayer::HandleCollision( Entity *other )
 	{
 		knockbackStartTime = now;
 		knockback = true;
-		knockbackDirection = sf::Vector2f(
-			other->hitbox.left < hitbox.left ? 1 : -1,
-			other->hitbox.top < hitbox.top ? 1 : -1
-		);
+		if (direction == sf::Vector2f(0, 0))
+		{
+			knockbackDirection = sf::Vector2f(
+				other->hitbox.left < hitbox.left ? 1 : -1,
+				other->hitbox.top < hitbox.top ? 1 : -1
+			);
+		}
+		else
+		{
+			knockbackDirection = sf::Vector2f(direction.x * -1, direction.y * -1);
+		}
 	}
 }
 

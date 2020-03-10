@@ -279,8 +279,12 @@ void StateGameplay::Draw() const
 
 	entityManager.Draw();
 
+
 	for (int i = 0; i < game->GetHitPoints(); i++)
 	{
+		if (game->GetHitPoints() == 0)
+			break;
+
 		game->window.draw(hitPoint[i]);
 	}
 
