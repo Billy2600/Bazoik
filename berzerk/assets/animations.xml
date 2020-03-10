@@ -151,6 +151,9 @@
 	<anim name="door_locked">
 		<frame x="243" y="107" w="64" h="40"></frame>
 	</anim>
+	<anim name="door_floor">
+		<frame x="403" y="59" w="32" h="32"></frame>
+	</anim>
 	<anim name="eraser">
 		<frame x="371" y="27" w="32" h="32"></frame>
 	</anim>

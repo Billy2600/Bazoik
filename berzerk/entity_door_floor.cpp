@@ -8,7 +8,7 @@ EntityDoorFloor::EntityDoorFloor(sf::Vector2f pos, Game* game)
 	hitbox.top = -999;
 	drawPriority = 1;
 	sprite.setPosition(pos);
-	sprite.setTextureRect(sf::IntRect(403, 59, 32, 32)); // TODO: Load this from animManager
+	sprite.setTextureRect(animManager.Animate("door_floor"));
 }
 
 void EntityDoorFloor::Draw() const
@@ -27,4 +27,9 @@ void EntityDoorFloor::Think(const float dt)
 void EntityDoorFloor::Move(sf::Vector2f move, const float dt)
 {
 	sprite.setPosition(sprite.getPosition() + sf::Vector2f(move.x * dt, move.y * dt));
+}
+
+void EntityDoorFloor::HandleCollision(Entity* other)
+{
+	// Do nothing
 }
