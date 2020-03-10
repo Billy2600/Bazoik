@@ -6,11 +6,15 @@ class EntityKey : public Entity
 private:
 	sf::Sprite sprite;
 	AnimManager animManager;
+#ifdef  _DEBUG
+	sf::RectangleShape shape;
+#endif //  _DEBUG
+
 
 public:
 	EntityKey(sf::Vector2f pos);
-	virtual void Think(const float dt) = 0;
-	virtual void Draw() const = 0;
-	virtual void HandleCollision(Entity* other) = 0;
+	virtual void Think(const float dt);
+	virtual void Draw() const;
+	virtual void HandleCollision(Entity* other);
 	virtual void Move(sf::Vector2f move, const float dt);
 };

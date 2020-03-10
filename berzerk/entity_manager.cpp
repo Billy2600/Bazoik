@@ -239,6 +239,8 @@ bool EntityManager::TryMove(Entity* entity, const sf::Vector2f move, const float
 		// Detect collision
 		if ((entity != NULL && entityB != NULL) && (entity != entityB && newHitbox.intersects(entityB->hitbox)))
 		{
+			entity->HandleCollision(entityB);
+			entityB->HandleCollision(entity);
 			return false; // You cannot move
 		}
 	}

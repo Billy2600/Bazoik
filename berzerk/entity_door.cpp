@@ -78,7 +78,7 @@ void EntityDoor::HandleCollision(Entity* other)
 {
 	if (dynamic_cast<EntityPlayer*>(other) != NULL)
 	{
-		if (state == DoorStates::Closed)
+		if ( state == DoorStates::Closed || (state == DoorStates::Locked && game->UseKey()) )
 		{
 			doorOpened = true;
 		}

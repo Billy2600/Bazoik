@@ -4,6 +4,7 @@
 #include "entity_block.h"
 #include "entity_floor.h"
 #include "entity_stalfos.h"
+#include "entity_key.h"
 
 Room::Room()
 {
@@ -70,6 +71,10 @@ void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 	else if (type == "gravel_3")
 	{
 		entityManager->Add(new EntityFloor(pos, FloorTypes::GravelThree));
+	}
+	else if (type == "key")
+	{
+		entityManager->Add(new EntityKey(pos));
 	}
 	else
 	{
