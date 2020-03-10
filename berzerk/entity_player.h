@@ -8,6 +8,7 @@
 #include "entity_sword.h"
 
 #define PLAYER_SPEED 200
+#define KNOCKBACK_TIME 300
 
 struct PlayerInput
 {
@@ -43,8 +44,13 @@ private:
 	const sf::Int32 resetDelay = 500; // Delay before resetting the state after dying
 	bool dead; // Death flag
 	bool reset; // Reset flag
+	bool knockback; // Currently being knocked back
+	sf::Int32 knockbackStartTime;
+	sf::Vector2f knockbackDirection;
 
 	void Die(); // Perform death
+	void KnockbackMove(float dt);
+	void InputMove(float dt);
 
 	AnimManager animManager;
 	sf::Sprite sprite;

@@ -1,4 +1,5 @@
 #include "entity_player.h"
+#include "entity_enemy.h"
 #include "error_log.h"
 
 EntityPlayer::EntityPlayer()
@@ -120,26 +121,56 @@ void EntityPlayer::Think( const float dt )
 		return;
 	}
 
-	// Move based on input
-	sf::Vector2f move = sf::Vector2f( 0, 0 );
+	if (knockback)
+		KnockbackMove(dt);
+	else
+		InputMove(dt);
+}
+
+void EntityPlayer::Die()
+{
+	animManager.ResetAnim( "player_death" );
+	currentAnim = "player_death";
+	dead = true;
+	deathTime = (float)now;
+	game->assetManager.PlaySound( "death", false, 50 );
+}
+
+void EntityPlayer::KnockbackMove(float dt)
+{
+	sprite.setColor(sf::Color(255, 0, 0, 150));
+
+	if ((now - knockbackStartTime) > KNOCKBACK_TIME)
+	{
+		knockback = false;
+		sprite.setColor(sf::Color::White);
+	}
+
+	auto move = sf::Vector2f(knockbackDirection.x * PLAYER_SPEED, knockbackDirection.y * PLAYER_SPEED);
+	Move(move, dt);
+}
+
+void EntityPlayer::InputMove(float dt)
+{
+	sf::Vector2f move = sf::Vector2f(0, 0);
 	// Prevent straferunning
 	float realSpeed = PLAYER_SPEED;
-	if( ( input.left && input.up ) || ( input.left && input.down ) ||
-		( input.right && input.up ) || ( input.right && input.down ) )
+	if ((input.left && input.up) || (input.left && input.down) ||
+		(input.right && input.up) || (input.right && input.down))
 	{
 		realSpeed = PLAYER_SPEED - DIAG_SPEED;
 	}
 
 	// Basic movement and basic direction
-	if( input.left )
+	if (input.left)
 	{
-		if( !input.fire ) move.x -= realSpeed;
+		if (!input.fire) move.x -= realSpeed;
 		direction.x = -1;
 		lastHoriz = Directions::W;
 	}
-	else if( input.right )
+	else if (input.right)
 	{
-		if( !input.fire ) move.x += realSpeed;
+		if (!input.fire) move.x += realSpeed;
 		direction.x = 1;
 		lastHoriz = Directions::E;
 	}
@@ -148,14 +179,14 @@ void EntityPlayer::Think( const float dt )
 		direction.x = 0;
 	}
 
-	if( input.up )
+	if (input.up)
 	{
-		if( !input.fire ) move.y -= realSpeed;
-		direction.y  = -1;
+		if (!input.fire) move.y -= realSpeed;
+		direction.y = -1;
 	}
-	else if( input.down )
+	else if (input.down)
 	{
-		if( !input.fire ) move.y += realSpeed;
+		if (!input.fire) move.y += realSpeed;
 		direction.y = 1;
 	}
 	else
@@ -164,24 +195,24 @@ void EntityPlayer::Think( const float dt )
 	}
 
 	// Choose diagonal directions
-	if( input.left && input.up )
+	if (input.left && input.up)
 	{
-		direction = sf::Vector2f( -1, -1 );
+		direction = sf::Vector2f(-1, -1);
 		lastHoriz = Directions::W;
 	}
-	else if( input.right && input.up )
+	else if (input.right && input.up)
 	{
-		direction = sf::Vector2f( 1, -1 );
+		direction = sf::Vector2f(1, -1);
 		lastHoriz = Directions::E;
 	}
-	else if( input.left && input.down )
+	else if (input.left && input.down)
 	{
-		direction = sf::Vector2f( -1, 1 );
+		direction = sf::Vector2f(-1, 1);
 		lastHoriz = Directions::W;
 	}
-	else if( input.right && input.down )
+	else if (input.right && input.down)
 	{
-		direction = sf::Vector2f( 1, 1 );
+		direction = sf::Vector2f(1, 1);
 		lastHoriz = Directions::E;
 	}
 
@@ -191,11 +222,11 @@ void EntityPlayer::Think( const float dt )
 	}
 
 	// Swing with delay
-	if( input.fire && now - lastFire >= fireDelay )
+	if (input.fire && now - lastFire >= fireDelay)
 	{
-		entityManager->Add( new EntitySword( GetDirectionFromVector(lastDirection) , this ) );
+		entityManager->Add(new EntitySword(GetDirectionFromVector(lastDirection), this));
 		lastFire = now;
-		game->assetManager.PlaySound( "shoot" );
+		game->assetManager.PlaySound("shoot");
 	}
 
 	// Perform move
@@ -211,15 +242,6 @@ void EntityPlayer::Think( const float dt )
 		currentAnim = "player_stand_" + animDirection;
 }
 
-void EntityPlayer::Die()
-{
-	animManager.ResetAnim( "player_death" );
-	currentAnim = "player_death";
-	dead = true;
-	deathTime = (float)now;
-	game->assetManager.PlaySound( "death", false, 50 );
-}
-
 bool EntityPlayer::IsDead() const
 {
 	return dead;
@@ -232,7 +254,8 @@ bool EntityPlayer::CheckReset() const
 
 void EntityPlayer::SetInput( const PlayerInput input )
 {
-	this->input = input;
+	if(!knockback) // Ignore inputs during knockback
+		this->input = input;
 }
 
 void EntityPlayer::Draw() const
@@ -248,6 +271,13 @@ void EntityPlayer::HandleCollision( Entity *other )
 	// Early out if dead
 	if( dead )
 		return;
+
+	if (dynamic_cast<EntityEnemy*>(other) != NULL)
+	{
+		knockbackStartTime = now;
+		knockback = true;
+		knockbackDirection = sf::Vector2f(direction.x * -1, direction.y * -1);
+	}
 }
 
 void EntityPlayer::Move(sf::Vector2f move, const float dt) // Add vector to produce movement
