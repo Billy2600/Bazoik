@@ -58,7 +58,7 @@ void StateTitleScreen::Start()
 	playDemo = false;
 	recordDemo = false;
 	game->ResetKeys();
-	game->score = 0;
+	game->ResetHitPoints();
 
 	if (game->music.getStatus() != sf::Music::Status::Playing)
 	{
@@ -263,6 +263,7 @@ void StateTitleScreen::Draw() const
 void StateTitleScreen::StartGame()
 {
 	log.Write( "Switching to gameplay state" );
+	game->ResetHitPoints();
 	game->ResetKeys();
 	game->currentRoom = START_ROOM;
 

@@ -1,5 +1,4 @@
 #include "state_gameplay.h"
-#include "state_highscore.h"
 #include "state_titlescreen.h"
 #include "pugixml.hpp"
 

@@ -149,7 +149,6 @@
     <ClCompile Include="state_credits.cpp" />
     <ClCompile Include="state_editor.cpp" />
     <ClCompile Include="state_gameplay.cpp" />
-    <ClCompile Include="state_highscore.cpp" />
     <ClCompile Include="state_options.cpp" />
     <ClCompile Include="state_splash.cpp" />
     <ClCompile Include="state_titlescreen.cpp" />
@@ -187,7 +186,6 @@
     <ClInclude Include="state_credits.h" />
     <ClInclude Include="state_editor.h" />
     <ClInclude Include="state_gameplay.h" />
-    <ClInclude Include="state_highscore.h" />
     <ClInclude Include="state_options.h" />
     <ClInclude Include="state_splash.h" />
     <ClInclude Include="state_titlescreen.h" />

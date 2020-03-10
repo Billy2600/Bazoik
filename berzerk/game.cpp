@@ -11,7 +11,6 @@
 #include "game_state.h"
 #include "state_gameplay.h"
 #include "state_titlescreen.h"
-#include "state_highscore.h"
 
 Game::Game()
 {
@@ -109,6 +108,26 @@ void Game::SwitchState( GameState* newState )
 	PopState();
 	states.push( newState );
 	states.top()->Start();
+}
+
+sf::Int8 Game::GetHitPoints()
+{
+	return hitPoints;
+}
+
+void Game::ResetHitPoints()
+{
+	hitPoints = MAX_HP;
+}
+
+void Game::SubtractHitPoints(sf::Int8 subtract)
+{
+	hitPoints -= subtract;
+}
+
+void Game::AddHitPoints(sf::Int8 add)
+{
+	hitPoints += add;
 }
 
 void Game::ResetKeys()

@@ -8,6 +8,7 @@
 #define GAME_NAME "Bazoik"
 #define GAME_WIDTH 480	
 #define GAME_HEIGHT 320
+#define MAX_HP 8
 // Account for OS differences
 #ifdef _WIN32
 #define P_ENV_VAR "USERPROFILE"
@@ -24,13 +25,13 @@ class Game
 {
 private:
 	sf::Int8 keys;
+	sf::Int8 hitPoints; // 1 heart = 2 hp
 
 public:
 	bool popped; // Flag for when state was popped
 	sf::RenderWindow window;
 	std::stack<GameState*> states;
 	AssetManager assetManager;
-	unsigned int score;
 	InputManager inputManager;
 	sf::Vector2i currentRoom;
 	sf::Music music;
@@ -40,6 +41,10 @@ public:
 	void PopState(); // Pop state off stack
 	void ResetState(); // Reset current state
 	void SwitchState(GameState* newState); // Switch current state (will delete old one)
+	sf::Int8 GetHitPoints();
+	void ResetHitPoints();
+	void SubtractHitPoints(sf::Int8 subtract);
+	void AddHitPoints(sf::Int8 add);
 	void ResetKeys();
 	bool UseKey(); // Will return if you have any keys to use
 	void AddKey();
