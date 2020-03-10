@@ -241,6 +241,9 @@ bool EntityManager::TryMove(Entity* entity, const sf::Vector2f move, const float
 		{
 			entity->HandleCollision(entityB);
 			entityB->HandleCollision(entity);
+			if (entityB->deleteMe) // If this entity is now trying to delete itself, we can keep moving
+				continue;
+
 			return false; // You cannot move
 		}
 	}
