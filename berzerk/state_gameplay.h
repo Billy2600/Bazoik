@@ -25,6 +25,7 @@ private:
 	Room room;
 
 	sf::Sprite background;
+	sf::Sprite hitPoint[MAX_HP];
 
 	static Directions lastMove;
 	bool transition; // Is the screen moving?
@@ -36,9 +37,7 @@ private:
 	bool recordDemo;
 	bool playDemo;
 
-	// Sound stuff
-	bool deathSoundPlayed; // Did we play the death sound yet?
-
+	void LoadSprites();
 	void ScreenTransition( const float dt ); // Transition screen
 	bool ResetIfDead(); // Reset if player died
 	void ReturnToTitle(); // Return to title screen

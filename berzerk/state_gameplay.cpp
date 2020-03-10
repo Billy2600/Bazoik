@@ -14,13 +14,10 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	// Init entities 
 	entityManager.game = game;
 	entityManager.Add( &player );
-	AssetManager *assetManager = &this->game->assetManager;
 	room = Room(game->currentRoom, &entityManager);
 	room.SetupRoom();
 
-	background = sf::Sprite( assetManager->GetTextureRef( "background" ) );
-
-	deathSoundPlayed = false;
+	LoadSprites();
 
 	clock.restart();
 
@@ -51,6 +48,29 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 			game->music.play();
 		}
 	}
+}
+
+void StateGameplay::LoadSprites()
+{
+	AssetManager* assetManager = &this->game->assetManager;
+	background = sf::Sprite(assetManager->GetTextureRef("background"));
+
+	for (int i = 0; i < MAX_HP; i++)
+	{
+		hitPoint[i] = sf::Sprite(assetManager->GetTextureRef("sprites"));
+
+		if (i % 2 == 0)
+		{
+			hitPoint[i].setTextureRect(animManager.Animate("heart_left"));
+		}
+		else
+		{
+			hitPoint[i].setTextureRect(animManager.Animate("heart_right"));
+		}
+
+		hitPoint[i].setPosition(4 + ((hitPoint[i].getGlobalBounds().width) * i), 5);
+	}
+	
 }
 
 void StateGameplay::Start()
@@ -258,6 +278,11 @@ void StateGameplay::Draw() const
 	game->window.draw(background);
 
 	entityManager.Draw();
+
+	for (int i = 0; i < game->GetHitPoints(); i++)
+	{
+		game->window.draw(hitPoint[i]);
+	}
 
 	if ( pause.open )
 		pause.Draw();
