@@ -57,7 +57,7 @@ void StateTitleScreen::Start()
 	clkAttractMode.restart();
 	playDemo = false;
 	recordDemo = false;
-	game->ResetLives();
+	game->ResetKeys();
 	game->score = 0;
 
 	if (game->music.getStatus() != sf::Music::Status::Playing)
@@ -263,7 +263,7 @@ void StateTitleScreen::Draw() const
 void StateTitleScreen::StartGame()
 {
 	log.Write( "Switching to gameplay state" );
-	game->ResetLives();
+	game->ResetKeys();
 	game->currentRoom = START_ROOM;
 
 	if( currentDemo >= NUM_DEMOS )

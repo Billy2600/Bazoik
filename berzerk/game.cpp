@@ -29,7 +29,6 @@ Game::Game()
 
 	inputManager.LoadFromFile( "keys.xml" );
 	inputManager.game = this;
-	lives = START_LIVES;
 
 	if ( inputManager.fullscreen )
 	{
@@ -110,26 +109,6 @@ void Game::SwitchState( GameState* newState )
 	PopState();
 	states.push( newState );
 	states.top()->Start();
-}
-
-unsigned int Game::GetLives() const
-{
-	return lives;
-}
-
-void Game::ResetLives()
-{
-	lives = START_LIVES;
-}
-
-void Game::RemoveLife()
-{
-	lives--;
-}
-
-void Game::AddLife()
-{
-	lives++;
 }
 
 void Game::ResetKeys()

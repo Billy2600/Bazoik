@@ -218,7 +218,6 @@ void EntityPlayer::Die()
 	dead = true;
 	deathTime = (float)now;
 	game->assetManager.PlaySound( "death", false, 50 );
-	game->RemoveLife();
 }
 
 bool EntityPlayer::IsDead() const

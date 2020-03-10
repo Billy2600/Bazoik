@@ -4,9 +4,6 @@
 #include "pugixml.hpp"
 
 Directions StateGameplay::lastMove = Directions::S;
-std::vector<Directions> StateGameplay::lastFourMoves = std::vector<Directions>();
-
-bool StateGameplay::chicken = false;
 
 StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool playDemo, const std::string demoName )
 {
@@ -21,28 +18,6 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	AssetManager *assetManager = &this->game->assetManager;
 	room = Room(game->currentRoom, &entityManager);
 	room.SetupRoom();
-
-	txScore.setFont( assetManager->GetFontRef( "joystix" ) );
-#ifdef OLD_SFML
-	txScore.setColor( sf::Color::Green );
-#else
-	txScore.setFillColor( sf::Color::Green );
-#endif
-	txScore.setCharacterSize( 30 );
-	txScore.setPosition( sf::Vector2f( 3, 3 ) );
-	txScore.setString( game->score );
-
-	respawnPrompt = txScore;
-	respawnPrompt.setPosition( sf::Vector2f( 3, 50 ) );
-	respawnPrompt.setString( "Press any button to respawn" );
-
-	for( unsigned int i = 0; i < MAX_LIVES; i++ )
-	{
-		lives[i].setTexture( game->assetManager.GetTextureRef( "sprites" ) );
-		lives[i].setTextureRect( animManager.Animate( "life_icon" ) );
-		lives[i].setScale( 4, 4 );
-		lives[i].setPosition( (5 + lives[i].getGlobalBounds().width) * i, GAME_HEIGHT - lives[i].getGlobalBounds().height - 5 );
-	}
 
 	background = sf::Sprite( assetManager->GetTextureRef( "background" ) );
 
@@ -137,10 +112,6 @@ void StateGameplay::HandleInput()
 				}
 			}
 
-			if( event.key.code == sf::Keyboard::Key::F12 )
-			{
-				this->game->AddLife();
-			}
 			if( event.key.code == sf::Keyboard::Key::F11 )
 			{
 				transition = true;
@@ -242,8 +213,6 @@ void StateGameplay::Update( const float dt )
 	{
 		entityManager.Think( dt );
 		entityManager.CheckCollisions();
-		//txScore.setString( std::to_string( game->score ) );
-		txScore.setString( std::to_string(game->currentRoom.x) + "," + std::to_string(game->currentRoom.y) );
 
 		// Begin screen transition if player moves outside screen
 		sf::Vector2f plPos( player.hitbox.left, player.hitbox.top );
@@ -276,34 +245,7 @@ void StateGameplay::Update( const float dt )
 		if ( startTrans )
 		{
 			transition = true;
-			AddLastMove( lastMove );
 			transStart = now;
-			PlayTransitionSound();
-		}
-
-		// Did we run out of lives?
-		if( game->GetLives() <= 0 && player.CheckReset() )
-		{
-			game->music.stop();
-			game->assetManager.StopSound( "death" );
-			lastMove = Directions::W;
-			game->window.setMouseCursorVisible( true );
-			this->game->SwitchState( new StateHighscore( this->game ) );
-			return;
-		}
-
-		if( player.IsDead() && !deathSoundPlayed )
-		{
-			if( chicken )
-			{
-				game->assetManager.PlaySound( "got_chicken", true );
-			}
-			else
-			{
-				game->assetManager.PlaySound( "got_humanoid", true );
-			}
-
-			deathSoundPlayed = true;
 		}
 	}
 	else
@@ -317,21 +259,6 @@ void StateGameplay::Draw() const
 	game->window.draw(background);
 
 	entityManager.Draw();
-
-	game->window.draw( txScore );
-
-	if ( player.IsDead() && !playDemo && !recordDemo )
-	{
-		game->window.draw( respawnPrompt );
-	}
-
-	for( unsigned int i = 0; i < MAX_LIVES; i++ )
-	{
-		if( i >= game->GetLives() )
-			break;
-
-		game->window.draw( lives[i] );
-	}
 
 	if ( pause.open )
 		pause.Draw();
@@ -381,21 +308,6 @@ void StateGameplay::ScreenTransition( const float dt )
 		this->game->currentRoom = nextRoom;
 		this->game->SwitchState( new StateGameplay( this->game ) );
 	}
-}
-
-void StateGameplay::PlayTransitionSound()
-{
-	/*if ( entityManager.GetRobotCount() > 0 ) chicken = true;
-	else chicken = false;
-
-	if ( chicken )
-	{
-		game->assetManager.PlaySound( "chicken", true );
-	}
-	else
-	{
-		game->assetManager.PlaySound( "intruder", true );
-	}*/
 }
 
 bool StateGameplay::ResetIfDead()
@@ -455,29 +367,7 @@ sf::Vector2f StateGameplay::GetPlayerStart(const Directions lastMove, EntityPlay
 	return sf::Vector2f(0, 0);
 }
 
-void StateGameplay::AddLastMove( Directions move )
-{
-	lastFourMoves.push_back( move );
-	if ( lastFourMoves.size() > 4 ) // Limit to four
-		lastFourMoves.erase( lastFourMoves.begin() );
-}
-
-bool StateGameplay::CheckEasterEgg() const
-{
-	if ( lastFourMoves.size() == 4
-		&& lastFourMoves[0] == Directions::S
-		&& lastFourMoves[1] == Directions::E
-		&& lastFourMoves[2] == Directions::N
-		&& lastFourMoves[3] == Directions::E
-		)
-	{
-		return true;
-	}
-
-	return false;
-}
-
 StateGameplay::~StateGameplay()
 {
-	//maze.ClearMap();
+	
 }
