@@ -98,7 +98,16 @@ void EntityDoor::OpenDoor()
 {
 	if (entityManager != NULL)
 	{
-		entityManager->Add(new EntityDoorFloor(sf::Vector2f(hitbox.left + 16, hitbox.top + 8), game));
+		sf::Vector2f floorOffset;
+		switch (direction)
+		{
+		case Directions::N: floorOffset = sf::Vector2f(16, 40); break;
+		case Directions::E: floorOffset = sf::Vector2f(0, 16); break;
+		case Directions::S: floorOffset = sf::Vector2f(48, 0); break;
+		case Directions::W: floorOffset = sf::Vector2f(40, 48); break;
+		}
+
+		entityManager->Add(new EntityDoorFloor(sf::Vector2f(hitbox.left, hitbox.top) + floorOffset, direction, sprite.getRotation(), game));
 
 		// Move hitbox somehwere we know won't be collided with
 		hitbox.left = 9000;

@@ -1,6 +1,6 @@
 #include "entity_door_floor.h"
 
-EntityDoorFloor::EntityDoorFloor(sf::Vector2f pos, Game* game)
+EntityDoorFloor::EntityDoorFloor(sf::Vector2f pos, Directions direction, float rotation, Game* game)
 {
 	this->game = game;
 
@@ -9,6 +9,8 @@ EntityDoorFloor::EntityDoorFloor(sf::Vector2f pos, Game* game)
 	drawPriority = 1;
 	sprite.setPosition(pos);
 	sprite.setTextureRect(animManager.Animate("door_floor"));
+	sprite.setOrigin(sf::Vector2f(0, sprite.getLocalBounds().width));
+	sprite.setRotation(rotation);
 }
 
 void EntityDoorFloor::Draw() const

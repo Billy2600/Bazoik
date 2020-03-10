@@ -9,7 +9,7 @@ private:
 	AnimManager animManager;
 
 public:
-	EntityDoorFloor(sf::Vector2f pos, Game* game);
+	EntityDoorFloor(sf::Vector2f pos, Directions direction, float rotation, Game* game);
 	virtual void Draw() const;
 	virtual void Think(const float dt);
 	virtual void Move(sf::Vector2f move, const float dt);
