@@ -1,5 +1,6 @@
 #include "entity_keese.h"
 #include "entity_sword.h"
+#include "entity_player.h"
 
 EntityKeese::EntityKeese(const sf::Vector2f pos)
 {
@@ -62,6 +63,10 @@ void EntityKeese::HandleCollision(Entity* other)
 	if (dynamic_cast<EntitySword*>(other) != NULL)
 	{
 		deleteMe = true;
+	}
+	else if (dynamic_cast<EntityPlayer*>(other) != NULL)
+	{
+		game->SubtractHitPoints(1);
 	}
 }
 

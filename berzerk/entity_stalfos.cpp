@@ -1,5 +1,6 @@
 #include "entity_stalfos.h"
 #include "entity_sword.h"
+#include "entity_player.h"
 
 EntityStalfos::EntityStalfos(const sf::Vector2f pos)
 {
@@ -62,6 +63,10 @@ void EntityStalfos::HandleCollision(Entity* other)
 	if (dynamic_cast<EntitySword*>(other) != NULL)
 	{
 		deleteMe = true;
+	}
+	else if (dynamic_cast<EntityPlayer*>(other) != NULL)
+	{
+		game->SubtractHitPoints(2);
 	}
 }
 
