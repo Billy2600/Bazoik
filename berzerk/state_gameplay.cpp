@@ -3,7 +3,7 @@
 #include "state_titlescreen.h"
 #include "pugixml.hpp"
 
-Directions StateGameplay::lastMove = Directions::N;
+Directions StateGameplay::lastMove = Directions::S;
 std::vector<Directions> StateGameplay::lastFourMoves = std::vector<Directions>();
 
 bool StateGameplay::chicken = false;
@@ -433,21 +433,21 @@ void StateGameplay::ReturnToTitle()
 sf::Vector2f StateGameplay::GetPlayerStart(const Directions lastMove, EntityPlayer& player) const
 {
 	// Spawn player based on last move
+	// Keep in mind you'll end up on the other side that you exited
 	switch (lastMove)
 	{
-		// Keep in mind you'll end up on the other side that you exited
-	case Directions::S:
-		return sf::Vector2f(GAME_WIDTH / 2, GAME_HEIGHT - player.hitbox.height - WALL_WIDTH);
-		break;
 	case Directions::N:
-		return sf::Vector2f(GAME_WIDTH / 2, WALL_WIDTH);
+		return sf::Vector2f(240, 48);
 		break;
-	case Directions::E:
-		return sf::Vector2f(GAME_WIDTH - player.hitbox.width - WALL_HEIGHT, GAME_HEIGHT / 2);
+	case Directions::S:
+		return sf::Vector2f(230, 240);
 		break;
 	case Directions::W:
+		return sf::Vector2f(48, 144);
+		break;
+	case Directions::E:
 	default:
-		return sf::Vector2f(WALL_HEIGHT, GAME_HEIGHT / 2);
+		return sf::Vector2f(400, 144);
 		break;
 	}
 
