@@ -193,4 +193,13 @@
 	<anim name="key">
 		<frame x="403" y="91" w="16" h="32"></frame>
 	</anim>
+	<anim name="heart">
+		<frame x="419" y="91" w="14" h="16"></frame>
+	</anim>
+	<anim name="heart_left">
+		<frame x="419" y="91" w="7" h="16"></frame>
+	</anim>
+	<anim name="heart_right">
+		<frame x="426" y="91" w="7" h="16"></frame>
+	</anim>
 </animations>
