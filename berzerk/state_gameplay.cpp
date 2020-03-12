@@ -89,12 +89,10 @@ void StateGameplay::LoadBackgroundAndUiElements()
 		for (int y = 0; y < MAX_ROOM_Y; y++)
 		{
 			uiMap[x][y] = sf::RectangleShape(sf::Vector2f(10, 5));
-			if(game->GetRoomVisited(x, y)) uiMap[x][y].setFillColor(sf::Color(255, 0, 0, 150));
+			if (sf::Vector2i(x, y) == game->currentRoom) uiMap[x][y].setFillColor(sf::Color(0, 255, 0, 150));
+			else if (game->GetRoomVisited(x, y)) uiMap[x][y].setFillColor(sf::Color(255, 0, 0, 150));
 			else uiMap[x][y].setFillColor(sf::Color(0, 0, 0, 150));
-			uiMap[x][y].setPosition(sf::Vector2f(
-				330 + (11 * x),
-				5 + (6 * y)
-			));
+			uiMap[x][y].setPosition( sf::Vector2f( 330 + (11 * x), 5 + (6 * y) ));
 		}
 	}
 }
