@@ -41,13 +41,14 @@ public:
 	void PopState(); // Pop state off stack
 	void ResetState(); // Reset current state
 	void SwitchState(GameState* newState); // Switch current state (will delete old one)
-	sf::Int8 GetHitPoints();
+	sf::Int8 GetHitPoints() const;
 	void ResetHitPoints();
 	void SubtractHitPoints(sf::Int8 subtract);
 	void AddHitPoints(sf::Int8 add);
 	void ResetKeys();
 	bool UseKey(); // Will return if you have any keys to use
 	void AddKey();
+	sf::Int8 GetKeys() const;
 	void Draw(); // Runs every frame
 	static std::string GetConfigDir(); // Get directory for saving/loading files; includes trailing slash
 	bool FileExists( const std::string path ) const;

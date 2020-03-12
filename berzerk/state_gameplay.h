@@ -25,7 +25,9 @@ private:
 	Room room;
 
 	sf::Sprite background;
-	sf::Sprite hitPoint[MAX_HP];
+	sf::Sprite uiHitPoint[MAX_HP];
+	sf::Sprite uiKey;
+	sf::Text uiNumKeys;
 
 	static Directions lastMove;
 	bool transition; // Is the screen moving?

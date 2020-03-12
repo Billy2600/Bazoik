@@ -57,20 +57,30 @@ void StateGameplay::LoadSprites()
 
 	for (int i = 0; i < MAX_HP; i++)
 	{
-		hitPoint[i] = sf::Sprite(assetManager->GetTextureRef("sprites"));
+		uiHitPoint[i] = sf::Sprite(assetManager->GetTextureRef("sprites"));
 
 		if (i % 2 == 0)
 		{
-			hitPoint[i].setTextureRect(animManager.Animate("heart_left"));
+			uiHitPoint[i].setTextureRect(animManager.Animate("heart_left"));
 		}
 		else
 		{
-			hitPoint[i].setTextureRect(animManager.Animate("heart_right"));
+			uiHitPoint[i].setTextureRect(animManager.Animate("heart_right"));
 		}
 
-		hitPoint[i].setPosition(4 + ((hitPoint[i].getGlobalBounds().width) * i), 5);
+		uiHitPoint[i].setPosition(4 + ((uiHitPoint[i].getGlobalBounds().width) * i), 5);
 	}
 	
+	uiKey = sf::Sprite(assetManager->GetTextureRef("sprites"));
+	uiKey.setTextureRect(animManager.Animate("key"));
+	uiKey.setScale(sf::Vector2f(0.5f, 0.5f));
+	uiKey.setPosition(sf::Vector2f(uiHitPoint[MAX_HP - 1].getPosition().x + uiHitPoint[MAX_HP - 1].getLocalBounds().width + 16, 5));
+
+	uiNumKeys = sf::Text("x0", assetManager->GetFontRef("joystix"), 16);
+	uiNumKeys.setFont(assetManager->GetFontRef("joystix"));
+	uiNumKeys.setCharacterSize(16);
+	uiNumKeys.setPosition(uiKey.getPosition().x + 8, 5);
+	uiNumKeys.setFillColor(sf::Color::White);
 }
 
 void StateGameplay::Start()
@@ -266,6 +276,11 @@ void StateGameplay::Update( const float dt )
 			transition = true;
 			transStart = now;
 		}
+
+		if (game != NULL)
+		{
+			uiNumKeys.setString( "x" + std::to_string(game->GetKeys()) );
+		}
 	}
 	else
 	{
@@ -285,8 +300,11 @@ void StateGameplay::Draw() const
 		if (game->GetHitPoints() == 0)
 			break;
 
-		game->window.draw(hitPoint[i]);
+		game->window.draw(uiHitPoint[i]);
 	}
+
+	game->window.draw(uiKey);
+	game->window.draw(uiNumKeys);
 
 	if ( pause.open )
 		pause.Draw();
@@ -365,7 +383,7 @@ bool StateGameplay::ResetIfDead()
 void StateGameplay::ReturnToTitle()
 {
 	game->window.setMouseCursorVisible( true );
-	lastMove = Directions::W;
+	lastMove = Directions::S;
 	//game->music.stop();
 	game->PopState();
 }

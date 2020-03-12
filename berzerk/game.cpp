@@ -110,7 +110,7 @@ void Game::SwitchState( GameState* newState )
 	states.top()->Start();
 }
 
-sf::Int8 Game::GetHitPoints()
+sf::Int8 Game::GetHitPoints() const
 {
 	return hitPoints;
 }
@@ -133,6 +133,11 @@ void Game::AddHitPoints(sf::Int8 add)
 void Game::ResetKeys()
 {
 	keys = 0;
+}
+
+sf::Int8 Game::GetKeys() const
+{
+	return keys;
 }
 
 bool Game::UseKey()
