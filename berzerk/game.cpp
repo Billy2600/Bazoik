@@ -140,6 +140,33 @@ sf::Int8 Game::GetKeys() const
 	return keys;
 }
 
+bool Game::GetRoomVisited(int x, int y) const
+{
+	if (x >= MAX_ROOM_X || y >= MAX_ROOM_Y)
+		return false;
+
+	return visitedRooms[x][y];
+}
+
+void Game::SetRoomVisited(int x, int y)
+{
+	if (x >= MAX_ROOM_X || y >= MAX_ROOM_Y)
+		return;
+
+	visitedRooms[x][y] = true;
+}
+
+void Game::ResetVisitedRooms()
+{
+	for (int x = 0; x < MAX_ROOM_X; x++)
+	{
+		for (int y = 0; y < MAX_ROOM_Y; y++)
+		{
+			visitedRooms[x][y] = false;
+		}
+	}
+}
+
 bool Game::UseKey()
 {
 	if (keys > 0)

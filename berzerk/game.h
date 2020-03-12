@@ -9,6 +9,8 @@
 #define GAME_WIDTH 480	
 #define GAME_HEIGHT 320
 #define MAX_HP 8
+#define MAX_ROOM_X 7
+#define MAX_ROOM_Y 6
 // Account for OS differences
 #ifdef _WIN32
 #define P_ENV_VAR "USERPROFILE"
@@ -34,6 +36,7 @@ public:
 	AssetManager assetManager;
 	InputManager inputManager;
 	sf::Vector2i currentRoom;
+	bool visitedRooms[MAX_ROOM_X][MAX_ROOM_Y]; // Which rooms have we visited so far?
 	sf::Music music;
 
 	Game();
@@ -49,6 +52,9 @@ public:
 	bool UseKey(); // Will return if you have any keys to use
 	void AddKey();
 	sf::Int8 GetKeys() const;
+	bool GetRoomVisited(int x, int y) const;
+	void SetRoomVisited(int x, int y);
+	void ResetVisitedRooms();
 	void Draw(); // Runs every frame
 	static std::string GetConfigDir(); // Get directory for saving/loading files; includes trailing slash
 	bool FileExists( const std::string path ) const;

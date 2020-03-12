@@ -8,6 +8,8 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 {
 	this->game = game;
 
+	this->game->SetRoomVisited(game->currentRoom.x, game->currentRoom.y);
+
 	player.SetPos( GetPlayerStart(lastMove, player) );
 	transition = false;
 
@@ -17,7 +19,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	room = Room(game->currentRoom, &entityManager);
 	room.SetupRoom();
 
-	LoadSprites();
+	LoadBackgroundAndUiElements();
 
 	clock.restart();
 
@@ -50,7 +52,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	}
 }
 
-void StateGameplay::LoadSprites()
+void StateGameplay::LoadBackgroundAndUiElements()
 {
 	AssetManager* assetManager = &this->game->assetManager;
 	background = sf::Sprite(assetManager->GetTextureRef("background"));
@@ -81,6 +83,20 @@ void StateGameplay::LoadSprites()
 	uiNumKeys.setCharacterSize(16);
 	uiNumKeys.setPosition(uiKey.getPosition().x + 8, 5);
 	uiNumKeys.setFillColor(sf::Color::White);
+
+	for (int x = 0; x < MAX_ROOM_X; x++)
+	{
+		for (int y = 0; y < MAX_ROOM_Y; y++)
+		{
+			uiMap[x][y] = sf::RectangleShape(sf::Vector2f(10, 5));
+			if(game->GetRoomVisited(x, y)) uiMap[x][y].setFillColor(sf::Color(255, 0, 0, 150));
+			else uiMap[x][y].setFillColor(sf::Color(0, 0, 0, 150));
+			uiMap[x][y].setPosition(sf::Vector2f(
+				330 + (11 * x),
+				5 + (6 * y)
+			));
+		}
+	}
 }
 
 void StateGameplay::Start()
@@ -306,6 +322,14 @@ void StateGameplay::Draw() const
 	game->window.draw(uiKey);
 	game->window.draw(uiNumKeys);
 
+	for (int x = 0; x < MAX_ROOM_X; x++)
+	{
+		for (int y = 0; y < MAX_ROOM_Y; y++)
+		{
+			game->window.draw(uiMap[x][y]);
+		}
+	}
+
 	if ( pause.open )
 		pause.Draw();
 }
@@ -386,6 +410,7 @@ void StateGameplay::ReturnToTitle()
 	lastMove = Directions::S;
 	//game->music.stop();
 	game->PopState();
+	game->ResetVisitedRooms();
 }
 
 sf::Vector2f StateGameplay::GetPlayerStart(const Directions lastMove, EntityPlayer& player) const

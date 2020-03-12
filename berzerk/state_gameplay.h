@@ -28,6 +28,7 @@ private:
 	sf::Sprite uiHitPoint[MAX_HP];
 	sf::Sprite uiKey;
 	sf::Text uiNumKeys;
+	sf::RectangleShape uiMap[MAX_ROOM_X][MAX_ROOM_Y];
 
 	static Directions lastMove;
 	bool transition; // Is the screen moving?
@@ -39,7 +40,7 @@ private:
 	bool recordDemo;
 	bool playDemo;
 
-	void LoadSprites();
+	void LoadBackgroundAndUiElements();
 	void ScreenTransition( const float dt ); // Transition screen
 	bool ResetIfDead(); // Reset if player died
 	void ReturnToTitle(); // Return to title screen
