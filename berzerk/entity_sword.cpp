@@ -65,7 +65,7 @@ void EntitySword::SetPositionBasedOnDirection(const Directions direction)
 	// Below the player
 	case Directions::S:
 		hitbox.left = owner->hitbox.left + (owner->hitbox.width / 2);
-		hitbox.top = owner->hitbox.top + (owner->hitbox.height * 2); // Account for height difference between hitbox and sprite
+		hitbox.top = owner->hitbox.top + (owner->hitbox.height); // Account for height difference between hitbox and sprite
 		break;
 	// Left of the player
 	case Directions::SW:
@@ -97,7 +97,7 @@ void EntitySword::SetSpriteRotationAndPositionBasedOnDirection(const Directions 
 	// Below the player
 	case Directions::S:
 		sprite.setRotation(180.f);
-		sprite.setPosition(hitbox.left + (SWORD_WIDTH + SWORD_HILT_EXTRA_PIXELS), hitbox.top + owner->hitbox.height);
+		sprite.setPosition(hitbox.left + (SWORD_WIDTH + SWORD_HILT_EXTRA_PIXELS), hitbox.top + (owner->hitbox.height * 2));
 		break;
 	// Left of the player
 	case Directions::SW:
