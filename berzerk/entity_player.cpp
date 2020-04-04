@@ -304,8 +304,10 @@ void EntityPlayer::Move(sf::Vector2f move, const float dt) // Add vector to prod
 #endif
 		sprite.setPosition( GetSpritePos() );
 
-		// Need to flip sprite if moving W, or second frame of walk_n
-		if ((lastHoriz == Directions::W && currentAnim != "player_fire_n") || (currentAnim == "player_walk_n" && animManager.GetCurrentFrame(currentAnim) > 0))
+		// Need to flip sprite in certain cases
+		if (currentAnim == "player_walk_w"
+			|| currentAnim == "player_fire_w"
+			|| (currentAnim == "player_walk_n" && animManager.GetCurrentFrame(currentAnim) > 0))
 		{
 			sprite.setScale(-1, 1);
 			// Account for sprite mis-aligning with the hitbox when flipped via negative scale

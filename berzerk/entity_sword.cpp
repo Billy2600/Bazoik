@@ -59,26 +59,25 @@ void EntitySword::SetPositionBasedOnDirection(const Directions direction)
 	case Directions::NE:
 	case Directions::NW:
 	case Directions::N:
-		hitbox.left = owner->hitbox.left + (owner->hitbox.width / 2);
-		hitbox.top = owner->hitbox.top - hitbox.height;
+		hitbox.left = owner->hitbox.left + 6;
+		hitbox.top = (owner->hitbox.top - owner->hitbox.height) - 16; // Normally hitbox height would be divided by two, but hitbox is already half-height of sprite
 		break;
 	// Below the player
 	case Directions::S:
-		hitbox.left = owner->hitbox.left + (owner->hitbox.width / 2);
-		hitbox.top = owner->hitbox.top + (owner->hitbox.height); // Account for height difference between hitbox and sprite
+		hitbox.left = owner->hitbox.left + 16;
+		hitbox.top = (owner->hitbox.top - owner->hitbox.height) + 30;
 		break;
 	// Left of the player
 	case Directions::SW:
 	case Directions::W:
-		hitbox.left = owner->hitbox.left - hitbox.width;
-		// Subtract height to put sword in the middle of sprite (not hitbox)
-		hitbox.top = (owner->hitbox.top - owner->hitbox.height) + owner->hitbox.height; // Normally hitbox height would be divided by two, but hitbox is already half-height of sprite
+		hitbox.left = owner->hitbox.left - hitbox.width + 2;
+		hitbox.top = (owner->hitbox.top - owner->hitbox.height) + 14; 
 		break;
 	// Right of the player
 	case Directions::SE:
 	case Directions::E:
-		hitbox.left = owner->hitbox.left + owner->hitbox.width;
-		hitbox.top = (owner->hitbox.top - owner->hitbox.height) + owner->hitbox.height; // Same as above
+		hitbox.left = owner->hitbox.left + 25;
+		hitbox.top = (owner->hitbox.top - owner->hitbox.height) + 14;
 		break;
 	}
 }
