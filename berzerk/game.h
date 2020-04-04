@@ -42,7 +42,7 @@ public:
 	bool visitedRooms[MAX_ROOM_X][MAX_ROOM_Y]; // Which rooms have we visited so far?
 	sf::Music music;
 
-	std::vector<sf::Vector2i> pickedUpKeys;
+	std::vector<sf::Vector2i> keysCollected;
 	std::vector< std::pair<sf::Vector2i, Directions> > openedDoors;
 
 	Game();

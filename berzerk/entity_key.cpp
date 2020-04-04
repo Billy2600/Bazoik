@@ -6,6 +6,7 @@ EntityKey::EntityKey(sf::Vector2f pos)
 	hitbox.top = pos.y;
 	hitbox.left = pos.x;
 	sprite.setPosition(pos);
+	keyAlreadyCollectedCheck = false;
 
 #ifdef _DEBUG
 	shape.setOutlineColor(sf::Color::Red);
@@ -29,6 +30,9 @@ void EntityKey::Think(const float dt)
 		shape.setSize(sf::Vector2f(animRect.width, animRect.height));
 #endif
 	}
+
+	if (KeyAlreadyCollected())
+		deleteMe = true;
 }
 
 void EntityKey::Draw() const
@@ -59,4 +63,19 @@ void EntityKey::Move(sf::Vector2f move, const float dt)
 #ifdef _DEBUG
 	shape.setPosition(shape.getPosition() + moveVec);
 #endif
+}
+
+bool EntityKey::KeyAlreadyCollected()
+{
+	if (!keyAlreadyCollectedCheck)
+	{
+		keyAlreadyCollectedCheck = true;
+
+		if (game->keysCollected.empty())
+			return false;
+
+		return std::find(game->keysCollected.begin(), game->keysCollected.end(), game->currentRoom) != game->keysCollected.end();
+	}
+
+	return false;
 }

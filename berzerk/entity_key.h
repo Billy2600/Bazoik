@@ -10,6 +10,8 @@ private:
 	sf::RectangleShape shape;
 #endif //  _DEBUG
 
+	bool keyAlreadyCollectedCheck;
+	bool KeyAlreadyCollected();
 
 public:
 	EntityKey(sf::Vector2f pos);

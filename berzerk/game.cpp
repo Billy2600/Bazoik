@@ -183,6 +183,7 @@ bool Game::UseKey()
 void Game::AddKey()
 {
 	keys++;
+	keysCollected.push_back(currentRoom);
 }
 
 void Game::PopState()

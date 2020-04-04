@@ -53,7 +53,7 @@ void EntityDoor::Think(const float dt)
 	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
 #endif // _DEBUG
 
-	if (!doorAlreadyOpenCheck && DoorAlreadyOpened())
+	if (DoorAlreadyOpened())
 		doorOpened = true;
 
 	if (doorOpened)
@@ -135,15 +135,20 @@ void EntityDoor::OpenDoor()
 
 bool EntityDoor::DoorAlreadyOpened()
 {
-	doorAlreadyOpenCheck = true;
+	if (!doorAlreadyOpenCheck)
+	{
+		doorAlreadyOpenCheck = true;
 
-	if (state != DoorStates::Locked)
-		return false;
+		if (state != DoorStates::Locked)
+			return false;
 
-	if (game->openedDoors.empty())
-		return false;
+		if (game->openedDoors.empty())
+			return false;
 
-	return std::find(game->openedDoors.begin(), game->openedDoors.end(), std::make_pair(game->currentRoom, direction)) != game->openedDoors.end();
+		return std::find(game->openedDoors.begin(), game->openedDoors.end(), std::make_pair(game->currentRoom, direction)) != game->openedDoors.end();
+	}
+
+	return false;
 }
 
 void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)
