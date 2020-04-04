@@ -27,10 +27,12 @@ private:
 	sf::RectangleShape wallPiece; // Cover part of wall, so player won't appear over it
 	sf::Vector2f position; // Need to store position seperately, as sprite and hitbox can be in different places
 	bool doorOpened; // Door opened flag
+	bool doorAlreadyOpenCheck; // So we can run DoorAlreadyOpened() only once
 
 	void SetPositionRotationBasedOnDirection(const Directions direction);
 	void LoadSprite();
 	void OpenDoor();
+	bool DoorAlreadyOpened();
 
 public:
 	EntityDoor(DoorStates initialState, Directions initialDirection);

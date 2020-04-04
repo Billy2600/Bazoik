@@ -10,7 +10,12 @@ EntityDoor::EntityDoor(DoorStates initialState = DoorStates::None, Directions in
 
 	SetPositionRotationBasedOnDirection(direction);
 
-	if (initialState == DoorStates::Open) doorOpened = true;
+	if (initialState == DoorStates::Open)
+	{
+		doorOpened = true;
+	}
+
+	doorAlreadyOpenCheck = false;
 
 #ifdef _DEBUG
 	shape.setFillColor(sf::Color::Transparent);
@@ -48,6 +53,9 @@ void EntityDoor::Think(const float dt)
 	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
 #endif // _DEBUG
 
+	if (!doorAlreadyOpenCheck && DoorAlreadyOpened())
+		doorOpened = true;
+
 	if (doorOpened)
 		OpenDoor();
 }
@@ -70,7 +78,9 @@ void EntityDoor::Move(sf::Vector2f move, const float dt)
 
 	const sf::Vector2f moveDelta = sf::Vector2f(move.x * dt, move.y * dt);
 	sprite.setPosition(sprite.getPosition() + moveDelta);
+#ifdef  _DEBUG
 	shape.setPosition(shape.getPosition() + moveDelta);
+#endif //  _DEBUG
 	wallPiece.setPosition(wallPiece.getPosition() + moveDelta);
 }
 
@@ -78,7 +88,7 @@ void EntityDoor::HandleCollision(Entity* other)
 {
 	if (dynamic_cast<EntityPlayer*>(other) != NULL)
 	{
-		if ( state == DoorStates::Closed || (state == DoorStates::Locked && game->UseKey()) )
+		if (state == DoorStates::Closed || (state == DoorStates::Locked && game->UseKey()))
 		{
 			doorOpened = true;
 		}
@@ -113,9 +123,27 @@ void EntityDoor::OpenDoor()
 		hitbox.left = 9000;
 		hitbox.top = 9000;
 
+		if (state == DoorStates::Locked)
+		{
+			game->openedDoors.push_back(std::make_pair(game->currentRoom, direction));
+		}
+
 		state = DoorStates::Open;
 		doorOpened = false;
 	}
+}
+
+bool EntityDoor::DoorAlreadyOpened()
+{
+	doorAlreadyOpenCheck = true;
+
+	if (state != DoorStates::Locked)
+		return false;
+
+	if (game->openedDoors.empty())
+		return false;
+
+	return std::find(game->openedDoors.begin(), game->openedDoors.end(), std::make_pair(game->currentRoom, direction)) != game->openedDoors.end();
 }
 
 void EntityDoor::SetPositionRotationBasedOnDirection(const Directions direction)

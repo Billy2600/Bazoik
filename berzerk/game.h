@@ -21,6 +21,9 @@
 #endif
 #define ERROR_COLOR sf::Color( 255, 20, 147 ) // Look for this color to know something went wrong
 
+// Directions
+enum class Directions { N, NE, E, SE, S, SW, W, NW };
+
 class GameState;
 
 class Game
@@ -38,6 +41,9 @@ public:
 	sf::Vector2i currentRoom;
 	bool visitedRooms[MAX_ROOM_X][MAX_ROOM_Y]; // Which rooms have we visited so far?
 	sf::Music music;
+
+	std::vector<sf::Vector2i> pickedUpKeys;
+	std::vector< std::pair<sf::Vector2i, Directions> > openedDoors;
 
 	Game();
 	void GameLoop(); // Runs every update
