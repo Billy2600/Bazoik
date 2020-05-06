@@ -5,7 +5,7 @@
 #include "input_manager.h"
 #include "anim_manager.h"
 
-#define GAME_NAME "Bazoik"
+#define GAME_NAME "Zelda Clone"
 #define GAME_WIDTH 480	
 #define GAME_HEIGHT 320
 #define MAX_HP 8

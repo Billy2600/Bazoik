@@ -46,7 +46,7 @@ Game::Game()
 	window.setFramerateLimit( 60 );
 	sf::Image icon;
 	icon.loadFromFile("assets/ICON.png");
-	window.setIcon(480, 480, icon.getPixelsPtr());
+	window.setIcon(792, 528, icon.getPixelsPtr());
 
 	// Load sprite texture
 	assetManager.LoadTexture( "sprites", "assets/sprites.png" );
