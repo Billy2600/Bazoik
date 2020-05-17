@@ -1,0 +1,1 @@
+robocopy "C:\projects\BazoikDOS" "C:\Users\billy\My Games\dos\project" /E /COPYALL 

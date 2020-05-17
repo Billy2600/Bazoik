@@ -1,5 +1,7 @@
-#pragma once
-#include <SFML/Graphics.hpp>
+#ifndef __Game_H__
+#define __Game_H__
+
+#include "SFML\\Graphics.hpp"
 #include <stack>
 #include "asset_manager.h"
 #include "input_manager.h"
@@ -53,3 +55,5 @@ public:
 	void Close(); // Close game
 	~Game();
 };
+
+#endif

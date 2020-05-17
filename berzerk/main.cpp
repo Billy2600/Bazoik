@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include "SFML\\Graphics.hpp"
 #include "game.h"
 #include "state_splash.h"
 
