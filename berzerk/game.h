@@ -1,11 +1,18 @@
 #ifndef __Game_H__
 #define __Game_H__
 
-#include "SFML\\Graphics.hpp"
 #include <stack>
+#ifndef _DOS
+#include "SFML/Graphics.hpp"
 #include "asset_manager.h"
 #include "input_manager.h"
 #include "anim_manager.h"
+#else
+#include "SFML\\Graphics.hpp"
+#include "ASSET_~2.H"
+#include "INPUT_~2.H"
+#include "ANIM_M~2.H"
+#endif
 
 #define GAME_NAME "Bazoik"
 #define GAME_WIDTH 848
@@ -15,6 +22,9 @@
 // Account for OS differences
 #ifdef _WIN32
 #define P_ENV_VAR "USERPROFILE"
+#define P_SEPERATOR "\\"
+#elif defined(_DOS)
+#define P_ENV_VAR "USERPROFILE" // Probably not used on DOS
 #define P_SEPERATOR "\\"
 #else
 #define P_ENV_VAR "HOME"

@@ -3,7 +3,23 @@
 
 namespace sf
 {
+    class SoundBuffer
+    {
+        public:
+            SoundBuffer()
+            {
 
+            }
+    };
+
+    class Sound
+    {
+        public:
+            Sound()
+            {
+
+            }
+    };
 }
 
 #endif

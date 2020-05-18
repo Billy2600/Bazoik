@@ -1,9 +1,13 @@
 #pragma once
 #include <string>
 #include <map>
+#ifndef _DOS
 #include <array>
 #include <SFML/Graphics.hpp>
 #include "pugixml.hpp"
+#else
+#include "SFML\\Graphics.hpp"
+#endif
 
 #define JOYSTICK_DEADZONE 50
 #define CONFIG_FILE_VERSION_NO 1.0

@@ -1,9 +1,16 @@
 #pragma once
 #include <map>
-#include <random>
 #include <string>
+
+#ifndef _DOS
+#include <random>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#else
+#include "SFML\\Graphics.hpp"
+#include "SFML\\Audio.hpp"
+#endif
+
 
 #define MAX_SOUNDS 10 // Maximum number of sounds that can play at the same time
 
@@ -14,7 +21,9 @@ private:
 	std::map<std::string, sf::Font> fonts;
 	std::map<std::string, sf::SoundBuffer> soundBuffers;
 	sf::Sound sounds[MAX_SOUNDS];
+#ifndef _DOS
 	std::mt19937 rngEngine = std::mt19937( (unsigned int)time( 0 ) ); // To randomly pick sounds
+#endif
 
 public:
 

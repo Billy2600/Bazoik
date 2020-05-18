@@ -2,6 +2,8 @@
 #include <cstdlib>
 #ifdef _WIN32
 #include <Windows.h>
+#elif _DOS
+#include <stdio.h>
 #else
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -149,7 +151,7 @@ void Game::Draw()
 
 std::string Game::GetConfigDir()
 {
-	std::string path;
+	std::string path = "";
 	char *buf = nullptr;
 	size_t sz = 0;
 
@@ -159,6 +161,8 @@ std::string Game::GetConfigDir()
 		path = std::string( buf );
 		free( buf );
 	}
+#elif defined(_DOS)
+	return path; // Just use the directory the application is in on DOS
 #else
 	if( secure_getenv( P_ENV_VAR ) != NULL )
 	{
@@ -191,6 +195,17 @@ bool Game::FileExists( const std::string path ) const
 #ifdef _WIN32
 	DWORD attrib = GetFileAttributes( path.c_str() );
 	return ( attrib != INVALID_FILE_ATTRIBUTES && !( attrib & FILE_ATTRIBUTE_DIRECTORY ) );
+#elif defined(_DOS)
+	FILE *file;
+	if (file = fopen("a.txt", "r"))
+	{
+		fclose(file);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 #else
 	struct stat st = { 0 };
 	return ( stat( path.c_str(), &st ) == 0 );
