@@ -10,30 +10,33 @@ StateTitleScreen::StateTitleScreen(Game *game)
 
 	AssetManager *assetManager = &this->game->assetManager;
 	assetManager->LoadFont( "joystix", "assets/joystix monospace.ttf" );
-	title.setFont( assetManager->GetFontRef( "joystix" ) );
+	debug.setFont( assetManager->GetFontRef( "joystix" ) );
 #ifdef OLD_SFML
-	title.setColor( sf::Color::Green );
+	debug.setColor( sf::Color::Black );
 #else
-	title.setFillColor( sf::Color::Green );
+	debug.setFillColor( sf::Color::Black );
 #endif
-	title.setCharacterSize( 50 );
-	title.setPosition( sf::Vector2f(30,5) );
-	title.setString( GAME_NAME );
+	debug.setCharacterSize( 12 );
+	debug.setPosition( sf::Vector2f(GAME_WIDTH - 150,5) );
+	debug.setString( GAME_NAME );
 
-	buttons["start"] = GuiButton( sf::Vector2f( 30, 80 ), sf::Vector2f( 270, 50 ), sf::Vector2f(10,3), "Start Game", assetManager->GetFontRef("joystix"), 0 );
-	buttons["start"].SetColors( sf::Color::Black, sf::Color::Green, sf::Color::Green );
-	buttons["start"].SetHighlightColors( sf::Color::Black, sf::Color::Red, sf::Color::Red );
+	buttons["start"] = GuiButton( sf::Vector2f( 96, 235 ), sf::Vector2f( 130, 20 ), sf::Vector2f( 0, 0 ), "Start Game", assetManager->GetFontRef("joystix"), 0 );
+	buttons["start"].SetCharacterSize(14);
+	buttons["start"].SetColors( sf::Color::Transparent, sf::Color::Black, sf::Color::Transparent );
+	buttons["start"].SetHighlightColors( sf::Color::Transparent, sf::Color::Red, sf::Color::Transparent );
 	buttons["start"].SetHighlight( false );
 
 	buttons["options"] = buttons["start"];
 	buttons["options"].order = 1;
 	buttons["options"].SetText( "Options" );
-	buttons["options"].SetPos( sf::Vector2f( 30, 160 ) );
+	buttons["options"].SetPos( sf::Vector2f( 236, 235) );
+	buttons["options"].SetSize( sf::Vector2f(100, 20) );
 
 	buttons["quit"] = buttons["start"];
 	buttons["quit"].order = 2;
 	buttons["quit"].SetText( "Quit" );
-	buttons["quit"].SetPos( sf::Vector2f( 30, 240 ) );
+	buttons["quit"].SetPos( sf::Vector2f( 336, 235 ) );
+	buttons["quit"].SetSize(sf::Vector2f(70, 20));
 
 	selectedButton = 0;
 	playDemo = false;
@@ -43,17 +46,18 @@ StateTitleScreen::StateTitleScreen(Game *game)
 	clkAttractMode.restart();
 
 	if (!txImage.loadFromFile( "assets/TitleScreen001.png" ))
-		log.Write( "Could not load title screen image" );
+		log.Write( "Could not load debug screen image" );
 	else
 	{
 		spImage.setTexture( txImage );
-		spImage.setPosition( 0, 0 );
+		spImage.setPosition( 48, 0 );
+		spImage.setScale(sf::Vector2f(1.5f, 1.5f));
 	}
 }
 
 void StateTitleScreen::Start()
 {
-	log.Write( "Title state started" );
+	log.Write( "debug state started" );
 	clkAttractMode.restart();
 	playDemo = false;
 	recordDemo = false;
@@ -194,12 +198,12 @@ void StateTitleScreen::HandleInput()
 		{
 			if ( startLevel > 1 )
 				startLevel--;
-			title.setString( "Start: " + std::to_string( startLevel ) );
+			debug.setString( "Start: " + std::to_string( startLevel ) );
 		}
 		else if ( event.key.code == sf::Keyboard::Key::F2 )
 		{
 			startLevel++;
-			title.setString( "Start: " + std::to_string( startLevel ) );
+			debug.setString( "Start: " + std::to_string( startLevel ) );
 		}
 
 		// Record/play demos
@@ -207,13 +211,13 @@ void StateTitleScreen::HandleInput()
 		{
 			playDemo = true;
 			recordDemo = false;
-			title.setString( "Play Demo" );
+			debug.setString( "Play Demo" );
 		}
 		if (event.key.code == sf::Keyboard::Key::F11)
 		{
 			recordDemo = true;
 			playDemo = false;
-			title.setString("Record Demo");
+			debug.setString("Record Demo");
 		}
 
 		if (event.key.code == sf::Keyboard::Key::F5)
@@ -227,30 +231,12 @@ void StateTitleScreen::HandleInput()
 
 void StateTitleScreen::Update(const float dt)
 {
-	if ( clkAttractMode.getElapsedTime().asMilliseconds() > ATTRACT_MODE_DELAY )
-	{
-		bool demoCheck = false;
-		for ( int i = 0; i < NUM_DEMOS; i++ )
-		{
-			// No demos will play unless all are accounted for
-			demoCheck = game->FileExists( "assets/demo" + std::to_string( i ) + ".xml" );
-		}
 
-		if ( demoCheck )
-		{
-			playDemo = true;
-			recordDemo = false;
-			StartGame();
-			currentDemo++;
-			if ( currentDemo >= NUM_DEMOS + 1 ) // One above the limit will show credits instead
-				currentDemo = 0;
-		}
-	}
 }
 
 void StateTitleScreen::Draw() const
 {
-	game->window.draw( title );
+	game->window.draw( debug );
 
 	game->window.draw( spImage );
 

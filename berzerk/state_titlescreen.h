@@ -11,7 +11,7 @@
 class StateTitleScreen : public GameState
 {
 private:
-	sf::Text title;
+	sf::Text debug;
 	std::map<std::string, GuiButton> buttons;
 	bool joystickInput = false; // Will flip once user starts using joystick
 	int selectedButton; // Which button is currently selected? (Joystick only)
