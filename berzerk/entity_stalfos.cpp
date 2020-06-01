@@ -7,7 +7,7 @@ EntityStalfos::EntityStalfos(const sf::Vector2f pos)
 	hitbox.left = pos.x;
 	hitbox.top = pos.y;
 	hitbox.width = 32;
-	hitbox.height = 20;
+	hitbox.height = 32;
 	moving = true;
 	moveTimer.restart();
 
