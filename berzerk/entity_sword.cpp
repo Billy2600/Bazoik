@@ -33,14 +33,14 @@ void EntitySword::SetDimensionsBasedOnDirection(const Directions direction)
 	switch (direction)
 	{
 	// Above/below the player
-	case Directions::NE:
-	case Directions::NW:
 	case Directions::N:
 	case Directions::S:
 		hitbox.width = SWORD_WIDTH;
 		hitbox.height = SWORD_HEIGHT;
 		break;
 	// Left/right of the player
+	case Directions::NE:
+	case Directions::NW:
 	case Directions::SE:
 	case Directions::SW:
 	case Directions::W:
@@ -56,8 +56,6 @@ void EntitySword::SetPositionBasedOnDirection(const Directions direction)
 	switch (direction)
 	{
 	// Above the player
-	case Directions::NE:
-	case Directions::NW:
 	case Directions::N:
 		hitbox.left = owner->hitbox.left + 6;
 		hitbox.top = (owner->hitbox.top - owner->hitbox.height) - 16; // Normally hitbox height would be divided by two, but hitbox is already half-height of sprite
@@ -68,12 +66,14 @@ void EntitySword::SetPositionBasedOnDirection(const Directions direction)
 		hitbox.top = (owner->hitbox.top - owner->hitbox.height) + 30;
 		break;
 	// Left of the player
+	case Directions::NW:
 	case Directions::SW:
 	case Directions::W:
 		hitbox.left = owner->hitbox.left - hitbox.width + 2;
 		hitbox.top = (owner->hitbox.top - owner->hitbox.height) + 14; 
 		break;
 	// Right of the player
+	case Directions::NE:
 	case Directions::SE:
 	case Directions::E:
 		hitbox.left = owner->hitbox.left + 25;
@@ -87,8 +87,6 @@ void EntitySword::SetSpriteRotationAndPositionBasedOnDirection(const Directions 
 	switch (direction)
 	{
 	// Above the player
-	case Directions::NE:
-	case Directions::NW:
 	case Directions::N:
 		sprite.setRotation(0.f);
 		sprite.setPosition(hitbox.left - SWORD_HILT_EXTRA_PIXELS, hitbox.top);
@@ -99,12 +97,14 @@ void EntitySword::SetSpriteRotationAndPositionBasedOnDirection(const Directions 
 		sprite.setPosition(hitbox.left + (SWORD_WIDTH + SWORD_HILT_EXTRA_PIXELS), hitbox.top + (owner->hitbox.height * 2));
 		break;
 	// Left of the player
+	case Directions::NW:
 	case Directions::SW:
 	case Directions::W:
 		sprite.setRotation(270.f);
 		sprite.setPosition(hitbox.left, hitbox.top + (SWORD_WIDTH + SWORD_HILT_EXTRA_PIXELS));
 		break;
 	// Right of the player
+	case Directions::NE:
 	case Directions::SE:
 	case Directions::E:
 		sprite.setRotation(90.f);

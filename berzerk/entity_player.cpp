@@ -55,19 +55,19 @@ std::string EntityPlayer::ChooseAnimDirection( const sf::Vector2f moveVec )
 	auto direction = GetDirectionFromVector(moveVec);
 	switch (direction)
 	{
-	case Directions::NW:
-	case Directions::NE:
 	case Directions::N:
 		return "n";
 		break;
 	case Directions::S:
 		return "s";
 		break;
-	case Directions::SE:
+	case Directions::NW:
 	case Directions::SW:
 	case Directions::W:
 		return "w";
 		break;
+	case Directions::NE:
+	case Directions::SE:
 	case Directions::E:
 		return "e";
 		break;
