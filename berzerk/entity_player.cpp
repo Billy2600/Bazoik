@@ -327,25 +327,27 @@ void EntityPlayer::Move(sf::Vector2f move, const float dt) // Add vector to prod
 	if (move != sf::Vector2f(0, 0) && (allowMoveX || allowMoveY))
 	{
 		if(allowMoveX) hitbox.left += move.x * dt;
-		if(allowMoveY) hitbox.top += move.y * dt;
-#ifdef _DEBUG
-		shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
-#endif
-		sprite.setPosition( GetSpritePos() );
+		if (allowMoveY) hitbox.top += move.y * dt;
+	}
 
-		// Need to flip sprite in certain cases
-		if (currentAnim == "player_walk_w"
-			|| currentAnim == "player_fire_w"
-			|| (currentAnim == "player_walk_n" && animManager.GetCurrentFrame(currentAnim) > 0))
-		{
-			sprite.setScale(-1, 1);
-			// Account for sprite mis-aligning with the hitbox when flipped via negative scale
-			sprite.move(sf::Vector2f(hitbox.width, 0));
-		}
-		else
-		{
-			sprite.setScale(1, 1);
-		}
+#ifdef _DEBUG
+	shape.setPosition(sf::Vector2f(hitbox.left, hitbox.top));
+#endif
+	sprite.setPosition(GetSpritePos());
+
+	// Need to flip sprite in certain cases
+	if (currentAnim == "player_walk_w"
+		|| currentAnim == "player_fire_w"
+		|| (currentAnim == "player_walk_n" && animManager.GetCurrentFrame(currentAnim) > 0)
+		|| currentAnim == "player_stand_w")
+	{
+		sprite.setScale(-1, 1);
+		// Account for sprite mis-aligning with the hitbox when flipped via negative scale
+		sprite.move(sf::Vector2f(hitbox.width, 0));
+	}
+	else
+	{
+		sprite.setScale(1, 1);
 	}
 
 	// Keep animating even if we didn't actually move anywhere
