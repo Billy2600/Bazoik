@@ -66,7 +66,7 @@ void EntityStalfos::HandleCollision(Entity* other)
 	}
 	else if (dynamic_cast<EntityPlayer*>(other) != NULL)
 	{
-		game->SubtractHitPoints(2);
+		DamagePlayer(dynamic_cast<EntityPlayer*>(other), 1);
 	}
 }
 

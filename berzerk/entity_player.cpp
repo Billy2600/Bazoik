@@ -101,6 +101,12 @@ sf::Vector2f EntityPlayer::GetSpritePos() const
 	return sf::Vector2f(hitbox.left, hitbox.top - 16.f);
 }
 
+void EntityPlayer::StartMercyInvincibility()
+{
+	mercyInvincibilityStartTime = now;
+	game->SetMercyInvicibility(true);
+}
+
 void EntityPlayer::Think( const float dt )
 {
 	LoadSprite();
@@ -122,7 +128,7 @@ void EntityPlayer::Think( const float dt )
 		return;
 	}
 
-	if (const bool mercyInvincibility = game->GetMercyInvicibility())
+	if (game->GetMercyInvicibility())
 		CheckMercyInvincibilityEnd();
 
 	if (knockback)
@@ -296,9 +302,6 @@ void EntityPlayer::HandleCollision( Entity *other )
 		knockbackStartTime = now;
 		knockback = true;
 		sprite.setColor(sf::Color(255, 0, 0, 150));
-
-		mercyInvincibilityStartTime = now;
-		game->SetMercyInvicibility(true);
 
 		if (direction == sf::Vector2f(0, 0))
 		{

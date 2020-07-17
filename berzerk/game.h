@@ -30,8 +30,8 @@ class Game
 {
 private:
 	sf::Int8 keys;
-	sf::Int8 hitPoints; // 1 heart = 2 hp
-	bool mercyInvicibility;
+	sf::Int8 hitPoints; // 1 heart = 2 hp. Here to prevent permission issues if it was part of the player entity
+	bool mercyInvicibility; // This is here so we can check for it beforeremoving hit points.
 
 public:
 	bool popped; // Flag for when state was popped

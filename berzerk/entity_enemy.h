@@ -1,5 +1,6 @@
 #pragma once
 #include "entity.h"
+#include "entity_player.h"
 
 class EntityEnemy : public Entity
 {
@@ -9,9 +10,8 @@ protected:
 public:
 	bool seePlayer;
 
-	void SetPlayerPos(const sf::Vector2f playerPos)
-	{
-		this->playerPos = playerPos;
-	}
+	void SetPlayerPos(const sf::Vector2f playerPos);
+
+	void DamagePlayer(EntityPlayer* player, const sf::Int8 damage);
 };
 

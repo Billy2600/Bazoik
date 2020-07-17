@@ -66,7 +66,7 @@ void EntityKeese::HandleCollision(Entity* other)
 	}
 	else if (dynamic_cast<EntityPlayer*>(other) != NULL)
 	{
-		game->SubtractHitPoints(1);
+		DamagePlayer(dynamic_cast<EntityPlayer*>(other), 1);
 	}
 }
 

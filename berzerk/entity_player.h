@@ -72,6 +72,7 @@ public:
 	bool CheckReset() const; // Signal to state that it's time to reset
 	void SetInput( const PlayerInput input );
 	void SetPos( const sf::Vector2f pos );
+	void StartMercyInvincibility();
 	virtual void Think( const float dt );
 	virtual void Draw() const;
 	virtual void Move( sf::Vector2f move, const float dt );
