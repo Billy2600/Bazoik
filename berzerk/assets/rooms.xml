@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <rooms>
 	<room x="0" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="0" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="0" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="0" y="1" door_n="none" door_s="open" door_e="open" door_w="none" />
+	<room x="0" y="2" door_n="open" door_s="none" door_e="open" door_w="none" />
 	<room x="0" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="0" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="1" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="1" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="1" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="1" y="0" door_n="none" door_s="open" door_e="open" door_w="none" />
+	<room x="1" y="1" door_n="open" door_s="none" door_e="none" door_w="open" />
+	<room x="1" y="2" door_n="none" door_s="none" door_e="open" door_w="open" />
 	<room x="1" y="3" door_n="none" door_s="none" door_e="open" door_w="none">
 		<entity type="block" x="176" y="48" />
 		<entity type="block" x="368" y="112" />
@@ -35,10 +35,10 @@
 	</room>
 	<room x="1" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="1" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="2" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="2" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="2" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="2" y="3" door_n="none" door_s="open" door_e="open" door_w="open">
+	<room x="2" y="0" door_n="none" door_s="open" door_e="none" door_w="open" />
+	<room x="2" y="1" door_n="open" door_s="none" door_e="open" door_w="none" />
+	<room x="2" y="2" door_n="none" door_s="none" door_e="none" door_w="open" />
+	<room x="2" y="3" door_n="none" door_s="open" door_e="locked" door_w="open">
 		<entity type="water" x="272" y="240" />
 		<entity type="water" x="49" y="240" />
 		<entity type="water" x="81" y="240" />
@@ -64,7 +64,17 @@
 	</room>
 	<room x="2" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="3" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="3" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="3" y="1" door_n="none" door_s="none" door_e="open" door_w="open">
+		<entity type="water" x="79" y="48" />
+		<entity type="water" x="79" y="80" />
+		<entity type="water" x="48" y="80" />
+		<entity type="water" x="48" y="48" />
+		<entity type="water" x="79" y="208" />
+		<entity type="water" x="48" y="208" />
+		<entity type="water" x="79" y="240" />
+		<entity type="water" x="48" y="240" />
+		<entity type="stalfos" x="236" y="135" />
+	</room>
 	<room x="3" y="2" door_n="none" door_s="open" door_e="open" door_w="none">
 		<entity type="water" x="176" y="80" />
 		<entity type="water" x="176" y="112" />
@@ -117,8 +127,17 @@
 		<entity type="face_left_light" x="368" y="143" />
 		<entity type="face_left_light" x="368" y="78" />
 	</room>
-	<room x="4" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="4" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="4" y="0" door_n="none" door_s="open" door_e="open" door_w="none">
+		<entity type="block_inverted" x="144" y="81" />
+		<entity type="block_inverted" x="81" y="208" />
+		<entity type="block_inverted" x="111" y="144" />
+	</room>
+	<room x="4" y="1" door_n="open" door_s="none" door_e="open" door_w="locked">
+		<entity type="face_right_dark" x="48" y="48" />
+		<entity type="face_right_dark" x="49" y="240" />
+		<entity type="face_left_dark" x="401" y="239" />
+		<entity type="face_left_dark" x="400" y="48" />
+	</room>
 	<room x="4" y="2" door_n="none" door_s="open" door_e="open" door_w="open">
 		<entity type="water" x="177" y="80" />
 		<entity type="water" x="145" y="80" />
@@ -136,7 +155,7 @@
 		<entity type="water" x="304" y="112" />
 		<entity type="key" x="377" y="145" />
 	</room>
-	<room x="4" y="3" door_n="open" door_s="locked" door_e="open" door_w="none">
+	<room x="4" y="3" door_n="open" door_s="none" door_e="open" door_w="none">
 		<entity type="keese" x="311" y="207" />
 		<entity type="stalfos" x="120" y="197" />
 		<entity type="keese" x="125" y="114" />
@@ -155,15 +174,81 @@
 		<entity type="key" x="232" y="149" />
 	</room>
 	<room x="4" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="5" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="5" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="5" y="2" door_n="none" door_s="open" door_e="none" door_w="open" />
+	<room x="5" y="0" door_n="none" door_s="none" door_e="none" door_w="open">
+		<entity type="key" x="242" y="146" />
+		<entity type="keese" x="192" y="207" />
+		<entity type="keese" x="190" y="120" />
+	</room>
+	<room x="5" y="1" door_n="none" door_s="none" door_e="open" door_w="open">
+		<entity type="hole" x="238" y="48" />
+		<entity type="hole" x="206" y="48" />
+		<entity type="hole" x="174" y="48" />
+		<entity type="hole" x="142" y="48" />
+		<entity type="hole" x="111" y="48" />
+		<entity type="hole" x="79" y="48" />
+		<entity type="hole" x="48" y="48" />
+		<entity type="hole" x="398" y="48" />
+		<entity type="hole" x="366" y="48" />
+		<entity type="hole" x="334" y="48" />
+		<entity type="hole" x="302" y="48" />
+		<entity type="hole" x="270" y="48" />
+		<entity type="hole" x="398" y="239" />
+		<entity type="hole" x="366" y="240" />
+		<entity type="hole" x="334" y="240" />
+		<entity type="hole" x="302" y="240" />
+		<entity type="hole" x="270" y="240" />
+		<entity type="hole" x="238" y="240" />
+		<entity type="hole" x="206" y="240" />
+		<entity type="hole" x="175" y="240" />
+		<entity type="hole" x="143" y="240" />
+		<entity type="hole" x="112" y="240" />
+		<entity type="hole" x="80" y="240" />
+		<entity type="hole" x="48" y="240" />
+		<entity type="keese" x="271" y="183" />
+		<entity type="keese" x="272" y="121" />
+		<entity type="keese" x="146" y="186" />
+		<entity type="keese" x="209" y="149" />
+		<entity type="keese" x="145" y="116" />
+	</room>
+	<room x="5" y="2" door_n="none" door_s="open" door_e="locked" door_w="open" />
 	<room x="5" y="3" door_n="open" door_s="none" door_e="none" door_w="open" />
 	<room x="5" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="5" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="6" y="0" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="6" y="1" door_n="none" door_s="none" door_e="none" door_w="none" />
-	<room x="6" y="2" door_n="none" door_s="none" door_e="none" door_w="none" />
+	<room x="6" y="1" door_n="none" door_s="open" door_e="none" door_w="open">
+		<entity type="block" x="368" y="112" />
+		<entity type="block" x="368" y="81" />
+		<entity type="block" x="367" y="49" />
+		<entity type="block" x="400" y="241" />
+		<entity type="block" x="400" y="209" />
+		<entity type="block" x="400" y="176" />
+		<entity type="block" x="400" y="143" />
+		<entity type="block" x="400" y="112" />
+		<entity type="block" x="400" y="81" />
+		<entity type="block" x="400" y="49" />
+		<entity type="block" x="335" y="49" />
+		<entity type="block" x="368" y="176" />
+		<entity type="block" x="368" y="144" />
+		<entity type="block" x="335" y="112" />
+		<entity type="block" x="335" y="81" />
+		<entity type="block" x="239" y="80" />
+		<entity type="block" x="368" y="208" />
+		<entity type="block" x="336" y="144" />
+		<entity type="block" x="273" y="112" />
+		<entity type="block" x="304" y="144" />
+		<entity type="block" x="336" y="176" />
+		<entity type="block" x="304" y="81" />
+		<entity type="block" x="305" y="112" />
+		<entity type="block" x="239" y="47" />
+		<entity type="block" x="208" y="48" />
+		<entity type="block" x="273" y="48" />
+		<entity type="block" x="304" y="49" />
+		<entity type="block" x="272" y="80" />
+	</room>
+	<room x="6" y="2" door_n="open" door_s="none" door_e="none" door_w="open">
+		<entity type="stalfos" x="139" y="81" />
+		<entity type="stalfos" x="305" y="207" />
+	</room>
 	<room x="6" y="3" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="6" y="4" door_n="none" door_s="none" door_e="none" door_w="none" />
 	<room x="6" y="5" door_n="none" door_s="none" door_e="none" door_w="none" />
