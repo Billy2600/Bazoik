@@ -56,6 +56,8 @@ Game::Game()
 	animManager.LoadFromFile( "assets/animations.xml" );
 
 	music.setLoop(true); // Music will always loop
+
+	mercyInvicibility = false;
 }
 
 void Game::GameLoop()
@@ -120,19 +122,31 @@ void Game::ResetHitPoints()
 	hitPoints = MAX_HP;
 }
 
-void Game::SubtractHitPoints(sf::Int8 subtract)
+void Game::SubtractHitPoints(const sf::Int8 subtract)
 {
-	hitPoints -= subtract;
+	if(!mercyInvicibility)
+		hitPoints -= subtract;
 }
 
-void Game::AddHitPoints(sf::Int8 add)
+void Game::AddHitPoints(const sf::Int8 add)
 {
 	hitPoints += add;
+}
+
+void Game::SetMercyInvicibility(const bool newValue)
+{
+	mercyInvicibility = newValue;
+}
+
+bool Game::GetMercyInvicibility() const
+{
+	return mercyInvicibility;
 }
 
 void Game::ResetKeys()
 {
 	keys = 0;
+	keysCollected.clear();
 }
 
 sf::Int8 Game::GetKeys() const
@@ -165,6 +179,11 @@ void Game::ResetVisitedRooms()
 			visitedRooms[x][y] = false;
 		}
 	}
+}
+
+void Game::ResetDoors()
+{
+	this->openedDoors.clear();
 }
 
 bool Game::UseKey()

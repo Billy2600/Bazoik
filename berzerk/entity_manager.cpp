@@ -216,7 +216,7 @@ void EntityManager::MoveAllEntities(sf::Vector2f move, const float dt)
 	}
 }
 
-bool EntityManager::TryMove(Entity* entity, const sf::Vector2f move, const float dt) const
+bool EntityManager::TryMove(Entity* entity, const sf::Vector2f move, const float dt, const bool ignoreEnemies) const
 {
 	Quadtree quadtree = Quadtree(0, sf::IntRect(0, 0, GAME_WIDTH, GAME_HEIGHT));
 
@@ -236,6 +236,9 @@ bool EntityManager::TryMove(Entity* entity, const sf::Vector2f move, const float
 
 	for (auto entityB : returnObjects)
 	{
+		if (ignoreEnemies && entityB != NULL && dynamic_cast<EntityEnemy*>(entityB) != NULL)
+			continue;
+
 		// Detect collision
 		if ((entity != NULL && entityB != NULL) && (entity != entityB && newHitbox.intersects(entityB->hitbox)))
 		{

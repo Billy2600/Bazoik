@@ -22,6 +22,7 @@ EntityPlayer::EntityPlayer()
 	drawHitbox = false;
 	lastDirection = sf::Vector2f(0, -1);
 	lastHoriz = GetDirectionFromVector(lastDirection);
+	knockback = false;
 }
 
 void EntityPlayer::SetPos( const sf::Vector2f pos )
@@ -121,10 +122,21 @@ void EntityPlayer::Think( const float dt )
 		return;
 	}
 
+	if (const bool mercyInvincibility = game->GetMercyInvicibility())
+		CheckMercyInvincibilityEnd();
+
 	if (knockback)
 		KnockbackMove(dt);
 	else
 		InputMove(dt);
+}
+
+void EntityPlayer::CheckMercyInvincibilityEnd()
+{
+	if ((now - mercyInvincibilityStartTime) > MERCY_INVINCIBILITY_TIME)
+	{
+		game->SetMercyInvicibility(false);
+	}
 }
 
 void EntityPlayer::Die()
@@ -138,8 +150,6 @@ void EntityPlayer::Die()
 
 void EntityPlayer::KnockbackMove(float dt)
 {
-	sprite.setColor(sf::Color(255, 0, 0, 150));
-
 	if ((now - knockbackStartTime) > KNOCKBACK_TIME)
 	{
 		knockback = false;
@@ -260,7 +270,13 @@ void EntityPlayer::SetInput( const PlayerInput input )
 
 void EntityPlayer::Draw() const
 {
-	game->window.draw( sprite );
+	const bool mercyInvincibility = game->GetMercyInvicibility();
+
+	if (!mercyInvincibility || (mercyInvincibility && now % 2 == 0))
+	{
+		game->window.draw(sprite);
+	}
+
 #ifdef _DEBUG
 	game->window.draw( shape );
 #endif
@@ -274,8 +290,16 @@ void EntityPlayer::HandleCollision( Entity *other )
 
 	if (dynamic_cast<EntityEnemy*>(other) != NULL)
 	{
+		if (game->GetMercyInvicibility())
+			return;
+
 		knockbackStartTime = now;
 		knockback = true;
+		sprite.setColor(sf::Color(255, 0, 0, 150));
+
+		mercyInvincibilityStartTime = now;
+		game->SetMercyInvicibility(true);
+
 		if (direction == sf::Vector2f(0, 0))
 		{
 			knockbackDirection = sf::Vector2f(
@@ -292,8 +316,10 @@ void EntityPlayer::HandleCollision( Entity *other )
 
 void EntityPlayer::Move(sf::Vector2f move, const float dt) // Add vector to produce movement
 {
-	bool allowMoveX = entityManager->TryMove(this, sf::Vector2f(move.x, 0), dt); // Check x and y separately, to allow 'sliding' along walls, etc.
-	bool allowMoveY = entityManager->TryMove(this, sf::Vector2f(0, move.y), dt);
+	const bool mercyInvincibility = game->GetMercyInvicibility();
+
+	bool allowMoveX = entityManager->TryMove(this, sf::Vector2f(move.x, 0), dt, mercyInvincibility); // Check x and y separately, to allow 'sliding' along walls, etc.
+	bool allowMoveY = entityManager->TryMove(this, sf::Vector2f(0, move.y), dt, mercyInvincibility);
 
 	if (move != sf::Vector2f(0, 0) && (allowMoveX || allowMoveY))
 	{

@@ -210,82 +210,82 @@ void StateGameplay::HandleInput()
 
 		if( game->inputManager.TestKeyDown( "up", event ) ) input.up = true;
 
-		if( game->inputManager.TestKeyDown( "down", event ) ) input.down = true;
+if (game->inputManager.TestKeyDown("down", event)) input.down = true;
 
-		if( game->inputManager.TestKeyDown( "fire", event ) ) input.fire = true;
+if (game->inputManager.TestKeyDown("fire", event)) input.fire = true;
 
-		// Keys released
-		if( game->inputManager.TestKeyUp( "right", event ) ) input.right = false;
+// Keys released
+if (game->inputManager.TestKeyUp("right", event)) input.right = false;
 
-		if( game->inputManager.TestKeyUp( "left", event ) ) input.left = false;
+if (game->inputManager.TestKeyUp("left", event)) input.left = false;
 
-		if( game->inputManager.TestKeyUp( "up", event ) ) input.up = false;
-		
-		if( game->inputManager.TestKeyUp( "down", event ) ) input.down = false;
+if (game->inputManager.TestKeyUp("up", event)) input.up = false;
 
-		if( game->inputManager.TestKeyUp( "fire", event ) ) input.fire = false;
+if (game->inputManager.TestKeyUp("down", event)) input.down = false;
+
+if (game->inputManager.TestKeyUp("fire", event)) input.fire = false;
 	}
 
-	if( playDemo && !recordDemo )
+	if (playDemo && !recordDemo)
 	{
-		player.SetInput( demo.Play() );
+		player.SetInput(demo.Play());
 		// Return to title screen if demo is done
-		if ( demo.IsDone() )
+		if (demo.IsDone())
 		{
 			ReturnToTitle();
 			return;
 		}
 	}
-	else if( !playDemo )
+	else if (!playDemo)
 	{
-		player.SetInput( input );
-		if( recordDemo ) // This is here so you can't record while playing a demo
-			demo.Record( input );
+		player.SetInput(input);
+		if (recordDemo) // This is here so you can't record while playing a demo
+			demo.Record(input);
 	}
 }
 
-void StateGameplay::Update( const float dt )
+void StateGameplay::Update(const float dt)
 {
-	if ( pause.open )
+	if (pause.open)
 	{
 		clock.restart();
 		return;
 	}
 
-	if( !transition )
+	if (!transition)
 	{
-		entityManager.Think( dt );
+		entityManager.Think(dt);
 		entityManager.CheckCollisions();
 
 		// Begin screen transition if player moves outside screen
-		sf::Vector2f plPos( player.hitbox.left, player.hitbox.top );
+		sf::Vector2f plPos(player.hitbox.left, player.hitbox.top);
 		sf::Int32 now = clock.getElapsedTime().asMilliseconds();
 		bool startTrans = false;
 
 		// Decide if we should start transition
-		if( plPos.x > GAME_WIDTH )
+		if (plPos.x > GAME_WIDTH)
 		{
 			lastMove = Directions::W;
 			startTrans = true;
 		}
-		else if( ( plPos.x + player.hitbox.width ) < 0 )
+		else if ((plPos.x + player.hitbox.width) < 0)
 		{
 			lastMove = Directions::E;
 			startTrans = true;
 		}
-		else if( plPos.y > GAME_HEIGHT )
+		else if (plPos.y > GAME_HEIGHT)
 		{
 			lastMove = Directions::N;
 			startTrans = true;
 		}
-		else if( ( plPos.y + player.hitbox.height ) < 0 )
+		else if ((plPos.y + player.hitbox.height) < 0)
 		{
 			lastMove = Directions::S;
 			startTrans = true;
 		}
 
 		// Kick off transition
-		if ( startTrans )
+		if (startTrans)
 		{
 			transition = true;
 			transStart = now;
@@ -293,7 +293,7 @@ void StateGameplay::Update( const float dt )
 
 		if (game != NULL)
 		{
-			uiNumKeys.setString( "x" + std::to_string(game->GetKeys()) );
+			uiNumKeys.setString("x" + std::to_string(game->GetKeys()));
 		}
 	}
 	else
@@ -309,12 +309,12 @@ void StateGameplay::Draw() const
 	entityManager.Draw();
 
 
-	for (int i = 0; i < game->GetHitPoints(); i++)
+	if (game->GetHitPoints() > 0)
 	{
-		if (game->GetHitPoints() == 0)
-			break;
-
-		game->window.draw(uiHitPoint[i]);
+		for (int i = 0; i < game->GetHitPoints(); i++)
+		{
+			game->window.draw(uiHitPoint[i]);
+		}
 	}
 
 	game->window.draw(uiKey);
@@ -407,8 +407,9 @@ void StateGameplay::ReturnToTitle()
 	game->window.setMouseCursorVisible( true );
 	lastMove = Directions::S;
 	//game->music.stop();
-	game->PopState();
 	game->ResetVisitedRooms();
+	game->ResetDoors();
+	game->PopState();
 }
 
 sf::Vector2f StateGameplay::GetPlayerStart(const Directions lastMove, EntityPlayer& player) const

@@ -31,6 +31,7 @@ class Game
 private:
 	sf::Int8 keys;
 	sf::Int8 hitPoints; // 1 heart = 2 hp
+	bool mercyInvicibility;
 
 public:
 	bool popped; // Flag for when state was popped
@@ -52,8 +53,10 @@ public:
 	void SwitchState(GameState* newState); // Switch current state (will delete old one)
 	sf::Int8 GetHitPoints() const;
 	void ResetHitPoints();
-	void SubtractHitPoints(sf::Int8 subtract);
-	void AddHitPoints(sf::Int8 add);
+	void SubtractHitPoints(const sf::Int8 subtract);
+	void AddHitPoints(const sf::Int8 add);
+	void SetMercyInvicibility(const bool newValue);
+	bool GetMercyInvicibility() const;
 	void ResetKeys();
 	bool UseKey(); // Will return if you have any keys to use
 	void AddKey();
@@ -61,6 +64,7 @@ public:
 	bool GetRoomVisited(int x, int y) const;
 	void SetRoomVisited(int x, int y);
 	void ResetVisitedRooms();
+	void ResetDoors();
 	void Draw(); // Runs every frame
 	static std::string GetConfigDir(); // Get directory for saving/loading files; includes trailing slash
 	bool FileExists( const std::string path ) const;

@@ -9,6 +9,7 @@
 
 #define PLAYER_SPEED 200
 #define KNOCKBACK_TIME 300
+#define MERCY_INVINCIBILITY_TIME 1500
 
 struct PlayerInput
 {
@@ -47,6 +48,8 @@ private:
 	bool knockback; // Currently being knocked back
 	sf::Int32 knockbackStartTime;
 	sf::Vector2f knockbackDirection;
+	// Mercy Invincibility, will ignore damage and collision with enemies
+	sf::Int32 mercyInvincibilityStartTime;
 
 	void Die(); // Perform death
 	void KnockbackMove(float dt);
@@ -59,6 +62,7 @@ private:
 	std::string ChooseAnimDirection(sf::Vector2f direction); // Choose firing direction; will set animation (does not return)
 	Directions GetDirectionFromVector(const sf::Vector2f vector);
 	sf::Vector2f GetSpritePos() const; // Get sprite offset
+	void CheckMercyInvincibilityEnd();
 
 public:
 	bool drawHitbox;
