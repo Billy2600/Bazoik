@@ -6,6 +6,9 @@ StateEditor::StateEditor(Game* game)
 
 	spBackground.setTexture(game->assetManager.GetTextureRef("background"));
 	spBackground.setPosition(0, 0);
+	shTextRoom.setFillColor(sf::Color::Black);
+	shTextRoom.setPosition(48, 48);
+	shTextRoom.setSize(sf::Vector2f(384, 224));
 	currentRoom = START_ROOM;
 	currentlyDragging = NULL;
 	deleteMode = false;
@@ -105,6 +108,18 @@ void StateEditor::InitMenu()
 
 	deleteIcon = sf::Sprite(game->assetManager.GetTextureRef("sprites"), animManager.Animate("eraser"));
 	deleteIcon.setOrigin(deleteIcon.getGlobalBounds().width / 2, deleteIcon.getGlobalBounds().height / 2);
+
+	buttons["menu_text_room_toggle"] = GuiButton(sf::Vector2f(342, 150), sf::Vector2f(15, 15), sf::Vector2f(2, 0),
+		rooms[currentRoom.x][currentRoom.y].textRoom ? "X" : " ",
+		assetManager->GetFontRef("joystix"), 0);
+	buttons["menu_text_room_toggle"].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
+	buttons["menu_text_room_toggle"].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
+	buttons["menu_text_room_toggle"].SetHighlight(false);
+	buttons["menu_text_room_toggle"].SetCharacterSize(12);
+
+	text["menu_text_room_toggle"] = sf::Text("Text Room", assetManager->GetFontRef("joystix"), 13);
+	text["menu_text_room_toggle"].setFillColor(sf::Color::Green);
+	text["menu_text_room_toggle"].setPosition(sf::Vector2f(365, 150));
 }
 
 void StateEditor::InitDoors()
@@ -236,6 +251,8 @@ void StateEditor::Load()
 				if (room.attribute("door_w") != NULL)
 					rooms[x][y].doorStates.insert( std::make_pair( Directions::W, Room::GetDoorStateFromString( room.attribute("door_w").as_string() ) ) );
 
+				rooms[x][y].textRoom = room.attribute("text_room").as_bool();
+
 				for (pugi::xml_node entity : room.children("entity"))
 				{
 					sf::Vector2f pos = sf::Vector2f(0, 0);
@@ -280,6 +297,8 @@ void StateEditor::Save()
 				room.append_attribute("door_e").set_value(Room::GetDoorStateStringFromState(rooms[x][y].doorStates[Directions::E]).c_str());
 				room.append_attribute("door_w").set_value(Room::GetDoorStateStringFromState(rooms[x][y].doorStates[Directions::W]).c_str());
 
+				room.append_attribute("text_room").set_value(rooms[x][y].textRoom);
+
 				for (auto& entity : rooms[x][y].entities)
 				{
 					pugi::xml_node entityNode = room.append_child("entity");
@@ -311,9 +330,11 @@ void StateEditor::ChangeRoom(const sf::Vector2i newRoom)
 	// Highlight current room/de-highlight old room
 	buttons["menu_room_" + std::to_string(currentRoom.x) + std::to_string(currentRoom.y) ].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
 	buttons["menu_room_" + std::to_string(newRoom.x) + std::to_string(newRoom.y)].SetColors(sf::Color::Black, sf::Color::Blue, sf::Color::Blue);
+	UpdateTextRoomToggle(rooms[newRoom.x][newRoom.y].textRoom);
 
 	currentRoom = newRoom;
 	text["menu_coord"].setString( std::to_string(newRoom.x) + "," + std::to_string(newRoom.y) );
+
 	UpdateDoors();
 }
 
@@ -325,6 +346,9 @@ void StateEditor::Start()
 void StateEditor::Draw() const
 {
 	game->window.draw(spBackground);
+
+	if(rooms[currentRoom.x][currentRoom.y].textRoom)
+		game->window.draw(shTextRoom);
 
 	for (auto& door : doors)
 	{
@@ -439,6 +463,13 @@ void StateEditor::HandleInput()
 				{
 					Save();
 				}
+				else if (button.first == "menu_text_room_toggle" && showMenu)
+				{
+					// Toggle selection
+					bool& textRoom = rooms[currentRoom.x][currentRoom.y].textRoom;
+					textRoom = !textRoom;
+					UpdateTextRoomToggle(textRoom);
+				}
 			}
 		}
 
@@ -546,4 +577,16 @@ void StateEditor::RemoveEntity(const EditorEntities entity)
 		),
 		rooms[currentRoom.x][currentRoom.y].entities.end()
 	);
+}
+
+void StateEditor::UpdateTextRoomToggle(const bool textRoom)
+{
+	if(textRoom)
+	{
+		buttons["menu_text_room_toggle"].SetText("X");
+	}
+	else
+	{
+		buttons["menu_text_room_toggle"].SetText(" ");
+	}
 }

@@ -41,6 +41,7 @@ private:
 	{
 		std::vector<EditorEntities> entities;
 		std::map<Directions, DoorStates> doorStates;
+		bool textRoom;
 	};
 
 	std::map<std::string, GuiButton> buttons;
@@ -48,6 +49,7 @@ private:
 	std::map<std::string, sf::Sprite> menuEntities; // Buttons for entities we can add; string identifier is also the type
 	AnimManager animManager;
 	sf::Sprite spBackground;
+	sf::RectangleShape shTextRoom;
 	sf::Clock lastSave;
 	sf::Sprite* currentlyDragging; // Which object are we currently dragging? NULL when none
 	sf::Vector2f draggingOffset; // Offset used while dragging object
@@ -69,6 +71,7 @@ private:
 	void Save(); // Save out XML file
 	void ChangeRoom(const sf::Vector2i newRoom);
 	void RemoveEntity(const EditorEntities entity); // Purposefully taking in by value
+	void UpdateTextRoomToggle(const bool textRoom);
 
 public:
 
