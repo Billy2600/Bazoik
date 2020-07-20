@@ -103,7 +103,7 @@
 		<entity type="keese" x="175" y="149" />
 		<entity type="keese" x="271" y="150" />
 	</room>
-	<room x="3" y="5" door_n="open" door_s="none" door_e="none" door_w="none" text_room="false">
+	<room x="3" y="5" door_n="open" door_s="none" door_e="none" door_w="none" text_room="true">
 		<entity type="face_right_light" x="79" y="79" />
 		<entity type="face_right_light" x="79" y="142" />
 		<entity type="face_right_light" x="79" y="206" />

@@ -112,6 +112,11 @@ std::string Room::GetDoorStateStringFromState(const DoorStates state)
 	}
 }
 
+bool Room::GetTextRoom() const
+{
+	return textRoom;
+}
+
 void Room::LoadRoomContents()
 {
 	pugi::xml_document doc;
@@ -139,6 +144,8 @@ void Room::LoadRoomContents()
 					doors.insert(std::make_pair(Directions::E, GetDoorStateFromString(room.attribute("door_e").value())));
 				if (room.attribute("door_w") != NULL)
 					doors.insert(std::make_pair(Directions::W, GetDoorStateFromString(room.attribute("door_w").value())));
+
+				textRoom = room.attribute("text_room").as_bool();
 
 				for (pugi::xml_node entity : room.children("entity"))
 				{

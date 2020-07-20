@@ -57,6 +57,10 @@ void StateGameplay::LoadBackgroundAndUiElements()
 	AssetManager* assetManager = &this->game->assetManager;
 	background = sf::Sprite(assetManager->GetTextureRef("background"));
 
+	shTextRoom.setFillColor(sf::Color::Black);
+	shTextRoom.setPosition(48, 48);
+	shTextRoom.setSize(sf::Vector2f(384, 224));
+
 	for (int i = 0; i < MAX_HP; i++)
 	{
 		uiHitPoint[i] = sf::Sprite(assetManager->GetTextureRef("sprites"));
@@ -305,6 +309,9 @@ void StateGameplay::Update(const float dt)
 void StateGameplay::Draw() const
 {
 	game->window.draw(background);
+
+	if (room.GetTextRoom())
+		game->window.draw(shTextRoom);
 
 	entityManager.Draw();
 
