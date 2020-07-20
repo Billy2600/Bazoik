@@ -126,6 +126,10 @@ void StateEditor::InitMenu()
 	buttons["menu_text_room_string"].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
 	buttons["menu_text_room_string"].SetHighlight(false);
 	buttons["menu_text_room_string"].SetCharacterSize(12);
+
+	text["room_text"] = sf::Text(rooms[currentRoom.x][currentRoom.y].roomText, assetManager->GetFontRef("joystix"), 15);
+	text["room_text"].setFillColor(sf::Color::White);
+	text["room_text"].setPosition(sf::Vector2f(80, 80));
 }
 
 void StateEditor::InitDoors()
@@ -259,6 +263,8 @@ void StateEditor::Load()
 
 				rooms[x][y].textRoom = room.attribute("text_room").as_bool();
 
+				rooms[x][y].roomText = room.attribute("room_text").as_string();
+
 				for (pugi::xml_node entity : room.children("entity"))
 				{
 					sf::Vector2f pos = sf::Vector2f(0, 0);
@@ -305,6 +311,8 @@ void StateEditor::Save()
 
 				room.append_attribute("text_room").set_value(rooms[x][y].textRoom);
 
+				room.append_attribute("room_text").set_value(rooms[x][y].roomText.c_str());
+
 				for (auto& entity : rooms[x][y].entities)
 				{
 					pugi::xml_node entityNode = room.append_child("entity");
@@ -337,6 +345,8 @@ void StateEditor::ChangeRoom(const sf::Vector2i newRoom)
 	buttons["menu_room_" + std::to_string(currentRoom.x) + std::to_string(currentRoom.y) ].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
 	buttons["menu_room_" + std::to_string(newRoom.x) + std::to_string(newRoom.y)].SetColors(sf::Color::Black, sf::Color::Blue, sf::Color::Blue);
 	UpdateTextRoomToggle(rooms[newRoom.x][newRoom.y].textRoom);
+
+	UpdateRoomTextString(rooms[newRoom.x][newRoom.y].roomText);
 
 	currentRoom = newRoom;
 	text["menu_coord"].setString( std::to_string(newRoom.x) + "," + std::to_string(newRoom.y) );
@@ -397,7 +407,8 @@ void StateEditor::Draw() const
 	{
 		if ((t.first.substr(0, 4) == "menu" && showMenu) || // Same conditions as above
 			(t.first.substr(0, 4) != "menu" && !showMenu) ||
-			(t.first == "saved") )  // Exceptions
+			(t.first == "saved") ||
+			(t.first == "room_text") )  // Exceptions
 		{
 			game->window.draw(t.second);
 		}
@@ -613,6 +624,8 @@ void StateEditor::UpdateTextRoomToggle(const bool textRoom)
 
 void StateEditor::TypeTextIntoField(sf::Event &event)
 {
+	std::string& inputString = rooms[currentRoom.x][currentRoom.y].roomText;
+
 	if (event.type == sf::Event::TextEntered)
 	{
 		// Printable chars; 0x08 is backspace (handled below)
@@ -636,9 +649,17 @@ void StateEditor::TypeTextIntoField(sf::Event &event)
 		}
 	}
 
+	UpdateRoomTextString(inputString);
+}
+
+void StateEditor::UpdateRoomTextString(std::string inputString)
+{
+	// Set button text only to what'll fit
 	buttons["menu_text_room_string"].SetText(
 		inputString.size() > 12
-			? inputString.substr(inputString.size() - 12, 12)
-			: inputString
+		? inputString.substr(inputString.size() - 12, 12)
+		: inputString
 	);
+
+	text["room_text"].setString(inputString);
 }
