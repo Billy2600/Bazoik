@@ -74,6 +74,11 @@ void GuiButton::SetText( const std::string text )
 	this->text.setString( text );
 }
 
+const std::string GuiButton::GetText() const
+{
+	return this->text.getString();
+}
+
 void GuiButton::SetCharacterSize(const unsigned int size)
 {
 	this->text.setCharacterSize(size);

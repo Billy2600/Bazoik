@@ -120,6 +120,12 @@ void StateEditor::InitMenu()
 	text["menu_text_room_toggle"] = sf::Text("Text Room", assetManager->GetFontRef("joystix"), 13);
 	text["menu_text_room_toggle"].setFillColor(sf::Color::Green);
 	text["menu_text_room_toggle"].setPosition(sf::Vector2f(365, 150));
+
+	buttons["menu_text_room_string"] = GuiButton(sf::Vector2f(342, 175), sf::Vector2f(120, 15), sf::Vector2f(2, 0), "", assetManager->GetFontRef("joystix"), 0);
+	buttons["menu_text_room_string"].SetColors(sf::Color::Black, sf::Color::Green, sf::Color::Green);
+	buttons["menu_text_room_string"].SetHighlightColors(sf::Color::Black, sf::Color::Red, sf::Color::Red);
+	buttons["menu_text_room_string"].SetHighlight(false);
+	buttons["menu_text_room_string"].SetCharacterSize(12);
 }
 
 void StateEditor::InitDoors()
@@ -381,7 +387,9 @@ void StateEditor::Draw() const
 		if ( (button.first.substr(0, 4) == "menu" && showMenu) || // Show menu items when menu is open
 			(button.first.substr(0, 4) != "menu" && !showMenu) ) // Show other items when it's not
 		{
-			game->window.draw(button.second);
+			// Don't draw text room string field if this isn't a text room
+			if(button.first != "menu_text_room_string" || rooms[currentRoom.x][currentRoom.y].textRoom)
+				game->window.draw(button.second);
 		}
 	}
 
@@ -439,11 +447,16 @@ void StateEditor::HandleInput()
 			}
 		}
 
+		if (typingMode)
+			TypeTextIntoField(event);
+
 		// Click on/select button
 		for (auto button : buttons)
 		{
 			if (event.type == sf::Event::MouseButtonPressed && button.second.hitbox.contains(m))
 			{
+				typingMode = false;
+
 				// Perform action based on which button this is
 				if (button.first.substr(0, 10) == "menu_room_")
 				{
@@ -470,6 +483,10 @@ void StateEditor::HandleInput()
 					textRoom = !textRoom;
 					UpdateTextRoomToggle(textRoom);
 				}
+				else if (button.first == "menu_text_room_string" && showMenu)
+				{
+					typingMode = true;
+				}
 			}
 		}
 
@@ -479,6 +496,7 @@ void StateEditor::HandleInput()
 			{
 				if (menuEntity.second.getGlobalBounds().contains(m))
 				{
+					typingMode = false;
 					AddEntity(menuEntity.first, ENTITY_SPAWN_POS);
 				}
 			}
@@ -489,6 +507,7 @@ void StateEditor::HandleInput()
 		{
 			if ( (event.type == sf::Event::MouseButtonPressed && door.second.hitbox.contains(m))) 
 			{
+				typingMode = false;
 				if (showMenu && door.first == Directions::E) // E door is under the menu
 					continue;
 
@@ -522,6 +541,7 @@ void StateEditor::HandleInput()
 
 			if (event.type == sf::Event::MouseButtonPressed && spriteBounds.contains(m))
 			{
+				typingMode = false;
 				draggingOffset = sf::Vector2f( m.x - spriteBounds.left, m.y - spriteBounds.top );
 
 				// Don't allow clicking anything 'under' the menu when it's showing
@@ -589,4 +609,36 @@ void StateEditor::UpdateTextRoomToggle(const bool textRoom)
 	{
 		buttons["menu_text_room_toggle"].SetText(" ");
 	}
+}
+
+void StateEditor::TypeTextIntoField(sf::Event &event)
+{
+	if (event.type == sf::Event::TextEntered)
+	{
+		// Printable chars; 0x08 is backspace (handled below)
+		if (event.text.unicode < 0x80 && event.text.unicode != 0x08)
+		{
+			inputString += (char)event.text.unicode;
+		}
+	}
+
+	if (event.type == sf::Event::KeyPressed)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return))
+		{
+			typingMode = false;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::BackSpace))
+		{
+			// Remove last char from string
+			if(inputString.length() > 0)
+				inputString.pop_back();
+		}
+	}
+
+	buttons["menu_text_room_string"].SetText(
+		inputString.size() > 12
+			? inputString.substr(inputString.size() - 12, 12)
+			: inputString
+	);
 }

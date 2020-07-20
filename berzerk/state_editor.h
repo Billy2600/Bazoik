@@ -54,6 +54,9 @@ private:
 	sf::Sprite* currentlyDragging; // Which object are we currently dragging? NULL when none
 	sf::Vector2f draggingOffset; // Offset used while dragging object
 
+	bool typingMode; // Are we currently typing into a field?
+	std::string inputString; // Entire input string (actual button will only show the last x chars that fit
+
 	EditorRooms rooms[MAX_ROOM_X][MAX_ROOM_Y];
 	sf::Vector2i currentRoom;
 	std::map<Directions, EditorDoor> doors; // For working on doors in current room; the actual intractable on-screen element
@@ -72,6 +75,7 @@ private:
 	void ChangeRoom(const sf::Vector2i newRoom);
 	void RemoveEntity(const EditorEntities entity); // Purposefully taking in by value
 	void UpdateTextRoomToggle(const bool textRoom);
+	void TypeTextIntoField(sf::Event& event);
 
 public:
 
