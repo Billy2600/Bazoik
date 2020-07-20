@@ -99,6 +99,10 @@ void StateGameplay::LoadBackgroundAndUiElements()
 			uiMap[x][y].setPosition( sf::Vector2f( 330 + (11 * x), 5 + (6 * y) ));
 		}
 	}
+
+	roomText = sf::Text(room.GetRoomText(), assetManager->GetFontRef("joystix"), 15);
+	roomText.setFillColor(sf::Color::White);
+	roomText.setPosition(sf::Vector2f(80, 80));
 }
 
 void StateGameplay::Start()
@@ -311,7 +315,10 @@ void StateGameplay::Draw() const
 	game->window.draw(background);
 
 	if (room.GetTextRoom())
+	{
 		game->window.draw(shTextRoom);
+		game->window.draw(roomText);
+	}
 
 	entityManager.Draw();
 

@@ -408,7 +408,7 @@ void StateEditor::Draw() const
 		if ((t.first.substr(0, 4) == "menu" && showMenu) || // Same conditions as above
 			(t.first.substr(0, 4) != "menu" && !showMenu) ||
 			(t.first == "saved") ||
-			(t.first == "room_text") )  // Exceptions
+			(t.first == "room_text" && rooms[currentRoom.x][currentRoom.y].textRoom) )  // Exceptions
 		{
 			game->window.draw(t.second);
 		}

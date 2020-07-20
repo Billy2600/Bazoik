@@ -14,6 +14,7 @@ private:
 	ErrorLog log;
 	std::map<Directions, DoorStates> doors; // The states in which to spawn doors, with single char indentifier (n, s, e, or w)
 	bool textRoom;
+	std::string roomText;
 
 	void SpawnEntity(const std::string type, const sf::Vector2f pos);
 
@@ -26,6 +27,7 @@ public:
 	void SetupRoom();
 	static DoorStates GetDoorStateFromString(const std::string strState);
 	static std::string GetDoorStateStringFromState(const DoorStates state);
-	bool GetTextRoom() const;
+	const bool GetTextRoom() const;
+	const std::string GetRoomText() const;
 };
 

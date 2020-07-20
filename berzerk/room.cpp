@@ -112,9 +112,14 @@ std::string Room::GetDoorStateStringFromState(const DoorStates state)
 	}
 }
 
-bool Room::GetTextRoom() const
+const bool Room::GetTextRoom() const
 {
 	return textRoom;
+}
+
+const std::string Room::GetRoomText() const
+{
+	return roomText;
 }
 
 void Room::LoadRoomContents()
@@ -146,6 +151,8 @@ void Room::LoadRoomContents()
 					doors.insert(std::make_pair(Directions::W, GetDoorStateFromString(room.attribute("door_w").value())));
 
 				textRoom = room.attribute("text_room").as_bool();
+
+				roomText = room.attribute("room_text").as_string();
 
 				for (pugi::xml_node entity : room.children("entity"))
 				{

@@ -30,6 +30,7 @@ private:
 	sf::Text uiNumKeys;
 	sf::RectangleShape uiMap[MAX_ROOM_X][MAX_ROOM_Y];
 	sf::RectangleShape shTextRoom;
+	sf::Text roomText;
 
 	static Directions lastMove;
 	bool transition; // Is the screen moving?
