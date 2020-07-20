@@ -5,7 +5,8 @@ enum class FloorTypes
 {
 	GravelOne,
 	GravelTwo,
-	GravelThree
+	GravelThree,
+	OldMan
 };
 
 class EntityFloor : public Entity
@@ -41,6 +42,9 @@ public:
 				break;
 			case FloorTypes::GravelThree:
 				sprite.setTextureRect(animManager.Animate("gravel_3"));
+				break;
+			case FloorTypes::OldMan:
+				sprite.setTextureRect(animManager.Animate("old_man"));
 				break;
 			}
 		}

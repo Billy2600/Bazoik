@@ -86,6 +86,7 @@ void StateEditor::InitMenu()
 		{"gravel_2", "gravel_2"},
 		{"gravel_3", "gravel_3"},
 		{"key", "key"},
+		{"old_man", "old_man"},
 		{"delete", "eraser"}
 	};
 
@@ -214,6 +215,7 @@ void StateEditor::AddEntity(const std::string type, const sf::Vector2f pos, sf::
 	else if (type == "gravel_2") animName = "gravel_2";
 	else if (type == "gravel_3") animName = "gravel_3";
 	else if (type == "key") animName = "key";
+	else if (type == "old_man") animName = "old_man";
 	// Special exception: Enable delete mode
 	else if (type == "delete")
 	{

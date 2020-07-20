@@ -168,6 +168,7 @@
 	</room>
 	<room x="4" y="4" door_n="none" door_s="none" door_e="none" door_w="open" text_room="true" room_text="       find the ring">
 		<entity type="key" x="232" y="149" />
+		<entity type="old_man" x="223" y="107" />
 	</room>
 	<room x="4" y="5" door_n="none" door_s="none" door_e="none" door_w="none" text_room="false" room_text="" />
 	<room x="5" y="0" door_n="none" door_s="none" door_e="none" door_w="open" text_room="false" room_text="">

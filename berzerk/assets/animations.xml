@@ -144,4 +144,7 @@
 	<anim name="heart_right">
 		<frame x="426" y="91" w="7" h="16"></frame>
 	</anim>
+	<anim name="old_man">
+		<frame x="436" y="60" w="32" h="32"></frame>
+	</anim>
 </animations>
