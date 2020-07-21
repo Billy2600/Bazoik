@@ -26,7 +26,7 @@ private:
 		std::string type;
 		sf::Sprite sprite; // Sprite can be used for positioning, bounds, etc.
 
-		bool EditorEntities::operator ==(const EditorEntities& rhs) // Need to overload == operator for vector deletes
+		bool operator ==(const EditorEntities& rhs) // Need to overload == operator for vector deletes
 		{
 			return (
 				this->sprite.getTextureRect() == rhs.sprite.getTextureRect()
