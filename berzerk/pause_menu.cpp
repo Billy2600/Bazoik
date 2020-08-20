@@ -20,10 +20,10 @@ void PauseMenu::SetGame( Game *game )
 	title.setFillColor( sf::Color::Green );
 #endif
 	title.setCharacterSize( 60 );
-	title.setPosition( sf::Vector2f( 250, 30 ) );
+	title.setPosition( sf::Vector2f( 100, 0 ) );
 	title.setString( "Pause" );
 
-	buttons["resume"] = GuiButton( sf::Vector2f( 250, 150 ), sf::Vector2f( 270, 50 ), sf::Vector2f( 10, 3 ), "Resume", assetManager->GetFontRef( "joystix" ), 0 );
+	buttons["resume"] = GuiButton( sf::Vector2f( 100, 80 ), sf::Vector2f( 270, 50 ), sf::Vector2f( 10, 3 ), "Resume", assetManager->GetFontRef( "joystix" ), 0 );
 	buttons["resume"].SetColors( sf::Color::Black, sf::Color::Green, sf::Color::Green );
 	buttons["resume"].SetHighlightColors( sf::Color::Black, sf::Color::Red, sf::Color::Red );
 	buttons["resume"].SetHighlight( false );
@@ -31,12 +31,12 @@ void PauseMenu::SetGame( Game *game )
 	buttons["options"] = buttons["resume"];
 	buttons["options"].order = 1;
 	buttons["options"].SetText( "Options" );
-	buttons["options"].SetPos( sf::Vector2f( 250, 215 ) );
+	buttons["options"].SetPos( sf::Vector2f( 100, 145 ) );
 
 	buttons["quit"] = buttons["resume"];
 	buttons["quit"].order = 2;
 	buttons["quit"].SetText( "Exit" );
-	buttons["quit"].SetPos( sf::Vector2f( 250, 280 ) );
+	buttons["quit"].SetPos( sf::Vector2f( 100, 210 ) );
 
 	overlay.setPosition( 0, 0 );
 	overlay.setSize( sf::Vector2f(game->window.getSize().x, game->window.getSize().y ) );

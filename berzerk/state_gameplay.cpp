@@ -218,20 +218,20 @@ void StateGameplay::HandleInput()
 
 		if( game->inputManager.TestKeyDown( "up", event ) ) input.up = true;
 
-if (game->inputManager.TestKeyDown("down", event)) input.down = true;
+		if (game->inputManager.TestKeyDown("down", event)) input.down = true;
 
-if (game->inputManager.TestKeyDown("fire", event)) input.fire = true;
+		if (game->inputManager.TestKeyDown("fire", event)) input.fire = true;
 
-// Keys released
-if (game->inputManager.TestKeyUp("right", event)) input.right = false;
+		// Keys released
+		if (game->inputManager.TestKeyUp("right", event)) input.right = false;
 
-if (game->inputManager.TestKeyUp("left", event)) input.left = false;
+		if (game->inputManager.TestKeyUp("left", event)) input.left = false;
 
-if (game->inputManager.TestKeyUp("up", event)) input.up = false;
+		if (game->inputManager.TestKeyUp("up", event)) input.up = false;
 
-if (game->inputManager.TestKeyUp("down", event)) input.down = false;
+		if (game->inputManager.TestKeyUp("down", event)) input.down = false;
 
-if (game->inputManager.TestKeyUp("fire", event)) input.fire = false;
+		if (game->inputManager.TestKeyUp("fire", event)) input.fire = false;
 	}
 
 	if (playDemo && !recordDemo)
