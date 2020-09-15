@@ -1,12 +1,13 @@
 #include "entity_key.h"
 #include "entity_player.h"
 
-EntityKey::EntityKey(sf::Vector2f pos)
+EntityKey::EntityKey(sf::Vector2f pos, bool isRing)
 {
 	hitbox.top = pos.y;
 	hitbox.left = pos.x;
 	sprite.setPosition(pos);
 	keyAlreadyCollectedCheck = false;
+	this->isRing = isRing;
 
 #ifdef _DEBUG
 	shape.setOutlineColor(sf::Color::Red);
@@ -22,7 +23,7 @@ void EntityKey::Think(const float dt)
 	if (sprite.getTexture() == NULL)
 	{
 		sprite.setTexture(game->assetManager.GetTextureRef("sprites"));
-		const sf::IntRect animRect = animManager.Animate("key");
+		const sf::IntRect animRect = animManager.Animate(isRing ? "ring" : "key");
 		sprite.setTextureRect(animRect);
 		hitbox.width = animRect.width;
 		hitbox.height = animRect.height;

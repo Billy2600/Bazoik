@@ -147,4 +147,7 @@
 	<anim name="old_man">
 		<frame x="436" y="60" w="32" h="32"></frame>
 	</anim>
+	<anim name="ring">
+		<frame x="403" y="123" w="32" h="32"></frame>
+	</anim>
 </animations>

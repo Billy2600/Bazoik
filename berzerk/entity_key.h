@@ -4,6 +4,7 @@
 class EntityKey : public Entity
 {
 private:
+	bool isRing;
 	sf::Sprite sprite;
 	AnimManager animManager;
 #ifdef  _DEBUG
@@ -14,7 +15,7 @@ private:
 	bool KeyAlreadyCollected();
 
 public:
-	EntityKey(sf::Vector2f pos);
+	EntityKey(sf::Vector2f pos, bool isRing = false);
 	virtual void Think(const float dt);
 	virtual void Draw() const;
 	virtual void HandleCollision(Entity* other);

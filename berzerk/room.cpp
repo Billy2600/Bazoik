@@ -76,6 +76,10 @@ void Room::SpawnEntity(const std::string type, const sf::Vector2f pos)
 	{
 		entityManager->Add(new EntityKey(pos));
 	}
+	else if (type == "ring")
+	{
+		entityManager->Add(new EntityKey(pos, true));
+	}
 	else if (type == "old_man")
 	{
 		entityManager->Add(new EntityFloor(pos, FloorTypes::OldMan));
