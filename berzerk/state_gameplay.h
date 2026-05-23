@@ -59,7 +59,7 @@ private:
 
 	static std::vector<Directions> lastFourMoves; // Used to keep track for easter egg
 	void AddLastMove( Directions move ); // Add last move to vector
-	bool CheckEasterEgg() const; // Check if we should fire easter egg
+	bool CheckEasterEgg(); // Check if we should fire easter egg
 
 	void SpawnEnemies();
 	void CreateWalls();

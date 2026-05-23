@@ -566,19 +566,14 @@ void StateGameplay::AddLastMove( Directions move )
 		lastFourMoves.erase( lastFourMoves.begin() );
 }
 
-bool StateGameplay::CheckEasterEgg() const
+bool StateGameplay::CheckEasterEgg()
 {
-	if ( lastFourMoves.size() == 4
-		&& lastFourMoves[0] == Directions::S
-		&& lastFourMoves[1] == Directions::E
-		&& lastFourMoves[2] == Directions::N
-		&& lastFourMoves[3] == Directions::E
-		)
-	{
-		return true;
-	}
+	std::uniform_int_distribution<int> rndEasterEgg(0, 50);
 
-	return false;
+	if ( rndEasterEgg( rngEngine ) == 1)
+		return true;
+	else
+		return false;
 }
 
 void StateGameplay::SpawnEnemies()
