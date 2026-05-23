@@ -585,10 +585,20 @@ void StateGameplay::SpawnEnemies()
 	std::uniform_int_distribution<int> rndRobotY(robotWidth, GAME_HEIGHT - robotWidth);
 
 
-	for (int i = 0; i < robotStats.numRobots; i++)
+	int i = 0;
+	while (i < robotStats.numRobots)
 	{
 		auto pos = sf::Vector2f(rndRobotX(rngEngine), rndRobotY(rngEngine));
-		entityManager.Add(new EntityRobot(pos, robotStats));
+
+		constexpr float padding = 50.f;
+		// Keep from spawning this one too close to the player
+		auto playerArea = sf::FloatRect((GAME_WIDTH / 2.f) - padding, (GAME_HEIGHT / 2.f) - padding, padding, padding);
+
+		if (!playerArea.intersects(sf::FloatRect(pos.x, pos.y, robotWidth, robotWidth)))
+		{
+			entityManager.Add(new EntityRobot(pos, robotStats));
+			i++;
+		}
 	}
 }
 
