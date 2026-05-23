@@ -6,8 +6,6 @@
 Directions StateGameplay::lastMove = Directions::W;
 std::vector<Directions> StateGameplay::lastFourMoves = std::vector<Directions>();
 
-bool StateGameplay::chicken = false;
-
 StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool playDemo, const std::string demoName )
 {
 	this->game = game;
@@ -283,25 +281,13 @@ void StateGameplay::Update( const float dt )
 		sf::Int32 now = clock.getElapsedTime().asMilliseconds();
 		bool startTrans = false;
 
-		// Decide if we should start transition
-		if( plPos.x > GAME_WIDTH )
+		if(entityManager.GetRobotCount() == 0)
 		{
-			lastMove = Directions::W;
-			startTrans = true;
-		}
-		else if( ( plPos.x + player.hitbox.width ) < 0 )
-		{
-			lastMove = Directions::E;
-			startTrans = true;
-		}
-		else if( plPos.y > GAME_HEIGHT )
-		{
-			lastMove = Directions::N;
-			startTrans = true;
-		}
-		else if( ( plPos.y + player.hitbox.height ) < 0 )
-		{
-			lastMove = Directions::S;
+			std::uniform_int_distribution<int> rndLastMove(0, 7);
+			// Randomly choose a direction for transition
+			// This used to be done by leaving the screen, but you can't do that now so let's choose one at random
+			lastMove = static_cast<Directions>(rndLastMove(rngEngine));
+
 			startTrans = true;
 		}
 
@@ -359,14 +345,11 @@ void StateGameplay::Update( const float dt )
 
 		if( player.IsDead() && !deathSoundPlayed )
 		{
-			if( chicken )
-			{
-				game->assetManager.PlaySound( "got_chicken", true );
-			}
-			else
-			{
-				game->assetManager.PlaySound( "got_humanoid", true );
-			}
+
+			// TODO: Figure out another way to determine chicken
+			//game->assetManager.PlaySound( "got_chicken", true );
+
+			game->assetManager.PlaySound( "got_humanoid", true );
 
 			deathSoundPlayed = true;
 		}
@@ -406,15 +389,19 @@ void StateGameplay::ScreenTransition( const float dt )
 	switch( lastMove )
 	{
 	case Directions::N:
+	case Directions::NW:
 		move = sf::Vector2f( 0, -VERT_TRANS_SPEED );
 		break;
 	case Directions::E:
+	case Directions::NE:
 		move = sf::Vector2f( HORZ_TRANS_SPEED, 0 );
 		break;
 	case Directions::S:
+	case Directions::SE:
 		move = sf::Vector2f( 0, VERT_TRANS_SPEED );
 		break;
 	case Directions::W:
+	case Directions::SW:
 		move = sf::Vector2f( -HORZ_TRANS_SPEED, 0 );
 		break;
 	}
@@ -438,17 +425,9 @@ void StateGameplay::ScreenTransition( const float dt )
 
 void StateGameplay::PlayTransitionSound()
 {
-	if ( entityManager.GetRobotCount() > 0 ) chicken = true;
-	else chicken = false;
-
-	if ( chicken )
-	{
-		game->assetManager.PlaySound( "chicken", true );
-	}
-	else
-	{
-		game->assetManager.PlaySound( "intruder", true );
-	}
+	// TODO: Come up with another way to determine chicken
+	//game->assetManager.PlaySound( "chicken", true );
+	game->assetManager.PlaySound( "intruder", true );
 }
 
 bool StateGameplay::ResetIfDead()
