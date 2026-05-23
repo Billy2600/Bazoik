@@ -12,7 +12,7 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 {
 	this->game = game;
 
-	player.SetPos( maze.GetPlayerStart(lastMove, player) );
+	player.SetPos( sf::Vector2f( GAME_WIDTH / 2, GAME_HEIGHT / 2 ) );
 	transition = false;
 
 	// Init entities 
@@ -259,42 +259,17 @@ void StateGameplay::Update( const float dt )
 		return;
 	}
 
-	if ( !playDemo )
+	if (!enemiesSpawned)
 	{
-		while ( !maze.IsDone() )
-		{
-			maze.Generate();
-		}
-	}
-	else
-		maze.SkipGenerate();
-
-	if ( maze.IsDone() && !wallsCreated )
-	{
-		if ( recordDemo )
-			demo.SetWalls( maze.CreateWalls( entityManager ) );
-		else if( playDemo )
-			maze.LoadWalls( demo.GetWalls(), entityManager );
-		else
-			maze.CreateWalls( entityManager );
-
-		if ( game->level >= 5 )
-		{
-			maze.BlockExit( entityManager, lastMove );
-		}
-		wallsCreated = true;
-	}
-	if( maze.IsDone() && !enemiesSpawned )
-	{
-		if ( recordDemo )
-			demo.SetRobotPositions( maze.SpawnEnemies( entityManager, lastMove, LoadRobotStats() ) );
-		else if ( playDemo )
-			maze.LoadEnemies( demo.GetRobotPositions(), entityManager, LoadRobotStats() );
-		else
-			maze.SpawnEnemies( entityManager, lastMove, LoadRobotStats() );
-		enemiesSpawned = true;
-
 		game->assetManager.PlaySound( "humanoid", true );
+		SpawnEnemies();
+		enemiesSpawned = true;
+	}
+
+	if (!wallsCreated)
+	{
+		CreateWalls();
+		wallsCreated = true;
 	}
 
 	if( !transition )
@@ -625,6 +600,34 @@ bool StateGameplay::CheckEasterEgg() const
 	}
 
 	return false;
+}
+
+void StateGameplay::SpawnEnemies()
+{
+	auto robotStats = LoadRobotStats();
+	auto robotWidth = (32 * robotStats.scale) + 3; // Adds some padding so they're not right up against a wall
+
+	std::uniform_int_distribution<int> rndRobotX(robotWidth, GAME_WIDTH - robotWidth);
+	std::uniform_int_distribution<int> rndRobotY(robotWidth, GAME_HEIGHT - robotWidth);
+
+
+	for (int i = 0; i < robotStats.numRobots; i++)
+	{
+		auto pos = sf::Vector2f(rndRobotX(rngEngine), rndRobotY(rngEngine));
+		entityManager.Add(new EntityRobot(pos, robotStats));
+	}
+}
+
+void StateGameplay::CreateWalls()
+{
+	const float wallWidth = 10.f;
+	const auto walLColor = sf::Color::Blue;
+
+	entityManager.Add(new EntityWall(sf::Vector2f(0.f, 0.f), sf::Vector2f(GAME_WIDTH, wallWidth), walLColor));
+	entityManager.Add(new EntityWall(sf::Vector2f(0.f, 0.f), sf::Vector2f(wallWidth, GAME_HEIGHT), walLColor));
+	entityManager.Add(new EntityWall(sf::Vector2f(0.f, GAME_HEIGHT - 10.f), sf::Vector2f(GAME_WIDTH, wallWidth), walLColor));
+	entityManager.Add(new EntityWall(sf::Vector2f(GAME_WIDTH - 10.f, 0.f), sf::Vector2f(wallWidth, GAME_HEIGHT), walLColor));
+
 }
 
 StateGameplay::~StateGameplay()

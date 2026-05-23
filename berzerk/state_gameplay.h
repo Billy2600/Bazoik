@@ -6,7 +6,6 @@
 #include "entity_wall.h"
 #include "entity_robot.h"
 #include "entity_manager.h"
-#include "maze.h"
 #include "demo.h"
 #include "pause_menu.h"
 
@@ -23,7 +22,6 @@ private:
 	EntityPlayer player;
 	PlayerInput input;
 	EntityManager entityManager;
-	Maze maze;
 	bool wallsCreated;
 	bool enemiesSpawned;
 	static bool chicken; // Did you kill all the robots? Static so it will carry over
@@ -48,6 +46,9 @@ private:
 	// Sound stuff
 	bool deathSoundPlayed; // Did we play the death sound yet?
 
+	PauseMenu pause;
+	sf::Int32 pauseTime; // Record time we paused for use with the Otto delay
+
 	void ScreenTransition( const float dt ); // Transition screen
 	void PlayTransitionSound();
 	bool ResetIfDead(); // Reset if player died
@@ -61,8 +62,8 @@ private:
 	void AddLastMove( Directions move ); // Add last move to vector
 	bool CheckEasterEgg() const; // Check if we should fire easter egg
 
-	PauseMenu pause;
-	sf::Int32 pauseTime; // Record time we paused for use with the Otto delay
+	void SpawnEnemies();
+	void CreateWalls();
 
 public:
 
