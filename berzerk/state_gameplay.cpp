@@ -76,6 +76,18 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 			game->music.play();
 		}
 	}
+
+	healthBar.setSize(sf::Vector2f(200.f, 20.f));
+	healthBar.setPosition(GAME_WIDTH - 205.f, GAME_HEIGHT - 25.f);
+	healthBar.setFillColor(sf::Color::Red);
+	healthBar.setOutlineColor(sf::Color::White);
+	healthBar.setOutlineThickness(2.f);
+
+	healthIcon = txScore;
+	healthIcon.setString("+");
+	healthIcon.setFillColor(sf::Color::White);
+	healthIcon.setPosition(GAME_WIDTH - 205.f, GAME_HEIGHT - 25.f);
+	healthIcon.setCharacterSize(18);
 }
 
 void StateGameplay::Start()
@@ -358,6 +370,14 @@ void StateGameplay::Update( const float dt )
 	{
 		ScreenTransition(dt);
 	}
+
+	auto health = static_cast<float>(player.GetHealth());
+	healthBar.setSize(sf::Vector2f(health * 40.f, 20.f));
+	if (health == 0.f)
+	{
+		healthIcon.setString("");
+		healthBar.setOutlineThickness(0.f);
+	}
 }
 
 void StateGameplay::Draw() const
@@ -378,6 +398,9 @@ void StateGameplay::Draw() const
 
 		game->window.draw( lives[i] );
 	}
+
+	game->window.draw(healthBar);
+	game->window.draw(healthIcon);
 
 	if ( pause.open )
 		pause.Draw();

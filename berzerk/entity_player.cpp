@@ -21,6 +21,7 @@ EntityPlayer::EntityPlayer()
 	deathTime = 0.f;
 	now = clock.getElapsedTime().asMilliseconds();
 	drawHitbox = false;
+	health = 5;
 }
 
 void EntityPlayer::SetPos( const sf::Vector2f pos )
@@ -209,6 +210,12 @@ void EntityPlayer::Hurt(sf::Vector2f attacker)
 	if (hurt)
 		return;
 
+	if (health <= 1)
+	{
+		Die();
+		return;
+	}
+
 	lastHurt = now;
 	hurt = true;
 	mercyInvincible = true;
@@ -216,10 +223,12 @@ void EntityPlayer::Hurt(sf::Vector2f attacker)
 	// Move away from it instead
 	moveHurtVec.x = moveHurtVec.x * -1;
 	moveHurtVec.y = moveHurtVec.y * -1;
+	health -= 1;
 }
 
 void EntityPlayer::Die()
 {
+	health = 0;
 	//sprite.setColor( sf::Color::Red );
 	animManager.ResetAnim( "player_death" );
 	currentAnim = "player_death";
@@ -232,6 +241,11 @@ void EntityPlayer::Die()
 bool EntityPlayer::IsDead() const
 {
 	return dead;
+}
+
+sf::Int32 EntityPlayer::GetHealth() const
+{
+	return health;
 }
 
 bool EntityPlayer::CheckReset() const

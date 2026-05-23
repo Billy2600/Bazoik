@@ -29,6 +29,9 @@ private:
 	sf::Sprite lives[MAX_LIVES];
 	AnimManager animManager;
 
+	sf::RectangleShape healthBar;
+	sf::Text healthIcon; // Using a + for the icon
+
 	static Directions lastMove;
 	bool transition; // Is the screen moving?
 	sf::Clock clock;
