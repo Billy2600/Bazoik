@@ -271,7 +271,7 @@ void StateHighscore::HandleInput()
 				entryChar--;
 			}
 
-			if( game->inputManager.TestKeyDown( "fire", event ) 
+			if( game->inputManager.TestKeyDown( "accept", event )
 				|| event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return )
 			{
 				entryIndex++;

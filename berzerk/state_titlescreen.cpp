@@ -108,7 +108,7 @@ void StateTitleScreen::HandleInput()
 		for( auto button : buttons )
 		{
 			if( event.type == sf::Event::MouseButtonPressed && button.second.hitbox.contains( m ) 
-				|| joystickInput && button.second.order == selectedButton && game->inputManager.TestKeyDown( "fire", event )
+				|| joystickInput && button.second.order == selectedButton && game->inputManager.TestKeyDown( "accept", event )
 				|| button.second.order == selectedButton && ( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Return ) )
 			{
 				// Perform action based on which button this is

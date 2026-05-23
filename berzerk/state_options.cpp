@@ -65,6 +65,10 @@ StateOptions::StateOptions( Game *game )
 	buttons["pause"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
 	buttons["pause"].order = order++;
 
+	buttons["accept"] = buttons["up"];
+	buttons["accept"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["accept"].order = order++;
+
 	buttons["fullscreen"] = buttons["up"];
 	buttons["fullscreen"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
 	buttons["fullscreen"].order = order++;
@@ -141,7 +145,7 @@ void StateOptions::HandleInput()
 			}
 		}
 
-		if( event.type == sf::Event::MouseButtonPressed || game->inputManager.TestKeyDown( "fire", event ) || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Return )
+		if( event.type == sf::Event::MouseButtonPressed || game->inputManager.TestKeyDown( "accept", event ) || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Return )
 		{
 			// Check if mouse was inside any of the gui buttons
 			for( auto button : buttons )
@@ -259,6 +263,7 @@ void StateOptions::Update(const float dt)
 		buttons["fireRight"].SetText( "fire right:  " + game->inputManager.GetKeyName( "fireRight" ) );
 		buttons["fireDown"].SetText( "fire down:  " + game->inputManager.GetKeyName( "fireDown" ) );
 		buttons["pause"].SetText( "pause: " + game->inputManager.GetKeyName( "pause" ) );
+		buttons["accept"].SetText( "accept:  " + game->inputManager.GetKeyName( "accept" ) );
 	}
 
 	if ( game->inputManager.fullscreen )

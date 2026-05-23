@@ -53,6 +53,8 @@ void InputManager::LoadDefaults()
 	keys["fireDown"] = key;
 	key.keyCode = sf::Keyboard::Key::Escape;
 	keys["pause"] = key;
+	key.keyCode = sf::Keyboard::Key::Enter;
+	keys["accept"] = key;
 	fullscreen = false;
 }
 
