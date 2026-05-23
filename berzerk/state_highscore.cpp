@@ -181,7 +181,7 @@ void StateHighscore::Update( const float dt )
 		else space = " ";
 
 		// Display entry mode
-		if( entryMode && score.initials[4] == ' ' )
+		if( entryMode && score.num == game->score )
 		{
 			entryLoc = i - 1; // Take down location
 
