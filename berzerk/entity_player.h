@@ -42,10 +42,19 @@ private:
 	Directions lastHoriz; // Last horizontal direction we moved (for animations)
 	sf::Vector2f lastPos; // Last position (to move back on collision with walls, etc.)
 
+	bool hurt;
+	bool mercyInvincible;
+	sf::Int32 lastHurt;
+	const sf::Int32 hurtDelay = 200; // Delay for hurt effect
+	const sf::Int32 mercyInvincibilityDelay = 1000;
+
+	void Hurt(sf::Vector2f attacker);
+
 	float deathTime; // Time we died
 	const sf::Int32 resetDelay = 500; // Delay before resetting the state after dying
 	bool dead; // Death flag
 	bool reset; // Reset flag
+	sf::Vector2f moveHurtVec;
 
 	void Die(); // Perform death
 

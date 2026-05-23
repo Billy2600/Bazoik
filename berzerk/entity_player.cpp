@@ -12,6 +12,9 @@ EntityPlayer::EntityPlayer()
 	hitbox.width = 16.f;
 	hitbox.height = 32.f;
 	clock.restart();
+	hurt = false;
+	mercyInvincible = false;
+	lastHurt = 0;
 	dead = false;
 	reset = false;
 	lastFire = 0;
@@ -172,6 +175,25 @@ void EntityPlayer::Think( const float dt )
 		game->assetManager.PlaySound( "shoot" );
 	}
 
+	if (hurt)
+	{
+		move = moveHurtVec;
+		sprite.setColor(sf::Color::Red);
+
+		if (now - lastHurt >= hurtDelay)
+			hurt = false;
+	}
+	else
+	{
+		sprite.setColor(sf::Color::White);
+	}
+
+	if (mercyInvincible)
+	{
+		if (now - lastHurt >= mercyInvincibilityDelay)
+			mercyInvincible = false;
+	}
+
 	Move( move, dt );
 	// Change animation
 	if( move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0 )
@@ -180,6 +202,20 @@ void EntityPlayer::Think( const float dt )
 		ChooseFireAnim(fireDirection);
 	else
 		currentAnim = "player_stand";
+}
+
+void EntityPlayer::Hurt(sf::Vector2f attacker)
+{
+	if (hurt)
+		return;
+
+	lastHurt = now;
+	hurt = true;
+	mercyInvincible = true;
+	moveHurtVec = GetMoveTowardsVec(attacker, 100.f);
+	// Move away from it instead
+	moveHurtVec.x = moveHurtVec.x * -1;
+	moveHurtVec.y = moveHurtVec.y * -1;
 }
 
 void EntityPlayer::Die()
@@ -210,7 +246,11 @@ void EntityPlayer::SetInput( const PlayerInput input )
 
 void EntityPlayer::Draw() const
 {
+	if (mercyInvincible && now % 2 == 0)
+		return;
+
 	game->window.draw( sprite );
+
 #ifdef _DEBUG
 	game->window.draw( shape );
 #endif
@@ -227,6 +267,10 @@ void EntityPlayer::HandleCollision( Entity *other )
 	{
 		hitbox.left = lastPos.x;
 		hitbox.top = lastPos.y;
+	}
+	else if (dynamic_cast<EntityRobot*>( other ) != NULL && !mercyInvincible )
+	{
+		Hurt(sf::Vector2f(other->hitbox.left, other->hitbox.top));
 	}
 }
 
