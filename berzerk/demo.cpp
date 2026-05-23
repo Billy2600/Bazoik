@@ -69,7 +69,10 @@ void Demo::LoadFromFile( const std::string path )
 		newInput.input.down = std::stoi( input.attribute( "down" ).value() );
 		newInput.input.left = std::stoi( input.attribute( "left" ).value() );
 		newInput.input.right = std::stoi( input.attribute( "right" ).value() );
-		newInput.input.fire = std::stoi( input.attribute( "fire" ).value() );
+		newInput.input.fireUp = std::stoi( input.attribute( "fireUp" ).value() );
+		newInput.input.fireLeft = std::stoi( input.attribute( "fireLeft" ).value() );
+		newInput.input.fireRight = std::stoi( input.attribute( "fireRight" ).value() );
+		newInput.input.fireDown = std::stoi( input.attribute( "fireDown" ).value() );
 		newInput.frame = std::stoi( input.attribute( "frame" ).value() );
 		inputs.push_back( newInput );
 	}
@@ -126,7 +129,10 @@ void Demo::SaveToFile( const std::string path ) const
 		inputNode.append_attribute( "left" ).set_value( (int)fInput.input.left );
 		inputNode.append_attribute( "right" ).set_value( (int)fInput.input.right );
 		inputNode.append_attribute( "up" ).set_value( (int)fInput.input.up );
-		inputNode.append_attribute( "fire" ).set_value( (int)fInput.input.fire );
+		inputNode.append_attribute( "fireUp" ).set_value( (int)fInput.input.fireUp );
+		inputNode.append_attribute( "fireLeft" ).set_value( (int)fInput.input.fireLeft );
+		inputNode.append_attribute( "fireRight" ).set_value( (int)fInput.input.fireRight );
+		inputNode.append_attribute( "fireDown" ).set_value( (int)fInput.input.fireDown );
 		inputNode.append_attribute( "frame" ).set_value( (int)fInput.frame );
 	}
 

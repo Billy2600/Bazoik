@@ -22,38 +22,56 @@ StateOptions::StateOptions( Game *game )
 	rebind.setCharacterSize( 30 );
 	rebind.setString( "Rebind Keys:" );
 
-	buttons["up"] = GuiButton( sf::Vector2f( 30, 150 ), sf::Vector2f( 500, 30 ), sf::Vector2f( 10, 3 ), "", assetManager->GetFontRef( "joystix" ), 0 );
+	const float xPos = 30; // They all have the same x position
+	float yPos = 150.f; // Y position for the first item, will increment as we go down the buttons
+	const float yIncrement = 25.f;
+	int order = 1; // Same as above, but for the button order
+
+	buttons["up"] = GuiButton( sf::Vector2f( 30, yPos += yIncrement ), sf::Vector2f( 250, 15 ), sf::Vector2f( 5, 3 ), "", assetManager->GetFontRef( "joystix" ), 0 );
 	buttons["up"].SetColors( sf::Color::Black, sf::Color::Green, sf::Color::Transparent );
 	buttons["up"].SetHighlightColors( sf::Color::Black, sf::Color::Red, sf::Color::Transparent );
 	buttons["up"].SetHighlight( false );
+	buttons["up"].SetCharacterSize(15);
 
 	buttons["down"] = buttons["up"];
-	buttons["down"].SetPos( sf::Vector2f( 30, 190 ) );
-	buttons["down"].order = 1;
+	buttons["down"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["down"].order = order++;
 
 	buttons["left"] = buttons["up"];
-	buttons["left"].SetPos( sf::Vector2f( 30, 230 ) );
-	buttons["left"].order = 2;
+	buttons["left"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["left"].order = order++;
 
 	buttons["right"] = buttons["up"];
-	buttons["right"].SetPos( sf::Vector2f( 30, 270 ) );
-	buttons["right"].order = 3;
+	buttons["right"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["right"].order = order++;
 
-	buttons["fire"] = buttons["up"];
-	buttons["fire"].SetPos( sf::Vector2f( 30, 310 ) );
-	buttons["fire"].order = 4;
+	buttons["fireUp"] = buttons["up"];
+	buttons["fireUp"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["fireUp"].order = order++;
+
+	buttons["fireLeft"] = buttons["up"];
+	buttons["fireLeft"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["fireLeft"].order = order++;
+
+	buttons["fireRight"] = buttons["up"];
+	buttons["fireRight"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["fireRight"].order = order++;
+
+	buttons["fireDown"] = buttons["up"];
+	buttons["fireDown"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["fireDown"].order = order++;
 
 	buttons["pause"] = buttons["up"];
-	buttons["pause"].SetPos( sf::Vector2f( 30, 350 ) );
-	buttons["pause"].order = 5;
+	buttons["pause"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["pause"].order = order++;
 
 	buttons["fullscreen"] = buttons["up"];
-	buttons["fullscreen"].SetPos( sf::Vector2f( 30, 390 ) );
-	buttons["fullscreen"].order = 6;
+	buttons["fullscreen"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["fullscreen"].order = order++;
 
 	buttons["return"] = buttons["up"];
-	buttons["return"].SetPos( sf::Vector2f( 30, 430 ) );
-	buttons["return"].order = 7;
+	buttons["return"].SetPos( sf::Vector2f( xPos, yPos += yIncrement ) );
+	buttons["return"].order = order++;
 	buttons["return"].SetText( "Save & Return" );
 
 	selectedButton = 0;
@@ -236,7 +254,10 @@ void StateOptions::Update(const float dt)
 		buttons["down"].SetText( "down:  " + game->inputManager.GetKeyName( "down" ) );
 		buttons["left"].SetText( "left:  " + game->inputManager.GetKeyName( "left" ) );
 		buttons["right"].SetText( "right: " + game->inputManager.GetKeyName( "right" ) );
-		buttons["fire"].SetText( "fire:  " + game->inputManager.GetKeyName( "fire" ) );
+		buttons["fireUp"].SetText( "fire up:  " + game->inputManager.GetKeyName( "fireUp" ) );
+		buttons["fireLeft"].SetText( "fire left:  " + game->inputManager.GetKeyName( "fireLeft" ) );
+		buttons["fireRight"].SetText( "fire right:  " + game->inputManager.GetKeyName( "fireRight" ) );
+		buttons["fireDown"].SetText( "fire down:  " + game->inputManager.GetKeyName( "fireDown" ) );
 		buttons["pause"].SetText( "pause: " + game->inputManager.GetKeyName( "pause" ) );
 	}
 

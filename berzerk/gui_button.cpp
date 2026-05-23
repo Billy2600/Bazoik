@@ -69,6 +69,11 @@ void GuiButton::SetSize( const sf::Vector2f size )
 	hitbox.height = size.y;
 }
 
+void GuiButton::SetCharacterSize(const unsigned int size)
+{
+	text.setCharacterSize(size);
+}
+
 void GuiButton::SetText( const std::string text )
 {
 	this->text.setString( text );

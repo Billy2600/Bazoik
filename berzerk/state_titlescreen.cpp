@@ -75,6 +75,11 @@ void StateTitleScreen::Start()
 
 void StateTitleScreen::HandleInput()
 {
+	if (sf::Joystick::isConnected(0))
+	{
+		printf("Joystick 0 connected!");
+	}
+
 	sf::Event event;
 	sf::Vector2f m = game->window.mapPixelToCoords( sf::Mouse::getPosition( this->game->window ) );
 

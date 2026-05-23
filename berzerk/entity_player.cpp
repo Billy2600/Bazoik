@@ -99,13 +99,13 @@ void EntityPlayer::Think( const float dt )
 	// Basic movement and basic direction
 	if( input.left )
 	{
-		if( !input.fire ) move.x -= realSpeed;
+		move.x -= realSpeed;
 		direction.x = -1;
 		lastHoriz = Directions::W;
 	}
 	else if( input.right )
 	{
-		if( !input.fire ) move.x += realSpeed;
+		move.x += realSpeed;
 		direction.x = 1;
 		lastHoriz = Directions::E;
 	}
@@ -116,12 +116,12 @@ void EntityPlayer::Think( const float dt )
 
 	if( input.up )
 	{
-		if( !input.fire ) move.y -= realSpeed;
+		move.y -= realSpeed;
 		direction.y  = -1;
 	}
 	else if( input.down )
 	{
-		if( !input.fire ) move.y += realSpeed;
+		move.y += realSpeed;
 		direction.y = 1;
 	}
 	else
@@ -152,9 +152,22 @@ void EntityPlayer::Think( const float dt )
 	}
 
 	// Fire with delay
-	if( direction != sf::Vector2f(0,0) && input.fire && now - lastFire >= fireDelay )
+	bool firing = input.fireUp || input.fireLeft || input.fireRight || input.fireDown;
+	auto fireDirection = sf::Vector2f(0, 0);
+
+	if(firing && now - lastFire >= fireDelay )
 	{
-		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), direction, this ) );
+		if (input.fireLeft)
+			fireDirection.x = -1;
+		else if (input.fireRight)
+			fireDirection.x = 1;
+
+		if (input.fireUp)
+			fireDirection.y = -1;
+		else if (input.fireDown)
+			fireDirection.y = 1;
+
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), fireDirection, this ) );
 		lastFire = now;
 		game->assetManager.PlaySound( "shoot" );
 	}
@@ -163,8 +176,8 @@ void EntityPlayer::Think( const float dt )
 	// Change animation
 	if( move.x > 0 || move.y > 0 || move.x < 0 || move.y < 0 )
 		currentAnim = "player_walk";
-	else if( input.fire )
-		ChooseFireAnim( direction );
+	else if(firing)
+		ChooseFireAnim(fireDirection);
 	else
 		currentAnim = "player_stand";
 }

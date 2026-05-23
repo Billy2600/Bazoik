@@ -43,8 +43,14 @@ void InputManager::LoadDefaults()
 	keys["right"] = key;
 	key.keyCode = sf::Keyboard::Key::A;
 	keys["left"] = key;
-	key.keyCode = sf::Keyboard::Key::RControl;
-	keys["fire"] = key;
+	key.keyCode = sf::Keyboard::Key::Up;
+	keys["fireUp"] = key;
+	key.keyCode = sf::Keyboard::Key::Left;
+	keys["fireLeft"] = key;
+	key.keyCode = sf::Keyboard::Key::Right;
+	keys["fireRight"] = key;
+	key.keyCode = sf::Keyboard::Key::Down;
+	keys["fireDown"] = key;
 	key.keyCode = sf::Keyboard::Key::Escape;
 	keys["pause"] = key;
 	fullscreen = false;

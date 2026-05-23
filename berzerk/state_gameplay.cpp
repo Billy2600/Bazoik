@@ -105,7 +105,11 @@ void StateGameplay::HandleInput()
 		input.left = false;
 		input.up = false;
 		input.down = false;
-		input.fire = false;
+		input.fireUp = false;
+		input.fireLeft = false;
+		input.fireRight = false;
+		input.fireDown = false;
+
 		return;
 	}
 
@@ -190,7 +194,7 @@ void StateGameplay::HandleInput()
 			return;
 		}
 
-		// Keys presed
+		// Keys pressed
 		if( game->inputManager.TestKeyDown( "right", event ) ) input.right = true;
 
 		if( game->inputManager.TestKeyDown( "left", event ) ) input.left = true;
@@ -199,7 +203,16 @@ void StateGameplay::HandleInput()
 
 		if( game->inputManager.TestKeyDown( "down", event ) ) input.down = true;
 
-		if( game->inputManager.TestKeyDown( "fire", event ) ) input.fire = true;
+		if( game->inputManager.TestKeyDown( "fireUp", event ) ) input.fireUp = true;
+
+		if( game->inputManager.TestKeyDown( "fireLeft", event ) ) input.fireLeft = true;
+
+		if( game->inputManager.TestKeyDown( "fireRight", event ) ) input.fireRight = true;
+
+		if( game->inputManager.TestKeyDown( "fireDown", event ) ) input.fireDown = true;
+
+
+
 
 		// Keys released
 		if( game->inputManager.TestKeyUp( "right", event ) ) input.right = false;
@@ -210,7 +223,14 @@ void StateGameplay::HandleInput()
 		
 		if( game->inputManager.TestKeyUp( "down", event ) ) input.down = false;
 
-		if( game->inputManager.TestKeyUp( "fire", event ) ) input.fire = false;
+		if( game->inputManager.TestKeyUp( "fireUp", event ) ) input.fireUp = false;
+
+		if( game->inputManager.TestKeyUp( "fireLeft", event ) ) input.fireLeft = false;
+
+		if( game->inputManager.TestKeyUp( "fireRight", event ) ) input.fireRight = false;
+
+		if( game->inputManager.TestKeyUp( "fireDown", event ) ) input.fireDown = false;
+
 	}
 
 	if( playDemo && !recordDemo )
@@ -330,7 +350,7 @@ void StateGameplay::Update( const float dt )
 		{
 			game->music.stop();
 			game->assetManager.StopSound( "death" );
-			lastMove == Directions::W;
+			lastMove = Directions::W;
 			game->window.setMouseCursorVisible( true );
 			this->game->SwitchState( new StateHighscore( this->game ) );
 			return;
