@@ -604,7 +604,7 @@ void StateGameplay::SpawnEnemies()
 
 void StateGameplay::CreateWalls()
 {
-	const float wallWidth = 10.f;
+	constexpr float wallWidth = 10.f;
 	const auto walLColor = sf::Color::Blue;
 
 	entityManager.Add(new EntityWall(sf::Vector2f(0.f, 0.f), sf::Vector2f(GAME_WIDTH, wallWidth), walLColor));

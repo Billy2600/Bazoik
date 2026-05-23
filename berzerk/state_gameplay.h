@@ -10,8 +10,8 @@
 #include "pause_menu.h"
 
 // Different transition speeds so we have time for robot voices (take less time to move screen vertically)
-#define VERT_TRANS_SPEED 250
-#define HORZ_TRANS_SPEED 400
+#define VERT_TRANS_SPEED 500
+#define HORZ_TRANS_SPEED 800
 #define MAX_LIVES 9 // Maximum number of lives to show on screen
 #define ALL_ROBOTS_SCORE 300 // Score added for killing all robots
 
