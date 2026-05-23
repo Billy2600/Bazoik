@@ -15,6 +15,14 @@ StateHighscore::StateHighscore( Game *game )
 	entryIndex = 0;
 	entryChar = 'A';
 
+	for (auto & score : scores)
+	{
+		score = {
+			0,
+			{ 'A', 'A', 'A', '\0', ' ' }
+		};
+	}
+
 	title.setFont( assetManager->GetFontRef( "joystix" ) );
 #ifdef OLD_SFML
 	title.setColor( sf::Color::Green );

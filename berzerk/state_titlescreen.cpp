@@ -225,25 +225,25 @@ void StateTitleScreen::HandleInput()
 
 void StateTitleScreen::Update(const float dt)
 {
-	if ( clkAttractMode.getElapsedTime().asMilliseconds() > ATTRACT_MODE_DELAY )
-	{
-		bool demoCheck = false;
-		for ( int i = 0; i < NUM_DEMOS; i++ )
-		{
-			// No demos will play unless all are accounted for
-			demoCheck = game->FileExists( "assets/demo" + std::to_string( i ) + ".xml" );
-		}
-
-		if ( demoCheck )
-		{
-			playDemo = true;
-			recordDemo = false;
-			StartGame();
-			currentDemo++;
-			if ( currentDemo >= NUM_DEMOS + 1 ) // One above the limit will show credits instead
-				currentDemo = 0;
-		}
-	}
+	// if ( clkAttractMode.getElapsedTime().asMilliseconds() > ATTRACT_MODE_DELAY )
+	// {
+	// 	bool demoCheck = false;
+	// 	for ( int i = 0; i < NUM_DEMOS; i++ )
+	// 	{
+	// 		// No demos will play unless all are accounted for
+	// 		demoCheck = game->FileExists( "assets/demo" + std::to_string( i ) + ".xml" );
+	// 	}
+	//
+	// 	if ( demoCheck )
+	// 	{
+	// 		playDemo = true;
+	// 		recordDemo = false;
+	// 		StartGame();
+	// 		currentDemo++;
+	// 		if ( currentDemo >= NUM_DEMOS + 1 ) // One above the limit will show credits instead
+	// 			currentDemo = 0;
+	// 	}
+	// }
 }
 
 void StateTitleScreen::Draw() const
