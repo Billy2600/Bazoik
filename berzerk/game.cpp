@@ -15,6 +15,8 @@
 
 Game::Game()
 {
+	health = 5;
+	
 	if ( !DirectoryExists( "assets" ) )
 	{
 		ErrorLog log;

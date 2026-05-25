@@ -21,7 +21,6 @@ EntityPlayer::EntityPlayer()
 	deathTime = 0.f;
 	now = clock.getElapsedTime().asMilliseconds();
 	drawHitbox = false;
-	health = 5;
 }
 
 void EntityPlayer::SetPos( const sf::Vector2f pos )
@@ -210,7 +209,7 @@ void EntityPlayer::Hurt(sf::Vector2f attacker)
 	if (hurt)
 		return;
 
-	if (health <= 1)
+	if (game->health <= 1)
 	{
 		Die();
 		return;
@@ -223,12 +222,12 @@ void EntityPlayer::Hurt(sf::Vector2f attacker)
 	// Move away from it instead
 	moveHurtVec.x = moveHurtVec.x * -1;
 	moveHurtVec.y = moveHurtVec.y * -1;
-	health -= 1;
+	game->health -= 1;
 }
 
 void EntityPlayer::Die()
 {
-	health = 0;
+	game->health = 0;
 	//sprite.setColor( sf::Color::Red );
 	animManager.ResetAnim( "player_death" );
 	currentAnim = "player_death";
@@ -236,16 +235,12 @@ void EntityPlayer::Die()
 	deathTime = (float)now;
 	game->assetManager.PlaySound( "death", false, 50 );
 	game->RemoveLife();
+	game->health = 5;
 }
 
 bool EntityPlayer::IsDead() const
 {
 	return dead;
-}
-
-sf::Int32 EntityPlayer::GetHealth() const
-{
-	return health;
 }
 
 bool EntityPlayer::CheckReset() const
@@ -282,7 +277,7 @@ void EntityPlayer::HandleCollision( Entity *other )
 		hitbox.left = lastPos.x;
 		hitbox.top = lastPos.y;
 	}
-	else if (dynamic_cast<EntityRobot*>( other ) != NULL && !mercyInvincible )
+	else if ((dynamic_cast<EntityRobot*>( other ) != NULL || dynamic_cast<EntityBullet*>(other)) && !mercyInvincible )
 	{
 		Hurt(sf::Vector2f(other->hitbox.left, other->hitbox.top));
 	}

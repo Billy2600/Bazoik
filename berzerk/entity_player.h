@@ -55,7 +55,6 @@ private:
 	bool dead; // Death flag
 	bool reset; // Reset flag
 	sf::Vector2f moveHurtVec;
-	sf::Int32 health;
 
 	void Die(); // Perform death
 
@@ -70,7 +69,6 @@ public:
 
 	EntityPlayer();
 	bool IsDead() const;
-	sf::Int32 GetHealth() const;
 	bool CheckReset() const; // Signal to state that it's time to reset
 	void SetInput( const PlayerInput input );
 	void SetPos( const sf::Vector2f pos );

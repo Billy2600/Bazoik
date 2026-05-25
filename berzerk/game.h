@@ -6,7 +6,7 @@
 #include "anim_manager.h"
 
 #define GAME_NAME "Bazoik"
-#define GAME_WIDTH 640
+#define GAME_WIDTH 854
 #define GAME_HEIGHT 480
 #define START_LIVES 3
 #define EXTRA_LIFE_SCORE 1000 // Extra life is awarded every x points
@@ -36,6 +36,7 @@ public:
 	InputManager inputManager;
 	int unsigned level; // Current level, certain behaviors will change based on this
 	sf::Music music;
+	sf::Int32 health;
 
 	Game();
 	void GameLoop(); // Runs every update

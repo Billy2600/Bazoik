@@ -371,12 +371,15 @@ void StateGameplay::Update( const float dt )
 		ScreenTransition(dt);
 	}
 
-	auto health = static_cast<float>(player.GetHealth());
-	healthBar.setSize(sf::Vector2f(health * 40.f, 20.f));
-	if (health == 0.f)
+	if(game != nullptr)
 	{
-		healthIcon.setString("");
-		healthBar.setOutlineThickness(0.f);
+		auto health = static_cast<float>(game->health);
+		healthBar.setSize(sf::Vector2f(health * 40.f, 20.f));
+		if (health == 0.f)
+		{
+			healthIcon.setString("");
+			healthBar.setOutlineThickness(0.f);
+		}
 	}
 }
 

@@ -262,6 +262,7 @@ void StateTitleScreen::StartGame()
 {
 	log.Write( "Switching to gameplay state" );
 	game->ResetLives();
+	game->health = 5;
 	game->level = startLevel;
 	if( currentDemo >= NUM_DEMOS )
 		this->game->states.push( new StateCredits( this->game) );
