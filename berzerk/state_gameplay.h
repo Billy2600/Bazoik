@@ -30,6 +30,7 @@ private:
 	AnimManager animManager;
 
 	sf::RectangleShape healthBar;
+	sf::RectangleShape healthBarOutline;
 	sf::Text healthIcon; // Using a + for the icon
 
 	static Directions lastMove;

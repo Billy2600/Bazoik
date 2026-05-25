@@ -80,8 +80,11 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 	healthBar.setSize(sf::Vector2f(200.f, 20.f));
 	healthBar.setPosition(GAME_WIDTH - 205.f, GAME_HEIGHT - 25.f);
 	healthBar.setFillColor(sf::Color::Red);
-	healthBar.setOutlineColor(sf::Color::White);
-	healthBar.setOutlineThickness(2.f);
+
+	healthBarOutline = healthBar;
+	healthBarOutline.setFillColor(sf::Color::Transparent);
+	healthBarOutline.setOutlineColor(sf::Color::White);
+	healthBarOutline.setOutlineThickness(2.f);
 
 	healthIcon = txScore;
 	healthIcon.setString("+");
@@ -404,6 +407,7 @@ void StateGameplay::Draw() const
 
 	game->window.draw(healthBar);
 	game->window.draw(healthIcon);
+	game->window.draw(healthBarOutline);
 
 	if ( pause.open )
 		pause.Draw();
