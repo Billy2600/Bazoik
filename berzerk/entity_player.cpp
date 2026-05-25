@@ -281,6 +281,10 @@ void EntityPlayer::HandleCollision( Entity *other )
 	{
 		Hurt(sf::Vector2f(other->hitbox.left, other->hitbox.top));
 	}
+	else if(dynamic_cast<EntityOtto*>( other ) != NULL && !mercyInvincible )
+	{
+		Die();
+	}
 }
 
 void EntityPlayer::Move( sf::Vector2f move, const float dt ) // Add vector to produce movement
