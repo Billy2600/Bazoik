@@ -598,7 +598,7 @@ void StateGameplay::AddLastMove( Directions move )
 
 bool StateGameplay::CheckEasterEgg()
 {
-	std::uniform_int_distribution<int> rndEasterEgg(0, 50);
+	std::uniform_int_distribution<int> rndEasterEgg(0, 5);
 
 	if ( rndEasterEgg( rngEngine ) == 1)
 		return true;
