@@ -9,7 +9,7 @@
 #define GAME_WIDTH 854
 #define GAME_HEIGHT 480
 #define START_LIVES 3
-#define EXTRA_LIFE_SCORE 1000 // Extra life is awarded every x points
+#define EXTRA_LIFE_SCORE 5000 // Extra life is awarded every x points
 // Account for OS differences
 #ifdef _WIN32
 #define P_ENV_VAR "USERPROFILE"
