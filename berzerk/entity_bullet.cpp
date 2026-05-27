@@ -8,7 +8,11 @@ EntityBullet::EntityBullet( sf::Vector2f pos, sf::Vector2f direction, Entity* ow
 	hitbox.height = 10;
 	hitbox.width = 1;
 	shape.setPosition( pos );
-	shape.setFillColor( sf::Color::Red );
+
+	if(dynamic_cast<EntityPlayer*>( owner ) != NULL )
+		shape.setFillColor( sf::Color::Green );
+	else
+		shape.setFillColor( sf::Color::Red );
 
 	if( dynamic_cast<EntityPlayer*>(owner) != NULL )
 		shape.setSize( sf::Vector2f( BULLET_WIDTH, PLAYER_BULLET_HEIGHT ) );
@@ -54,6 +58,10 @@ void EntityBullet::Draw() const
 
 void EntityBullet::HandleCollision( Entity *other )
 {
+	auto bullet = dynamic_cast<EntityBullet*>( other );
+	if( bullet != NULL && bullet->owner == owner )
+		return; // Don't collide with owner or owner's bullets
+
 	// Delete in all cases, except when colliding with owner
 	// Other object will decide what to do (usually die)
 	if( other != owner )

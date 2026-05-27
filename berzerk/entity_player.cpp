@@ -171,6 +171,10 @@ void EntityPlayer::Think( const float dt )
 			fireDirection.y = 1;
 
 		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), fireDirection, this ) );
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), { fireDirection.x + 0.15f, fireDirection.y + 0.15f }, this ) );
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), { fireDirection.x - 0.15f, fireDirection.y - 0.15f }, this ) );
+
+
 		lastFire = now;
 		game->assetManager.PlaySound( "shoot" );
 	}
