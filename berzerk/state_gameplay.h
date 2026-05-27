@@ -8,6 +8,7 @@
 #include "entity_manager.h"
 #include "demo.h"
 #include "pause_menu.h"
+#include "entity_powerup.h"
 
 // Different transition speeds so we have time for robot voices (take less time to move screen vertically)
 #define VERT_TRANS_SPEED 500

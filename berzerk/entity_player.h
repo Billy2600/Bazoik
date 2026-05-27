@@ -5,6 +5,8 @@
 #include "entity_wall.h"
 #include "entity_robot.h"
 #include "entity_bullet.h"
+#include "powerup_types.h"
+#include "entity_powerup.h"
 
 #define PLAYER_SPEED 200
 
@@ -48,6 +50,8 @@ private:
 	const sf::Int32 hurtDelay = 200; // Delay for hurt effect
 	const sf::Int32 mercyInvincibilityDelay = 1000;
 
+	PowerupType activePowerup;
+
 	void Hurt(sf::Vector2f attacker);
 
 	float deathTime; // Time we died
@@ -63,6 +67,7 @@ private:
 	std::string currentAnim;
 	void LoadSprite();
 	void ChooseFireAnim(sf::Vector2f direction); // Choose firing direction; will set animation (does not return)
+	void ShootBullet(sf::Vector2f direction); // Shoot bullet in specified direction
 
 public:
 	bool drawHitbox;

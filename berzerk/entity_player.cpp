@@ -68,6 +68,24 @@ void EntityPlayer::ChooseFireAnim( sf::Vector2f direction )
 		currentAnim = "player_fire_se";
 }
 
+void EntityPlayer::ShootBullet(sf::Vector2f direction)
+{
+	switch (activePowerup)
+	{
+	case PowerupSpreadshot:
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), direction, this ) );
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), { direction.x + 0.15f, direction.y + 0.15f }, this ) );
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), { direction.x - 0.15f, direction.y - 0.15f }, this ) );
+		break;
+	case PowerupRicochet:
+		// Implementation for ricochet
+		break;
+	default:
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), direction, this ) );
+		break;
+	}
+}
+
 void EntityPlayer::Think( const float dt )
 {
 	LoadSprite();
@@ -170,10 +188,7 @@ void EntityPlayer::Think( const float dt )
 		else if (input.fireDown)
 			fireDirection.y = 1;
 
-		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), fireDirection, this ) );
-		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), { fireDirection.x + 0.15f, fireDirection.y + 0.15f }, this ) );
-		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), { fireDirection.x - 0.15f, fireDirection.y - 0.15f }, this ) );
-
+		ShootBullet(fireDirection);
 
 		lastFire = now;
 		game->assetManager.PlaySound( "shoot" );
@@ -288,6 +303,12 @@ void EntityPlayer::HandleCollision( Entity *other )
 	else if(dynamic_cast<EntityOtto*>( other ) != NULL && !mercyInvincible )
 	{
 		Die();
+	}
+	else if(dynamic_cast<EntityPowerup*>( other ) != NULL )
+	{
+		auto powerup = dynamic_cast<EntityPowerup*>( other );
+		activePowerup = powerup->type;
+		powerup->deleteMe = true;
 	}
 }
 
