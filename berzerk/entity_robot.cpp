@@ -13,7 +13,7 @@ EntityRobot::EntityRobot( const sf::Vector2f pos, const RobotStats stats )
 	shape.setOutlineThickness( 1.f );
 	shape.setPosition( sf::Vector2f( hitbox.left, hitbox.top ) );
 #endif
-	hits = 0;
+	health = int(5 * stats.scale);
 	dead = false;
 	seePlayer = false;
 	moving = false;
@@ -127,12 +127,12 @@ void EntityRobot::Draw() const
 
 void EntityRobot::HandleCollision( Entity *other )
 {
-	if( dynamic_cast<EntityBullet*>( other ) != NULL || dynamic_cast<EntityWall*>( other ) != NULL )
+	if( dynamic_cast<EntityBullet*>( other ) != nullptr || dynamic_cast<EntityWall*>( other ) != nullptr )
 	{   
-		hits++;
+		health--;
 		if( !dead ) // Only do this stuff once
 		{
-			if ( hits >= (int)stats.scale )
+			if ( health <= 0 )
 			{
 				unsigned int prevScore = game->score;
 				game->score += 50;
@@ -148,16 +148,8 @@ void EntityRobot::HandleCollision( Entity *other )
 			else
 			{
 				sf::Color prevColor = sprite.getColor();
-				float factor = stats.scale / hits;
+				float factor = stats.scale / health;
 				sprite.setColor( sf::Color( prevColor.r / factor, prevColor.g / factor, prevColor.b / factor) );
-				
-				// Initiate retreat
-				/*if( dynamic_cast<EntityWall*>( other ) != NULL )
-				{*/
-					/*retreat = true;
-					lastRetreat = clock.getElapsedTime().asMilliseconds();
-					retreatPos = sf::Vector2f( other->hitbox.left, other->hitbox.top );*/
-				/*}*/
 
 				// Push robot away from wall
 				if ( dynamic_cast<EntityWall*>( other ) != NULL )
