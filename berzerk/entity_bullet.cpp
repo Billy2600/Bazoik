@@ -9,12 +9,12 @@ EntityBullet::EntityBullet( sf::Vector2f pos, sf::Vector2f direction, Entity* ow
 	hitbox.width = 1;
 	shape.setPosition( pos );
 
-	if(dynamic_cast<EntityPlayer*>( owner ) != NULL )
+	if(dynamic_cast<EntityPlayer*>( owner ) != nullptr )
 		shape.setFillColor( sf::Color::Green );
 	else
 		shape.setFillColor( sf::Color::Red );
 
-	if( dynamic_cast<EntityPlayer*>(owner) != NULL )
+	if( dynamic_cast<EntityPlayer*>(owner) != nullptr )
 		shape.setSize( sf::Vector2f( BULLET_WIDTH, PLAYER_BULLET_HEIGHT ) );
 	else
 		shape.setSize( sf::Vector2f( BULLET_WIDTH, ROBOT_BULLET_HEIGHT ) );
@@ -22,6 +22,10 @@ EntityBullet::EntityBullet( sf::Vector2f pos, sf::Vector2f direction, Entity* ow
 	this->direction = direction;
 	this->owner = owner;
 	SetAngle();
+
+	this->type = type;
+	clock.restart();
+	children = 0;
 }
 
 void EntityBullet::SetAngle()
@@ -58,13 +62,19 @@ void EntityBullet::Draw() const
 
 void EntityBullet::HandleCollision( Entity *other )
 {
-	if(type == PowerupType::PowerupRicochet)
+	if (type == PowerupType::PowerupRicochet && clock.getElapsedTime().asMilliseconds() <= BULLET_RICOCHET_SPAWN_DELAY)
 	{
-		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left, hitbox.top ), { -direction.x, -direction.y }, this, PowerupType::PowerupRicochet ) );
+		return;
+	}
+
+	if(type == PowerupType::PowerupRicochet && children == 0)
+	{
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left, hitbox.top ), { -direction.x, -direction.y }, this->owner, PowerupType::PowerupRicochet ) );
+		children++;
 	}
 	
-	auto bullet = dynamic_cast<EntityBullet*>( other );
-	if( bullet != NULL && bullet->owner == owner )
+	const EntityBullet* bullet = dynamic_cast<EntityBullet*>( other );
+	if( bullet != nullptr && bullet->owner == owner )
 		return; // Don't collide with owner or owner's bullets
 
 	// Delete in all cases, except when colliding with owner
@@ -84,5 +94,5 @@ void EntityBullet::Move( sf::Vector2f move, const float dt ) // Add vector to pr
 
 void EntityBullet::RemoveOwner()
 {
-	owner = NULL;
+	owner = nullptr;
 }

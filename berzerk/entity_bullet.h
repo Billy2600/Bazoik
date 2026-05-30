@@ -8,12 +8,16 @@
 #define PLAYER_BULLET_HEIGHT 30
 #define ROBOT_BULLET_HEIGHT 20
 
+#define BULLET_RICOCHET_SPAWN_DELAY 500 // Delay on collision checks right after we spawned a ricochet bullet
+
 class EntityBullet : public Entity
 {
 private:
 	sf::RectangleShape shape;
 	sf::Vector2f direction;
 	PowerupType type;
+	sf::Clock clock;
+	sf::Int8 children;
 
 public:
 	Entity* owner;
