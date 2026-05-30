@@ -95,7 +95,13 @@ StateGameplay::StateGameplay( Game *game, const bool recordDemo , const bool pla
 
 void StateGameplay::Start()
 {
-	entityManager.Add(new EntityPowerup(sf::Vector2f(100.f, 100.f), PowerupType::PowerupSpreadshot));
+
+	auto powerupType = PowerupType::PowerupSpreadshot;
+
+	if(game->level % 2 == 0)
+		powerupType = PowerupType::PowerupRicochet;
+
+	entityManager.Add(new EntityPowerup(sf::Vector2f(100.f, 100.f), powerupType));
 }
 
 void StateGameplay::HandleInput()

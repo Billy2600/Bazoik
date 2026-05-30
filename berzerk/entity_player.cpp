@@ -78,7 +78,7 @@ void EntityPlayer::ShootBullet(sf::Vector2f direction)
 		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), { direction.x - 0.15f, direction.y - 0.15f }, this ) );
 		break;
 	case PowerupRicochet:
-		// Implementation for ricochet
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), direction, this, PowerupType::PowerupRicochet ) );
 		break;
 	default:
 		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left + (hitbox.width/2), hitbox.top + (hitbox.height/3) ), direction, this ) );

@@ -1,5 +1,6 @@
 #pragma once
 #include "entity.h"
+#include "powerup_types.h"
 
 #define BULLET_SPEED 500
 #define BULLET_WIDTH 2
@@ -12,11 +13,12 @@ class EntityBullet : public Entity
 private:
 	sf::RectangleShape shape;
 	sf::Vector2f direction;
+	PowerupType type;
 
 public:
 	Entity* owner;
 
-	EntityBullet( sf::Vector2f pos, sf::Vector2f direction, Entity* owner );
+	EntityBullet( sf::Vector2f pos, sf::Vector2f direction, Entity* owner, PowerupType type = PowerupType::None );
 	void SetAngle(); // Set angle based on direction
 	virtual void Think( const float dt );
 	virtual void Draw() const;

@@ -7,12 +7,28 @@ EntityPowerup::EntityPowerup(sf::Vector2f position, PowerupType type)
 
     this->type = type;
     shape.setSize(size);
-    shape.setFillColor(sf::Color::Yellow);
+    ChooseColor();
     shape.setPosition(position);
     hitbox.left = position.x;
     hitbox.top = position.y;
     hitbox.width = size.x;
     hitbox.height = size.y;
+}
+
+void EntityPowerup::ChooseColor()
+{
+    switch (type)
+    {
+    case PowerupSpreadshot:
+        shape.setFillColor(sf::Color::Green);
+        break;
+    case PowerupRicochet:
+        shape.setFillColor(sf::Color::Cyan);
+        break;
+    default:
+        shape.setFillColor(sf::Color::Yellow);
+        break;
+    }
 }
 
 void EntityPowerup::Think(const float dt)

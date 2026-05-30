@@ -1,7 +1,7 @@
 #include "entity_bullet.h"
 #include "entity_robot.h"
 
-EntityBullet::EntityBullet( sf::Vector2f pos, sf::Vector2f direction, Entity* owner = NULL )
+EntityBullet::EntityBullet( sf::Vector2f pos, sf::Vector2f direction, Entity* owner = NULL, PowerupType type )
 {
 	hitbox.top = pos.y;
 	hitbox.left = pos.x;
@@ -58,6 +58,11 @@ void EntityBullet::Draw() const
 
 void EntityBullet::HandleCollision( Entity *other )
 {
+	if(type == PowerupType::PowerupRicochet)
+	{
+		entityManager->Add( new EntityBullet( sf::Vector2f( hitbox.left, hitbox.top ), { -direction.x, -direction.y }, this, PowerupType::PowerupRicochet ) );
+	}
+	
 	auto bullet = dynamic_cast<EntityBullet*>( other );
 	if( bullet != NULL && bullet->owner == owner )
 		return; // Don't collide with owner or owner's bullets

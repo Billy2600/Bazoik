@@ -7,6 +7,8 @@ class EntityPowerup : public Entity
 private:
     sf::RectangleShape shape;
 
+    void ChooseColor();
+
 public:
     PowerupType type;
 
